@@ -4,6 +4,6 @@
     "outDir": "dist",
     "rootDir": "src"
   },
-  "references": [{ "path": "../schema" }],
+  "references": [{ "path": "../schema" }, { "path": "../fixtures" }],
   "include": ["src"]
 }

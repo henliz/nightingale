@@ -1,4 +1,15 @@
-// transcribe / diarize / condense / photo pass workers, each behind an interface
-// so providers are swappable, see ARCHITECTURE.md section 8
-// coming in milestone 3 with a fake adapter first, real providers land in milestone 8
-export {};
+export type {
+  Condenser,
+  Diarizer,
+  IncidentContext,
+  PhotoPass,
+  PhotoPassResult,
+  RawSegment,
+  Transcriber,
+  TranscribeResult,
+} from "./interfaces.js";
+export { FakeCondenser, FakeDiarizer, FakePhotoPass, FakeTranscriber } from "./fake-adapters.js";
+export { runPipeline } from "./pipeline.js";
+export type { PipelineDeps, RunPipelineInput, RunPipelineResult } from "./pipeline.js";
+export { factRecallScore } from "./eval.js";
+export type { FactRecallResult } from "./eval.js";
