@@ -25,6 +25,10 @@ interface CompleteResponse {
   verified: boolean;
   sha256: string;
 }
+interface AuditResponse {
+  events: { action: string; recordType: string; recordId: string; actorId: string }[];
+  verified: { valid: boolean };
+}
 
 async function json<T>(res: Response): Promise<T> {
   return (await res.json()) as T;
@@ -121,5 +125,34 @@ describe("ingest api", () => {
     const app = createApp(new MemoryVaultStore());
     const res = await app.request("/assets/does-not-exist");
     expect(res.status).toBe(404);
+  });
+
+  it("logs an audit event for every mutation and read, chain stays valid", async () => {
+    const app = createApp(new MemoryVaultStore());
+    const bytes = new TextEncoder().encode("short clip");
+    const sha256 = sha256Hex(bytes);
+
+    const initRes = await app.request("/captures/cap_1/assets", {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-actor-id": "resp_1", "x-actor-role": "fire" },
+      body: JSON.stringify({ kind: "audio", sha256 }),
+    });
+    const init = await json<InitAssetResponse>(initRes);
+
+    await app.request(`/assets/${init.assetId}/parts/1`, { method: "PUT", body: bytes });
+    await app.request(`/assets/${init.assetId}`);
+    await app.request(`/assets/${init.assetId}/complete`, { method: "POST" });
+
+    const auditRes = await app.request("/_audit");
+    const audit = await json<AuditResponse>(auditRes);
+
+    expect(audit.verified.valid).toBe(true);
+    // init, part, view, complete = 4. the GET /_audit call logs its own view too, but
+    // after it's already taken the snapshot, so it shows up on the *next* call, not this one
+    expect(audit.events.length).toBe(4);
+    expect(audit.events[0]!.actorId).toBe("resp_1");
+    expect(audit.events[0]!.recordId).toBe(init.assetId);
+    expect(audit.events.some((e) => e.action === "view")).toBe(true);
+    expect(audit.events.some((e) => e.action === "vault_access")).toBe(true);
   });
 });

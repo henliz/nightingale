@@ -1,3 +1,5 @@
-// hash chained audit log, coming in milestone 2 (ARCHITECTURE.md section 12)
-// every mutation/read gets wired through this so it produces a verifiable AuditEvent
-export {};
+export { GENESIS_HASH, computeHash } from "./hash.js";
+export { MemoryAuditStore } from "./store.js";
+export type { AuditStore } from "./store.js";
+export { createAuditLog, verifyChain } from "./log.js";
+export type { RecordInput, VerifyResult } from "./log.js";
