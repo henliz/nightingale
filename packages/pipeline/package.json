@@ -1,0 +1,19 @@
+{
+  "name": "@nightingale/pipeline",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b",
+    "test": "echo \"no tests yet (milestone 3)\" && exit 0"
+  },
+  "dependencies": {
+    "@nightingale/schema": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@nightingale/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b",
+    "test": "echo \"no tests yet (milestone 5)\" && exit 0"
+  },
+  "dependencies": {
+    "@nightingale/schema": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,13 @@
+[package]
+name = "nightingale-device"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+# deps get added as each milestone needs them (rppal for gpio, reqwest+rustls for upload,
+# serde+toml for config, sha2 for checksums), see ARCHITECTURE.md section 11 and milestone 7
+[dependencies]
+
+[[bin]]
+name = "nightingale-device"
+path = "src/main.rs"
