@@ -1,6 +1,6 @@
 # Nightingale / "Lost in Handoff": System Architecture (v0.1)
 
-**Status:** draft for the prototype build. Written to be handed to Claude Code to scaffold a monorepo, and to be read by the capstone team.
+**Status:** draft for the prototype build, read by the capstone team and used to guide the monorepo build.
 **Scope:** capstone prototype (MVP package Nov 6), designed so a small trial after December is possible. The prototype uses **scripted drills with fictional patients only. No real patient information goes through it.**
 **Legal note:** the privacy rules below come from the team's Oct 8 design research. They are design assumptions, not legal advice. Items marked **[LAWYER]** must be confirmed before any real-world trial.
 
@@ -143,6 +143,17 @@ QUEUED --online--> UPLOADING (chunked, resumable) --server ack--> local copy del
 - Config: `max_clip_seconds`, `device_id`, API base URL, auth token. Responder identification by PIN or badge (v0: a PIN set per drill).
 - Mock mode: record from a WAV file and photo from a test image so all logic runs on a laptop without hardware.
 - Camera: run `rpicam-still` as a subprocess (`std::process::Command`) and read the file it writes. Audio: run `arecord` as a subprocess (16 kHz, mono, 16-bit WAV, lossless), or use the `cpal` crate (ALSA) if subprocess control proves awkward. **Do not use the old Pi camera crates** (`raspicam-rs` and similar need a 32-bit or legacy camera stack). `rslibcamlite` is an optional later upgrade, not a v0 dependency, because it depends on the rpicam-apps version and must be rebuilt after updates. **No video in v0** (a deliberate decision: photos plus short audio only).
+- **Photo capture must handle focus and motion automatically (no hand-set lens position, ever).** The device is worn, so the subject and the wearer both move.
+  - Camera (v0, working): **Arducam 16MP IMX519 autofocus** (UC-873 Rev.D) with **Arducam's own libcamera build for trixie**. Raspberry Pi's stock libcamera has no `rpi.af` block for this sensor ("no AF algorithm"); Arducam's packages (libcamera0.7, libcamera-ipa, librpicam-app1, rpicam-apps-core, version `0.7.2+rpt20260819-2` / `1.13.0-2`) add it, and autofocus now locks on the face. Install by hand (do not run Arducam's script, which edits `/boot/config.txt` instead of `/boot/firmware/config.txt`): download the debs from the ArduCAM/Arducam-Pivariety-V4L2-Driver GitHub releases (`libcamera-v0.0.5`, `libcamera-apps-v0.0.5`) and `sudo apt install ./*.deb`. Then `sudo apt-mark hold libcamera0.7 libcamera-ipa librpicam-app1 rpicam-apps-core` so an OS update cannot silently restore the stock build. **Risk:** this depends on Arducam keeping its builds current with Raspberry Pi OS. Fallback if it breaks or Arducam stops updating: Raspberry Pi Camera Module 3 (autofocus in the stock stack, 15-pin, use the 22-to-15 adapter, standard lens).
+  - **Keep the camera pipeline warm.** Do not spawn `rpicam-still` cold on each press (5 s default timeout, plus AE and AF warm-up). Run one long-lived `rpicam-vid`/`rpicam-still` process (for example `--timelapse` or `--signal`/`--keypress` capture, or `--mode` with continuous autofocus) while the device is ARMED or IDLE-with-camera-ready, so exposure and focus are already settled when the button is pressed. For the v0 shell proof, `-t 1000` is the minimum.
+  - **"Live photo" burst, pick the sharpest.** On a press, take a short burst of about 5 to 8 frames spanning roughly 0.3 s around the press (a rolling buffer for the frames just before it, plus a few after). Score each frame with the variance of the Laplacian (computed on a downscaled greyscale copy; cheap on a Zero 2 W) and **save only the sharpest frame**. Discard the rest immediately, so no extra image data is retained (this is consistent with the data-minimisation rules in section 2). Do not keep or upload video.
+  - **Autofocus on capture:** use `--autofocus-mode auto --autofocus-on-capture` (or continuous AF while armed, with a triggered refocus on press). Use `--autofocus-window` biased to the centre of the frame as a starting point; tune on hardware.
+  - **Motion and exposure (measured, Oct 2026): do NOT force a fast fixed shutter.** In a normal dim evening room the sensor is already at maximum gain, so brightness scales directly with shutter time. At a forced 1/120 s the photo was far too dark (mean brightness 42 of 255, against 118 for the camera's own choice), and `--ev` did nothing because gain was already maxed. A fixed 1/250 s would be worse, and a short shutter under indoor lights also gives horizontal flicker bands (use multiples of 1/120 s, for example 8333 us, on 60 Hz mains). Instead: let auto-exposure choose, with a ceiling of about 1/30 s, and handle movement by the burst-and-pick-sharpest step plus the quality gate. Smaller files, brighter and sharper photos. Firefighters will shoot in dark and smoky scenes, so low light is a core case, not an edge case; an on-device light is worth considering. Record tuned values in config (`camera.max_shutter_us`, `camera.burst_frames`).
+  - **Multi-frame stacking: optional, low-light only (not v0 default).** Prototype `nightingale_stack.py` (burst, reject blurry frames, align with ECC, average, deleting all intermediate frames) was tested on the Zero 2 W: about 16.7 s total for 3 frames at 2328x1748. In a bright room the merged image was slightly softer than the best single frame and noise did not improve. It may help in dim scenes; test before adopting. Stacking only ever saves one finished photo, so it fits the data-minimisation rule if the source frames are deleted at once, but merging on the server would mean uploading several frames, which is a [LAWYER] question.
+  - **Burst capture:** `rpicam-still --timelapse` restarts the camera for every frame (about 1.5 s per frame, 3 frames in 4.6 s), too slow and it resets autofocus each time. The daemon must keep one camera pipeline running and pull frames from the stream (for example `rpicam-vid --codec mjpeg` or a libcamera binding), then score and keep the sharpest.
+  - **Resolution and tuning (still to test):** compare 2328x1748 (default in tests) with full 4656x3496, and `--sharpness 1.5 --denoise cdn_hq`, against the default, in the same light.
+  - **Quality gate:** if the best frame's sharpness score is below a threshold (`camera.min_sharpness`), flag the photo as `low_quality` in its metadata so the responder review step can see it, and do not silently discard it.
+  - Lens distortion on this wide lens is expected at close range (selfie distance); scenes at 1 to 3 m look more natural. Software correction is a later option.
 - GPIO (button, LED, buzzer): the `rppal` crate.
 - Upload: `reqwest` (blocking or async with `tokio`) with `rustls`. Chunked, resumable, with a sha256 per file (`sha2`). Config in a TOML file (`serde`, `toml`).
 - Build on the PC and cross-compile to `aarch64-unknown-linux-gnu` (the `cross` tool). Do **not** compile on the Pi (512 MB RAM). Copy the binary over with `scp` and run it as a `systemd` service.
@@ -150,7 +161,7 @@ QUEUED --online--> UPLOADING (chunked, resumable) --server ack--> local copy del
 
 ## 6. Data model (`packages/schema`, zod)
 
-Sketch. Claude Code should turn this into zod schemas and export JSON Schema.
+Sketch, turned into zod schemas and exported JSON Schema in `packages/schema`.
 
 ```ts
 type OrgType = "fire" | "paramedic" | "hospital";
@@ -282,7 +293,7 @@ SEALED --hold placed--> HELD (clock paused) --hold released--> SEALED (clock res
 - Web: React (Vite). Auth: simple JWT with seeded demo users and roles for the prototype.
 - Device: stable Rust, `rppal` (GPIO), `reqwest` + `rustls` (upload), `serde` + `toml` (config), `sha2` (checksums), `cpal` (optional audio), `cross` (cross-compile to aarch64). Camera and audio via the `rpicam-still` and `arecord` subprocesses.
 
-## 12. Build order (milestones for Claude Code)
+## 12. Build order (milestones)
 
 0. **Scaffold** the monorepo, `schema` package, CI (typecheck, lint, test), docker-compose, `fixtures` with 2 fictional scenarios.
 1. **Ingest API** with chunked, resumable upload into the vault, plus a Rust upload client (`device/src/upload.rs`) tested against it.
@@ -293,6 +304,7 @@ SEALED --hold placed--> HELD (clock paused) --hold released--> SEALED (clock res
 6. **Retention service** with hold logic and destruction certificates.
 7. **Device daemon (Rust)**:
    - **7a. Checkpoint, before writing any Rust:** on the real Pi, prove the hardware from the shell with `rpicam-hello`, `rpicam-still` and `arecord`. Then cross-compile a hello-world with `cross`, copy it over with `scp`, and run it. If this takes more than about a week, switch the device to Python (same HTTP contract) and note it here.
+   - **7a status (13 Oct 2026):** camera proven from the shell. Arducam IMX519 on the Zero 2 W (`dtoverlay=imx519` and `camera_auto_detect=0` in `/boot/firmware/config.txt`; 22-to-22-pin ribbon, silver contacts toward the flap at the camera end, blue tip up at the Pi end). Autofocus works with Arducam's trixie libcamera build (see section 5). Hardware proven: camera, capture, `scp` transfer, passwordless SSH key. **Still open for 7a:** `arecord` and the microphone (mic plug and USB sound card), the `cross` hello-world, resolution/tuning comparison, a continuous-stream burst, and testing in other rooms and light (needs the battery or boost board).
    - **7b.** Daemon in mock mode (WAV file and test image instead of hardware), with the state machine, queue and upload.
    - **7c.** Real camera, mic, button, LED and buzzer on the Pi, run as a `systemd` service.
 8. **Real providers** (one transcriber, one LLM) behind the interfaces, run against the fixtures.
@@ -312,7 +324,3 @@ SEALED --hold placed--> HELD (clock paused) --hold released--> SEALED (clock res
 3. Does capturing bystander audio, or any pre-roll buffer, risk the Criminal Code interception rule? (The design avoids pre-roll and flags non-responder speech.) [LAWYER]
 4. Who is the first trial buyer and signer (township chief, regional paramedic service)? This decides which tiers the first trial needs.
 5. Union consultation and a joint privacy impact assessment before any trial with real calls.
-
-## 15. First prompt for Claude Code
-
-> Read ARCHITECTURE.md fully. Scaffold the monorepo exactly as in section 4 and complete **milestone 0**: the pnpm workspace, the `schema` package (zod schemas for every type in section 6, plus exported JSON Schema), docker-compose with Postgres and MinIO, CI (TypeScript checks, plus `cargo fmt`, `cargo clippy` and `cargo test` for `device/`), an empty `device/` Cargo crate that compiles, and the `fixtures` package with two fictional scenarios. Do not build features beyond milestone 0. The device is **Rust**; do not substitute Python. Treat section 2 (design rules) as requirements that must be enforced by tests. Ask me before changing any rule in section 2.
