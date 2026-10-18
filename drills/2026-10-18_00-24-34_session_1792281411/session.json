@@ -1,0 +1,237 @@
+{
+  "captureId": "session_1792281411",
+  "dir": "2026-10-18_00-24-34_session_1792281411",
+  "deviceId": "nightingale",
+  "startedAt": 1792297474629,
+  "assets": [
+    {
+      "assetId": "04caec51-ea90-4a85-8a0f-7eb85caed333",
+      "captureId": "session_1792281411",
+      "kind": "audio",
+      "completedAt": 1792297488411,
+      "capturedAt": 1792281411643,
+      "status": "ready",
+      "file": "audio/002448_04caec51.wav",
+      "durationMs": 14726.9375,
+      "levelDbfs": -47.353938049894914,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Hello, hello,",
+          "at": 1792281413793
+        },
+        {
+          "speaker": "Person 1",
+          "text": "testing one, two,",
+          "at": 1792281415593
+        },
+        {
+          "speaker": "Person 1",
+          "text": "three.",
+          "at": 1792281417643
+        },
+        {
+          "speaker": "Person 1",
+          "text": "Hello, hello.",
+          "at": 1792281419743
+        }
+      ],
+      "note": {
+        "id": "451d5538-c695-48de-9108-1bfc137b1807",
+        "captureId": "session_1792281411",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "The responder conducted a sound check, testing the equipment."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]",
+              "segment[3]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "5a032908-2292-40a9-8027-6e8f35cc3aec",
+      "captureId": "session_1792281411",
+      "kind": "audio",
+      "completedAt": 1792297497495,
+      "capturedAt": 1792281426697,
+      "status": "ready",
+      "file": "audio/002457_5a032908.wav",
+      "durationMs": 14961.375,
+      "levelDbfs": -42.80224123145238,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Testing,",
+          "at": 1792281430497
+        },
+        {
+          "speaker": "Person 1",
+          "text": "testing,",
+          "at": 1792281431297
+        },
+        {
+          "speaker": "Person 1",
+          "text": "one,",
+          "at": 1792281432297
+        },
+        {
+          "speaker": "Person 1",
+          "text": "two,",
+          "at": 1792281433397
+        },
+        {
+          "speaker": "Person 1",
+          "text": "three.",
+          "at": 1792281434347
+        }
+      ],
+      "note": {
+        "id": "6f978aa5-a976-48ce-a238-0798599ed462",
+        "captureId": "session_1792281411",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "Testing was conducted by Person 1."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]",
+              "segment[3]",
+              "segment[4]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "ef7e0128-2a42-437b-a7d6-910a1718b45b",
+      "captureId": "session_1792281411",
+      "kind": "photo",
+      "completedAt": 1792297503066,
+      "capturedAt": 1792297498056,
+      "status": "ready",
+      "file": "photos/002503_ef7e0128.jpg",
+      "caption": "The image shows a young person with long hair, lying down in a room with a light-colored wall and a closed door in the background."
+    },
+    {
+      "assetId": "40e5f323-9bc1-42cc-b211-d5dd55939c34",
+      "captureId": "session_1792281411",
+      "kind": "audio",
+      "completedAt": 1792297505153,
+      "capturedAt": 1792297482935,
+      "status": "ready",
+      "file": "audio/002505_40e5f323.wav",
+      "durationMs": 14961.375,
+      "levelDbfs": -37.65851265674559,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Testing, testing,",
+          "at": 1792297485735
+        },
+        {
+          "speaker": "Person 1",
+          "text": "one,",
+          "at": 1792297488235
+        },
+        {
+          "speaker": "Person 1",
+          "text": "two,",
+          "at": 1792297489235
+        },
+        {
+          "speaker": "Person 1",
+          "text": "three.",
+          "at": 1792297489785
+        }
+      ],
+      "note": {
+        "id": "fc642457-6b56-45d0-a359-c3248ba45fd5",
+        "captureId": "session_1792281411",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "The responders conducted a testing drill, with one responder counting to three."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]",
+              "segment[3]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "bd7a71b6-22f2-4fae-b011-8a31c14cdab6",
+      "captureId": "session_1792281411",
+      "kind": "audio",
+      "completedAt": 1792297513551,
+      "capturedAt": 1792297498007,
+      "status": "silent",
+      "file": "audio/002513_bd7a71b6.wav",
+      "durationMs": 14982.6875,
+      "levelDbfs": -67.16552503149973
+    }
+  ],
+  "speakers": [
+    "Person 1"
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "4ebf7fc3-6ded-48f1-a3c0-36239fa1bbb5",
+    "captureId": "session_1792281411",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v3",
+    "sections": {
+      "narrative": "Testing was conducted multiple times by Person 1."
+    },
+    "spans": [
+      {
+        "field": "sections.narrative",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]"
+        ]
+      }
+    ],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1792297513022,
+  "epcrChunks": 3,
+  "liveTurns": [
+    {
+      "id": "item_EaCjswDHU80dd51l3ZPxh",
+      "startedAt": 1792297487383,
+      "endedAt": 1792297503514,
+      "text": "Testing testing one two three"
+    }
+  ],
+  "liveCoverage": [
+    [
+      1792297476836,
+      1792297527645
+    ]
+  ]
+}

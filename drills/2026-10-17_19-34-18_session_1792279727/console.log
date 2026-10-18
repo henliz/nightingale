@@ -1,0 +1,20 @@
+7:34:18 p.m. server info: new drill session session_1792279727, saving to drills/2026-10-17_19-34-18_session_1792279727
+7:28:47 p.m. nightingale info: device nightingale is ON, v0.0.0, session session_1792279727, talking to http://Henriettas-MacBook-Air.local:8787
+7:28:47 p.m. nightingale info: 1 file(s) (929 KB) waiting in the queue from before, uploading those first
+7:28:47 p.m. nightingale info: [button] POWER/RECORD on gpio 3
+7:28:47 p.m. nightingale info: [button] PHOTO on gpio 17
+7:28:47 p.m. nightingale info: [hw] no buzzer configured (NIGHTINGALE_BUZZER_PIN), ready tone skipped
+7:28:47 p.m. nightingale info: [notice] reminder for the responder: say "I'm recording for the medical record"
+7:28:47 p.m. nightingale info: [record] RECORDING (max 1800s). press POWER/RECORD to stop and power off, PHOTO for a photo
+7:28:52 p.m. nightingale warn: [live] can't stream live audio (request or response body error for url (http://henriettas-macbook-air.local:8787/live/session_1792279727/audio)), retrying. the 30s chunks still upload
+7:28:52 p.m. nightingale warn: [audio] upload of session_1792278464__1792279681529.wav failed, keeping it queued, retry in 2s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792278464/assets)
+7:28:59 p.m. nightingale warn: [audio] upload of session_1792278464__1792279681529.wav failed, keeping it queued, retry in 4s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792278464/assets)
+7:29:08 p.m. nightingale warn: [audio] upload of session_1792278464__1792279681529.wav failed, keeping it queued, retry in 8s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792278464/assets)
+7:34:21 p.m. server info: live audio connected, transcribing as you speak
+7:34:27 p.m. nightingale info: [audio] uploaded session_1792278464__1792279681529.wav (929 KB) in 0.5s, asset 73026d6f-1a3c-4507-ab80-9c5a2e986e36
+7:34:27 p.m. nightingale info: [heartbeat] up 0m, queue 0 file(s) / 0 KB, 1 uploaded, 3 failed attempts, cpu 39.2C, wifi -54 dBm
+7:34:27 p.m. nightingale info: [audio] chunk #1 saved (30s), queued
+7:34:28 p.m. server warn: audio chunk e5f8d26b-d030-44bb-a0c8-7655bff12399 saved, silent (loudest -64 dBFS), nothing to transcribe
+7:34:28 p.m. nightingale info: [audio] uploaded session_1792279727__1792279727251.wav (929 KB) in 0.4s, asset e5f8d26b-d030-44bb-a0c8-7655bff12399
+7:34:31 p.m. server info: live audio disconnected
+7:34:41 p.m. server info: audio chunk e9757e78-18d3-4ae3-b621-5f25e3a0049b saved (115 KB), already transcribed live

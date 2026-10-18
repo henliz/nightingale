@@ -4,13 +4,19 @@ version = "0.0.0"
 edition = "2021"
 publish = false
 
-# gpio/rppal, config/toml land when the capture state machine does (milestone 7b/7c)
+# config/toml lands when the capture state machine does (milestone 7b/7c)
 [dependencies]
 reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
 hex = "0.4"
+# decodes burst frames at 1/8 scale to score sharpness (capture.rs)
+jpeg-decoder = { version = "0.3", default-features = false }
+
+# gpio for the button, linux only so the crate still builds + tests on a mac
+[target.'cfg(target_os = "linux")'.dependencies]
+rppal = "0.22"
 
 [dev-dependencies]
 httpmock = "0.7"

@@ -20,8 +20,21 @@ export interface TranscribeResult {
   segments: RawSegment[];
 }
 
+/** a voice the transcriber should recognise by name, e.g. "Person 1" + a 2-10 s wav clip */
+export interface KnownSpeaker {
+  name: string;
+  /** "data:audio/wav;base64,..." */
+  reference: string;
+}
+
+export interface TranscribeOptions {
+  vocab?: string[];
+  /** keeps speaker labels consistent across chunks, only diarizing transcribers use it */
+  knownSpeakers?: KnownSpeaker[];
+}
+
 export interface Transcriber {
-  transcribe(audio: Uint8Array, opts?: { vocab?: string[] }): Promise<TranscribeResult>;
+  transcribe(audio: Uint8Array, opts?: TranscribeOptions): Promise<TranscribeResult>;
 }
 
 export interface Diarizer {
@@ -46,4 +59,10 @@ export interface PhotoPassResult {
 
 export interface PhotoPass {
   process(image: Uint8Array): Promise<PhotoPassResult>;
+}
+
+// separate from PhotoPass on purpose: PhotoPass is about safety processing (blur,
+// health number detection), this is just "describe what's in it" for the dashboard
+export interface PhotoCaptioner {
+  caption(image: Uint8Array): Promise<string>;
 }

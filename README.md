@@ -37,7 +37,7 @@ and [`packages/audit/README.md`](./packages/audit/README.md).
 
 ```
 pnpm install
-pnpm run dev:services   # postgres + minio via docker compose
+pnpm run dev:services   # postgres + the s3-compatible vault (seaweedfs) via docker compose
 pnpm run typecheck
 pnpm run test
 ```

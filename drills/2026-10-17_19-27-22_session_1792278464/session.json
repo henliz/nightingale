@@ -1,0 +1,35 @@
+{
+  "captureId": "session_1792278464",
+  "dir": "2026-10-17_19-27-22_session_1792278464",
+  "deviceId": "nightingale",
+  "startedAt": 1792279642484,
+  "assets": [
+    {
+      "assetId": "a3388c26-54c7-4f2f-8499-d2c4cab9bec8",
+      "captureId": "session_1792278464",
+      "kind": "audio",
+      "completedAt": 1792279653142,
+      "status": "silent",
+      "file": "audio/192733_a3388c26.wav",
+      "levelDbfs": -58.771417544815485
+    },
+    {
+      "assetId": "1e5275e6-931d-4669-a39b-53cf7659f4fe",
+      "captureId": "session_1792278464",
+      "kind": "audio",
+      "completedAt": 1792279682768,
+      "status": "failed",
+      "file": "audio/192802_1e5275e6.wav"
+    },
+    {
+      "assetId": "73026d6f-1a3c-4507-ab80-9c5a2e986e36",
+      "captureId": "session_1792278464",
+      "kind": "audio",
+      "completedAt": 1792280067050,
+      "capturedAt": 1792279681529,
+      "status": "silent",
+      "file": "audio/193427_73026d6f.wav",
+      "levelDbfs": -51.097411259312295
+    }
+  ]
+}

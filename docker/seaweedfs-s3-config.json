@@ -1,0 +1,14 @@
+{
+  "identities": [
+    {
+      "name": "nightingale",
+      "credentials": [
+        {
+          "accessKey": "nightingale",
+          "secretKey": "nightingale-dev"
+        }
+      ],
+      "actions": ["Admin", "Read", "Write"]
+    }
+  ]
+}

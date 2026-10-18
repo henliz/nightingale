@@ -1,6 +1,6 @@
-# cross compile scripts
+# cross compile
 
-empty for now. once there's an actual daemon to ship (milestone 7), this is where the
-`cross build --target aarch64-unknown-linux-gnu` scripts go, build on the pc, scp the
-binary over, never compile on the pi itself (512mb ram, it'll choke). see ARCHITECTURE.md
-section 5 and section 12 milestone 7a.
+see `../deploy.sh`, it does the `cross build --release --target aarch64-unknown-linux-gnu`
++ copy + restart. build on the pc, never on the pi itself (512mb ram, it'll choke). on an
+apple silicon mac cross's images run under amd64 emulation, deploy.sh sets that up, see
+`../README.md` for the one-time rustup step.

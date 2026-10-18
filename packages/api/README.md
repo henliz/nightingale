@@ -1,14 +1,35 @@
 # @nightingale/api
 
-milestone 1 done: chunked, resumable ingest into the sealed vault.
+chunked, resumable ingest into the sealed vault, wired to the pipeline on the audio side.
 
 - `POST /captures/:captureId/assets`: start an upload, body is `{ kind, sha256, photoPurpose? }`, returns `{ assetId, vaultKey, nextPartNumber }`
 - `PUT /assets/:assetId/parts/:partNumber`: upload one chunk, raw bytes, parts must land in order (that's the resumability story, ask where you left off and keep going)
 - `GET /assets/:assetId`: status check, tells you `receivedParts` + `nextPartNumber` so a device can resume after dropping offline
-- `POST /assets/:assetId/complete`: finishes the multipart upload, reads the assembled object back, verifies its sha256 against what was declared at init
+- `POST /assets/:assetId/complete`: finishes the multipart upload, reads the assembled object back, verifies its sha256 against what was declared at init. if `kind` is `audio`, this also runs it through `@nightingale/pipeline` right then and there (not a queue/background job yet)
+- `GET /assets/:assetId/note`: the `DraftNote` the pipeline produced, as json. 404 until the audio asset's `/complete` call has finished, or if the asset was a photo (nothing to transcribe)
+- `GET /assets/:assetId/download`: streams the raw bytes back, so a photo can actually be viewed in a browser instead of only living in the vault
 
-`vault.ts` has two `VaultStore` adapters: `MemoryVaultStore` (fake, what the tests use) and `S3VaultStore` (real, talks to the minio in the root `docker-compose.yml`). `pnpm --filter @nightingale/api run dev` runs the real server against minio.
+dev routes (drills only, no access control, ARCHITECTURE.md section 9 item 5):
 
-heads up: minio/s3 multipart requires every part except the last to be at least 5mb. drill clips fit under that today so it only works as a single part upload, see the comment in `vault.ts` if clip sizes ever grow.
+- `GET /`: the live dashboard, ePCR box + transcript box + console
+- `POST /live/:sessionId/audio`: the pi streams raw mic audio here while recording, transcribed word by word (`live-transcribe.ts`, `NIGHTINGALE_LIVE_MODEL`, default `gpt-live-transcribe`)
+- `POST /dev/logs`: the pi ships its log lines here (`{ deviceId, sessionId, lines }`)
+- `GET /dev/stream`: server-sent events, log lines + "something changed" pings
+- `POST /dev/sessions/new`: the dashboard's "New session" button, splits a fresh session off the device's current one from now on
+- `GET /dev/sessions`: every drill session, its assets, transcripts and session-wide ePCR
+- `GET /dev/files/:dir/:sub/:name`: raw photos/audio saved in a drill folder
 
-still a placeholder: attribute based access control, that's **milestone 4** (ARCHITECTURE.md section 7).
+every device connection is saved to `drills/<date>_<time>_<session>/` at the repo root
+(`drills.ts`, override with `NIGHTINGALE_DRILLS_DIR`) and reloaded on restart, see
+ARCHITECTURE.md section 9. other knobs: `NIGHTINGALE_TRANSCRIBE_MODEL` (default
+`gpt-4o-transcribe`), `NIGHTINGALE_SILENCE_DBFS` (default -50).
+
+`vault.ts` has two `VaultStore` adapters: `MemoryVaultStore` (fake, what the tests use) and `S3VaultStore` (real, talks to the s3-compatible vault in the root `docker-compose.yml`, and creates the bucket on startup if it doesn't exist yet). `pnpm --filter @nightingale/api run dev` runs the real server against it.
+
+that vault is **SeaweedFS**, not MinIO. MinIO was the original pick (ARCHITECTURE.md section 11) but locked its free docker images behind a login in 2025, so `docker-compose.yml` runs SeaweedFS's S3 gateway instead, same S3 API, same code in `vault.ts` either way. credentials live in `docker/seaweedfs-s3-config.json` (dev only, fake creds).
+
+transcription is real if `OPENAI_API_KEY` is set (loaded from a root `.env` if one exists, see `--env-file-if-exists` in the `dev` script), otherwise it falls back to `@nightingale/pipeline`'s `FakeTranscriber`. condenser and captioner are real with a key too; the diarizer is still fake, see that package's README.
+
+heads up: s3 multipart requires every part except the last to be at least 5mb, most s3-compatible stores enforce the same rule. the pi sends 8 mb parts so photos and chunks always go up as one part (2 mb parts broke photos, oct 17 2026).
+
+still a placeholder: attribute based access control, that's **milestone 4** (ARCHITECTURE.md section 7). none of these routes check who's asking right now.

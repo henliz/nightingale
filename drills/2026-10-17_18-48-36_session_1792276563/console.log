@@ -1,0 +1,347 @@
+6:48:36 p.m. server info: new drill session session_1792276563, saving to drills/2026-10-17_18-48-36_session_1792276563
+6:48:36 p.m. server warn: audio chunk 102691b9-ef06-4d4b-946d-8e39849cb3f4 is silent (loudest -52 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:48:36 p.m. nightingale info: [audio] uploaded session_1792276563__1792277285.wav (937 KB) in 0.4s, asset 102691b9-ef06-4d4b-946d-8e39849cb3f4
+6:49:06 p.m. server info: got audio chunk 3e9b7346-1b4b-4ac4-b2a1-e7cfbdbf1029 (938 KB, loudest -49 dBFS), transcribing...
+6:49:07 p.m. server info: transcript ready for 3e9b7346-1b4b-4ac4-b2a1-e7cfbdbf1029 in 1.4s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:49:10 p.m. nightingale info: [audio] uploaded session_1792276563__1792277315.wav (937 KB) in 5.1s, asset 3e9b7346-1b4b-4ac4-b2a1-e7cfbdbf1029
+6:49:11 p.m. server info: ePCR updated from 1 chunk(s) in 3.2s (2 sections filled)
+6:49:30 p.m. nightingale info: [photo] photo #25 taken (2588 KB, 5.1s), queued
+6:49:33 p.m. nightingale info: [heartbeat] up 13m, queue 25 file(s) / 62637 KB, 25 photos, 26 chunks, 26 uploaded, 29 failed attempts, cpu 39.7C, wifi -47 dBm
+6:49:35 p.m. nightingale info: [audio] chunk #27 saved (30s, 937 KB), queued
+6:49:36 p.m. server info: got audio chunk 7c9603bd-ab35-4ee1-bb53-65ac2e907075 (938 KB, loudest -50 dBFS), transcribing...
+6:49:37 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:49:37 p.m. server info: transcript ready for 7c9603bd-ab35-4ee1-bb53-65ac2e907075 in 1.4s (2 segments, gpt-4o-transcribe), updating the ePCR...
+6:49:39 p.m. server info: ePCR updated from 2 chunk(s) in 2.0s (1 sections filled)
+6:49:40 p.m. nightingale info: [audio] uploaded session_1792276563__1792277345.wav (937 KB) in 4.4s, asset 7c9603bd-ab35-4ee1-bb53-65ac2e907075
+6:50:06 p.m. server info: got audio chunk 8de29094-b47e-490f-aca9-a99462f31b16 (938 KB, loudest -46 dBFS), transcribing...
+6:50:07 p.m. server info: transcript ready for 8de29094-b47e-490f-aca9-a99462f31b16 in 1.1s (2 segments, gpt-4o-transcribe), updating the ePCR...
+6:50:08 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:50:09 p.m. nightingale info: [audio] uploaded session_1792276563__1792277375.wav (937 KB) in 3.5s, asset 8de29094-b47e-490f-aca9-a99462f31b16
+6:50:12 p.m. server info: ePCR updated from 3 chunk(s) in 4.8s (3 sections filled)
+6:50:33 p.m. nightingale info: [heartbeat] up 14m, queue 26 file(s) / 65345 KB, 26 photos, 28 chunks, 28 uploaded, 31 failed attempts, cpu 39.7C, wifi -54 dBm
+6:50:36 p.m. nightingale info: [audio] chunk #29 saved (30s, 937 KB), queued
+6:50:36 p.m. server warn: audio chunk 0a293571-3781-4675-867b-8552459c26b3 is silent (loudest -59 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:50:36 p.m. nightingale info: [audio] uploaded session_1792276563__1792277405.wav (937 KB) in 0.6s, asset 0a293571-3781-4675-867b-8552459c26b3
+6:50:39 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:50:40 p.m. nightingale info: [photo] photo #27 taken (2638 KB, 4.9s), queued
+6:51:03 p.m. nightingale info: [heartbeat] up 15m, queue 27 file(s) / 67983 KB, 27 photos, 29 chunks, 29 uploaded, 32 failed attempts, cpu 39.7C, wifi -51 dBm
+6:51:06 p.m. nightingale info: [audio] chunk #30 saved (30s, 937 KB), queued
+6:51:06 p.m. server warn: audio chunk ffb18ba7-0f50-4469-b446-379006b70ff5 is silent (loudest -59 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:51:06 p.m. nightingale info: [audio] uploaded session_1792276563__1792277436.wav (937 KB) in 0.4s, asset ffb18ba7-0f50-4469-b446-379006b70ff5
+6:51:10 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:51:16 p.m. nightingale info: [photo] photo #28 taken (2626 KB, 5.3s), queued
+6:51:33 p.m. nightingale info: [heartbeat] up 15m, queue 28 file(s) / 70610 KB, 28 photos, 30 chunks, 30 uploaded, 33 failed attempts, cpu 39.7C, wifi -51 dBm
+6:51:36 p.m. nightingale info: [audio] chunk #31 saved (30s, 937 KB), queued
+6:51:36 p.m. server info: got audio chunk 1f747353-f019-4b26-a81a-c7f0dbed9e3b (938 KB, loudest -48 dBFS), transcribing...
+6:51:37 p.m. server info: transcript ready for 1f747353-f019-4b26-a81a-c7f0dbed9e3b in 1.0s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:51:39 p.m. nightingale info: [audio] uploaded session_1792276563__1792277466.wav (937 KB) in 3.5s, asset 1f747353-f019-4b26-a81a-c7f0dbed9e3b
+6:51:41 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:51:42 p.m. server info: ePCR updated from 4 chunk(s) in 5.0s (3 sections filled)
+6:51:50 p.m. nightingale info: [photo] photo #29 taken (2651 KB, 4.9s), queued
+6:52:03 p.m. nightingale info: [heartbeat] up 16m, queue 29 file(s) / 73261 KB, 29 photos, 31 chunks, 31 uploaded, 34 failed attempts, cpu 40.2C, wifi -52 dBm
+6:52:06 p.m. nightingale info: [audio] chunk #32 saved (30s, 937 KB), queued
+6:52:06 p.m. server info: got audio chunk d7d84c1c-6b87-443d-a29b-487436fc6dd6 (938 KB, loudest -28 dBFS), transcribing...
+6:52:08 p.m. server info: transcript ready for d7d84c1c-6b87-443d-a29b-487436fc6dd6 in 1.7s (7 segments, gpt-4o-transcribe), updating the ePCR...
+6:52:13 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:52:14 p.m. server info: ePCR updated from 5 chunk(s) in 6.4s (8 sections filled)
+6:52:15 p.m. nightingale info: [audio] uploaded session_1792276563__1792277496.wav (937 KB) in 9.0s, asset d7d84c1c-6b87-443d-a29b-487436fc6dd6
+6:52:26 p.m. nightingale info: [photo] photo #30 taken (2650 KB, 5.2s), queued
+6:52:33 p.m. nightingale info: [heartbeat] up 16m, queue 30 file(s) / 75912 KB, 30 photos, 32 chunks, 32 uploaded, 35 failed attempts, cpu 40.2C, wifi -58 dBm
+6:52:36 p.m. nightingale info: [audio] chunk #33 saved (30s, 937 KB), queued
+6:52:37 p.m. server info: got audio chunk 8036b5ef-f742-4721-8dd4-da4cb1957af9 (938 KB, loudest -11 dBFS), transcribing...
+6:52:38 p.m. server info: transcript ready for 8036b5ef-f742-4721-8dd4-da4cb1957af9 in 1.2s (3 segments, gpt-4o-transcribe), updating the ePCR...
+6:52:40 p.m. nightingale info: [audio] uploaded session_1792276563__1792277526.wav (937 KB) in 4.0s, asset 8036b5ef-f742-4721-8dd4-da4cb1957af9
+6:52:44 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:52:44 p.m. server info: ePCR updated from 6 chunk(s) in 6.2s (7 sections filled)
+6:53:01 p.m. nightingale info: [photo] photo #31 taken (2635 KB, 4.9s), queued
+6:53:03 p.m. nightingale info: [heartbeat] up 17m, queue 31 file(s) / 78547 KB, 31 photos, 33 chunks, 33 uploaded, 36 failed attempts, cpu 40.8C, wifi -58 dBm
+6:53:06 p.m. nightingale info: [audio] chunk #34 saved (30s, 937 KB), queued
+6:53:07 p.m. server info: got audio chunk 68de5c3b-cd12-4a0c-83fb-ffdb9b77890f (938 KB, loudest -46 dBFS), transcribing...
+6:53:08 p.m. server info: transcript ready for 68de5c3b-cd12-4a0c-83fb-ffdb9b77890f in 1.2s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:53:10 p.m. nightingale info: [audio] uploaded session_1792276563__1792277556.wav (937 KB) in 3.3s, asset 68de5c3b-cd12-4a0c-83fb-ffdb9b77890f
+6:53:14 p.m. server info: ePCR updated from 7 chunk(s) in 5.9s (8 sections filled)
+6:53:15 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:53:33 p.m. nightingale info: [heartbeat] up 17m, queue 31 file(s) / 78547 KB, 31 photos, 34 chunks, 34 uploaded, 37 failed attempts, cpu 42.4C, wifi -52 dBm
+6:53:36 p.m. nightingale info: [photo] photo #32 taken (2637 KB, 5.1s), queued
+6:53:36 p.m. nightingale info: [audio] chunk #35 saved (30s, 937 KB), queued
+6:53:37 p.m. server info: got audio chunk ecc04934-40e7-4d15-a201-08dff73aa372 (938 KB, loudest -49 dBFS), transcribing...
+6:53:38 p.m. server info: transcript ready for ecc04934-40e7-4d15-a201-08dff73aa372 in 1.4s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:53:41 p.m. nightingale info: [audio] uploaded session_1792276563__1792277586.wav (937 KB) in 4.5s, asset ecc04934-40e7-4d15-a201-08dff73aa372
+6:53:44 p.m. server info: ePCR updated from 8 chunk(s) in 6.4s (7 sections filled)
+6:53:46 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:54:03 p.m. nightingale info: [heartbeat] up 18m, queue 32 file(s) / 81185 KB, 32 photos, 35 chunks, 35 uploaded, 38 failed attempts, cpu 39.7C, wifi -46 dBm
+6:54:06 p.m. nightingale info: [audio] chunk #36 saved (30s, 937 KB), queued
+6:54:07 p.m. server info: got audio chunk aa8f0469-e295-44a6-91f9-eff5f556a6d8 (938 KB, loudest -38 dBFS), transcribing...
+6:54:08 p.m. server info: transcript ready for aa8f0469-e295-44a6-91f9-eff5f556a6d8 in 1.3s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:54:11 p.m. nightingale info: [photo] photo #33 taken (2639 KB, 5.1s), queued
+6:54:13 p.m. nightingale info: [audio] uploaded session_1792276563__1792277616.wav (937 KB) in 6.6s, asset aa8f0469-e295-44a6-91f9-eff5f556a6d8
+6:54:15 p.m. server info: ePCR updated from 9 chunk(s) in 6.7s (7 sections filled)
+6:54:18 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:54:33 p.m. nightingale info: [heartbeat] up 18m, queue 33 file(s) / 83825 KB, 33 photos, 36 chunks, 36 uploaded, 39 failed attempts, cpu 40.8C, wifi -49 dBm
+6:54:36 p.m. nightingale info: [audio] chunk #37 saved (30s, 937 KB), queued
+6:54:37 p.m. server warn: audio chunk e9b9c36b-7952-4804-914c-9ddab5fbf5c9 is silent (loudest -57 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:54:37 p.m. nightingale info: [audio] uploaded session_1792276563__1792277646.wav (937 KB) in 0.5s, asset e9b9c36b-7952-4804-914c-9ddab5fbf5c9
+6:54:46 p.m. nightingale info: [photo] photo #34 taken (2626 KB, 4.9s), queued
+6:54:49 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:55:03 p.m. nightingale info: [heartbeat] up 19m, queue 34 file(s) / 86451 KB, 34 photos, 37 chunks, 37 uploaded, 40 failed attempts, cpu 39.7C, wifi -46 dBm
+6:55:06 p.m. nightingale info: [audio] chunk #38 saved (30s, 937 KB), queued
+6:55:07 p.m. server warn: audio chunk d6939b31-41cc-408b-ba70-590ef7a3a7e3 is silent (loudest -61 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:55:07 p.m. nightingale info: [audio] uploaded session_1792276563__1792277676.wav (937 KB) in 0.5s, asset d6939b31-41cc-408b-ba70-590ef7a3a7e3
+6:55:20 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:55:21 p.m. nightingale info: [photo] photo #35 taken (2631 KB, 5.2s), queued
+6:55:33 p.m. nightingale info: [heartbeat] up 19m, queue 35 file(s) / 89083 KB, 35 photos, 38 chunks, 38 uploaded, 41 failed attempts, cpu 40.8C, wifi -44 dBm
+6:55:36 p.m. nightingale info: [audio] chunk #39 saved (30s, 937 KB), queued
+6:55:37 p.m. server warn: audio chunk 9d907e59-7ab4-496d-a8a6-11edc53c4f70 is silent (loudest -55 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:55:37 p.m. nightingale info: [audio] uploaded session_1792276563__1792277706.wav (937 KB) in 0.6s, asset 9d907e59-7ab4-496d-a8a6-11edc53c4f70
+6:55:51 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:55:56 p.m. nightingale info: [photo] photo #36 taken (2626 KB, 5.0s), queued
+6:56:03 p.m. nightingale info: [heartbeat] up 20m, queue 36 file(s) / 91709 KB, 36 photos, 39 chunks, 39 uploaded, 42 failed attempts, cpu 40.2C, wifi -43 dBm
+6:56:06 p.m. nightingale info: [audio] chunk #40 saved (30s, 937 KB), queued
+6:56:07 p.m. server info: got audio chunk 64cec3fd-d200-4d72-ba29-2d4eb9848e36 (938 KB, loudest -48 dBFS), transcribing...
+6:56:08 p.m. server info: transcript ready for 64cec3fd-d200-4d72-ba29-2d4eb9848e36 in 1.0s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:56:10 p.m. nightingale info: [audio] uploaded session_1792276563__1792277736.wav (937 KB) in 3.5s, asset 64cec3fd-d200-4d72-ba29-2d4eb9848e36
+6:56:15 p.m. server info: ePCR updated from 10 chunk(s) in 6.6s (7 sections filled)
+6:56:22 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:56:31 p.m. nightingale info: [photo] photo #37 taken (2631 KB, 5.1s), queued
+6:56:33 p.m. nightingale info: [heartbeat] up 20m, queue 37 file(s) / 94340 KB, 37 photos, 40 chunks, 40 uploaded, 43 failed attempts, cpu 41.3C, wifi -45 dBm
+6:56:37 p.m. nightingale info: [audio] chunk #41 saved (30s, 937 KB), queued
+6:56:37 p.m. server warn: audio chunk 1d4357ea-7b4c-4fb5-a588-084f6d590760 is silent (loudest -59 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:56:37 p.m. nightingale info: [audio] uploaded session_1792276563__1792277766.wav (937 KB) in 0.5s, asset 1d4357ea-7b4c-4fb5-a588-084f6d590760
+6:56:53 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:57:03 p.m. nightingale info: [heartbeat] up 21m, queue 37 file(s) / 94340 KB, 37 photos, 41 chunks, 41 uploaded, 44 failed attempts, cpu 42.4C, wifi -49 dBm
+6:57:06 p.m. nightingale info: [photo] photo #38 taken (2632 KB, 4.9s), queued
+6:57:07 p.m. nightingale info: [audio] chunk #42 saved (30s, 937 KB), queued
+6:57:07 p.m. server warn: audio chunk dcf6a3c9-9137-40a2-a86c-582082e03821 is silent (loudest -61 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:57:07 p.m. nightingale info: [audio] uploaded session_1792276563__1792277797.wav (937 KB) in 0.5s, asset dcf6a3c9-9137-40a2-a86c-582082e03821
+6:57:25 p.m. nightingale warn: [photo] upload of session_1792276563__1792276563.jpg failed, keeping it queued, retry in 30s: complete failed: 500 Internal Server Error
+6:57:37 p.m. server info: got audio chunk 5030930c-f6a9-44c7-bce0-5c6df7bba385 (938 KB, loudest -49 dBFS), transcribing...
+6:57:38 p.m. server info: transcript ready for 5030930c-f6a9-44c7-bce0-5c6df7bba385 in 1.4s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:57:40 p.m. nightingale info: [audio] uploaded session_1792276563__1792277827.wav (937 KB) in 3.4s, asset 5030930c-f6a9-44c7-bce0-5c6df7bba385
+6:57:41 p.m. nightingale info: [photo] photo #39 taken (2633 KB, 4.9s), queued
+6:58:14 p.m. server warn: audio chunk 9c7eec99-08e7-4fe5-8900-7e82b484f590 is silent (loudest -56 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:58:15 p.m. nightingale info: [audio] uploaded session_1792276563__1792277857.wav (937 KB) in 0.6s, asset 9c7eec99-08e7-4fe5-8900-7e82b484f590
+6:58:16 p.m. nightingale info: [photo] photo #40 taken (2636 KB, 5.1s), queued
+6:58:27 p.m. server info: got photo 71f2bbbc-770d-40ff-8d6e-209d5f101805 (2496 KB), captioning...
+6:58:30 p.m. server info: caption ready for 71f2bbbc-770d-40ff-8d6e-209d5f101805 in 2.9s
+6:58:30 p.m. nightingale info: [photo] uploaded session_1792276563__1792276563.jpg (2496 KB) in 4.1s, asset 71f2bbbc-770d-40ff-8d6e-209d5f101805
+6:58:31 p.m. server info: got photo 6886633a-34b8-49ac-9d7c-e9a7b2febf5b (2517 KB), captioning...
+6:58:33 p.m. nightingale info: [heartbeat] up 22m, queue 39 file(s) / 99747 KB, 40 photos, 44 chunks, 45 uploaded, 48 failed attempts, cpu 40.8C, wifi -47 dBm
+6:58:33 p.m. server info: caption ready for 6886633a-34b8-49ac-9d7c-e9a7b2febf5b in 2.4s
+6:58:33 p.m. nightingale info: [photo] uploaded session_1792276563__1792276597.jpg (2516 KB) in 3.5s, asset 6886633a-34b8-49ac-9d7c-e9a7b2febf5b
+6:58:35 p.m. server info: got photo 79e5b84a-e8b7-40fd-b5a4-f7126c1a2c73 (2514 KB), captioning...
+6:58:37 p.m. nightingale info: [audio] chunk #45 saved (30s, 937 KB), queued
+6:58:37 p.m. server info: caption ready for 79e5b84a-e8b7-40fd-b5a4-f7126c1a2c73 in 2.5s
+6:58:37 p.m. nightingale info: [photo] uploaded session_1792276563__1792276630.jpg (2514 KB) in 3.7s, asset 79e5b84a-e8b7-40fd-b5a4-f7126c1a2c73
+6:58:38 p.m. server info: got audio chunk a4c12b6e-51eb-44cb-b61f-2547efcad8cc (938 KB, loudest -46 dBFS), transcribing...
+6:58:39 p.m. server info: got photo 00ec9ae3-dc09-4217-addb-cafded4edf0b (2415 KB), captioning...
+6:58:39 p.m. server info: transcript ready for a4c12b6e-51eb-44cb-b61f-2547efcad8cc in 1.2s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:58:41 p.m. nightingale info: [audio] uploaded session_1792276563__1792277887.wav (937 KB) in 3.8s, asset a4c12b6e-51eb-44cb-b61f-2547efcad8cc
+6:58:42 p.m. server info: caption ready for 00ec9ae3-dc09-4217-addb-cafded4edf0b in 3.0s
+6:58:42 p.m. nightingale info: [photo] uploaded session_1792276563__1792276663.jpg (2415 KB) in 4.6s, asset 00ec9ae3-dc09-4217-addb-cafded4edf0b
+6:58:43 p.m. server info: got photo 345a9d7f-f581-4184-b06c-80a95a2b8b14 (2497 KB), captioning...
+6:58:45 p.m. server info: ePCR updated from 12 chunk(s) in 5.8s (8 sections filled)
+6:58:46 p.m. server info: caption ready for 345a9d7f-f581-4184-b06c-80a95a2b8b14 in 2.7s
+6:58:46 p.m. nightingale info: [photo] uploaded session_1792276563__1792276696.jpg (2496 KB) in 4.1s, asset 345a9d7f-f581-4184-b06c-80a95a2b8b14
+6:58:47 p.m. server info: got photo 38dfaf19-d9c7-4bde-b496-6a389bee6861 (2494 KB), captioning...
+6:58:49 p.m. server info: caption ready for 38dfaf19-d9c7-4bde-b496-6a389bee6861 in 2.4s
+6:58:49 p.m. nightingale info: [photo] uploaded session_1792276563__1792276730.jpg (2493 KB) in 3.7s, asset 38dfaf19-d9c7-4bde-b496-6a389bee6861
+6:58:51 p.m. server info: got photo b7d6ebb9-2136-45f3-a265-fc849f054d85 (2484 KB), captioning...
+6:58:51 p.m. nightingale info: [photo] photo #41 taken (2633 KB, 5.1s), queued
+6:58:54 p.m. server info: caption ready for b7d6ebb9-2136-45f3-a265-fc849f054d85 in 2.7s
+6:58:54 p.m. nightingale info: [photo] uploaded session_1792276563__1792276763.jpg (2484 KB) in 4.2s, asset b7d6ebb9-2136-45f3-a265-fc849f054d85
+6:58:55 p.m. server info: got photo e5ca8c28-caee-479d-9a70-d7b1098d9050 (2471 KB), captioning...
+6:58:57 p.m. server info: caption ready for e5ca8c28-caee-479d-9a70-d7b1098d9050 in 2.6s
+6:58:57 p.m. nightingale info: [photo] uploaded session_1792276563__1792276796.jpg (2471 KB) in 3.7s, asset e5ca8c28-caee-479d-9a70-d7b1098d9050
+6:58:58 p.m. server info: got photo 6303b4b2-00d2-491e-80b8-f92138dc3d3e (2463 KB), captioning...
+6:59:01 p.m. server info: caption ready for 6303b4b2-00d2-491e-80b8-f92138dc3d3e in 2.7s
+6:59:01 p.m. nightingale info: [photo] uploaded session_1792276563__1792276829.jpg (2462 KB) in 3.8s, asset 6303b4b2-00d2-491e-80b8-f92138dc3d3e
+6:59:02 p.m. server info: got photo a9218345-b86f-41ff-a9ba-90fea013a723 (2490 KB), captioning...
+6:59:03 p.m. nightingale info: [heartbeat] up 23m, queue 32 file(s) / 82525 KB, 41 photos, 45 chunks, 54 uploaded, 48 failed attempts, cpu 41.9C, wifi -50 dBm
+6:59:05 p.m. server info: caption ready for a9218345-b86f-41ff-a9ba-90fea013a723 in 2.5s
+6:59:05 p.m. nightingale info: [photo] uploaded session_1792276563__1792276862.jpg (2489 KB) in 3.5s, asset a9218345-b86f-41ff-a9ba-90fea013a723
+6:59:06 p.m. server info: got photo a4959d5b-2175-438e-bb20-27ad251688de (2459 KB), captioning...
+6:59:07 p.m. nightingale info: [audio] chunk #46 saved (30s, 937 KB), queued
+6:59:07 p.m. server info: got audio chunk d3d67729-5266-4a55-b5b3-708fbbbab36e (938 KB, loudest -45 dBFS), transcribing...
+6:59:08 p.m. server info: caption ready for a4959d5b-2175-438e-bb20-27ad251688de in 2.4s
+6:59:08 p.m. nightingale info: [photo] uploaded session_1792276563__1792276895.jpg (2459 KB) in 3.6s, asset a4959d5b-2175-438e-bb20-27ad251688de
+6:59:09 p.m. server info: transcript ready for d3d67729-5266-4a55-b5b3-708fbbbab36e in 1.4s (1 segments, gpt-4o-transcribe), updating the ePCR...
+6:59:09 p.m. server info: got photo 94cc6452-36b0-48a4-ba34-ab5a997b67f4 (2448 KB), captioning...
+6:59:11 p.m. nightingale info: [audio] uploaded session_1792276563__1792277917.wav (937 KB) in 3.6s, asset d3d67729-5266-4a55-b5b3-708fbbbab36e
+6:59:12 p.m. server info: caption ready for 94cc6452-36b0-48a4-ba34-ab5a997b67f4 in 2.4s
+6:59:12 p.m. nightingale info: [photo] uploaded session_1792276563__1792276928.jpg (2448 KB) in 3.7s, asset 94cc6452-36b0-48a4-ba34-ab5a997b67f4
+6:59:13 p.m. server info: got photo 703ef536-c166-4b22-90ee-328f94a8deaf (2471 KB), captioning...
+6:59:15 p.m. server info: ePCR updated from 13 chunk(s) in 6.3s (8 sections filled)
+6:59:16 p.m. server info: caption ready for 703ef536-c166-4b22-90ee-328f94a8deaf in 2.6s
+6:59:16 p.m. nightingale info: [photo] uploaded session_1792276563__1792276962.jpg (2471 KB) in 4.1s, asset 703ef536-c166-4b22-90ee-328f94a8deaf
+6:59:17 p.m. server info: got photo c71840a9-4590-4074-b092-c799f0bfd3f0 (2504 KB), captioning...
+6:59:20 p.m. server info: caption ready for c71840a9-4590-4074-b092-c799f0bfd3f0 in 2.7s
+6:59:20 p.m. nightingale info: [photo] uploaded session_1792276563__1792276995.jpg (2503 KB) in 3.8s, asset c71840a9-4590-4074-b092-c799f0bfd3f0
+6:59:21 p.m. server info: got photo ed9ac54f-b68e-4703-a8ea-b2a4c58bfdcb (2498 KB), captioning...
+6:59:23 p.m. server info: caption ready for ed9ac54f-b68e-4703-a8ea-b2a4c58bfdcb in 2.6s
+6:59:24 p.m. nightingale info: [photo] uploaded session_1792276563__1792277028.jpg (2498 KB) in 3.7s, asset ed9ac54f-b68e-4703-a8ea-b2a4c58bfdcb
+6:59:24 p.m. nightingale info: [photo] photo #42 taken (2324 KB, 3.2s), queued
+6:59:25 p.m. server info: got photo 09db1156-5dd3-4e2e-8310-74e07079c722 (2462 KB), captioning...
+6:59:27 p.m. server info: caption ready for 09db1156-5dd3-4e2e-8310-74e07079c722 in 2.5s
+6:59:27 p.m. nightingale info: [photo] uploaded session_1792276563__1792277061.jpg (2462 KB) in 3.7s, asset 09db1156-5dd3-4e2e-8310-74e07079c722
+6:59:28 p.m. server info: got photo 13e80f2b-b00f-4023-9127-29c314fb4489 (2448 KB), captioning...
+6:59:30 p.m. server info: caption ready for 13e80f2b-b00f-4023-9127-29c314fb4489 in 2.3s
+6:59:31 p.m. nightingale info: [photo] uploaded session_1792276563__1792277094.jpg (2447 KB) in 3.4s, asset 13e80f2b-b00f-4023-9127-29c314fb4489
+6:59:32 p.m. server info: got photo 7cb03a8c-7d0d-46c8-be9f-0f435110c5ab (2541 KB), captioning...
+6:59:33 p.m. nightingale info: [heartbeat] up 23m, queue 25 file(s) / 65068 KB, 42 photos, 46 chunks, 63 uploaded, 48 failed attempts, cpu 41.3C, wifi -52 dBm
+6:59:34 p.m. server info: caption ready for 7cb03a8c-7d0d-46c8-be9f-0f435110c5ab in 2.4s
+6:59:34 p.m. nightingale info: [photo] uploaded session_1792276563__1792277127.jpg (2540 KB) in 3.7s, asset 7cb03a8c-7d0d-46c8-be9f-0f435110c5ab
+6:59:36 p.m. server info: got photo 9301df58-d23b-4366-b188-267a9392aa42 (2533 KB), captioning...
+6:59:37 p.m. nightingale info: [audio] chunk #47 saved (30s, 937 KB), queued
+6:59:38 p.m. server warn: audio chunk 5fb3573b-4876-4583-96aa-18a9c69aabc9 is silent (loudest -60 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+6:59:38 p.m. nightingale info: [audio] uploaded session_1792276563__1792277947.wav (937 KB) in 0.7s, asset 5fb3573b-4876-4583-96aa-18a9c69aabc9
+6:59:39 p.m. server info: caption ready for 9301df58-d23b-4366-b188-267a9392aa42 in 3.1s
+6:59:39 p.m. nightingale info: [photo] uploaded session_1792276563__1792277160.jpg (2532 KB) in 4.5s, asset 9301df58-d23b-4366-b188-267a9392aa42
+6:59:41 p.m. server info: got photo 446727c5-6793-40dd-bb7a-7ff316f3260c (2553 KB), captioning...
+6:59:43 p.m. server info: caption ready for 446727c5-6793-40dd-bb7a-7ff316f3260c in 2.6s
+6:59:44 p.m. nightingale info: [photo] uploaded session_1792276563__1792277194.jpg (2552 KB) in 4.8s, asset 446727c5-6793-40dd-bb7a-7ff316f3260c
+6:59:45 p.m. server info: got photo 19bbcf52-d176-4891-b493-c56c470cd59f (2566 KB), captioning...
+6:59:48 p.m. server info: caption ready for 19bbcf52-d176-4891-b493-c56c470cd59f in 2.5s
+6:59:48 p.m. nightingale info: [photo] uploaded session_1792276563__1792277227.jpg (2565 KB) in 4.4s, asset 19bbcf52-d176-4891-b493-c56c470cd59f
+6:59:50 p.m. server info: got photo 32fda207-9de0-4c71-88b4-ec6fbe3257cb (2551 KB), captioning...
+6:59:52 p.m. server info: caption ready for 32fda207-9de0-4c71-88b4-ec6fbe3257cb in 2.1s
+6:59:52 p.m. nightingale info: [photo] uploaded session_1792276563__1792277260.jpg (2551 KB) in 4.1s, asset 32fda207-9de0-4c71-88b4-ec6fbe3257cb
+6:59:54 p.m. server info: got photo 26516ab9-6908-497e-96ae-54ea565b1555 (2587 KB), captioning...
+6:59:56 p.m. server info: caption ready for 26516ab9-6908-497e-96ae-54ea565b1555 in 2.3s
+6:59:56 p.m. nightingale info: [photo] uploaded session_1792276563__1792277295.jpg (2586 KB) in 3.9s, asset 26516ab9-6908-497e-96ae-54ea565b1555
+6:59:59 p.m. nightingale info: [photo] photo #43 taken (3071 KB, 5.0s), queued
+6:59:59 p.m. server info: got photo b7b24abb-dcb7-4eeb-b492-8db45dae938e (2587 KB), captioning...
+7:00:02 p.m. server info: caption ready for b7b24abb-dcb7-4eeb-b492-8db45dae938e in 2.9s
+7:00:02 p.m. nightingale info: [photo] uploaded session_1792276563__1792277330.jpg (2587 KB) in 6.3s, asset b7b24abb-dcb7-4eeb-b492-8db45dae938e
+7:00:03 p.m. nightingale info: [heartbeat] up 24m, queue 19 file(s) / 50222 KB, 43 photos, 47 chunks, 71 uploaded, 48 failed attempts, cpu 41.9C, wifi -55 dBm
+7:00:04 p.m. server info: got photo 0c71d01c-a76f-45c6-b8e8-e27d11e9225a (2588 KB), captioning...
+7:00:06 p.m. server info: caption ready for 0c71d01c-a76f-45c6-b8e8-e27d11e9225a in 2.6s
+7:00:06 p.m. nightingale info: [photo] uploaded session_1792276563__1792277365.jpg (2588 KB) in 4.1s, asset 0c71d01c-a76f-45c6-b8e8-e27d11e9225a
+7:00:07 p.m. nightingale info: [audio] chunk #48 saved (30s, 937 KB), queued
+7:00:07 p.m. server info: got photo d4de67b1-07db-4675-8ead-072ec31d5741 (2708 KB), captioning...
+7:00:08 p.m. server warn: audio chunk 79377f5c-6cd5-4e9a-995a-1188b53d91e3 is silent (loudest -52 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:00:08 p.m. nightingale info: [audio] uploaded session_1792276563__1792277977.wav (937 KB) in 0.4s, asset 79377f5c-6cd5-4e9a-995a-1188b53d91e3
+7:00:10 p.m. server info: caption ready for d4de67b1-07db-4675-8ead-072ec31d5741 in 2.8s
+7:00:10 p.m. nightingale info: [photo] uploaded session_1792276563__1792277400.jpg (2708 KB) in 4.0s, asset d4de67b1-07db-4675-8ead-072ec31d5741
+7:00:12 p.m. server info: got photo ccd9cfaf-da01-4773-a375-36aff7196350 (2638 KB), captioning...
+7:00:14 p.m. server info: caption ready for ccd9cfaf-da01-4773-a375-36aff7196350 in 2.5s
+7:00:14 p.m. nightingale info: [photo] uploaded session_1792276563__1792277435.jpg (2638 KB) in 3.6s, asset ccd9cfaf-da01-4773-a375-36aff7196350
+7:00:15 p.m. server info: got photo 2f926c65-2511-46aa-b92b-fd8be7dc8245 (2627 KB), captioning...
+7:00:18 p.m. server info: caption ready for 2f926c65-2511-46aa-b92b-fd8be7dc8245 in 2.6s
+7:00:18 p.m. nightingale info: [photo] uploaded session_1792276563__1792277470.jpg (2626 KB) in 3.9s, asset 2f926c65-2511-46aa-b92b-fd8be7dc8245
+7:00:19 p.m. server info: got photo 56888557-98d2-4aaa-98c0-833b0263518d (2651 KB), captioning...
+7:00:22 p.m. server info: caption ready for 56888557-98d2-4aaa-98c0-833b0263518d in 2.9s
+7:00:22 p.m. nightingale info: [photo] uploaded session_1792276563__1792277506.jpg (2651 KB) in 4.0s, asset 56888557-98d2-4aaa-98c0-833b0263518d
+7:00:25 p.m. server info: got photo 53cc6075-369d-4c9d-9509-3f07e7323f53 (2650 KB), captioning...
+7:00:27 p.m. server info: caption ready for 53cc6075-369d-4c9d-9509-3f07e7323f53 in 2.3s
+7:00:27 p.m. nightingale info: [photo] uploaded session_1792276563__1792277540.jpg (2650 KB) in 5.2s, asset 53cc6075-369d-4c9d-9509-3f07e7323f53
+7:00:28 p.m. server info: got photo 83936635-8eb2-47dd-ae73-9e9feba988d7 (2636 KB), captioning...
+7:00:32 p.m. server info: caption ready for 83936635-8eb2-47dd-ae73-9e9feba988d7 in 3.2s
+7:00:32 p.m. nightingale info: [photo] uploaded session_1792276563__1792277576.jpg (2635 KB) in 4.5s, asset 83936635-8eb2-47dd-ae73-9e9feba988d7
+7:00:33 p.m. server info: got photo 13fcd7d6-2132-4ca2-b5bf-ee5a1301689e (2638 KB), captioning...
+7:00:33 p.m. nightingale info: [heartbeat] up 24m, queue 12 file(s) / 31724 KB, 43 photos, 48 chunks, 79 uploaded, 48 failed attempts, cpu 44.0C, wifi -49 dBm
+7:00:34 p.m. nightingale info: [photo] photo #44 taken (3072 KB, 5.1s), queued
+7:00:35 p.m. server info: caption ready for 13fcd7d6-2132-4ca2-b5bf-ee5a1301689e in 2.6s
+7:00:35 p.m. nightingale info: [photo] uploaded session_1792276563__1792277611.jpg (2637 KB) in 3.7s, asset 13fcd7d6-2132-4ca2-b5bf-ee5a1301689e
+7:00:37 p.m. server info: got photo dfa63d7d-c2d7-459e-8ce5-9abca835cf6d (2640 KB), captioning...
+7:00:37 p.m. nightingale info: [audio] chunk #49 saved (30s, 937 KB), queued
+7:00:38 p.m. server warn: audio chunk df7d067c-375a-46d0-82d8-bc70dcfd0add is silent (loudest -61 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:00:38 p.m. nightingale info: [audio] uploaded session_1792276563__1792278007.wav (937 KB) in 0.6s, asset df7d067c-375a-46d0-82d8-bc70dcfd0add
+7:00:39 p.m. server info: caption ready for dfa63d7d-c2d7-459e-8ce5-9abca835cf6d in 2.9s
+7:00:40 p.m. nightingale info: [photo] uploaded session_1792276563__1792277646.jpg (2639 KB) in 4.1s, asset dfa63d7d-c2d7-459e-8ce5-9abca835cf6d
+7:00:40 p.m. server info: got photo 380e0896-5710-47f4-8614-5202cbaeda49 (2627 KB), captioning...
+7:00:43 p.m. server info: caption ready for 380e0896-5710-47f4-8614-5202cbaeda49 in 2.6s
+7:00:43 p.m. nightingale info: [photo] uploaded session_1792276563__1792277681.jpg (2626 KB) in 3.6s, asset 380e0896-5710-47f4-8614-5202cbaeda49
+7:00:44 p.m. server info: got photo 5dad8ba2-92c4-425b-bbc8-8c86ffa3a2f2 (2631 KB), captioning...
+7:00:47 p.m. server info: caption ready for 5dad8ba2-92c4-425b-bbc8-8c86ffa3a2f2 in 2.7s
+7:00:47 p.m. nightingale info: [photo] uploaded session_1792276563__1792277716.jpg (2631 KB) in 3.9s, asset 5dad8ba2-92c4-425b-bbc8-8c86ffa3a2f2
+7:00:48 p.m. server info: got photo 9ae1e252-3dfc-4dc7-911b-fd75652f7abd (2626 KB), captioning...
+7:00:51 p.m. server info: caption ready for 9ae1e252-3dfc-4dc7-911b-fd75652f7abd in 2.5s
+7:00:51 p.m. nightingale info: [photo] uploaded session_1792276563__1792277751.jpg (2626 KB) in 3.6s, asset 9ae1e252-3dfc-4dc7-911b-fd75652f7abd
+7:00:52 p.m. server info: got photo 0b64bbbf-f598-4052-9640-310fde9efe63 (2631 KB), captioning...
+7:00:54 p.m. server info: caption ready for 0b64bbbf-f598-4052-9640-310fde9efe63 in 2.6s
+7:00:54 p.m. nightingale info: [photo] uploaded session_1792276563__1792277786.jpg (2631 KB) in 3.6s, asset 0b64bbbf-f598-4052-9640-310fde9efe63
+7:00:55 p.m. server info: got photo 871b2a00-f26f-4634-a20b-e619690e3be2 (2633 KB), captioning...
+7:00:58 p.m. server info: caption ready for 871b2a00-f26f-4634-a20b-e619690e3be2 in 2.8s
+7:00:58 p.m. nightingale info: [photo] uploaded session_1792276563__1792277821.jpg (2632 KB) in 3.8s, asset 871b2a00-f26f-4634-a20b-e619690e3be2
+7:00:59 p.m. server info: got photo 1c2b6633-eb1f-4454-a17a-c44e8c1aa392 (2633 KB), captioning...
+7:01:01 p.m. server info: caption ready for 1c2b6633-eb1f-4454-a17a-c44e8c1aa392 in 2.5s
+7:01:02 p.m. nightingale info: [photo] uploaded session_1792276563__1792277856.jpg (2633 KB) in 3.6s, asset 1c2b6633-eb1f-4454-a17a-c44e8c1aa392
+7:01:03 p.m. server info: got photo 3e318303-036a-43b6-8b27-3eb4c8de6361 (2637 KB), captioning...
+7:01:03 p.m. nightingale info: [heartbeat] up 25m, queue 5 file(s) / 13738 KB, 44 photos, 49 chunks, 88 uploaded, 48 failed attempts, cpu 42.4C, wifi -47 dBm
+7:01:05 p.m. server info: caption ready for 3e318303-036a-43b6-8b27-3eb4c8de6361 in 2.5s
+7:01:05 p.m. nightingale info: [photo] uploaded session_1792276563__1792277891.jpg (2636 KB) in 3.5s, asset 3e318303-036a-43b6-8b27-3eb4c8de6361
+7:01:06 p.m. server info: got photo 21918595-3319-4253-9388-0bb4ea3bcbfb (2633 KB), captioning...
+7:01:07 p.m. nightingale info: [audio] chunk #50 saved (30s, 937 KB), queued
+7:01:08 p.m. server warn: audio chunk 3baa8680-1496-483e-ae6a-32f79bd01218 is silent (loudest -60 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:01:08 p.m. nightingale info: [audio] uploaded session_1792276563__1792278037.wav (937 KB) in 0.5s, asset 3baa8680-1496-483e-ae6a-32f79bd01218
+7:01:08 p.m. server info: caption ready for 21918595-3319-4253-9388-0bb4ea3bcbfb in 2.4s
+7:01:09 p.m. nightingale info: [photo] uploaded session_1792276563__1792277926.jpg (2633 KB) in 3.4s, asset 21918595-3319-4253-9388-0bb4ea3bcbfb
+7:01:09 p.m. nightingale info: [photo] photo #45 taken (3072 KB, 5.0s), queued
+7:01:09 p.m. server info: got photo 924a3d40-a079-477b-a86b-f854b60499b0 (2324 KB), captioning...
+7:01:12 p.m. server info: caption ready for 924a3d40-a079-477b-a86b-f854b60499b0 in 2.5s
+7:01:12 p.m. nightingale info: [photo] uploaded session_1792276563__1792277961.jpg (2324 KB) in 3.6s, asset 924a3d40-a079-477b-a86b-f854b60499b0
+7:01:13 p.m. server info: got photo 54fdedd5-9862-43e4-9e29-4d58f0053c18 (3071 KB), captioning...
+7:01:17 p.m. server info: caption ready for 54fdedd5-9862-43e4-9e29-4d58f0053c18 in 3.5s
+7:01:17 p.m. nightingale info: [photo] uploaded session_1792276563__1792277994.jpg (3071 KB) in 4.9s, asset 54fdedd5-9862-43e4-9e29-4d58f0053c18
+7:01:18 p.m. server info: got photo 30bacb4e-fd8c-428a-b332-cb82a8e9160c (3073 KB), captioning...
+7:01:21 p.m. server info: caption ready for 30bacb4e-fd8c-428a-b332-cb82a8e9160c in 2.6s
+7:01:21 p.m. nightingale info: [photo] uploaded session_1792276563__1792278029.jpg (3072 KB) in 3.9s, asset 30bacb4e-fd8c-428a-b332-cb82a8e9160c
+7:01:22 p.m. server info: got photo a11a6d19-3458-4c9a-8c63-0a1fc4f5e1ba (3073 KB), captioning...
+7:01:25 p.m. server info: caption ready for a11a6d19-3458-4c9a-8c63-0a1fc4f5e1ba in 2.9s
+7:01:25 p.m. nightingale info: [photo] uploaded session_1792276563__1792278064.jpg (3072 KB) in 4.3s, asset a11a6d19-3458-4c9a-8c63-0a1fc4f5e1ba
+7:01:33 p.m. nightingale info: [heartbeat] up 25m, queue 0 file(s) / 0 KB, 45 photos, 50 chunks, 95 uploaded, 48 failed attempts, cpu 41.9C, wifi -50 dBm
+7:01:37 p.m. nightingale info: [audio] chunk #51 saved (30s, 937 KB), queued
+7:01:38 p.m. server warn: audio chunk 7dece071-8919-499d-a2a5-8ac9c396726d is silent (loudest -61 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:01:38 p.m. nightingale info: [audio] uploaded session_1792276563__1792278067.wav (937 KB) in 1.0s, asset 7dece071-8919-499d-a2a5-8ac9c396726d
+7:01:44 p.m. nightingale info: [photo] photo #46 taken (3066 KB, 5.0s), queued
+7:01:48 p.m. server info: got photo ca16c5cc-c216-4405-b5c2-c56f8a95d5a5 (3067 KB), captioning...
+7:01:51 p.m. server info: caption ready for ca16c5cc-c216-4405-b5c2-c56f8a95d5a5 in 2.9s
+7:01:51 p.m. nightingale info: [photo] uploaded session_1792276563__1792278099.jpg (3066 KB) in 6.7s, asset ca16c5cc-c216-4405-b5c2-c56f8a95d5a5
+7:02:03 p.m. nightingale info: [heartbeat] up 26m, queue 0 file(s) / 0 KB, 46 photos, 51 chunks, 97 uploaded, 48 failed attempts, cpu 41.9C, wifi -49 dBm
+7:02:07 p.m. nightingale info: [audio] chunk #52 saved (30s, 937 KB), queued
+7:02:08 p.m. server warn: audio chunk a7b0ec33-92a6-48a8-a63f-2a4e9b2bacc8 is silent (loudest -62 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:02:08 p.m. nightingale info: [audio] uploaded session_1792276563__1792278097.wav (937 KB) in 0.6s, asset a7b0ec33-92a6-48a8-a63f-2a4e9b2bacc8
+7:02:19 p.m. nightingale info: [photo] photo #47 taken (3064 KB, 5.0s), queued
+7:02:21 p.m. server info: got photo 8a7295a0-5093-4440-882c-d2d0ec8eb8eb (3064 KB), captioning...
+7:02:24 p.m. server info: caption ready for 8a7295a0-5093-4440-882c-d2d0ec8eb8eb in 2.9s
+7:02:24 p.m. nightingale info: [photo] uploaded session_1792276563__1792278134.jpg (3064 KB) in 4.2s, asset 8a7295a0-5093-4440-882c-d2d0ec8eb8eb
+7:02:33 p.m. nightingale info: [heartbeat] up 26m, queue 0 file(s) / 0 KB, 47 photos, 52 chunks, 99 uploaded, 48 failed attempts, cpu 42.4C, wifi -48 dBm
+7:02:38 p.m. nightingale info: [audio] chunk #53 saved (30s, 937 KB), queued
+7:02:38 p.m. server info: got audio chunk 17fb1aaa-78ce-4506-b7e2-672aee4a0f70 (938 KB, loudest -46 dBFS), transcribing...
+7:02:40 p.m. server info: transcript ready for 17fb1aaa-78ce-4506-b7e2-672aee4a0f70 in 1.6s (1 segments, gpt-4o-transcribe), updating the ePCR...
+7:02:42 p.m. nightingale info: [audio] uploaded session_1792276563__1792278127.wav (937 KB) in 4.3s, asset 17fb1aaa-78ce-4506-b7e2-672aee4a0f70
+7:02:48 p.m. server info: ePCR updated from 14 chunk(s) in 8.6s (7 sections filled)
+7:02:54 p.m. nightingale info: [photo] photo #48 taken (3068 KB, 5.0s), queued
+7:02:56 p.m. server info: got photo 54ce5d81-870f-4b2e-bb6f-b3f23ed0eeac (3068 KB), captioning...
+7:02:59 p.m. server info: caption ready for 54ce5d81-870f-4b2e-bb6f-b3f23ed0eeac in 2.8s
+7:02:59 p.m. nightingale info: [photo] uploaded session_1792276563__1792278169.jpg (3068 KB) in 3.9s, asset 54ce5d81-870f-4b2e-bb6f-b3f23ed0eeac
+7:03:03 p.m. nightingale info: [heartbeat] up 27m, queue 0 file(s) / 0 KB, 48 photos, 53 chunks, 101 uploaded, 48 failed attempts, cpu 41.3C, wifi -47 dBm
+7:03:08 p.m. nightingale info: [audio] chunk #54 saved (30s, 937 KB), queued
+7:03:09 p.m. server warn: audio chunk d076e78a-6b79-41c4-8eb5-dfe0e67f655c is silent (loudest -64 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:03:09 p.m. nightingale info: [audio] uploaded session_1792276563__1792278158.wav (937 KB) in 0.7s, asset d076e78a-6b79-41c4-8eb5-dfe0e67f655c
+7:03:33 p.m. server info: got photo 52e5d262-3fac-4dcc-83be-c6447c0cec79 (3072 KB), captioning...
+7:03:29 p.m. nightingale info: [photo] photo #49 taken (3072 KB, 5.0s), queued
+7:03:33 p.m. nightingale info: [heartbeat] up 27m, queue 1 file(s) / 3072 KB, 49 photos, 54 chunks, 102 uploaded, 48 failed attempts, cpu 41.9C, wifi -51 dBm
+7:03:36 p.m. server info: caption ready for 52e5d262-3fac-4dcc-83be-c6447c0cec79 in 2.8s
+7:03:36 p.m. nightingale info: [photo] uploaded session_1792276563__1792278204.jpg (3072 KB) in 6.3s, asset 52e5d262-3fac-4dcc-83be-c6447c0cec79
+7:03:38 p.m. nightingale info: [audio] chunk #55 saved (30s, 937 KB), queued
+7:03:39 p.m. server warn: audio chunk 2978d69a-f50f-4f97-8737-e7f21893e7bf is silent (loudest -62 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:03:39 p.m. nightingale info: [audio] uploaded session_1792276563__1792278188.wav (937 KB) in 0.5s, asset 2978d69a-f50f-4f97-8737-e7f21893e7bf
+7:04:03 p.m. nightingale info: [heartbeat] up 28m, queue 0 file(s) / 0 KB, 49 photos, 55 chunks, 104 uploaded, 48 failed attempts, cpu 42.9C, wifi -49 dBm
+7:04:04 p.m. nightingale info: [photo] photo #50 taken (3073 KB, 5.0s), queued
+7:04:06 p.m. server info: got photo 0eef82d0-3061-4828-84e5-2f6a414bfed7 (3074 KB), captioning...
+7:04:08 p.m. nightingale info: [audio] chunk #56 saved (30s, 937 KB), queued
+7:04:08 p.m. server info: caption ready for 0eef82d0-3061-4828-84e5-2f6a414bfed7 in 2.9s
+7:04:08 p.m. nightingale info: [photo] uploaded session_1792276563__1792278239.jpg (3073 KB) in 4.0s, asset 0eef82d0-3061-4828-84e5-2f6a414bfed7
+7:04:09 p.m. server info: got audio chunk 3b746019-84df-4ed4-aa82-6bfb4a466718 (938 KB, loudest -47 dBFS), transcribing...
+7:04:10 p.m. server info: transcript ready for 3b746019-84df-4ed4-aa82-6bfb4a466718 in 1.0s (1 segments, gpt-4o-transcribe), updating the ePCR...
+7:04:10 p.m. nightingale info: [audio] uploaded session_1792276563__1792278218.wav (937 KB) in 2.3s, asset 3b746019-84df-4ed4-aa82-6bfb4a466718
+7:04:17 p.m. server info: ePCR updated from 15 chunk(s) in 7.2s (8 sections filled)
+7:04:33 p.m. nightingale info: [heartbeat] up 28m, queue 0 file(s) / 0 KB, 50 photos, 56 chunks, 106 uploaded, 48 failed attempts, cpu 43.5C, wifi -49 dBm
+7:04:38 p.m. nightingale info: [audio] chunk #57 saved (30s, 937 KB), queued
+7:04:38 p.m. server warn: audio chunk 40065c3e-003a-4ca2-ad74-d371a94bb687 is silent (loudest -65 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:04:38 p.m. nightingale info: [audio] uploaded session_1792276563__1792278248.wav (937 KB) in 0.4s, asset 40065c3e-003a-4ca2-ad74-d371a94bb687
+7:04:39 p.m. nightingale info: [photo] photo #51 taken (3068 KB, 4.9s), queued
+7:04:39 p.m. server warn: audio chunk 344b9f3b-5c22-48de-b5f9-9a2d3a957191 is silent (loudest -67 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:04:40 p.m. server info: got photo cce77275-fc4c-4dd9-a087-5e44120f01f1 (3068 KB), captioning...
+7:04:43 p.m. server info: caption ready for cce77275-fc4c-4dd9-a087-5e44120f01f1 in 2.7s

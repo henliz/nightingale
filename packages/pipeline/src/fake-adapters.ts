@@ -3,6 +3,7 @@ import type {
   Condenser,
   Diarizer,
   IncidentContext,
+  PhotoCaptioner,
   PhotoPass,
   PhotoPassResult,
   RawSegment,
@@ -99,5 +100,13 @@ export class FakeCondenser implements Condenser {
 export class FakePhotoPass implements PhotoPass {
   async process(image: Uint8Array): Promise<PhotoPassResult> {
     return { image, facesBlurred: true, healthNumberFlagged: false };
+  }
+}
+
+// doesn't actually look at the image, just a placeholder so the dashboard has
+// something to show before a real vision call is wired in
+export class FakePhotoCaptioner implements PhotoCaptioner {
+  async caption(): Promise<string> {
+    return "scene photo (no real captioning configured)";
   }
 }

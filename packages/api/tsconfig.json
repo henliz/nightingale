@@ -4,6 +4,6 @@
     "outDir": "dist",
     "rootDir": "src"
   },
-  "references": [{ "path": "../schema" }, { "path": "../audit" }],
+  "references": [{ "path": "../schema" }, { "path": "../audit" }, { "path": "../pipeline" }],
   "include": ["src"]
 }

@@ -1,6 +1,6 @@
-# Nightingale / "Lost in Handoff": System Architecture (v0.1)
+# Nightingale / "Lost in Handoff": System Architecture (v0.2)
 
-**Status:** draft for the prototype build, read by the capstone team and used to guide the monorepo build.
+**Status:** draft for the prototype build, read by the capstone team and used to guide the monorepo build. v0.2 (17 Oct 2026) adds the device service lifecycle, dev log streaming, the live transcript page, and the transcription research (sections 5, 8, 9, 12).
 **Scope:** capstone prototype (MVP package Nov 6), designed so a small trial after December is possible. The prototype uses **scripted drills with fictional patients only. No real patient information goes through it.**
 **Legal note:** the privacy rules below come from the team's Oct 8 design research. They are design assumptions, not legal advice. Items marked **[LAWYER]** must be confirmed before any real-world trial.
 
@@ -22,7 +22,7 @@ The Pi wearable is **one capture mode among several** (also: phone/tablet app, a
 
 **Capture**
 - Button-press only. **No always-on listening, no pre-roll buffer.** [LAWYER: is a pre-roll buffer an interception?]
-- Hard maximum clip length (default 90 s, configurable 60-120 s), auto-stop.
+- Hard maximum clip length, auto-stop. Was 90 s (60-120 s); **drill builds use 30 min** (`NIGHTINGALE_MAX_CLIP_SECONDS=1800`, 17 Oct 2026) because 90 s cut every drill off mid-scenario. It is a safety net for a forgotten device; the POWER/RECORD press is the normal stop. [Team/LAWYER: confirm the limit for a real trial.]
 - Audible start tone and a visible LED while recording. The responder reads a short verbal notice ("I'm recording for the medical record").
 - Camera is a deliberate action. Photos are stored in app-private storage only (no camera roll or gallery).
 - No live on-device AI (connectivity is unreliable). The device is **store-and-forward**.
@@ -95,6 +95,10 @@ The Pi wearable is **one capture mode among several** (also: phone/tablet app, a
                                                   +-----------------------------------+
 
  Audit log (hash-chained) records every step above.
+
+ DEV ONLY (drills, laptop on the same network):
+   device logs + heartbeat --POST /dev/logs--> api --SSE /dev/stream--> dashboard at /
+   transcripts, notes, photos as they land --GET /dev/sessions--------> (same page)
 ```
 
 ## 4. Repo layout (pnpm workspaces for TypeScript, a Cargo crate for the device)
@@ -103,7 +107,7 @@ The Pi wearable is **one capture mode among several** (also: phone/tablet app, a
 nightingale/
   ARCHITECTURE.md
   package.json, pnpm-workspace.yaml, tsconfig.base.json
-  docker-compose.yml          # postgres + minio (S3-compatible) for local dev
+  docker-compose.yml          # postgres + an s3-compatible vault for local dev
   packages/
     schema/       # zod schemas + TS types + exported JSON Schema (single source of truth)
     api/          # ingest + app API (Fastify or Hono), auth, access control
@@ -127,21 +131,27 @@ nightingale/
 
 Hardware (v0): Pi Zero 2 W (Raspberry Pi OS Lite 64-bit, Debian trixie), a Pi camera module via the CSI cable, a mic (USB or I2S MEMS), one capture button, one status LED, a buzzer or speaker for the start tone, a regulated 5 V power source. Power must allow a **clean shutdown** (UPS HAT or power bank with a low-battery signal). Never wire a raw lithium cell to the Pi. Bluetooth mask-mic input is a v1 option, not v0.
 
-**Capture state machine**
+**Buttons (final, 17 Oct 2026; do not change without the team)**
+- **POWER/RECORD**, GPIO3 (physical pin 5, ground pin 6). Off: a press wakes the Pi (hardware). Daemon up: recording starts immediately (`record_on_boot`), ready tone, LED on, verbal-notice reminder. Recording: a press stops, saves, writes to the queue (fsync), then `systemctl poweroff`. Reaching `max_clip_seconds` does exactly the same. Presses during boot, SAVING and POWERING OFF are ignored. One press, one action: no short/long press.
+- **PHOTO**, GPIO17 (physical pin 11, ground pin 9). While recording: one photo (sharpest of a burst), recording continues. Ignored otherwise.
+- Internal pull-ups, active-low, 30 ms debounce. The daemon owns both pins. **Do not enable `dtoverlay=gpio-shutdown`; keep I2C off** (GPIO3 is I2C SDA). The daemon runs as a root systemd service so poweroff needs no password. Shutdown never waits for the network. Never power off with an unsaved recording. Nothing records without the button-initiated boot; no photo without a press.
+- Why a power button: the Pi has no switch, the device is worn and must turn off without a laptop, and pulling power can corrupt the SD card and lose queued data.
+
+**Capture state machine** (`device/src/machine.rs`)
 ```
-IDLE --button--> ARMED (tone + LED on, verbal-notice reminder)
-ARMED --record--> RECORDING (max_clip_seconds, then auto-stop)
-RECORDING --button or timeout--> SAVING
-(optional) IDLE --photo button--> PHOTO (one still, saved)
-SAVING --> QUEUED (written to the local encrypted queue)
-QUEUED --online--> UPLOADING (chunked, resumable) --server ack--> local copy deleted
+OFF --press--> BOOTING --daemon up--> RECORDING
+RECORDING --press PHOTO--> RECORDING (one photo saved)
+RECORDING --press POWER/RECORD or max_clip_seconds--> SAVING --> QUEUED --> POWERING OFF
+QUEUED --online (this boot or the next)--> UPLOADING --server ack--> local copy deleted
 ```
+Internally the recording is cut into back-to-back chunks (`chunk_seconds`, default 30) so pieces upload and transcribe while recording continues; the buttons never see this.
 
 **Requirements**
 - Local queue on disk, survives power loss and flaky Wi-Fi. Files are removed only after the server acknowledges a complete upload.
 - File-level encryption for queued data. Remote wipe is a later item.
 - Config: `max_clip_seconds`, `device_id`, API base URL, auth token. Responder identification by PIN or badge (v0: a PIN set per drill).
 - Mock mode: record from a WAV file and photo from a test image so all logic runs on a laptop without hardware.
+- **Mic and audio quality matter more than the provider.** Close-talk placement (lavalier or I2S MEMS on the collar or shoulder strap, with a foam or fur windscreen) beats any processing. Fixed gain set once per device with `alsamixer`, peaks around -6 to -3 dBFS on a close shout; no aggressive AGC (it pumps background noise in the gaps). Clipping cannot be fixed later; a quiet recording can. Keep 16 kHz mono 16-bit lossless (48 kHz adds nothing, ASR resamples to 16 kHz); FLAC is the next step if upload size matters, before any lossy codec.
 - Camera: run `rpicam-still` as a subprocess (`std::process::Command`) and read the file it writes. Audio: run `arecord` as a subprocess (16 kHz, mono, 16-bit WAV, lossless), or use the `cpal` crate (ALSA) if subprocess control proves awkward. **Do not use the old Pi camera crates** (`raspicam-rs` and similar need a 32-bit or legacy camera stack). `rslibcamlite` is an optional later upgrade, not a v0 dependency, because it depends on the rpicam-apps version and must be rebuilt after updates. **No video in v0** (a deliberate decision: photos plus short audio only).
 - **Photo capture must handle focus and motion automatically (no hand-set lens position, ever).** The device is worn, so the subject and the wearer both move.
   - Camera (v0, working): **Arducam 16MP IMX519 autofocus** (UC-873 Rev.D) with **Arducam's own libcamera build for trixie**. Raspberry Pi's stock libcamera has no `rpi.af` block for this sensor ("no AF algorithm"); Arducam's packages (libcamera0.7, libcamera-ipa, librpicam-app1, rpicam-apps-core, version `0.7.2+rpt20260819-2` / `1.13.0-2`) add it, and autofocus now locks on the face. Install by hand (do not run Arducam's script, which edits `/boot/config.txt` instead of `/boot/firmware/config.txt`): download the debs from the ArduCAM/Arducam-Pivariety-V4L2-Driver GitHub releases (`libcamera-v0.0.5`, `libcamera-apps-v0.0.5`) and `sudo apt install ./*.deb`. Then `sudo apt-mark hold libcamera0.7 libcamera-ipa librpicam-app1 rpicam-apps-core` so an OS update cannot silently restore the stock build. **Risk:** this depends on Arducam keeping its builds current with Raspberry Pi OS. Fallback if it breaks or Arducam stops updating: Raspberry Pi Camera Module 3 (autofocus in the stock stack, 15-pin, use the 22-to-15 adapter, standard lens).
@@ -158,6 +168,20 @@ QUEUED --online--> UPLOADING (chunked, resumable) --server ack--> local copy del
 - Upload: `reqwest` (blocking or async with `tokio`) with `rustls`. Chunked, resumable, with a sha256 per file (`sha2`). Config in a TOML file (`serde`, `toml`).
 - Build on the PC and cross-compile to `aarch64-unknown-linux-gnu` (the `cross` tool). Do **not** compile on the Pi (512 MB RAM). Copy the binary over with `scp` and run it as a `systemd` service.
 - No transcription or AI on the device.
+
+**Service lifecycle (the device turns itself on and off)**
+- The daemon runs as a root `systemd` service (`device/systemd/nightingale-device.service`) and starts on boot, which is the POWER/RECORD wake-up press, so it records straight away (see Buttons above). It never waits for the network.
+- On `SIGTERM` (shutdown, `systemctl stop`, low battery): stop any recording at the current frame, finish writing the WAV header, move it into the queue, then exit. Never leave a half-written file outside the queue.
+- Low battery: the UPS HAT's low-battery GPIO (or its I2C fuel gauge) triggers `systemctl poweroff`, which flows through the `SIGTERM` path above.
+- `WatchdogSec=30` with `sd_notify` pings from the main loop (the `sd-notify` crate), so a hung `arecord` or camera process gets the daemon restarted instead of silently stalling.
+- Optional: the hardware watchdog (`dtparam=watchdog=on`, `RuntimeWatchdogSec=15` in `/etc/systemd/system.conf`) reboots the Pi if the whole OS locks up.
+- Deploy loop (from the laptop): `device/deploy.sh` runs `cross build --release` (under amd64 emulation on an Apple Silicon Mac, about 5 min cold), copies the binary, env file and unit over, and restarts the service. The Pi finds the laptop by its mDNS name (`<LocalHostName>.local`), so no IP edits when the network changes.
+
+**Logs and telemetry**
+- The daemon logs plain `[level] message` lines to stdout (`device/src/devlog.rs`). `journald` keeps it on the Pi (set a size cap: `SystemMaxUse=50M` in `/etc/systemd/journald.conf`). Zero-code way to watch: `ssh henliz@nightingale.local journalctl -fu nightingale-device -o cat`.
+- **Dev log shipping:** when `NIGHTINGALE_DEV=1`, a background thread batches log lines and `POST`s them to `/dev/logs` on the laptop API every second or so. If the laptop is unreachable it keeps a bounded ring buffer (about 1000 lines, oldest dropped) and never blocks capture.
+- **Heartbeat** every 30 s: state, queue depth and oldest-item age, free disk, CPU temperature, throttling (`vcgencmd get_throttled`), Wi-Fi signal, battery level if the HAT reports it, uptime, binary version.
+- **Logs never contain content.** Event names, ids, durations, byte counts, sha256 prefixes and errors only. No transcript text, no audio, no image data, no responder PIN. This keeps logs outside the vault rules.
 
 ## 6. Data model (`packages/schema`, zod)
 
@@ -262,7 +286,19 @@ interface Condenser   { condense(t: Transcript, ctx: IncidentContext): Promise<D
 interface PhotoPass   { process(img: Buffer): Promise<{ img: Buffer; facesBlurred: boolean; healthNumberFlagged: boolean }>; }
 ```
 
-- **Transcription:** batch (not live) for accuracy, with custom vocabulary (street names, unit numbers, medical terms) and speaker labels. Candidate providers: Deepgram, AssemblyAI, a local whisper.cpp or faster-whisper adapter. Keep a **fake adapter** for tests.
+- **Transcription:** batch (not live) for accuracy, with custom vocabulary (street names, unit numbers, medical terms) and speaker labels. Keep a **fake adapter** for tests. Current real adapter is OpenAI `whisper-1` (`real-adapters.ts`), a placeholder until the A/B below.
+  - **Current (17 Oct 2026):** OpenAI `gpt-4o-transcribe` (fewer invented lines than `whisper-1` on quiet audio, same price; `NIGHTINGALE_TRANSCRIBE_MODEL=whisper-1` to compare), language forced to English (auto-detect was picking Japanese on quiet audio), temperature 0, an EMS vocabulary prompt (`DEFAULT_EMS_VOCAB`), +15 dB in-memory gain, and the silence gate. Chunks are cut on hard 30 s boundaries, so a word can be split between two chunks; a small overlap is a possible next step.
+  - **Prototype pick (research, 17 Oct 2026):** A/B **Deepgram Nova-3** (pre-recorded, `diarize`, `smart_format`, `keyterm` up to 100 terms, about $0.005-0.008/min) against **AssemblyAI Universal-3.5 Pro** (keyterms up to 1,000, optional medical mode, about $0.21/hr plus add-ons) on 20 to 30 noisy drill clips. Both have TS SDKs. Keep whichever wins on word error rate and fact recall in the evaluation harness.
+  - **Canadian residency path:** Azure Speech in `canadacentral` (batch and fast transcription, diarization, phrase lists, data stays in region), or Deepgram self-hosted/Dedicated on a Canadian cloud (enterprise deal). Deepgram and AssemblyAI cloud have no Canada endpoint today.
+  - **Local fallback:** WhisperX (faster-whisper `large-v3-turbo` plus pyannote diarization) or NVIDIA Parakeet TDT 0.6B v3, as a worker on a laptop or Canadian VM. Gives an offline demo with no API key and a residency-safe option.
+  - **Do not denoise before transcription.** Studies on medical audio found denoising (MetricGAN+, SAM-Audio) made ASR error rates worse in every configuration tested (arXiv 2512.17562, 2603.04710). Send raw audio to the transcriber; denoise only a human playback copy if at all.
+  - **Silence trimming:** run Silero VAD on the server to skip empty clips and cut Whisper hallucinations on silence. Not on the Pi; the button is already the VAD.
+  - **Diarization caveat:** one body-worn mic gives strong "wearer vs everyone else" separation and weak labels among the others. Treat speaker labels as wearer/other, and let the non-responder flag (section 2) err toward flagging.
+  - **How comparable products do it (for reference):** Granola streams desktop audio (mic plus system audio, no bot) to Deepgram/AssemblyAI and keeps no audio. Pocket (YC W26) is a MagSafe clip-on recorder with a contact mic for calls and two mics for rooms, a physical record button, store-and-forward to the cloud for diarize, transcribe, summarize. Pocket is close to our design; its STT provider is not public.
+- **Live path (built 17 Oct 2026), the main transcript now:** while recording, the Pi pipes `arecord` into both the chunk WAV and a long chunked `POST /live/<session>/audio` (raw 16 kHz pcm16, `device/src/livestream.rs`, reconnects on drop, drops frames instead of buffering when offline). The server (`packages/api/src/live-transcribe.ts`) runs an adaptive speech gate (only speech plus 0.5 s lead-in is sent, so silence never becomes text or clutter), resamples to 24 kHz, and streams it to OpenAI realtime `gpt-live-transcribe` (no prompt, English, near-field noise reduction). Words reach the dashboard about 0.3 s after they are said; each utterance is committed by the gate after 1 s of quiet, saved to the session, and triggers an ePCR update. Probed against the real API: exact text on test speech, empty output for 12 s of room noise and keyboard clicks.
+- **Speaker labels (built 17 Oct 2026):** every saved chunk with speech goes to `gpt-4o-transcribe-diarize`, which tags each line with a voice. New voices become "Person 1", "Person 2", ... in the order first heard, and a 2-10 s reference clip of each (first 4, API limit) goes with every later chunk so the same voice keeps the same number. Labelled lines replace the live lines for that stretch, so the transcript shows words live first and speakers ~15-30 s later (chunks are 15 s). Labels are voices, not roles: nobody is marked responder vs patient yet, so the non-responder flag is off with real labels. The Pi sends its own clock with each upload (`deviceNow`) so the server can correct timestamps when the Pi's clock is off (no clock battery).
+- **Live gain and fast speech:** the live path normalises speech to about -20 dBFS (up to +36 dB) and keeps that boost between utterances, so a quick phrase isn't sent before the boost catches up; OpenAI's near-field noise reduction is off (it suppressed anyone not right at the mic). The Pi keeps the last 3 s of audio across a live-stream reconnect instead of dropping it.
+- **Chunks are the record:** WAV chunks still upload to the vault and are what the speaker-labelled transcript is made from, so audio recorded while the live stream was down still gets transcribed. Silent chunks (loudest second under -50 dBFS) are saved but not sent anywhere.
 - **Condensing:** the LLM output must be structured (matches `NoteSections`) and must cite `spans` back to transcript segments. Instruct it **not to add anything not in the transcript**. Anything it cannot support becomes an `unsupported_claim` flag. Keep the raw transcript next to the note.
 - **Evaluation harness:** record about 10 realistic scripted clips with hand-written correct transcripts, then compute word error rate per provider and a fact-recall score per note. Use the same ten planted facts as the drill protocol.
 - **Residency:** the prototype uses fictional data only. A real trial requires Canadian-region processing, a no-training agreement, and local processing as a fallback option. [LAWYER / vendor terms]
@@ -273,6 +309,13 @@ interface PhotoPass   { process(img: Buffer): Promise<{ img: Buffer; facesBlurre
 2. **Receiver quick view (for paramedics and ED):** glanceable, minimal, readable in seconds before the full dashboard. Key facts first, photos second, provenance marker (AI / edited).
 3. **Full dashboard:** incident history, notes by tier, audit trail, hold status. Role-appropriate views only.
 4. **Admin:** retention settings per org, hold placement.
+5. **Dev dashboard (drills only, never in a trial build), built:** one page at `GET /` (`packages/api/src/dashboard.ts`).
+   - **ePCR box:** a draft ePCR (incident and times, scene with the scene photos, patient, chief complaint/OPQRST, SAMPLE, vitals table, assessment, interventions table, transport, bystander statements, narrative, needs-review flags). The server rebuilds it from the **whole session transcript** after every chunk (`refreshEpcr` in `app.ts`, condenser prompt `epcr-v2`), so it fills in and corrects itself; changed fields flash. Vitals are only numbers someone said aloud. No impression/diagnosis field (section 2). Photos open full size with their caption.
+   - **Transcript box:** the running transcript, chunk by chunk, with each chunk's loudness; silent chunks show as skipped.
+   - Labelled "draft, pending review". No access control, so it must only ever show fictional drill data.
+   - Console: device and server log lines live, plus a status strip (API connected, device on / last heard, latest heartbeat).
+   - Updates are pushed: the page listens on `/dev/stream` (server-sent events) and re-reads `/dev/sessions` the moment an asset changes. A 15 s poll is only a fallback.
+   - **Every device connection is its own saved test** (`packages/api/src/drills.ts`): `drills/<date>_<time>_<session>/` with `session.json`, `transcript.md`, `epcr.md`, `console.log`, `photos/`, `audio/`. Sessions reload when the API restarts and are never reset automatically; a session picker switches between them. The **New session** button (`POST /dev/sessions/new`) starts a fresh session without touching the Pi: from that moment, everything the Pi sends (chunks by capture time, live lines by when they were said, logs) goes to the new session, which gets its own folder, an empty ePCR and speakers numbered from Person 1 again. The previous session is kept as it was. Raw audio and photos are gitignored (size, real voices and faces); the text files can be committed for review.
 
 ## 10. Retention and holds (`packages/retention`)
 
@@ -288,12 +331,14 @@ SEALED --hold placed--> HELD (clock paused) --hold released--> SEALED (clock res
 ## 11. Suggested stack (defaults; swappable)
 
 - Node 22+, TypeScript, pnpm workspaces, Vitest.
-- API: Fastify or Hono. DB: Postgres (docker-compose for local). Object store: S3-compatible (MinIO locally) with per-object encryption.
+- API: Fastify or Hono. DB: Postgres (docker-compose for local). Object store: S3-compatible (SeaweedFS locally, see docker-compose.yml; MinIO was the original pick but locked its free docker images behind a login in 2025) with per-object encryption.
 - Queue: pg-boss (keeps infrastructure to one database). Validation: zod.
 - Web: React (Vite). Auth: simple JWT with seeded demo users and roles for the prototype.
 - Device: stable Rust, `rppal` (GPIO), `reqwest` + `rustls` (upload), `serde` + `toml` (config), `sha2` (checksums), `cpal` (optional audio), `cross` (cross-compile to aarch64). Camera and audio via the `rpicam-still` and `arecord` subprocesses.
 
 ## 12. Build order (milestones)
+
+**Status (17 Oct 2026):** 0 to 3 done (scaffold, ingest + Rust upload client, hash-chained audit, pipeline end to end with fake adapters plus OpenAI transcriber/condenser/captioner behind the interfaces). 7 partly done: `capture.rs` shells out to `rpicam-still` (now `-t 1000`, about 1.5-2 s per photo) and `arecord`; `main.rs` runs a no-button continuous drill mode (agreed for now, see question 6) with capture writing into an on-disk queue (`queue.rs`) and background uploaders draining it, so recording never pauses for an upload and nothing is deleted before the server acks. 7d mostly done: `systemd` unit with `Restart=always`, `device/deploy.sh`, dev log shipping and heartbeat (`devlog.rs`). Two-button state machine done (`machine.rs`, `button.rs`, `hw.rs`): POWER/RECORD on GPIO3, PHOTO on GPIO17, burst-and-pick-sharpest photos, fsync'd queue then `systemctl poweroff`, mock mode (keyboard buttons), tests for every case in the button spec. No timed photos exist anymore. LED, buzzer and notice audio are optional config until that hardware is wired. Uploads use 8 MB parts so photos go up as one part (S3 rejects non-final parts under 5 MB). The API skips transcribing chunks whose loudest second is under -50 dBFS (`NIGHTINGALE_SILENCE_DBFS`), since Whisper invents text from silence. **No vocabulary prompt is sent to the transcriber by default:** an EMS/hospital-name prompt made `gpt-4o-transcribe` invent whole radio calls from near-silent audio (17 Oct 2026). The S3 vault now writes one object on complete instead of an S3 multipart upload, so any part size works. Still open in 7d: button-gated audio, watchdog. 9 done as one page at `/`. 4, 5, 6 not started.
 
 0. **Scaffold** the monorepo, `schema` package, CI (typecheck, lint, test), docker-compose, `fixtures` with 2 fictional scenarios.
 1. **Ingest API** with chunked, resumable upload into the vault, plus a Rust upload client (`device/src/upload.rs`) tested against it.
@@ -307,7 +352,9 @@ SEALED --hold placed--> HELD (clock paused) --hold released--> SEALED (clock res
    - **7a status (13 Oct 2026):** camera proven from the shell. Arducam IMX519 on the Zero 2 W (`dtoverlay=imx519` and `camera_auto_detect=0` in `/boot/firmware/config.txt`; 22-to-22-pin ribbon, silver contacts toward the flap at the camera end, blue tip up at the Pi end). Autofocus works with Arducam's trixie libcamera build (see section 5). Hardware proven: camera, capture, `scp` transfer, passwordless SSH key. **Still open for 7a:** `arecord` and the microphone (mic plug and USB sound card), the `cross` hello-world, resolution/tuning comparison, a continuous-stream burst, and testing in other rooms and light (needs the battery or boost board).
    - **7b.** Daemon in mock mode (WAV file and test image instead of hardware), with the state machine, queue and upload.
    - **7c.** Real camera, mic, button, LED and buzzer on the Pi, run as a `systemd` service.
-8. **Real providers** (one transcriber, one LLM) behind the interfaces, run against the fixtures.
+   - **7d.** Service lifecycle and telemetry (section 5): button-gated IDLE on boot, `SIGTERM` flush, watchdog, `deploy.sh`, dev log shipping and heartbeat.
+8. **Real providers** (one transcriber, one LLM) behind the interfaces, run against the fixtures. Then the evaluation harness compares providers (section 8).
+9. **Dev dashboard** (section 9, item 5): live feed plus console over SSE.
 
 ## 13. Tests that matter most
 
@@ -324,3 +371,4 @@ SEALED --hold placed--> HELD (clock paused) --hold released--> SEALED (clock res
 3. Does capturing bystander audio, or any pre-roll buffer, risk the Criminal Code interception rule? (The design avoids pre-roll and flags non-responder speech.) [LAWYER]
 4. Who is the first trial buyer and signer (township chief, regional paramedic service)? This decides which tiers the first trial needs.
 5. Union consultation and a joint privacy impact assessment before any trial with real calls.
+6. ~~Continuous recording from boot vs the button-only rule.~~ Resolved 17 Oct 2026: the POWER/RECORD button boots the Pi and recording starts on boot, so every recording is button-initiated (section 5, Buttons).

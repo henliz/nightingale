@@ -1,18 +1,13 @@
-import {
-  CompleteMultipartUploadCommand,
-  CreateMultipartUploadCommand,
-  GetObjectCommand,
-  S3Client,
-  UploadPartCommand,
-} from "@aws-sdk/client-s3";
+import { createHash } from "node:crypto";
+import { CreateBucketCommand, GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 export interface VaultPart {
   partNumber: number;
   etag: string;
 }
 
-// one interface, two adapters: memory for tests, s3 for real use against minio/docker-compose
-// same pattern as the pipeline package (fake adapter first, real one wired in later)
+// one interface, two adapters: memory for tests, s3 for real use against the vault in
+// docker-compose. same pattern as the pipeline package (fake adapter first, real one wired in later)
 export interface VaultStore {
   createMultipartUpload(vaultKey: string): Promise<{ uploadId: string }>;
   uploadPart(
@@ -79,12 +74,14 @@ export interface S3VaultStoreConfig {
   region?: string;
 }
 
-// talks to minio locally (docker-compose), same api works against real s3 later
+// talks to the s3-compatible vault from docker-compose (seaweedfs locally), same api
+// works against real s3 later
 //
-// heads up: real s3/minio multipart upload requires every part except the last to be
-// at least 5mb. drill clips (90s max, 16khz mono wav) land well under that, so this only
-// works as long as the whole file fits in one part. fine for v0, revisit the chunk size
-// if clips get bigger or this gets wired to bigger files (ARCHITECTURE.md section 5)
+// parts are held in memory and written as ONE object on complete, not as an s3
+// multipart upload. s3 (seaweedfs included) rejects a multipart upload whose non-final
+// parts are under 5 mb (EntityTooSmall), and the pi's 2 mb parts made every ~2.5 mb
+// photo 500 (oct 17 2026). drill captures are a few mb, holding them briefly is fine.
+// the resumable part-by-part contract with the device is unchanged
 export class S3VaultStore implements VaultStore {
   private client: S3Client;
   private bucket: string;
@@ -102,41 +99,51 @@ export class S3VaultStore implements VaultStore {
     });
   }
 
+  // the vault doesn't come with the bucket pre-made, nothing else creates it either.
+  // call this once on startup instead of discovering a bucket-not-found error on
+  // the very first upload
+  async ensureBucket() {
+    try {
+      await this.client.send(new CreateBucketCommand({ Bucket: this.bucket }));
+    } catch (err) {
+      const name = (err as { name?: string }).name;
+      if (name !== "BucketAlreadyOwnedByYou" && name !== "BucketAlreadyExists") throw err;
+    }
+  }
+
+  private pending = new Map<string, { vaultKey: string; parts: Map<number, Uint8Array> }>();
+
   async createMultipartUpload(vaultKey: string) {
-    const res = await this.client.send(
-      new CreateMultipartUploadCommand({ Bucket: this.bucket, Key: vaultKey }),
-    );
-    if (!res.UploadId) throw new Error("minio didn't return an upload id");
-    return { uploadId: res.UploadId };
+    const uploadId = crypto.randomUUID();
+    this.pending.set(uploadId, { vaultKey, parts: new Map() });
+    return { uploadId };
   }
 
   async uploadPart(vaultKey: string, uploadId: string, partNumber: number, body: Uint8Array) {
-    const res = await this.client.send(
-      new UploadPartCommand({
-        Bucket: this.bucket,
-        Key: vaultKey,
-        UploadId: uploadId,
-        PartNumber: partNumber,
-        Body: body,
-      }),
-    );
-    if (!res.ETag) throw new Error("minio didn't return an etag");
-    return { etag: res.ETag };
+    const upload = this.pending.get(uploadId);
+    if (!upload || upload.vaultKey !== vaultKey) throw new Error(`no upload ${uploadId} for ${vaultKey}`);
+    upload.parts.set(partNumber, new Uint8Array(body));
+    return { etag: `"${createHash("md5").update(body).digest("hex")}"` };
   }
 
   async completeMultipartUpload(vaultKey: string, uploadId: string, parts: VaultPart[]) {
-    await this.client.send(
-      new CompleteMultipartUploadCommand({
-        Bucket: this.bucket,
-        Key: vaultKey,
-        UploadId: uploadId,
-        MultipartUpload: {
-          Parts: [...parts]
-            .sort((a, b) => a.partNumber - b.partNumber)
-            .map((p) => ({ ETag: p.etag, PartNumber: p.partNumber })),
-        },
-      }),
-    );
+    const upload = this.pending.get(uploadId);
+    if (!upload || upload.vaultKey !== vaultKey) throw new Error(`no upload ${uploadId} for ${vaultKey}`);
+    const chunks = [...parts]
+      .sort((a, b) => a.partNumber - b.partNumber)
+      .map((p) => {
+        const bytes = upload.parts.get(p.partNumber);
+        if (!bytes) throw new Error(`part ${p.partNumber} of ${uploadId} never arrived`);
+        return bytes;
+      });
+    const body = new Uint8Array(chunks.reduce((n, c) => n + c.length, 0));
+    let offset = 0;
+    for (const chunk of chunks) {
+      body.set(chunk, offset);
+      offset += chunk.length;
+    }
+    await this.client.send(new PutObjectCommand({ Bucket: this.bucket, Key: vaultKey, Body: body }));
+    this.pending.delete(uploadId);
   }
 
   async getObject(vaultKey: string) {

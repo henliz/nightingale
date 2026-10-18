@@ -16,24 +16,21 @@ services:
       timeout: 5s
       retries: 10
 
-  minio:
-    image: minio/minio:latest
+  # s3 compatible object store, this is the "sealed vault" in ARCHITECTURE.md.
+  # was minio, but minio locked its free docker images behind a login in 2025, so this
+  # is seaweedfs instead: apache-2.0, actively maintained, no corporate paywall on the
+  # image. same s3 api either way, packages/api/src/vault.ts doesn't care which one it's
+  # talking to. credentials come from docker/seaweedfs-s3-config.json (dev only, fake creds)
+  vault:
+    image: chrislusf/seaweedfs:latest
     restart: unless-stopped
-    command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: nightingale
-      MINIO_ROOT_PASSWORD: nightingale-dev
+    command: server -dir=/data -s3 -s3.port=9000 -s3.config=/etc/seaweedfs/s3config.json
     ports:
       - "9000:9000"
-      - "9001:9001"
     volumes:
-      - minio-data:/data
-    healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
+      - vault-data:/data
+      - ./docker/seaweedfs-s3-config.json:/etc/seaweedfs/s3config.json:ro
 
 volumes:
   postgres-data:
-  minio-data:
+  vault-data:

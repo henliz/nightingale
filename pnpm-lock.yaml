@@ -23,6 +23,9 @@ importers:
       '@nightingale/audit':
         specifier: workspace:*
         version: link:../audit
+      '@nightingale/pipeline':
+        specifier: workspace:*
+        version: link:../pipeline
       '@nightingale/schema':
         specifier: workspace:*
         version: link:../schema

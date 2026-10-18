@@ -46,13 +46,25 @@ pub struct CompleteResponse {
 struct InitAssetRequest<'a> {
     kind: &'a str,
     sha256: &'a str,
+    // when recording started, lets the server skip chunks it already transcribed live
+    #[serde(rename = "capturedAt", skip_serializing_if = "Option::is_none")]
+    captured_at: Option<u64>,
+    // this pi's clock right now. it has no clock battery and can be minutes off, the
+    // server uses the difference to correct capturedAt
+    #[serde(rename = "deviceNow")]
+    device_now: u64,
 }
 
 impl UploadClient {
     pub fn new(base_url: impl Into<String>) -> Self {
         Self {
             base_url: base_url.into(),
-            http: reqwest::blocking::Client::new(),
+            // the server transcribes + condenses audio before it answers /complete, a 30s
+            // chunk can take a while on a slow connection, reqwest's default 30s is too tight
+            http: reqwest::blocking::Client::builder()
+                .timeout(std::time::Duration::from_secs(180))
+                .build()
+                .expect("reqwest client"),
         }
     }
 
@@ -62,11 +74,29 @@ impl UploadClient {
         kind: &str,
         sha256: &str,
     ) -> Result<InitAssetResponse> {
+        self.init_asset_at(capture_id, kind, sha256, None)
+    }
+
+    pub fn init_asset_at(
+        &self,
+        capture_id: &str,
+        kind: &str,
+        sha256: &str,
+        captured_at: Option<u64>,
+    ) -> Result<InitAssetResponse> {
         let url = format!("{}/captures/{}/assets", self.base_url, capture_id);
         let res = self
             .http
             .post(url)
-            .json(&InitAssetRequest { kind, sha256 })
+            .json(&InitAssetRequest {
+                kind,
+                sha256,
+                captured_at,
+                device_now: std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .map(|d| d.as_millis() as u64)
+                    .unwrap_or(0),
+            })
             .send()?;
         if !res.status().is_success() {
             return Err(format!("init asset failed: {}", res.status()).into());
@@ -109,10 +139,21 @@ impl UploadClient {
         path: &Path,
         chunk_size: usize,
     ) -> Result<CompleteResponse> {
+        self.upload_file_at(capture_id, kind, path, chunk_size, None)
+    }
+
+    pub fn upload_file_at(
+        &self,
+        capture_id: &str,
+        kind: &str,
+        path: &Path,
+        chunk_size: usize,
+        captured_at: Option<u64>,
+    ) -> Result<CompleteResponse> {
         let bytes = fs::read(path)?;
         let sha256 = hex::encode(Sha256::digest(&bytes));
 
-        let init = self.init_asset(capture_id, kind, &sha256)?;
+        let init = self.init_asset_at(capture_id, kind, &sha256, captured_at)?;
         let mut next_part = init.next_part_number;
 
         for chunk in bytes.chunks(chunk_size.max(1)) {

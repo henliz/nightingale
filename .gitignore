@@ -15,3 +15,8 @@ device/cross/target/
 # Local data volumes
 .minio/
 .postgres/
+
+# drill sessions (packages/api/src/drills.ts). transcripts, epcr, logs are kept,
+# the raw audio + photos stay local only (size, and they are real voices/faces)
+drills/*/audio/
+drills/*/photos/

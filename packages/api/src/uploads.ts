@@ -4,6 +4,7 @@ import { HttpError } from "./http-error.js";
 import type { VaultPart, VaultStore } from "./vault.js";
 
 interface UploadSession {
+  captureId: string;
   vaultKey: string;
   uploadId: string;
   expectedSha256: string;
@@ -41,6 +42,7 @@ export function createUploadTracker(vault: VaultStore) {
     const vaultKey = `${captureId}/${assetId}`;
     const { uploadId } = await vault.createMultipartUpload(vaultKey);
     sessions.set(assetId, {
+      captureId,
       vaultKey,
       uploadId,
       expectedSha256: input.sha256,
@@ -74,6 +76,7 @@ export function createUploadTracker(vault: VaultStore) {
     return {
       assetId,
       vaultKey: session.vaultKey,
+      kind: session.kind,
       status: session.status,
       receivedParts: session.parts.map((p) => p.partNumber),
       nextPartNumber: session.nextPartNumber,
@@ -97,7 +100,15 @@ export function createUploadTracker(vault: VaultStore) {
     }
 
     session.status = "complete";
-    return { assetId, vaultKey: session.vaultKey, sha256: actualSha256, verified: true };
+    return {
+      assetId,
+      captureId: session.captureId,
+      vaultKey: session.vaultKey,
+      kind: session.kind,
+      sha256: actualSha256,
+      verified: true,
+      bytes: assembled,
+    };
   }
 
   return { initAsset, uploadPart, getStatus, complete };

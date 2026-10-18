@@ -1,0 +1,24 @@
+7:05:58 p.m. server info: new drill session session_1792278358, saving to drills/2026-10-17_19-05-58_session_1792278358
+7:05:58 p.m. nightingale warn: recovered 1 file(s) cut off by the last shutdown, queued for upload
+7:05:58 p.m. nightingale info: device nightingale is ON, v0.0.0, session session_1792278358, talking to http://Henriettas-MacBook-Air.local:8787
+7:05:58 p.m. nightingale info: 1 file(s) (568 KB) waiting in the queue from before, uploading those first
+7:05:58 p.m. nightingale info: [button] POWER/RECORD on gpio 3
+7:05:58 p.m. nightingale info: [button] PHOTO on gpio 17
+7:05:58 p.m. nightingale info: [hw] no buzzer configured (NIGHTINGALE_BUZZER_PIN), ready tone skipped
+7:05:58 p.m. nightingale info: [notice] reminder for the responder: say "I'm recording for the medical record"
+7:05:58 p.m. nightingale info: [record] RECORDING (max 90s). press POWER/RECORD to stop and power off, PHOTO for a photo
+7:05:58 p.m. nightingale info: [audio] uploaded session_1792278279__1792278340052.wav (568 KB) in 0.3s, asset 157c5b37-b0ec-44a9-af5a-637260c3d0ad
+7:06:28 p.m. nightingale info: [heartbeat] up 0m, queue 0 file(s) / 0 KB, 1 uploaded, 0 failed attempts, cpu 41.3C, wifi -48 dBm
+7:06:28 p.m. nightingale info: [audio] chunk #1 saved (30s), queued
+7:06:29 p.m. server warn: audio chunk fcb4ccd1-caa5-46cb-ae0a-b9f227fecb59 is silent (loudest -57 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:06:29 p.m. nightingale info: [audio] uploaded session_1792278358__1792278358388.wav (936 KB) in 0.5s, asset fcb4ccd1-caa5-46cb-ae0a-b9f227fecb59
+7:06:58 p.m. nightingale info: [heartbeat] up 1m, queue 0 file(s) / 0 KB, 2 uploaded, 0 failed attempts, cpu 40.8C, wifi -44 dBm
+7:06:58 p.m. nightingale info: [audio] chunk #2 saved (30s), queued
+7:06:59 p.m. server warn: audio chunk ab6d3a7a-c96b-447a-b07d-70fd8f50ea60 is silent (loudest -56 dBFS, cutoff -50), skipped transcription. mic too quiet or too far?
+7:06:59 p.m. nightingale info: [audio] uploaded session_1792278358__1792278388514.wav (935 KB) in 0.6s, asset ab6d3a7a-c96b-447a-b07d-70fd8f50ea60
+7:07:28 p.m. nightingale info: [heartbeat] up 1m, queue 0 file(s) / 0 KB, 3 uploaded, 0 failed attempts, cpu 40.8C, wifi -51 dBm
+7:07:28 p.m. nightingale info: [record] max_clip_seconds reached, SAVING
+7:07:28 p.m. nightingale info: [audio] chunk #3 saved (29s), queued
+7:07:28 p.m. nightingale info: [record] QUEUED (3 chunk(s), 0 photo(s) this session), POWERING OFF
+7:07:28 p.m. nightingale info: [power] systemctl poweroff
+7:27:31 p.m. server warn: audio chunk 3f3f884e-7eed-4fcc-bcc5-4c54dbef424e saved, silent (loudest -54 dBFS), nothing to transcribe

@@ -1,0 +1,24 @@
+[Unit]
+Description=nightingale capture daemon
+# capture works offline (the queue holds everything), so this only *wants* the
+# network, it never waits on it. power off never waits for it either
+After=sound.target
+Wants=network-online.target
+
+[Service]
+# api url, pins, max clip length etc, deploy.sh writes it
+EnvironmentFile=/home/henliz/nightingale.env
+ExecStart=/home/henliz/nightingale-device
+# root, so the POWER/RECORD button can run systemctl poweroff with no password
+User=root
+# alsa reads ~/.asoundrc from $HOME, point root at henliz's so the mic is the same one
+# that was tested as henliz
+Environment=HOME=/home/henliz
+Restart=on-failure
+RestartSec=3
+# on stop/shutdown systemd sends SIGTERM to arecord too, which closes the wav properly.
+# whatever was mid-record stays in the queue's incoming/ and gets picked up next boot
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
