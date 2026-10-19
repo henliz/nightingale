@@ -37,6 +37,11 @@ impl Queue {
         let mut moved = 0;
         for entry in fs::read_dir(self.dir.join("incoming"))? {
             let path = entry?.path();
+            // power died before anything reached the disk, nothing to recover
+            if fs::metadata(&path).map(|m| m.len() == 0).unwrap_or(false) {
+                fs::remove_file(&path).ok();
+                continue;
+            }
             if path.extension().is_some_and(|e| e == "wav") {
                 if let Err(e) = fix_wav_sizes(&path) {
                     crate::devlog::warn(format!("couldn't fix the header of {}: {e}", path.display()));
@@ -73,6 +78,16 @@ impl Queue {
         let ready = self.commit(incoming)?;
         fs::File::open(&self.dir)?.sync_all()?;
         Ok(ready)
+    }
+
+    // a file the server keeps rejecting goes to stuck/ instead of blocking everything
+    // queued behind it. kept, not deleted, so nothing's lost
+    pub fn set_aside(&self, path: &Path) -> io::Result<PathBuf> {
+        let stuck = self.dir.join("stuck");
+        fs::create_dir_all(&stuck)?;
+        let to = stuck.join(path.file_name().unwrap_or_default());
+        fs::rename(path, &to)?;
+        Ok(to)
     }
 
     // oldest first, only files with this extension, so audio and photos can each
@@ -159,6 +174,20 @@ mod tests {
         fs::write(q.incoming_path("session_1", 100, "wav"), b"cut off").unwrap();
         assert_eq!(q.recover_incoming().unwrap(), 1);
         assert_eq!(q.pending("wav").unwrap().len(), 1);
+        fs::remove_dir_all(dir).ok();
+    }
+
+    #[test]
+    fn empty_leftovers_are_dropped_and_stuck_files_leave_the_queue() {
+        let (q, dir) = temp_queue("stuck");
+        fs::write(q.incoming_path("s", 1, "wav"), b"").unwrap(); // power cut before any write
+        assert_eq!(q.recover_incoming().unwrap(), 0);
+        let p = q.incoming_path("s", 2, "wav");
+        fs::write(&p, b"x").unwrap();
+        let ready = q.commit(&p).unwrap();
+        q.set_aside(&ready).unwrap();
+        assert!(q.pending("wav").unwrap().is_empty());
+        assert!(dir.join("stuck").join(ready.file_name().unwrap()).exists());
         fs::remove_dir_all(dir).ok();
     }
 

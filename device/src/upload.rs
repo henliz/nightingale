@@ -99,7 +99,7 @@ impl UploadClient {
             })
             .send()?;
         if !res.status().is_success() {
-            return Err(format!("init asset failed: {}", res.status()).into());
+            return Err(rejected("init asset", res));
         }
         Ok(res.json()?)
     }
@@ -116,7 +116,7 @@ impl UploadClient {
         );
         let res = self.http.put(url).body(bytes.to_vec()).send()?;
         if !res.status().is_success() {
-            return Err(format!("part {} upload failed: {}", part_number, res.status()).into());
+            return Err(rejected(&format!("part {part_number}"), res));
         }
         Ok(res.json()?)
     }
@@ -125,7 +125,7 @@ impl UploadClient {
         let url = format!("{}/assets/{}/complete", self.base_url, asset_id);
         let res = self.http.post(url).send()?;
         if !res.status().is_success() {
-            return Err(format!("complete failed: {}", res.status()).into());
+            return Err(rejected("complete", res));
         }
         Ok(res.json()?)
     }
@@ -163,6 +163,18 @@ impl UploadClient {
 
         self.complete(&init.asset_id)
     }
+}
+
+// "complete rejected: 409 Conflict (no parts uploaded yet)". the "rejected" wording is
+// what the uploader looks for to tell "server said no" apart from "couldn't reach it"
+fn rejected(step: &str, res: reqwest::blocking::Response) -> Box<dyn std::error::Error> {
+    let status = res.status();
+    let body = res.text().unwrap_or_default();
+    let detail = serde_json::from_str::<serde_json::Value>(&body)
+        .ok()
+        .and_then(|v| v.get("error").and_then(|e| e.as_str()).map(str::to_string))
+        .unwrap_or(body);
+    format!("{step} rejected: {status} ({})", detail.chars().take(200).collect::<String>()).into()
 }
 
 #[cfg(test)]

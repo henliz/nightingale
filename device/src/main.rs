@@ -204,6 +204,8 @@ fn spawn_uploader(
     let client = UploadClient::new(base_url.to_string());
     thread::spawn(move || {
         let mut backoff = 2u64;
+        // same file + server said no this many times in a row = it's the file, not the wifi
+        let mut rejections: (PathBuf, u32) = (PathBuf::new(), 0);
         loop {
             let next = queue.pending(ext).ok().and_then(|p| p.into_iter().next());
             let Some(file) = next else {
@@ -216,6 +218,14 @@ fn spawn_uploader(
                 .map(|n| n.to_string_lossy().into_owned())
                 .unwrap_or_default();
             let kb = file_kb(&file.path);
+
+            // empty, or a wav that's only a header: nothing in it to upload
+            let size = std::fs::metadata(&file.path).map(|m| m.len()).unwrap_or(0);
+            if size == 0 || (ext == "wav" && size <= 44) {
+                warn(format!("[{kind}] {name} is empty ({size} bytes), nothing to upload, moved to stuck/"));
+                queue.set_aside(&file.path).ok();
+                continue;
+            }
             let started = Instant::now();
 
             let failure = match client.upload_file_at(
@@ -242,6 +252,21 @@ fn spawn_uploader(
 
             if let Some(reason) = failure {
                 counters.uploads_failed.fetch_add(1, Ordering::Relaxed);
+                if reason.contains("rejected") {
+                    rejections = if rejections.0 == file.path {
+                        (file.path.clone(), rejections.1 + 1)
+                    } else {
+                        (file.path.clone(), 1)
+                    };
+                    if rejections.1 >= 3 {
+                        warn(format!(
+                            "[{kind}] the laptop rejected {name} 3 times ({reason}), moved it to stuck/ so the rest of the queue keeps uploading"
+                        ));
+                        queue.set_aside(&file.path).ok();
+                        backoff = 2;
+                        continue;
+                    }
+                }
                 warn(format!(
                     "[{kind}] upload of {name} failed, keeping it queued, retry in {backoff}s: {reason}"
                 ));
