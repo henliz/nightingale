@@ -12,7 +12,7 @@ chunked, resumable ingest into the sealed vault, wired to the pipeline on the au
 dev routes (drills only, no access control, ARCHITECTURE.md section 9 item 5):
 
 - `GET /`: the live dashboard, ePCR box + transcript box + console
-- `POST /live/:sessionId/audio`: the pi streams raw mic audio here while recording, transcribed word by word (`live-transcribe.ts`, `NIGHTINGALE_LIVE_MODEL`, default `gpt-live-transcribe`)
+- `POST /live/:sessionId/audio`: the pi streams raw mic audio here while recording, transcribed word by word (`live-transcribe.ts`, `NIGHTINGALE_LIVE_MODEL`, default `gemini-3.5-transcribe-live` with a Gemini key, `gpt-live-transcribe` with an OpenAI one)
 - `POST /dev/logs`: the pi ships its log lines here (`{ deviceId, sessionId, lines }`)
 - `GET /dev/stream`: server-sent events, log lines + "something changed" pings
 - `POST /dev/sessions/new`: the dashboard's "New session" button, splits a fresh session off the device's current one from now on
@@ -28,7 +28,7 @@ ARCHITECTURE.md section 9. other knobs: `NIGHTINGALE_TRANSCRIBE_MODEL` (default
 
 that vault is **SeaweedFS**, not MinIO. MinIO was the original pick (ARCHITECTURE.md section 11) but locked its free docker images behind a login in 2025, so `docker-compose.yml` runs SeaweedFS's S3 gateway instead, same S3 API, same code in `vault.ts` either way. credentials live in `docker/seaweedfs-s3-config.json` (dev only, fake creds).
 
-transcription is real if `OPENAI_API_KEY` is set (loaded from a root `.env` if one exists, see `--env-file-if-exists` in the `dev` script), otherwise it falls back to `@nightingale/pipeline`'s `FakeTranscriber`. condenser and captioner are real with a key too; the diarizer is still fake, see that package's README.
+transcription is real if `GEMINI_API_KEY` (preferred, about half the cost) or `OPENAI_API_KEY` is set. `NIGHTINGALE_PROVIDER=openai` forces openai with both. after adding a gemini key, `pnpm build && node scripts/probe-gemini.mjs` checks it against saved drill audio (loaded from a root `.env` if one exists, see `--env-file-if-exists` in the `dev` script), otherwise it falls back to `@nightingale/pipeline`'s `FakeTranscriber`. condenser and captioner are real with a key too; the diarizer is still fake, see that package's README.
 
 heads up: s3 multipart requires every part except the last to be at least 5mb, most s3-compatible stores enforce the same rule. the pi sends 8 mb parts so photos and chunks always go up as one part (2 mb parts broke photos, oct 17 2026).
 

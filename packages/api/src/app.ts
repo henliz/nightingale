@@ -576,7 +576,7 @@ export function createApp(
     // resolved per utterance, so pressing "new session" mid-stream switches over cleanly
     const sessionNow = () => resolveSession(deviceSessionId);
     const sessionId = sessionNow();
-    if (!liveAsr) throw new HttpError(503, "live transcription isn't configured (no OPENAI_API_KEY), the 30s chunks still work");
+    if (!liveAsr) throw new HttpError(503, "live transcription isn't configured (no GEMINI_API_KEY or OPENAI_API_KEY), the saved chunks still work");
     const body = c.req.raw.body;
     if (!body) throw new HttpError(400, "no audio stream");
     const session = sessionFor(sessionId);

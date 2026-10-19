@@ -60,7 +60,7 @@ pub fn start(base_url: String, session_id: String) -> SyncSender<Vec<u8>> {
             }
             match result {
                 Ok(res) if res.status().as_u16() == 503 => {
-                    warn_limited("[live] the laptop has no live transcription set up (no OPENAI_API_KEY), only the 30s chunks will be transcribed".into());
+                    warn_limited("[live] the laptop has no live transcription set up (no GEMINI_API_KEY or OPENAI_API_KEY), only the saved chunks will be transcribed".into());
                     thread::sleep(Duration::from_secs(30));
                 }
                 Ok(res) if res.status().is_success() => {
@@ -71,7 +71,7 @@ pub fn start(base_url: String, session_id: String) -> SyncSender<Vec<u8>> {
                     thread::sleep(Duration::from_secs(3));
                 }
                 Err(e) => {
-                    warn_limited(format!("[live] can't stream live audio ({e}), retrying. the 30s chunks still upload"));
+                    warn_limited(format!("[live] can't stream live audio ({e}), retrying. the saved chunks still upload"));
                     thread::sleep(Duration::from_secs(3));
                 }
             }

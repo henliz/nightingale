@@ -3,8 +3,9 @@
 // this file turns that into partial + final transcript text:
 //
 //   pcm in -> SpeechGate (only stretches that sound like speech, plus 0.5s before them)
-//          -> resample to 24 khz -> openai realtime, gpt-live-transcribe
-//          -> deltas (words as they're said) + a final transcript per utterance
+//          -> gemini live (gemini-3.5-transcribe-live, 16 khz as is) or openai realtime
+//             (gpt-live-transcribe, resampled to 24 khz)
+//          -> words as they're said + a final transcript per utterance
 //
 // silence never gets sent, so it can't turn into text or clutter the transcript. the
 // 30s wav chunks still upload separately as the record of what was captured, and only
@@ -16,14 +17,17 @@
 // each utterance itself
 
 export interface LiveAsrEvents {
+  /** openai sends new words only, appended to what came before */
   onDelta(itemId: string, delta: string): void;
+  /** gemini sends its whole best guess so far each time, which can still change */
+  onText?(itemId: string, textSoFar: string): void;
   onFinal(itemId: string, transcript: string): void;
   onError(message: string): void;
 }
 
 export interface LiveAsrConnection {
-  /** 24 khz mono pcm16 */
-  append(pcm24: Uint8Array): void;
+  /** 16 khz mono pcm16, straight from the pi (each provider converts if it needs to) */
+  append(pcm16: Uint8Array): void;
   /** end of an utterance, finalizes it */
   commit(): void;
   close(): void;
@@ -96,9 +100,181 @@ export function openAiLiveAsr(
     ws.onerror = () => events.onError("realtime websocket error");
 
     return {
-      append: (pcm24) => send({ type: "input_audio_buffer.append", audio: Buffer.from(pcm24).toString("base64") }),
+      append: (pcm16) => {
+        const samples = new Int16Array(pcm16.buffer, pcm16.byteOffset, pcm16.byteLength / 2);
+        const pcm24 = new Uint8Array(resample16to24(samples).buffer);
+        send({ type: "input_audio_buffer.append", audio: Buffer.from(pcm24).toString("base64") });
+      },
       commit: () => send({ type: "input_audio_buffer.commit" }),
       close: () => ws.close(),
+    };
+  };
+}
+
+export const GEMINI_LIVE_MODEL_DEFAULT = "gemini-3.5-transcribe-live";
+
+/**
+ * gemini live transcription (oct 19 2026), about half what openai's live model costs.
+ *
+ * one gemini session per line: each utterance our speech gate lets through gets its own
+ * session (activityStart, audio, activityEnd), and a spare is always opened ahead so
+ * there's no wait. words stream in while it's said, the finished line lands ~0.5 s after
+ * the gate closes. probed on 19 oct against saved drills, the two obvious setups both
+ * failed:
+ *   - one long session with activityStart/End per line: gemini ignored the boundaries
+ *     and sent one giant line at the very end
+ *   - one long session using gemini's own voice detection: it skipped whole stretches of
+ *     quiet speech (even at high sensitivity)
+ * no speaker labels in live mode, those come from the saved chunks
+ * (GeminiDiarizedTranscriber)
+ */
+export function geminiLiveAsr(apiKey: string, model: string = GEMINI_LIVE_MODEL_DEFAULT): LiveAsrFactory {
+  // shared across connections so a line id never repeats
+  let counter = 0;
+  return (events) => {
+    interface Session {
+      id: string;
+      ws: WebSocket;
+      openedAt: number;
+      ready: boolean;
+      pending: string[];
+      interim: string;
+      /** the finished text, which can arrive in more than one piece */
+      final: string;
+      ended: boolean;
+      done: boolean;
+      timer?: ReturnType<typeof setTimeout>;
+    }
+
+    const finish = (s: Session, text: string) => {
+      if (s.done) return;
+      s.done = true;
+      clearTimeout(s.timer);
+      if (text.trim()) events.onFinal(s.id, text.trim());
+      // a moment for anything trailing, then hang up
+      setTimeout(() => s.ws.close(1000), 300);
+    };
+
+    const open = (): Session => {
+      const ws = new WebSocket(
+        `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=${encodeURIComponent(apiKey)}`,
+      );
+      const s: Session = {
+        id: `gemini_${++counter}`,
+        ws,
+        openedAt: Date.now(),
+        ready: false,
+        pending: [],
+        interim: "",
+        final: "",
+        ended: false,
+        done: false,
+      };
+      ws.onopen = () =>
+        ws.send(
+          JSON.stringify({
+            setup: {
+              model: `models/${model}`,
+              generationConfig: { responseModalities: ["TEXT"] },
+              realtimeInputConfig: { automaticActivityDetection: { disabled: true } },
+              // no custom vocabulary on purpose, same lesson as the openai prompt: biasing
+              // toward ems words made the batch model invent radio calls out of noise
+              inputAudioTranscription: { languageCodes: ["en-US"] },
+            },
+          }),
+        );
+      ws.onmessage = async (msg) => {
+        let event: {
+          setupComplete?: object;
+          serverContent?: {
+            interimInputTranscription?: { text?: string };
+            inputTranscription?: { text?: string };
+            generationComplete?: boolean;
+          };
+          error?: { message?: string };
+        };
+        try {
+          const raw = typeof msg.data === "string" ? msg.data : await new Response(msg.data as Blob).text();
+          event = JSON.parse(raw);
+        } catch {
+          return;
+        }
+        if (event.setupComplete) {
+          s.ready = true;
+          for (const text of s.pending.splice(0)) ws.send(text);
+          return;
+        }
+        if (event.error) return events.onError(event.error.message ?? "gemini live error");
+        const content = event.serverContent;
+        if (content?.interimInputTranscription?.text && !s.done) {
+          s.interim = content.interimInputTranscription.text;
+          events.onText?.(s.id, s.interim.trim());
+        }
+        if (content?.inputTranscription?.text && !s.done) {
+          s.final += content.inputTranscription.text;
+          events.onText?.(s.id, s.final.trim());
+        }
+        // the line's done once generationComplete shows up after our activityEnd (noise
+        // with no words gets just that and nothing else)
+        if (content?.generationComplete && s.ended) finish(s, s.final || s.interim);
+      };
+      ws.onerror = () => {
+        if (!s.done) events.onError("gemini live websocket error");
+      };
+      ws.onclose = (e) => {
+        if (!s.done && s.ended) finish(s, s.final || s.interim); // keep what was heard
+        if (!s.done && e.code !== 1000 && e.code !== 1005) events.onError(`gemini live closed (${e.code} ${e.reason})`);
+      };
+      return s;
+    };
+
+    const send = (s: Session, msg: object) => {
+      const text = JSON.stringify(msg);
+      if (s.ready && s.ws.readyState === WebSocket.OPEN) s.ws.send(text);
+      else s.pending.push(text);
+    };
+
+    let spare: Session | null = open();
+    let line: Session | null = null;
+    const takeSpare = () => {
+      // a session only lives 10 minutes, don't start a line on one that's nearly done
+      let s = spare;
+      if (!s || Date.now() - s.openedAt > 8 * 60_000) {
+        s?.ws.close(1000);
+        s = open();
+      }
+      spare = open();
+      return s;
+    };
+
+    return {
+      append: (pcm16) => {
+        if (!line) {
+          line = takeSpare();
+          send(line, { realtimeInput: { activityStart: {} } });
+        }
+        send(line, { realtimeInput: { audio: { data: Buffer.from(pcm16).toString("base64"), mimeType: "audio/pcm;rate=16000" } } });
+      },
+      commit: () => {
+        if (!line) return;
+        const s = line;
+        line = null;
+        s.ended = true;
+        send(s, { realtimeInput: { activityEnd: {} } });
+        // the final normally lands within a second. if it never does, keep the interim
+        s.timer = setTimeout(() => finish(s, s.final || s.interim), 6000);
+      },
+      close: () => {
+        spare?.ws.close(1000);
+        spare = null;
+        if (line) {
+          const s = line;
+          line = null;
+          s.ended = true;
+          send(s, { realtimeInput: { activityEnd: {} } });
+          s.timer = setTimeout(() => finish(s, s.final || s.interim), 6000);
+        }
+      },
     };
   };
 }
@@ -250,6 +426,7 @@ export class LiveStream {
   private gain = new AutoGain();
   private carry = new Uint8Array(0);
   private conn: LiveAsrConnection | null = null;
+  private connOpenedAt = 0;
   private partials = new Map<string, string>();
 
   constructor(
@@ -274,7 +451,7 @@ export class LiveStream {
     this.apply(this.gate.flush());
     // give the last utterance a moment to come back before hanging up
     const conn = this.conn;
-    if (conn) setTimeout(() => conn.close(), 5000);
+    if (conn) setTimeout(() => conn.close(), 8000);
     this.conn = null;
   }
 
@@ -282,9 +459,16 @@ export class LiveStream {
     for (const action of actions) {
       if (action.type === "send") {
         const boosted = this.gain.process(action.frame);
-        this.connection().append(new Uint8Array(resample16to24(boosted).buffer));
+        this.connection().append(new Uint8Array(boosted.buffer));
       } else {
         this.conn?.commit();
+        // a long-lived connection gets swapped for a fresh one between utterances after
+        // ~8 minutes (the old one gets a few seconds to send its last words)
+        if (this.conn && Date.now() - this.connOpenedAt > 8 * 60_000) {
+          const old = this.conn;
+          setTimeout(() => old.close(), 8000);
+          this.conn = null;
+        }
       }
     }
   }
@@ -292,9 +476,15 @@ export class LiveStream {
   // opened lazily on the first speech, so a silent recording never even connects
   private connection(): LiveAsrConnection {
     if (!this.conn) {
-      this.conn = this.factory({
+      this.connOpenedAt = Date.now();
+      let mine: LiveAsrConnection | null = null;
+      mine = this.conn = this.factory({
         onDelta: (id, delta) => {
           const text = (this.partials.get(id) ?? "") + delta;
+          this.partials.set(id, text);
+          this.callbacks.onPartial(id, text);
+        },
+        onText: (id, text) => {
           this.partials.set(id, text);
           this.callbacks.onPartial(id, text);
         },
@@ -303,9 +493,10 @@ export class LiveStream {
           this.callbacks.onFinal(id, transcript.trim());
         },
         onError: (message) => {
-          // drop the dead connection, the next speech opens a fresh one
-          this.conn?.close();
-          this.conn = null;
+          // drop the dead connection, the next speech opens a fresh one. only if it's
+          // still the current one, an old retired session closing isn't a problem
+          mine?.close();
+          if (this.conn === mine) this.conn = null;
           this.callbacks.onError(message);
         },
       });

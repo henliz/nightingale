@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { AutoGain, frameDbfs, resample16to24, SpeechGate, type GateAction } from "./live-transcribe.js";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { AutoGain, frameDbfs, geminiLiveAsr, resample16to24, SpeechGate, type GateAction } from "./live-transcribe.js";
 
 const frame = (amplitude: number) =>
   Int16Array.from({ length: 1600 }, (_, i) => Math.round(amplitude * Math.sin(i / 3)));
@@ -94,5 +94,75 @@ describe("AutoGain", () => {
     const out = gain.process(frame(8000)); // about -12 dBFS
     expect(gain.currentGainDb).toBe(0);
     expect(out[5]).toBe(frame(8000)[5]);
+  });
+});
+
+describe("geminiLiveAsr", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  // stands in for gemini's websocket: records what we send, lets the test play the server
+  class FakeSocket {
+    static last: FakeSocket;
+    static OPEN = 1;
+    static CONNECTING = 0;
+    readyState = 1;
+    sent: Record<string, any>[] = [];
+    onopen?: () => void;
+    onmessage?: (m: { data: string }) => void | Promise<void>;
+    onerror?: () => void;
+    onclose?: (e: { code: number; reason: string }) => void;
+    constructor(public url: string) {
+      FakeSocket.last = this;
+    }
+    send(text: string) {
+      this.sent.push(JSON.parse(text));
+    }
+    close() {}
+    server(msg: object) {
+      return this.onmessage?.({ data: JSON.stringify(msg) });
+    }
+  }
+
+  it("gives each line its own session (with a spare ready), streams words, then the final", async () => {
+    vi.stubGlobal("WebSocket", FakeSocket);
+    const texts: string[] = [];
+    const finals: [string, string][] = [];
+    const conn = geminiLiveAsr("key")({
+      onDelta: () => {},
+      onText: (_id, t) => texts.push(t),
+      onFinal: (id, t) => finals.push([id, t]),
+      onError: (m) => { throw new Error(m); },
+    });
+    const first = FakeSocket.last; // the spare, opened straight away
+    expect(first.url).toContain("key=key");
+    first.onopen!();
+    expect(first.sent[0]!.setup.realtimeInputConfig.automaticActivityDetection.disabled).toBe(true);
+
+    conn.append(new Uint8Array(3200)); // takes the spare, opens the next one
+    const second = FakeSocket.last;
+    expect(second).not.toBe(first);
+    expect(first.sent).toHaveLength(1); // held until setup's done
+    await first.server({ setupComplete: {} });
+    conn.append(new Uint8Array(3200));
+    conn.commit();
+    expect(first.sent.slice(1).map((m) => Object.keys(m.realtimeInput)[0])).toEqual(["activityStart", "audio", "audio", "activityEnd"]);
+    expect(first.sent[2]!.realtimeInput.audio.mimeType).toBe("audio/pcm;rate=16000");
+
+    // the next line goes to the second session
+    second.onopen!();
+    await second.server({ setupComplete: {} });
+    conn.append(new Uint8Array(3200));
+    expect(Object.keys(second.sent[1]!.realtimeInput)[0]).toBe("activityStart");
+
+    await first.server({ serverContent: { interimInputTranscription: { text: "where does it" } } });
+    await first.server({ serverContent: { inputTranscription: { text: "Where does" } } }); // in pieces
+    await first.server({ serverContent: { inputTranscription: { text: " it hurt?" } } });
+    await first.server({ serverContent: { generationComplete: true } });
+    await second.server({ serverContent: { interimInputTranscription: { text: "my left" } } });
+    conn.commit();
+    await second.server({ serverContent: { generationComplete: true } }); // no final: keeps the interim
+    expect(texts).toEqual(["where does it", "Where does", "Where does it hurt?", "my left"]);
+    expect(finals.map((f) => f[1])).toEqual(["Where does it hurt?", "my left"]);
+    expect(finals[0]![0]).not.toBe(finals[1]![0]);
   });
 });

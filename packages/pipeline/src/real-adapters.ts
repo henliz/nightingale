@@ -58,6 +58,16 @@ export function repairWav(bytes: Uint8Array): Uint8Array {
   return out;
 }
 
+/** the raw pcm of a 16-bit wav and its sample rate, null if it's not a wav we can read */
+export function wavPcm(bytes: Uint8Array): { pcm: Uint8Array; rate: number } | null {
+  const fixed = repairWav(bytes);
+  const data = findWavDataChunk(fixed);
+  if (!data || fixed.length < 44) return null;
+  const view = new DataView(fixed.buffer, fixed.byteOffset, fixed.byteLength);
+  const end = Math.min(fixed.length, data.offset + data.length);
+  return { pcm: fixed.subarray(data.offset, end - ((end - data.offset) % 2)), rate: view.getUint32(24, true) || 16000 };
+}
+
 /** seconds of audio actually in a 16-bit wav (after repairWav), null if it's not a wav */
 export function wavSeconds(bytes: Uint8Array): number | null {
   if (bytes.length < 44 || String.fromCharCode(...bytes.subarray(0, 4)) !== "RIFF") return null;
@@ -321,6 +331,8 @@ export class OpenAITranscriber implements Transcriber {
 export interface OpenAICondenserConfig {
   apiKey: string;
   model?: string;
+  /** "none" | "low" | ..., the newer models think before answering, less = faster */
+  reasoningEffort?: string;
   baseUrl?: string;
 }
 
@@ -395,13 +407,17 @@ function prune(value: unknown): unknown {
 export class OpenAICondenser implements Condenser {
   private apiKey: string;
   private model: string;
+  private reasoningEffort?: string;
   private baseUrl: string;
 
   constructor(config: OpenAICondenserConfig) {
     this.apiKey = config.apiKey;
-    // 4.1 not 4o-mini: on the oct 19 crash drill mini still wrote "leg entrapment" and
-    // made up "capacity: capable", 4.1 got MVC / driver's side impact / L leg on its own
-    this.model = config.model ?? "gpt-4.1";
+    // tried on the oct 19 crash drill: 4o-mini wrote "leg entrapment" and made up
+    // "capacity: capable". gpt-6-luna with no reasoning got MVC / driver's side / L leg in
+    // ~4s for ~0.1 cent. 6.1-sol was a bit more thorough but ~15-20s, too slow for a live
+    // form. NIGHTINGALE_CONDENSE_MODEL / _EFFORT override (sol only goes down to "low")
+    this.model = config.model ?? "gpt-6-luna";
+    this.reasoningEffort = config.reasoningEffort ?? (config.model ? undefined : "none");
     this.baseUrl = config.baseUrl ?? "https://api.openai.com/v1";
   }
 
@@ -491,7 +507,10 @@ export class OpenAICondenser implements Condenser {
       body: JSON.stringify({
         model: this.model,
         response_format: { type: "json_object" },
-        temperature: 0,
+        // openai's newer reasoning models only accept the default temperature, gemini and
+        // the gpt-4 ones take 0
+        ...(/^(gpt-[5-9]|o\d)/.test(this.model) ? {} : { temperature: 0 }),
+        ...(this.reasoningEffort ? { reasoning_effort: this.reasoningEffort } : {}),
         messages: [
           { role: "system", content: CONDENSE_SYSTEM_PROMPT },
           { role: "user", content: transcriptText || "(no speech captured in this clip)" },

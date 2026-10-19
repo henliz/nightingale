@@ -30,6 +30,7 @@ export {
   wavLoudestSecondDbfs,
   repairWav,
   wavSeconds,
+  wavPcm,
 } from "./real-adapters.js";
 export type {
   OpenAICondenserConfig,
@@ -40,3 +41,10 @@ export { runPipeline } from "./pipeline.js";
 export type { PipelineDeps, RunPipelineInput, RunPipelineResult } from "./pipeline.js";
 export { factRecallScore } from "./eval.js";
 export type { FactRecallResult } from "./eval.js";
+export {
+  GeminiDiarizedTranscriber,
+  GEMINI_TRANSCRIBE_MODEL_DEFAULT,
+  collectWords,
+  withReferenceClips,
+  wordsToSegments,
+} from "./gemini-adapters.js";
