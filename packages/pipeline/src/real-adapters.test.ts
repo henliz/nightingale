@@ -4,6 +4,8 @@ import {
   OpenAICondenser,
   OpenAITranscriber,
   wavLoudestSecondDbfs,
+  repairWav,
+  wavSeconds,
 } from "./real-adapters.js";
 
 // builds a minimal valid pcm16 mono wav, no extra chunks, so tests don't need a real
@@ -168,5 +170,23 @@ describe("OpenAICondenser", () => {
     expect(note.sections.hazards).toBeUndefined();
     expect(note.sections.transport).toBeUndefined();
     expect(note.flags.some((f) => f.ref === "sections.transport")).toBe(true);
+  });
+});
+
+describe("repairWav", () => {
+  it("fixes the 0 byte header a power cut leaves behind", () => {
+    const wav = buildTestWav(new Array(16000).fill(1000));
+    const cut = wav.slice();
+    new DataView(cut.buffer).setUint32(40, 0, true); // what the pi wrote before audio
+    new DataView(cut.buffer).setUint32(4, 36, true);
+    expect(wavSeconds(cut)).toBe(0);
+    const fixed = repairWav(cut);
+    expect(wavSeconds(fixed)).toBe(1);
+    expect(Array.from(fixed)).toEqual(Array.from(wav));
+  });
+
+  it("leaves a good wav alone", () => {
+    const wav = buildTestWav(new Array(1600).fill(5));
+    expect(repairWav(wav)).toBe(wav);
   });
 });

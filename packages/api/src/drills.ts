@@ -51,6 +51,8 @@ export interface DrillSession {
   deviceId?: string;
   startedAt: number;
   assets: LiveAsset[];
+  /** audio from an earlier boot that was still queued on the pi, uploaded late */
+  backlog?: boolean;
   /** the session-wide draft epcr, rebuilt from the whole transcript after every chunk */
   epcr?: DraftNote;
   epcrStatus?: "updating" | "ready" | "failed";

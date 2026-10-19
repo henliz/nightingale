@@ -1,0 +1,58 @@
+{
+  "captureId": "session_1792297542",
+  "dir": "2026-10-19_16-15-41_session_1792297542",
+  "startedAt": 1792440941751,
+  "assets": [
+    {
+      "assetId": "f5f02537-edb4-4db5-aa51-730936e1987e",
+      "captureId": "session_1792297542",
+      "kind": "audio",
+      "completedAt": 1792440941751,
+      "capturedAt": 1792347615240,
+      "status": "failed",
+      "file": "audio/161541_f5f02537.wav",
+      "durationMs": 0
+    },
+    {
+      "assetId": "ae2314cd-fca6-464c-82a9-39ef0850c89d",
+      "captureId": "session_1792297542",
+      "kind": "audio",
+      "completedAt": 1792440943391,
+      "capturedAt": 1792347630290,
+      "status": "failed",
+      "file": "audio/161543_ae2314cd.wav",
+      "durationMs": 0
+    },
+    {
+      "assetId": "50543869-868a-4dc2-b2f4-b0549ad18f83",
+      "captureId": "session_1792297542",
+      "kind": "audio",
+      "completedAt": 1792440944673,
+      "capturedAt": 1792439540965,
+      "status": "failed",
+      "file": "audio/161544_50543869.wav",
+      "durationMs": 0
+    },
+    {
+      "assetId": "aeb3248b-d21d-4b23-84d8-6fe6bbf2f6dc",
+      "captureId": "session_1792297542",
+      "kind": "audio",
+      "completedAt": 1792440945909,
+      "capturedAt": 1792389483858,
+      "status": "failed",
+      "file": "audio/161545_aeb3248b.wav",
+      "durationMs": 0
+    },
+    {
+      "assetId": "7269cc67-293c-47ae-94d3-788b0a3cae3f",
+      "captureId": "session_1792297542",
+      "kind": "audio",
+      "completedAt": 1792440946250,
+      "capturedAt": 1792389498884,
+      "status": "failed",
+      "file": "audio/161546_7269cc67.wav",
+      "durationMs": 0
+    }
+  ],
+  "backlog": true
+}

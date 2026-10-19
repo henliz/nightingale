@@ -1,0 +1,133 @@
+4:15:41 p.m. server info: new drill session session_1792390847, saving to drills/2026-10-19_16-15-41_session_1792390847
+4:15:41 p.m. server info: live audio connected, transcribing as you speak
+2:20:47 a.m. nightingale warn: recovered 1 file(s) cut off by the last shutdown, queued for upload
+2:20:47 a.m. nightingale info: device nightingale is ON, v0.0.0, session session_1792390847, talking to http://Henriettas-MacBook-Air.local:8787
+2:20:47 a.m. nightingale info: 28 file(s) (10512 KB) waiting in the queue from before, uploading those first
+2:20:47 a.m. nightingale info: [button] POWER/RECORD on gpio 3
+2:20:47 a.m. nightingale info: [button] PHOTO on gpio 17
+2:20:47 a.m. nightingale info: [hw] no buzzer configured (NIGHTINGALE_BUZZER_PIN), ready tone skipped
+2:20:47 a.m. nightingale info: [notice] reminder for the responder: say "I'm recording for the medical record"
+2:20:47 a.m. nightingale info: [record] RECORDING (max 1800s). press POWER/RECORD to stop and power off, PHOTO for a photo
+2:20:52 a.m. nightingale warn: [live] can't stream live audio (request or response body error for url (http://henriettas-macbook-air.local:8787/live/session_1792390847/audio)), retrying. the 30s chunks still upload
+2:20:52 a.m. nightingale warn: [audio] upload of session_1792281411__1792297513188.wav failed, keeping it queued, retry in 2s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792281411/assets)
+2:20:59 a.m. nightingale warn: [audio] upload of session_1792281411__1792297513188.wav failed, keeping it queued, retry in 4s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792281411/assets)
+2:21:02 a.m. nightingale info: [audio] chunk #1 saved (15s), queued
+2:21:09 a.m. nightingale info: [audio] uploaded session_1792281411__1792297513188.wav (444 KB) in 5.2s, asset 6a576ca0-9397-45d2-a56f-d44144d5424d
+2:21:10 a.m. nightingale info: [audio] uploaded session_1792297542__1792297542685.wav (0 KB) in 1.7s, asset f5f02537-edb4-4db5-aa51-730936e1987e
+2:21:12 a.m. nightingale info: [audio] uploaded session_1792297542__1792297557743.wav (0 KB) in 1.3s, asset ae2314cd-fca6-464c-82a9-39ef0850c89d
+4:15:45 p.m. nightingale info: [audio] uploaded session_1792297542__1792389468418.wav (0 KB) in 1.2s, asset 50543869-868a-4dc2-b2f4-b0549ad18f83
+4:15:45 p.m. nightingale info: [audio] uploaded session_1792297542__1792389483444.wav (0 KB) in 0.3s, asset aeb3248b-d21d-4b23-84d8-6fe6bbf2f6dc
+4:15:46 p.m. nightingale info: [audio] uploaded session_1792297542__1792389498470.wav (0 KB) in 0.3s, asset 7269cc67-293c-47ae-94d3-788b0a3cae3f
+4:15:49 p.m. nightingale info: [heartbeat] up 0m, queue 23 file(s) / 10532 KB, 6 uploaded, 2 failed attempts, cpu 32.7C, wifi -56 dBm
+4:15:50 p.m. nightingale info: [audio] chunk #2 saved (15s), queued
+4:15:54 p.m. nightingale info: [audio] uploaded session_1792389523__1792389523169.wav (460 KB) in 8.6s, asset 72990c65-01b2-4192-bbf3-b9cc270a9624
+4:15:55 p.m. server info: said (13 words), updating the ePCR
+4:15:57 p.m. server info: ePCR updated from 1 transcript line(s) in 2.1s (0 sections filled)
+4:16:03 p.m. nightingale info: [audio] uploaded session_1792389523__1792389538278.wav (468 KB) in 8.9s, asset 80e70c1a-79fe-4dd7-9b81-34de96bef337
+4:16:05 p.m. nightingale info: [audio] chunk #3 saved (15s), queued
+4:16:14 p.m. nightingale info: [audio] uploaded session_1792389523__1792389566176.wav (468 KB) in 10.5s, asset 4dc3b1d4-130d-40e7-ae32-d7d6f5be1ae9
+4:16:15 p.m. server info: said (15 words), updating the ePCR
+4:16:17 p.m. server info: ePCR updated from 2 transcript line(s) in 1.8s (1 sections filled)
+4:16:20 p.m. nightingale info: [heartbeat] up 1m, queue 22 file(s) / 10075 KB, 9 uploaded, 2 failed attempts, cpu 32.7C, wifi -51 dBm
+4:16:20 p.m. nightingale info: [audio] chunk #4 saved (15s), queued
+4:16:24 p.m. nightingale info: [audio] uploaded session_1792389523__1792389581248.wav (464 KB) in 10.0s, asset 51c0b157-cda8-4219-b50e-63517d7a00a2
+4:16:34 p.m. nightingale info: [audio] uploaded session_1792389523__1792389596325.wav (464 KB) in 10.2s, asset 5ec9f852-120a-4bff-82b3-9b9262d39934
+4:16:35 p.m. nightingale info: [audio] chunk #5 saved (15s), queued
+4:16:43 p.m. nightingale info: [audio] uploaded session_1792389523__1792389611400.wav (468 KB) in 8.9s, asset f652572b-89f7-4b29-87b5-dda92b9f3275
+4:16:50 p.m. nightingale info: [heartbeat] up 1m, queue 21 file(s) / 9606 KB, 12 uploaded, 2 failed attempts, cpu 33.2C, wifi -47 dBm
+4:16:50 p.m. nightingale info: [audio] chunk #6 saved (15s), queued
+4:16:51 p.m. nightingale info: [audio] uploaded session_1792389523__1792389626473.wav (464 KB) in 8.6s, asset 8f3cf19d-9228-4cca-a31e-b4f33414ca54
+4:17:00 p.m. nightingale info: [audio] uploaded session_1792389523__1792389641548.wav (464 KB) in 8.5s, asset b683ab6b-8ec9-47e0-8ee1-5d32a7310033
+4:17:05 p.m. nightingale info: [audio] chunk #7 saved (15s), queued
+4:17:10 p.m. nightingale info: [audio] uploaded session_1792389523__1792389656622.wav (468 KB) in 10.4s, asset 2608786b-398e-4bb1-ba12-8e0f85460650
+4:17:18 p.m. nightingale info: [audio] uploaded session_1792389523__1792389671697.wav (464 KB) in 7.5s, asset 50129c51-99af-402f-917d-15cc9534eced
+4:17:20 p.m. nightingale info: [heartbeat] up 2m, queue 19 file(s) / 8672 KB, 16 uploaded, 2 failed attempts, cpu 34.3C, wifi -50 dBm
+4:17:20 p.m. nightingale info: [audio] chunk #8 saved (15s), queued
+4:17:26 p.m. nightingale info: [audio] uploaded session_1792389523__1792389686770.wav (464 KB) in 8.2s, asset 6e1b5712-41d6-40af-8cd1-0789b50c2807
+4:17:34 p.m. nightingale info: [audio] uploaded session_1792389523__1792389701839.wav (468 KB) in 8.1s, asset 19fd3e98-85d7-42a9-a082-9562a4800090
+4:17:35 p.m. nightingale info: [audio] chunk #9 saved (15s), queued
+4:17:41 p.m. nightingale info: [audio] uploaded session_1792389523__1792389716914.wav (464 KB) in 7.4s, asset 7cddff80-5c3b-41eb-8d23-7cd95b3f2f8e
+4:17:44 p.m. server info: said (18 words), updating the ePCR
+4:17:46 p.m. server info: ePCR updated from 3 transcript line(s) in 2.1s (1 sections filled)
+4:17:49 p.m. nightingale info: [audio] uploaded session_1792389523__1792389731986.wav (464 KB) in 7.4s, asset fbd131c7-7deb-42ea-a71f-659d3779d15e
+4:17:50 p.m. nightingale info: [heartbeat] up 2m, queue 17 file(s) / 7742 KB, 20 uploaded, 2 failed attempts, cpu 35.4C, wifi -49 dBm
+4:17:50 p.m. nightingale info: [audio] chunk #10 saved (15s), queued
+4:17:58 p.m. nightingale info: [audio] uploaded session_1792389523__1792389747058.wav (464 KB) in 8.7s, asset 7987e5ea-8ab1-415f-8b54-fceddd77086e
+4:18:05 p.m. nightingale info: [audio] chunk #11 saved (15s), queued
+4:18:06 p.m. nightingale info: [audio] uploaded session_1792389523__1792389762130.wav (468 KB) in 8.3s, asset 990d18ee-5632-4cae-96f5-b16a9b37b129
+4:18:13 p.m. nightingale info: [audio] uploaded session_1792389523__1792389777204.wav (464 KB) in 7.5s, asset 48776cfa-1d0a-4858-a539-1502abf68188
+4:18:20 p.m. nightingale info: [heartbeat] up 3m, queue 16 file(s) / 7274 KB, 23 uploaded, 2 failed attempts, cpu 34.9C, wifi -50 dBm
+4:18:20 p.m. nightingale info: [audio] uploaded session_1792389523__1792389792278.wav (464 KB) in 6.5s, asset 7234b83a-6ff1-446b-8968-7a1b5877cd61
+4:18:21 p.m. nightingale info: [audio] chunk #12 saved (15s), queued
+4:18:26 p.m. nightingale info: [audio] uploaded session_1792389523__1792389807357.wav (464 KB) in 6.6s, asset 03d42c5c-4d28-41d3-8424-45a4cded3387
+4:18:32 p.m. server info: said (30 words), updating the ePCR
+4:18:33 p.m. nightingale info: [audio] uploaded session_1792389523__1792389822430.wav (464 KB) in 6.4s, asset 4e6136e7-39fb-4b60-b4ed-6125c25e8aab
+4:18:34 p.m. server info: ePCR updated from 4 transcript line(s) in 2.2s (1 sections filled)
+4:18:36 p.m. nightingale info: [audio] chunk #13 saved (15s), queued
+4:18:40 p.m. nightingale info: [audio] uploaded session_1792389523__1792389837502.wav (468 KB) in 7.6s, asset 3d3891a8-d216-4050-9b84-ecddd7bf7c66
+4:18:41 p.m. nightingale info: [audio] uploaded session_1792389523__1792389852577.wav (281 KB) in 0.4s, asset 92a3c5c7-6a45-4663-9a72-1d2480c37f75
+4:18:41 p.m. server info: got audio chunk 708be72b-283f-4f28-9c96-e5abd5c5101c (465 KB, loudest -23 dBFS), labelling speakers...
+4:18:48 p.m. server info: speakers labelled for 708be72b-283f-4f28-9c96-e5abd5c5101c in 6.2s (nobody), updating the ePCR...
+4:18:48 p.m. nightingale info: [audio] uploaded session_1792390847__1792390847860.wav (464 KB) in 7.1s, asset 708be72b-283f-4f28-9c96-e5abd5c5101c
+4:18:49 p.m. server info: got audio chunk 1193e027-6723-4c93-9284-32af6acc6f07 (469 KB, loudest -29 dBFS), labelling speakers...
+4:18:50 p.m. server info: ePCR updated from 4 transcript line(s) in 2.1s (1 sections filled)
+4:18:50 p.m. nightingale info: [heartbeat] up 3m, queue 12 file(s) / 5594 KB, 29 uploaded, 2 failed attempts, cpu 35.9C, wifi -52 dBm
+4:18:51 p.m. nightingale info: [audio] chunk #14 saved (15s), queued
+4:18:55 p.m. server info: new voice heard, calling it Person 1
+4:18:55 p.m. server info: speakers labelled for 1193e027-6723-4c93-9284-32af6acc6f07 in 6.4s (Person 1), updating the ePCR...
+4:18:56 p.m. nightingale info: [audio] uploaded session_1792390847__1792390862983.wav (468 KB) in 8.4s, asset 1193e027-6723-4c93-9284-32af6acc6f07
+4:18:57 p.m. server info: ePCR updated from 5 transcript line(s) in 2.0s (1 sections filled)
+4:18:57 p.m. server info: got audio chunk 6f8bd4c1-880e-4be9-b130-bdf871b177f8 (473 KB, loudest -29 dBFS), labelling speakers...
+4:19:04 p.m. server info: speakers labelled for 6f8bd4c1-880e-4be9-b130-bdf871b177f8 in 6.9s (Person 1), updating the ePCR...
+4:19:05 p.m. nightingale info: [audio] uploaded session_1792390847__1792440950188.wav (472 KB) in 9.1s, asset 6f8bd4c1-880e-4be9-b130-bdf871b177f8
+4:19:06 p.m. server info: ePCR updated from 5 transcript line(s) in 2.1s (1 sections filled)
+4:19:06 p.m. server info: got audio chunk b66fd9ef-479b-4455-a84d-543a4769f131 (465 KB, loudest -29 dBFS), labelling speakers...
+4:19:06 p.m. nightingale info: [audio] chunk #15 saved (15s), queued
+4:19:12 p.m. server info: speakers labelled for b66fd9ef-479b-4455-a84d-543a4769f131 in 6.3s (Person 1), updating the ePCR...
+4:19:14 p.m. nightingale info: [audio] uploaded session_1792390847__1792440965384.wav (464 KB) in 8.6s, asset b66fd9ef-479b-4455-a84d-543a4769f131
+4:19:15 p.m. server info: ePCR updated from 6 transcript line(s) in 2.1s (1 sections filled)
+4:19:15 p.m. server info: got audio chunk b21a600e-17ee-42a1-bb8f-aaa294439fc2 (465 KB, loudest -29 dBFS), labelling speakers...
+4:19:20 p.m. nightingale info: [heartbeat] up 4m, queue 11 file(s) / 5117 KB, 32 uploaded, 2 failed attempts, cpu 35.9C, wifi -54 dBm
+4:19:21 p.m. nightingale info: [audio] chunk #16 saved (15s), queued
+4:19:21 p.m. server info: speakers labelled for b21a600e-17ee-42a1-bb8f-aaa294439fc2 in 6.7s (nobody), updating the ePCR...
+4:19:22 p.m. nightingale info: [audio] uploaded session_1792390847__1792440980460.wav (464 KB) in 7.8s, asset b21a600e-17ee-42a1-bb8f-aaa294439fc2
+4:19:22 p.m. server info: got audio chunk f3baca11-65f0-4fe5-ade2-ac5515ddc562 (465 KB, loudest -29 dBFS), labelling speakers...
+4:19:23 p.m. server info: ePCR updated from 6 transcript line(s) in 2.1s (1 sections filled)
+4:19:28 p.m. server info: speakers labelled for f3baca11-65f0-4fe5-ade2-ac5515ddc562 in 5.5s (nobody), updating the ePCR...
+4:19:28 p.m. nightingale info: [audio] uploaded session_1792390847__1792440995534.wav (464 KB) in 6.3s, asset f3baca11-65f0-4fe5-ade2-ac5515ddc562
+4:19:29 p.m. server info: got audio chunk 370bfbce-0cb0-4788-a80c-19409369b63f (465 KB, loudest -29 dBFS), labelling speakers...
+4:19:30 p.m. server info: ePCR updated from 6 transcript line(s) in 2.3s (12 sections filled)
+4:19:34 p.m. server info: speakers labelled for 370bfbce-0cb0-4788-a80c-19409369b63f in 5.7s (nobody), updating the ePCR...
+4:19:37 p.m. server info: ePCR updated from 6 transcript line(s) in 2.2s (1 sections filled)
+4:20:25 p.m. server info: got audio chunk d00389f9-49c5-40e9-8b62-c729de344f34 (465 KB, loudest -29 dBFS), labelling speakers...
+4:20:32 p.m. server info: speakers labelled for d00389f9-49c5-40e9-8b62-c729de344f34 in 7.1s (nobody), updating the ePCR...
+4:20:33 p.m. server info: got audio chunk f6b8a391-58e9-4396-95df-feaa3fd6bed5 (469 KB, loudest -29 dBFS), labelling speakers...
+4:20:34 p.m. server info: ePCR updated from 6 transcript line(s) in 1.6s (0 sections filled)
+4:20:40 p.m. server info: speakers labelled for f6b8a391-58e9-4396-95df-feaa3fd6bed5 in 6.8s (nobody), updating the ePCR...
+4:20:41 p.m. server info: got audio chunk 666072e3-1f58-40c1-b8b2-41c091434844 (465 KB, loudest -29 dBFS), labelling speakers...
+4:20:42 p.m. server info: ePCR updated from 6 transcript line(s) in 2.2s (1 sections filled)
+4:20:49 p.m. server info: live audio disconnected
+4:20:49 p.m. server info: speakers labelled for 666072e3-1f58-40c1-b8b2-41c091434844 in 7.9s (Person 1), updating the ePCR...
+4:20:53 p.m. server info: got audio chunk 5a30a0f3-ed3c-49de-8eea-25c91e92c806 (465 KB, loudest -28 dBFS), labelling speakers...
+4:21:01 p.m. server info: speakers labelled for 5a30a0f3-ed3c-49de-8eea-25c91e92c806 in 7.3s (nobody), updating the ePCR...
+4:21:01 p.m. server info: got audio chunk fceb5545-6338-46ad-8bee-9760489e0fcb (465 KB, loudest -29 dBFS), labelling speakers...
+4:21:02 p.m. server info: ePCR updated from 6 transcript line(s) in 1.8s (1 sections filled)
+4:22:36 p.m. server info: got audio chunk c640615a-7264-4bff-b238-4e241a18f2ad (465 KB, loudest -29 dBFS), labelling speakers...
+4:22:41 p.m. server info: speakers labelled for c640615a-7264-4bff-b238-4e241a18f2ad in 5.2s (nobody), updating the ePCR...
+4:22:42 p.m. server info: got audio chunk 8ac8dd4c-6c34-481f-ac85-8aae5d0369b2 (465 KB, loudest -28 dBFS), labelling speakers...
+4:22:44 p.m. server info: ePCR updated from 6 transcript line(s) in 2.6s (1 sections filled)
+4:22:49 p.m. server info: new voice heard, calling it Person 2
+4:22:49 p.m. server info: speakers labelled for 8ac8dd4c-6c34-481f-ac85-8aae5d0369b2 in 6.5s (Person 2), updating the ePCR...
+4:22:51 p.m. server info: got audio chunk 41e8b218-b7be-4261-92ab-2f80e7b33af4 (465 KB, loudest -23 dBFS), labelling speakers...
+4:22:51 p.m. server info: ePCR updated from 6 transcript line(s) in 2.1s (1 sections filled)
+4:22:58 p.m. server info: speakers labelled for 41e8b218-b7be-4261-92ab-2f80e7b33af4 in 7.7s (Person 2), updating the ePCR...
+4:23:01 p.m. server info: got audio chunk ec43bd59-407f-4af2-9464-ae08a591e851 (465 KB, loudest -29 dBFS), labelling speakers...
+4:23:02 p.m. server info: ePCR updated from 7 transcript line(s) in 3.5s (2 sections filled)
+4:23:07 p.m. server info: speakers labelled for ec43bd59-407f-4af2-9464-ae08a591e851 in 6.7s (nobody), updating the ePCR...
+4:23:08 p.m. server info: got audio chunk e764dab8-5188-4b06-8f6b-bdd478c3ffab (465 KB, loudest -29 dBFS), labelling speakers...
+4:23:09 p.m. server info: ePCR updated from 7 transcript line(s) in 2.1s (1 sections filled)
+4:23:13 p.m. server info: speakers labelled for e764dab8-5188-4b06-8f6b-bdd478c3ffab in 5.0s (nobody), updating the ePCR...
+4:23:14 p.m. server info: got audio chunk 711e2834-9622-4e67-99af-989f3664e3cc (465 KB, loudest -27 dBFS), labelling speakers...
+4:23:15 p.m. server info: ePCR updated from 7 transcript line(s) in 1.7s (1 sections filled)
+4:23:20 p.m. server info: speakers labelled for 711e2834-9622-4e67-99af-989f3664e3cc in 6.3s (nobody), updating the ePCR...
+4:23:22 p.m. server info: ePCR updated from 7 transcript line(s) in 2.1s (1 sections filled)

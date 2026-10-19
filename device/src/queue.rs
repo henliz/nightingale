@@ -31,11 +31,17 @@ impl Queue {
     }
 
     // anything still in incoming/ at startup was cut off by a crash or power loss.
-    // keep it rather than lose the audio: arecord's wav is still readable, just short
+    // keep it rather than lose the audio. its wav header still says 0 bytes (the sizes
+    // only get patched when a chunk finishes), which openai rejects, so fix that first
     pub fn recover_incoming(&self) -> io::Result<usize> {
         let mut moved = 0;
         for entry in fs::read_dir(self.dir.join("incoming"))? {
             let path = entry?.path();
+            if path.extension().is_some_and(|e| e == "wav") {
+                if let Err(e) = fix_wav_sizes(&path) {
+                    crate::devlog::warn(format!("couldn't fix the header of {}: {e}", path.display()));
+                }
+            }
             if let Some(name) = path.file_name() {
                 fs::rename(&path, self.dir.join(name))?;
                 moved += 1;
@@ -107,6 +113,22 @@ impl Queue {
     }
 }
 
+// sets the riff + data sizes of our 44 byte wav header from the real file length
+fn fix_wav_sizes(path: &Path) -> io::Result<()> {
+    use std::io::{Seek, SeekFrom, Write};
+    let len = fs::metadata(path)?.len();
+    if len < 44 {
+        return Ok(());
+    }
+    let data = ((len - 44) & !1) as u32;
+    let mut f = fs::OpenOptions::new().write(true).open(path)?;
+    f.seek(SeekFrom::Start(4))?;
+    f.write_all(&(data + 36).to_le_bytes())?;
+    f.seek(SeekFrom::Start(40))?;
+    f.write_all(&data.to_le_bytes())?;
+    f.sync_all()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -137,6 +159,19 @@ mod tests {
         fs::write(q.incoming_path("session_1", 100, "wav"), b"cut off").unwrap();
         assert_eq!(q.recover_incoming().unwrap(), 1);
         assert_eq!(q.pending("wav").unwrap().len(), 1);
+        fs::remove_dir_all(dir).ok();
+    }
+
+    #[test]
+    fn recovered_wav_gets_its_header_sizes_fixed() {
+        let (q, dir) = temp_queue("recover_wav");
+        let mut wav = crate::capture::wav_header(0).to_vec(); // header written at the start
+        wav.extend_from_slice(&[1u8; 3200]); // then power died mid-chunk
+        fs::write(q.incoming_path("s", 1, "wav"), &wav).unwrap();
+        q.recover_incoming().unwrap();
+        let fixed = fs::read(&q.pending("wav").unwrap()[0].path).unwrap();
+        assert_eq!(u32::from_le_bytes(fixed[40..44].try_into().unwrap()), 3200);
+        assert_eq!(u32::from_le_bytes(fixed[4..8].try_into().unwrap()), 3236);
         fs::remove_dir_all(dir).ok();
     }
 

@@ -192,6 +192,17 @@
       "file": "audio/002513_bd7a71b6.wav",
       "durationMs": 14982.6875,
       "levelDbfs": -67.16552503149973
+    },
+    {
+      "assetId": "6a576ca0-9397-45d2-a56f-d44144d5424d",
+      "captureId": "session_1792281411",
+      "kind": "audio",
+      "completedAt": 1792440941658,
+      "capturedAt": 1792347590480,
+      "status": "silent",
+      "file": "audio/161541_6a576ca0.wav",
+      "durationMs": 14236.75,
+      "levelDbfs": -65.95290485306947
     }
   ],
   "speakers": [

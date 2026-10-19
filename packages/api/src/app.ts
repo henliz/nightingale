@@ -7,7 +7,9 @@ import {
   FakeTranscriber,
   CONDENSE_PROMPT_VERSION,
   normalizeWav,
+  repairWav,
   wavLoudestSecondDbfs,
+  wavSeconds,
   wavSlice,
   type KnownSpeaker,
   type RawSegment,
@@ -138,21 +140,30 @@ export function createApp(
   // the device session most recently heard from, what the button splits
   let lastDeviceSessionId: string | undefined;
 
-  const sessionFor = (captureId: string, deviceId?: string) => {
+  // backlog = chunks from an earlier boot that sat in the pi's queue (laptop was off, or
+  // the pi lost power) and only upload now. they get their own session like any other,
+  // but the dashboard doesn't jump to them
+  const sessionFor = (captureId: string, deviceId?: string, backlog = false) => {
     let session = sessions.get(captureId);
     if (!session) {
       const startedAt = Date.now();
       session = { captureId, dir: sessionDirName(captureId, startedAt), deviceId, startedAt, assets: [] };
+      if (backlog) session.backlog = true;
       sessions.set(captureId, session);
       drills.saveSession(session);
-      live.log("server", "info", `new drill session ${captureId}, saving to drills/${session.dir}`, {
-        sessionId: captureId,
-      });
+      live.log(
+        "server",
+        "info",
+        backlog
+          ? `catching up on ${captureId}, audio from an earlier boot that was still in the pi's queue. saving to drills/${session.dir}, the feed stays on the current session`
+          : `new drill session ${captureId}, saving to drills/${session.dir}`,
+        { sessionId: captureId },
+      );
     } else if (deviceId && !session.deviceId) {
       session.deviceId = deviceId;
       drills.saveSession(session);
     }
-    currentSessionId = captureId;
+    if (!session.backlog) currentSessionId = captureId;
     return session;
   };
 
@@ -348,13 +359,17 @@ export function createApp(
     // runs inline (not a background job/queue, that's later) so the note is
     // actually ready by the time you ask for it
     const kb = Math.round(result.bytes.length / 1024);
-    lastDeviceSessionId = result.captureId;
+    // a chunk cut off by power loss has a header that says "0 bytes", fix it up first
+    const bytes = result.kind === "audio" ? repairWav(result.bytes) : result.bytes;
+    // the device's current session comes from its logs / live stream. an upload alone
+    // doesn't count, it can be an old chunk from an earlier boot sitting in the queue
+    lastDeviceSessionId ??= result.captureId;
     const completedAt = Date.now();
     const sessionId = resolveSession(result.captureId, capturedAtById.get(assetId) ?? completedAt);
-    const session = sessionFor(sessionId);
+    const session = sessionFor(sessionId, undefined, result.captureId !== lastDeviceSessionId);
     const file = `${result.kind === "audio" ? "audio" : "photos"}/${clockStamp(completedAt)}_${assetId.slice(0, 8)}.${result.kind === "audio" ? "wav" : "jpg"}`;
     try {
-      drills.saveFile(session, file, result.bytes);
+      drills.saveFile(session, file, bytes);
     } catch (err) {
       live.log("server", "warn", `couldn't save ${file} to the drill folder: ${(err as Error).message}`, { sessionId });
     }
@@ -376,15 +391,24 @@ export function createApp(
     const started = Date.now();
     const secs = () => ((Date.now() - started) / 1000).toFixed(1);
 
-    const level = result.kind === "audio" ? wavLoudestSecondDbfs(result.bytes) : null;
+    const level = result.kind === "audio" ? wavLoudestSecondDbfs(bytes) : null;
     const levelText = level === null ? "" : `, loudest ${level.toFixed(0)} dBFS`;
 
     // 16 khz mono 16-bit = 32000 bytes a second, minus the 44 byte header
-    const durationMs = Math.max(0, ((result.bytes.length - 44) / 32000) * 1000);
+    const durationMs = Math.max(0, ((bytes.length - 44) / 32000) * 1000);
     const chunkStart = capturedAt ?? completedAt - durationMs;
     if (result.kind === "audio") Object.assign(asset, { capturedAt: chunkStart, durationMs });
 
-    if (result.kind === "audio" && level !== null && level < silenceDbfs) {
+    if (result.kind === "audio" && (wavSeconds(bytes) ?? 1) < 0.2) {
+      // header only, arecord produced nothing (mic not detected / wrong card)
+      setLive(assetId, { status: "silent" });
+      live.log(
+        "server",
+        "warn",
+        `audio chunk ${assetId} has no audio in it (${kb} KB), the mic gave nothing. check \`arecord -l\` on the pi`,
+        { sessionId },
+      );
+    } else if (result.kind === "audio" && level !== null && level < silenceDbfs) {
       setLive(assetId, { status: "silent", levelDbfs: level });
       live.log(
         "server",
@@ -399,7 +423,7 @@ export function createApp(
       try {
         // same three steps as runPipeline, split up so the transcript shows on the
         // dashboard the moment it exists instead of waiting on the condenser too
-        const raw = await pipelineDeps.transcriber.transcribe(result.bytes, {
+        const raw = await pipelineDeps.transcriber.transcribe(bytes, {
           knownSpeakers: speakerRefs.get(sessionId) ?? [],
         });
         const transcript = await pipelineDeps.diarizer.flagNonResponder(
@@ -412,7 +436,7 @@ export function createApp(
           }),
         );
         // renamed after the non-responder check so it still sees the original labels
-        transcript.segments = labelSpeakers(session, result.bytes, transcript.segments);
+        transcript.segments = labelSpeakers(session, bytes, transcript.segments);
         setLive(assetId, {
           status: "ready",
           levelDbfs: level ?? undefined,
@@ -456,7 +480,7 @@ export function createApp(
     } else if (result.kind === "photo") {
       live.log("server", "info", `got photo ${assetId} (${kb} KB), captioning...`, { sessionId });
       try {
-        const caption = await captioner.caption(result.bytes);
+        const caption = await captioner.caption(bytes);
         captions.set(assetId, caption);
         setLive(assetId, { status: "ready", caption });
         live.log("server", "info", `caption ready for ${assetId} in ${secs()}s`, { sessionId });

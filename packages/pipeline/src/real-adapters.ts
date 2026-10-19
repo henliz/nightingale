@@ -42,6 +42,34 @@ function findWavDataChunk(bytes: Uint8Array): { offset: number; length: number }
   return null;
 }
 
+// a wav whose recording got cut off (pi lost power mid-chunk) still has the placeholder
+// header arecord/the daemon wrote at the start: data length 0 (or 0xffffffff). openai
+// rejects those ("does not support the format"), so set the sizes from what's actually
+// in the file. returns a fixed copy, or the same bytes if they were fine
+export function repairWav(bytes: Uint8Array): Uint8Array {
+  const data = findWavDataChunk(bytes);
+  if (!data || bytes.length < 44) return bytes;
+  const actual = (bytes.length - data.offset) & ~1;
+  if (data.length === actual || (data.length > 0 && data.offset + data.length <= bytes.length)) return bytes;
+  const out = bytes.slice(0, data.offset + actual);
+  const view = new DataView(out.buffer);
+  view.setUint32(4, out.length - 8, true);
+  view.setUint32(data.offset - 4, actual, true);
+  return out;
+}
+
+/** seconds of audio actually in a 16-bit wav (after repairWav), null if it's not a wav */
+export function wavSeconds(bytes: Uint8Array): number | null {
+  if (bytes.length < 44 || String.fromCharCode(...bytes.subarray(0, 4)) !== "RIFF") return null;
+  const data = findWavDataChunk(bytes);
+  if (!data) return null;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const rate = view.getUint32(24, true) || 16000;
+  const channels = view.getUint16(22, true) || 1;
+  const len = Math.min(data.length, bytes.length - data.offset);
+  return len / (rate * channels * 2);
+}
+
 // how loud is this clip: rms of its loudest 1s window, in dBFS (0 = full scale, the pi
 // mic's room-tone floor sits around -68). null if it's not a 16-bit wav we can read.
 // used to skip transcribing silent chunks, whisper invents text out of silence
@@ -301,12 +329,21 @@ type ExtractedSections = Record<string, unknown> & { uncertain?: string[] };
 // v2 (oct 17 2026): fills the whole epcr shape, not just the handoff basics. the server
 // runs this over the whole session's transcript so far, so the form keeps filling in
 // and correcting itself as chunks land
-export const CONDENSE_PROMPT_VERSION = "epcr-v3";
+//
+// v4 (oct 19 2026): v3's "never infer" made it too timid. "hit on the driver's side, stuck
+// in the truck, leg under the dash" came out as mechanism "leg entrapment" and no
+// dispatch reason. now: restating + combining what was said in ems wording is the job,
+// only adding facts nobody said is off limits
+export const CONDENSE_PROMPT_VERSION = "epcr-v4";
 
 const CONDENSE_SYSTEM_PROMPT = `you fill in a draft ePCR (electronic patient care report) from a transcript of an emergency-response drill. a responder will review every field before anything is shared.
 
 rules:
-- only use what is explicitly said in the transcript. never infer, guess, or invent. no diagnosis, no clinical impression, no treatment advice, you summarize what was said and done
+- write it like an experienced paramedic would: pull every fact that was said into the right field, restated in standard ems wording, combining what different people said about the same thing. e.g. "I was up the ladder cleaning the gutter" + "he came down maybe eight feet" + "landed flat on his back" -> mechanism "fall ~8 ft from ladder, landed on back"
+- what's off limits is adding a fact nobody said: no diagnosis, no clinical impression, no treatment advice, no invented numbers, nothing because it "seems likely". restating and summarizing what was said is not inferring
+- fill every field the transcript supports, including the obvious one-word summaries a paramedic would write: dispatchReason is the call type that was described (what dispatch said if that's quoted, otherwise e.g. "fall", "MVC", "chest pain"), chiefComplaint is the patient's main problem with the body part and side ("R wrist pain"), hazards / environment / safety come from what's described about the scene
+- other responders count: who's on scene and what they said or did goes in unitsOnScene / othersOnScene (e.g. "fire (Sam, firefighter), police"), a responder giving a report to another (a handoff) goes in the narrative, a radio report to command is an intervention/communication worth noting
+- anything a responder reports about the patient (age, meds, time trapped, injuries) counts the same as the patient saying it
 - lines are tagged with who spoke: [Person 1], [Person 2], ... are different voices, numbered in the order they were first heard (not by role). [unlabelled] means the speaker isn't known yet. work out who is the patient only from what they say (e.g. describing their own pain or history), and never put a "Person N" label in the form
 - lines marked [bystander] are not the responder or patient, that content only goes in bystanderStatements
 - vitals: only record a number if someone actually said it out loud (e.g. "bp 140 over 90", "sats 96"). never estimate one. qualitative findings (alert, pale, breathing fast) go in conditionObserved / physicalExam / vitals.loc / vitals.skin
@@ -314,7 +351,7 @@ rules:
 - interventions are things the responder actually did, each as its own entry, with the patient's response if it was said
 - medications and allergies: the patient's own, as said. also list them in medsAndAllergiesMentioned for the short handoff view
 - the transcript is speech-to-text and has errors. if a word is clearly a mis-hearing of a common ems term, use the obvious term, but if you're not sure, keep it out and add a short note to "uncertain"
-- never fill a field because it seems likely. patient.capacity only if someone explicitly says the patient can or can't make decisions (alert and oriented alone is NOT capacity). scene.numberOfPatients only if a number of patients is said. sex only if said or the speaker uses he/she about the patient
+- patient.capacity only if someone explicitly says the patient can or can't make decisions (alert and oriented alone is NOT capacity). scene.numberOfPatients only if a number of patients is said. sex only if said or the speaker uses he/she about the patient
 - opqrst.severity is the pain score ("seven out of ten"), opqrst.quality is how it feels (sharp, dull, crushing)
 - times are hh:mm (24h), no brackets
 - if a field has no information, leave it out of the json entirely. empty strings and empty arrays are not allowed
@@ -362,7 +399,9 @@ export class OpenAICondenser implements Condenser {
 
   constructor(config: OpenAICondenserConfig) {
     this.apiKey = config.apiKey;
-    this.model = config.model ?? "gpt-4o-mini";
+    // 4.1 not 4o-mini: on the oct 19 crash drill mini still wrote "leg entrapment" and
+    // made up "capacity: capable", 4.1 got MVC / driver's side impact / L leg on its own
+    this.model = config.model ?? "gpt-4.1";
     this.baseUrl = config.baseUrl ?? "https://api.openai.com/v1";
   }
 

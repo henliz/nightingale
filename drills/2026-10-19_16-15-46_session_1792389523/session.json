@@ -1,0 +1,607 @@
+{
+  "captureId": "session_1792389523",
+  "dir": "2026-10-19_16-15-46_session_1792389523",
+  "startedAt": 1792440946802,
+  "assets": [
+    {
+      "assetId": "72990c65-01b2-4192-bbf3-b9cc270a9624",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792440946802,
+      "capturedAt": 1792389523583,
+      "status": "ready",
+      "file": "audio/161546_72990c65.wav",
+      "durationMs": 14750,
+      "levelDbfs": -22.55620371313944,
+      "transcript": [],
+      "note": {
+        "id": "55d61f75-43f4-4667-89ca-73dc2952c1eb",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "80e70c1a-79fe-4dd7-9b81-34de96bef337",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792440955395,
+      "capturedAt": 1792389538692,
+      "status": "ready",
+      "file": "audio/161555_80e70c1a.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.327003542564682,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "You okay?",
+          "at": 1792389547742
+        },
+        {
+          "speaker": "Person 1",
+          "text": "You okay?",
+          "at": 1792389553042
+        }
+      ],
+      "note": {
+        "id": "912dc1fe-f043-4ba8-8912-fc4ac82ae3b9",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "Person 1 asked if the patient was okay twice."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "4dc3b1d4-130d-40e7-ae32-d7d6f5be1ae9",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792440964268,
+      "capturedAt": 1792389566591,
+      "status": "ready",
+      "file": "audio/161604_4dc3b1d4.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.430283431803556,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "I look in deep in thought, no a little bit concerned.",
+          "at": 1792389566641
+        },
+        {
+          "speaker": "Person 1",
+          "text": "And the other",
+          "at": 1792389576891
+        }
+      ],
+      "note": {
+        "id": "7879f026-9950-4e94-8482-9628fa603fb1",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "A person appeared to be deep in thought and a little bit concerned.",
+          "conditionObserved": "concerned"
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "51c0b157-cda8-4219-b50e-63517d7a00a2",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792440974721,
+      "capturedAt": 1792389581666,
+      "status": "ready",
+      "file": "audio/161614_51c0b157.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.29644698768619,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Um",
+          "at": 1792389585366
+        },
+        {
+          "speaker": "Person 1",
+          "text": "And do you just have a blank Google Doc sitting in front of you?",
+          "at": 1792389589966
+        },
+        {
+          "speaker": "Person 1",
+          "text": "Okay, good.",
+          "at": 1792389595116
+        }
+      ],
+      "note": {
+        "id": "d00eb077-f6fc-4991-9343-9fb8ba63cc03",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "The responders were discussing the documentation process, confirming the presence of a blank Google Doc."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "5ec9f852-120a-4bff-82b3-9b9262d39934",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792440984748,
+      "capturedAt": 1792389596740,
+      "status": "ready",
+      "file": "audio/161624_5ec9f852.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.29796890604757,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Thank you.",
+          "at": 1792389596890
+        },
+        {
+          "speaker": "Person 1",
+          "text": "You're okay. You you're okay.",
+          "at": 1792389599340
+        }
+      ],
+      "note": {
+        "id": "c466f63b-4288-4c77-aa91-fb86c7d480a3",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "Person 1 reassured Person 2, saying they are okay."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "f652572b-89f7-4b29-87b5-dda92b9f3275",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792440994959,
+      "capturedAt": 1792389611816,
+      "status": "ready",
+      "file": "audio/161634_f652572b.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.268423895093374,
+      "transcript": [],
+      "note": {
+        "id": "1d65efd3-94f9-48f0-94c8-e1334caf3c03",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "8f3cf19d-9228-4cca-a31e-b4f33414ca54",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441003870,
+      "capturedAt": 1792389626897,
+      "status": "ready",
+      "file": "audio/161643_8f3cf19d.wav",
+      "durationMs": 14875,
+      "levelDbfs": -29.01077400148867,
+      "transcript": [],
+      "note": {
+        "id": "001c7c2c-cf03-4eda-b3f3-7a60343feaee",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "b683ab6b-8ec9-47e0-8ee1-5d32a7310033",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441012474,
+      "capturedAt": 1792389641966,
+      "status": "ready",
+      "file": "audio/161652_b683ab6b.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.22442567211722,
+      "transcript": [],
+      "note": {
+        "id": "38c7c064-a0a3-480e-a417-b471420cd600",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "2608786b-398e-4bb1-ba12-8e0f85460650",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441020993,
+      "capturedAt": 1792389657037,
+      "status": "ready",
+      "file": "audio/161700_2608786b.wav",
+      "durationMs": 15000,
+      "levelDbfs": -27.39448671686452,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Hello, hello, hello, testing one two three.",
+          "at": 1792389660337
+        }
+      ],
+      "note": {
+        "id": "c9360b93-6cc6-40cb-a2ec-f3621b9ab466",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "50129c51-99af-402f-917d-15cc9534eced",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441031387,
+      "capturedAt": 1792389672111,
+      "status": "ready",
+      "file": "audio/161711_50129c51.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.9668597404443,
+      "transcript": [],
+      "note": {
+        "id": "c4cba990-a1a7-4a91-9f79-e0cc3807462c",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "6e1b5712-41d6-40af-8cd1-0789b50c2807",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441038860,
+      "capturedAt": 1792389687186,
+      "status": "ready",
+      "file": "audio/161718_6e1b5712.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.94756561497946,
+      "transcript": [],
+      "note": {
+        "id": "e3aaef7d-a787-45bb-8303-273fd37d39d4",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "19fd3e98-85d7-42a9-a082-9562a4800090",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441047097,
+      "capturedAt": 1792389702253,
+      "status": "ready",
+      "file": "audio/161727_19fd3e98.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.395882118895642,
+      "transcript": [],
+      "note": {
+        "id": "c9a48732-eb8b-462e-afa7-845cbb49c3fd",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "7cddff80-5c3b-41eb-8d23-7cd95b3f2f8e",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441055172,
+      "capturedAt": 1792389717336,
+      "status": "ready",
+      "file": "audio/161735_7cddff80.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.880888118716435,
+      "transcript": [],
+      "note": {
+        "id": "808871c3-461a-48d5-b8e8-7a4def63df3a",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "fbd131c7-7deb-42ea-a71f-659d3779d15e",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441062533,
+      "capturedAt": 1792389732402,
+      "status": "ready",
+      "file": "audio/161742_fbd131c7.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.895679777256674,
+      "transcript": [],
+      "note": {
+        "id": "7f7a0f11-0ec8-4338-a525-31b8ad82d301",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "7987e5ea-8ab1-415f-8b54-fceddd77086e",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441070061,
+      "capturedAt": 1792389747474,
+      "status": "ready",
+      "file": "audio/161750_7987e5ea.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.178052816709453,
+      "transcript": [],
+      "note": {
+        "id": "afb863e2-6de6-435f-843e-81c2f5f42fab",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "990d18ee-5632-4cae-96f5-b16a9b37b129",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441079141,
+      "capturedAt": 1792389762547,
+      "status": "ready",
+      "file": "audio/161759_990d18ee.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.181178858238006,
+      "transcript": [],
+      "note": {
+        "id": "253e3043-b445-43d4-80d9-85a3c68bc587",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "48776cfa-1d0a-4858-a539-1502abf68188",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441087111,
+      "capturedAt": 1792389777618,
+      "status": "ready",
+      "file": "audio/161807_48776cfa.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.78077330199948,
+      "transcript": [],
+      "note": {
+        "id": "c2f54581-6cea-4863-8304-a73da7cf57d8",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "7234b83a-6ff1-446b-8968-7a1b5877cd61",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441094483,
+      "capturedAt": 1792389792693,
+      "status": "ready",
+      "file": "audio/161814_7234b83a.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.70530021222156,
+      "transcript": [],
+      "note": {
+        "id": "ccf56507-d3b0-4682-a50f-329208246423",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "03d42c5c-4d28-41d3-8424-45a4cded3387",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441100939,
+      "capturedAt": 1792389807778,
+      "status": "ready",
+      "file": "audio/161820_03d42c5c.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.597586727124916,
+      "transcript": [],
+      "note": {
+        "id": "257fd8f5-0e25-4692-bc3f-b5a5bd1b04ec",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "4e6136e7-39fb-4b60-b4ed-6125c25e8aab",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441107569,
+      "capturedAt": 1792389822845,
+      "status": "ready",
+      "file": "audio/161827_4e6136e7.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.86458575901832,
+      "transcript": [],
+      "note": {
+        "id": "3d8a0230-8c87-47b8-9b0b-da657a2eb14d",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "3d3891a8-d216-4050-9b84-ecddd7bf7c66",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441113919,
+      "capturedAt": 1792389837921,
+      "status": "ready",
+      "file": "audio/161833_3d3891a8.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.217706512390652,
+      "transcript": [],
+      "note": {
+        "id": "d905f594-8e5a-4731-835b-b25e553bc92a",
+        "captureId": "session_1792389523",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "92a3c5c7-6a45-4663-9a72-1d2480c37f75",
+      "captureId": "session_1792389523",
+      "kind": "audio",
+      "completedAt": 1792441121455,
+      "capturedAt": 1792389852995,
+      "status": "failed",
+      "file": "audio/161841_92a3c5c7.wav",
+      "durationMs": 9000
+    }
+  ],
+  "speakers": [
+    "Person 1",
+    "Person 2"
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "20388e50-911e-4e6a-8f42-d631931dd7a0",
+    "captureId": "session_1792389523",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v3",
+    "sections": {
+      "patient": {
+        "capacity": "unknown"
+      },
+      "narrative": "The responder checked on the patient, asking if they were okay multiple times. The patient responded with gratitude. The responder continued to engage with the patient, testing their microphone."
+    },
+    "spans": [
+      {
+        "field": "sections.patient",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]"
+        ]
+      },
+      {
+        "field": "sections.narrative",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]"
+        ]
+      }
+    ],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1792441125337,
+  "epcrChunks": 6,
+  "backlog": true
+}

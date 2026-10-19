@@ -28,6 +28,8 @@ export {
   CONDENSE_PROMPT_VERSION,
   DEFAULT_EMS_VOCAB,
   wavLoudestSecondDbfs,
+  repairWav,
+  wavSeconds,
 } from "./real-adapters.js";
 export type {
   OpenAICondenserConfig,

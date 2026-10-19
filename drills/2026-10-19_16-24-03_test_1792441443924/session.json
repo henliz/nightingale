@@ -1,0 +1,285 @@
+{
+  "captureId": "test_1792441443924",
+  "dir": "2026-10-19_16-24-03_test_1792441443924",
+  "startedAt": 1792441443924,
+  "assets": [],
+  "deviceSessionId": "session_1792441055",
+  "deviceId": "nightingale",
+  "liveTurns": [
+    {
+      "id": "item_EaoBwGdEMlz0LjTv2Ime7",
+      "startedAt": 1792441454347,
+      "endedAt": 1792441474075,
+      "text": "May still be starting the session. Okay. So, sir, can you hear me? What's your name? Dan. Dan Weller. Okay Dan, I'm Jake. I'm a firefighter. We're gonna get you out of here"
+    },
+    {
+      "id": "item_EaoCH1ol77mvg64GZ9n49",
+      "startedAt": 1792441474489,
+      "endedAt": 1792441494032,
+      "text": "Where does it hurt? My, my leg, my left leg. It's been stuck. I, I don't know, like ten, fifteen minutes. Okay, okay. Dispatch said there were two people. Was anybody else with you? No, no, it's just"
+    },
+    {
+      "id": "item_EaoCbIyFqd2RIAnC5jofO",
+      "startedAt": 1792441494798,
+      "endedAt": 1792441514334,
+      "text": "Excuse me. Uh, hey, it's only one person. Can you grab the, yeah, yeah, the bag. Good. Okay, Dad, are you on any serious medications? Yeah, uh warfarin, and I think I'm allergic."
+    },
+    {
+      "id": "item_EaoCvSMdRa9cT2qafBTmk",
+      "startedAt": 1792441514776,
+      "endedAt": 1792441526163,
+      "text": "To penicillin. Warfarin penicillin allergy, got it. Okay. Command we've got patient conscious leg entrapment"
+    },
+    {
+      "id": "item_EaoD7in7JiaNOlzP6Lggh",
+      "startedAt": 1792441527103,
+      "endedAt": 1792441546316,
+      "text": "Oh, hey, thanks for coming, paramedic. Uh, so this is Dan. He's 58, hit on the driver's side about 12 minutes stuck in the truck. He's on warfarin. He's allergic to penicillin. Yeah. Legs stuck under the dash. Dispatch said two, but it's just one guy"
+    },
+    {
+      "id": "item_EaoDSNMZ25UeMyQfcyrVc",
+      "startedAt": 1792441548022,
+      "endedAt": 1792441562928,
+      "text": "Uh, what happened exactly? Uh, anything else I need to know right away? Uh, no, just the blood thinner. Any as a bit of a cut on his hand. That's it"
+    },
+    {
+      "id": "item_EaoDisJHaLeIgnNOR8oxG",
+      "startedAt": 1792441575912,
+      "endedAt": 1792441583078,
+      "text": "Okay, that is our demo sort of done"
+    },
+    {
+      "id": "item_EaoE2wczaBCiBpV4xLC3l",
+      "startedAt": 1792441583851,
+      "endedAt": 1792441603329,
+      "text": "And there's a few things that didn't perfectly fit on. Ideally this incident report would be more filled in as the dispatch reason was car crash and someone got stuck and that should have been put down. And I guess location would be side of the road for I don't know"
+    },
+    {
+      "id": "item_EaoEMfsrgo5nYyMAZ4Bi4",
+      "startedAt": 1792441603933,
+      "endedAt": 1792441608747,
+      "text": "Excited of King Street East something or whatever and that would fit in."
+    },
+    {
+      "id": "item_EaoERWS4D4XZTMOWqK3cF",
+      "startedAt": 1792441609369,
+      "endedAt": 1792441628837,
+      "text": "But, yeah there it goes on its own. But this is a first little look at if they can do its job. And it can, which is very exciting. So there we go. Thank you"
+    }
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "e7e7e417-6c3b-49d8-b526-ba14ddfad177",
+    "captureId": "test_1792441443924",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v3",
+    "sections": {
+      "incident": {
+        "location": "side of the road near King Street East",
+        "dispatchReason": "car crash",
+        "times": {
+          "patientContact": "16:24"
+        }
+      },
+      "scene": {
+        "numberOfPatients": "1"
+      },
+      "chiefComplaint": "leg pain",
+      "mechanismOrComplaint": "leg entrapment",
+      "timeline": "stuck for about 10-15 minutes",
+      "patient": {
+        "name": "Dan Weller",
+        "age": "58",
+        "capacity": "capable"
+      },
+      "sample": {
+        "signsSymptoms": "leg pain, cut on hand",
+        "allergies": [
+          "penicillin"
+        ],
+        "medications": [
+          "warfarin"
+        ]
+      },
+      "opqrst": {
+        "onset": "10-15 minutes ago"
+      },
+      "narrative": "The responder identified the patient as Dan Weller, who is 58 years old and has leg pain due to being stuck in a truck for about 10-15 minutes. He is on warfarin and is allergic to penicillin. There was a cut on his hand. The incident occurred due to a car crash.",
+      "conditionObserved": "conscious",
+      "medsAndAllergiesMentioned": [
+        "warfarin",
+        "penicillin"
+      ]
+    },
+    "spans": [
+      {
+        "field": "sections.incident",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.scene",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.chiefComplaint",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.mechanismOrComplaint",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.timeline",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.patient",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.sample",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.opqrst",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.narrative",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.conditionObserved",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      },
+      {
+        "field": "sections.medsAndAllergiesMentioned",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]"
+        ]
+      }
+    ],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1792441634427,
+  "epcrChunks": 10
+}

@@ -45,3 +45,4 @@
 12:25:27 a.m. nightingale info: [record] QUEUED (5 chunk(s), 1 photo(s) this session), POWERING OFF
 12:25:27 a.m. nightingale info: [power] systemctl poweroff
 12:25:27 a.m. server info: live audio disconnected
+4:15:41 p.m. server warn: audio chunk 6a576ca0-9397-45d2-a56f-d44144d5424d saved, silent (loudest -66 dBFS), nothing to transcribe

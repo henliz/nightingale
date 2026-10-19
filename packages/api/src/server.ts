@@ -44,7 +44,7 @@ const pipelineDeps: PipelineDeps = {
   // fake non-responder flagging would flag every voice. pass through until a real
   // responder-voice check exists (ARCHITECTURE.md section 8)
   diarizer: apiKey ? { flagNonResponder: async (t) => t } : new FakeDiarizer(),
-  condenser: apiKey ? new OpenAICondenser({ apiKey }) : new FakeCondenser(),
+  condenser: apiKey ? new OpenAICondenser({ apiKey, model: process.env.NIGHTINGALE_CONDENSE_MODEL }) : new FakeCondenser(),
 };
 
 const captioner: PhotoCaptioner = apiKey

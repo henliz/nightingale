@@ -406,11 +406,15 @@ function render() {
 
   const pick = document.getElementById("session-pick");
   pick.hidden = sessions.length < 2;
+  // following = the newest session that isn't old queued audio from an earlier boot
+  const newest = (sessions.find((s) => !s.backlog) || sessions[0]).captureId;
   const current = pickedSession && sessions.find((s) => s.captureId === pickedSession)
-    ? pickedSession : sessions[0].captureId;
-  pick.innerHTML = sessions.map((s, i) =>
+    ? pickedSession : newest;
+  const ordered = [sessions.find((s) => s.captureId === newest)].concat(sessions.filter((s) => s.captureId !== newest));
+  pick.innerHTML = ordered.map((s, i) =>
     '<option value="' + esc(s.captureId) + '"' + (s.captureId === current ? " selected" : "") + '>' +
-    esc(new Date(s.startedAt).toLocaleString()) + ' \u00b7 ' + esc(s.captureId) + (i === 0 ? " (latest)" : "") + '</option>').join("");
+    esc(new Date(s.startedAt).toLocaleString()) + ' \u00b7 ' + esc(s.captureId) +
+    (i === 0 ? " (latest)" : s.backlog ? " (from an earlier boot)" : "") + '</option>').join("");
 
   const session = sessions.find((s) => s.captureId === current);
   if (!currentSession || currentSession.captureId !== session.captureId) prevValues = {}; // no flashing on switch
