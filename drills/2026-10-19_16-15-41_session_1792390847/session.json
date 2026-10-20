@@ -436,6 +436,16 @@
         "spans": [],
         "flags": []
       }
+    },
+    {
+      "assetId": "9371245a-2843-4769-88ec-098ff18792a7",
+      "captureId": "session_1792390847",
+      "kind": "audio",
+      "completedAt": 1792465065242,
+      "capturedAt": 1792449536131,
+      "status": "silent",
+      "file": "audio/225745_9371245a.wav",
+      "durationMs": 0
     }
   ],
   "liveTurns": [

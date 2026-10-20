@@ -20,3 +20,4 @@ device/cross/target/
 # the raw audio + photos stay local only (size, and they are real voices/faces)
 drills/*/audio/
 drills/*/photos/
+drills/*/speakers/

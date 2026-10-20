@@ -1,0 +1,265 @@
+{
+  "captureId": "session_1792444806",
+  "dir": "2026-10-19_22-59-20_session_1792444806",
+  "startedAt": 1792465160217,
+  "assets": [
+    {
+      "assetId": "910dffdb-0b62-4585-b606-2dc17e54f205",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465160217,
+      "capturedAt": 1792444806189,
+      "status": "ready",
+      "file": "audio/225920_910dffdb.wav",
+      "durationMs": 14875,
+      "levelDbfs": -20.136869954832036,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Yeah.",
+          "at": 1792444817189
+        }
+      ],
+      "note": {
+        "id": "0cfa4558-3dc1-4d68-b799-a2e9d8ff11cf",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "172e5a5f-652b-465a-a939-aeb36e2b1f56",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465161282,
+      "capturedAt": 1792444821284,
+      "status": "ready",
+      "file": "audio/225921_172e5a5f.wav",
+      "durationMs": 15000,
+      "levelDbfs": -26.887426581607528,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Success, no?",
+          "at": 1792444823984
+        },
+        {
+          "speaker": "Person 3",
+          "text": "We're working on it. It's being a little slow for some reason though. Oh, there we go. There we go.",
+          "at": 1792444825184
+        }
+      ],
+      "note": {
+        "id": "975a9173-615e-494e-b0f6-75001f7b1573",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "591be9aa-ff74-47a2-b6b0-15f96f77d81a",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465163424,
+      "capturedAt": 1792444836473,
+      "status": "ready",
+      "file": "audio/225923_591be9aa.wav",
+      "durationMs": 15000,
+      "levelDbfs": -28.941012083812467,
+      "transcript": [
+        {
+          "speaker": "Person 4",
+          "text": "Okay, then and I'm going to take and that's and",
+          "at": 1792444839473
+        }
+      ],
+      "note": {
+        "id": "a63acb00-ff6a-4bae-9310-2ae96f7b622b",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "e285e326-8ad8-4fd1-9222-2bf0dba299db",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465164742,
+      "capturedAt": 1792454082361,
+      "status": "ready",
+      "file": "audio/225924_e285e326.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.384423682247796,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "Okay. So I've told it about this",
+          "at": 1792454093361
+        }
+      ],
+      "note": {
+        "id": "ca8cc1c8-682a-414b-87a1-58377e42f1c3",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "0c0fb4e0-a404-4df8-a6b3-8358c565ce90",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465165442,
+      "capturedAt": 1792454097346,
+      "status": "ready",
+      "file": "audio/225925_0c0fb4e0.wav",
+      "durationMs": 14875,
+      "levelDbfs": -26.505024624555148,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "Look and then it exists. And then I should be able to just connect to it. And I believe that means this worked, but I'm going to ask",
+          "at": 1792454097446
+        }
+      ],
+      "note": {
+        "id": "082aa7cc-6836-4964-afa2-dd078762fe9a",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": [
+          {
+            "type": "unsupported_claim",
+            "ref": "condenser",
+            "note": "Person 3: Look and then it exists. And then I should be able to just connect to it. And I believe that means this worked, but I'm going to ask"
+          }
+        ]
+      }
+    },
+    {
+      "assetId": "65fae7e0-453e-4aa7-913f-3829f594acd8",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465166335,
+      "capturedAt": 1792454112409,
+      "status": "ready",
+      "file": "audio/225926_65fae7e0.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.370906985173026,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "And do I have a scenario idea?",
+          "at": 1792454125309
+        }
+      ],
+      "note": {
+        "id": "2f2620a3-23ff-4da8-a4d6-cf149b573cf2",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "c2f5acd7-fbc3-409a-918e-2dde8e78527d",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465167869,
+      "capturedAt": 1792454127487,
+      "status": "ready",
+      "file": "audio/225927_c2f5acd7.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.344519137490405,
+      "transcript": [
+        {
+          "speaker": "Person 5",
+          "text": "Yeah, we can Yeah, we can Okay.",
+          "at": 1792454128387
+        },
+        {
+          "speaker": "Person 3",
+          "text": "Okay. And remember the top of our head.",
+          "at": 1792454129287
+        }
+      ],
+      "note": {
+        "id": "875a7711-c5c6-42e5-8ba3-632a38d22425",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": [
+          {
+            "type": "unsupported_claim",
+            "ref": "condenser",
+            "note": "top of our head"
+          }
+        ]
+      }
+    },
+    {
+      "assetId": "0d97a455-0b37-4729-883b-464e1b248a10",
+      "captureId": "session_1792444806",
+      "kind": "audio",
+      "completedAt": 1792465168211,
+      "capturedAt": 1792454143077,
+      "status": "ready",
+      "file": "audio/225928_0d97a455.wav",
+      "durationMs": 7500,
+      "levelDbfs": -26.419648914329265,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "Oh, turn that",
+          "at": 1792454149177
+        }
+      ],
+      "note": {
+        "id": "c4897de7-294f-4365-923e-53de4c8b7afd",
+        "captureId": "session_1792444806",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    }
+  ],
+  "backlog": true,
+  "speakers": [
+    "Person 1",
+    "Person 2",
+    "Person 3",
+    "Person 4",
+    "Person 5"
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "e9111a3c-01a5-4b6b-b974-ed09abf2a779",
+    "captureId": "session_1792444806",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v4",
+    "sections": {},
+    "spans": [],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1792465172683,
+  "epcrChunks": 10
+}

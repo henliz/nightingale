@@ -2,52 +2,61 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 4:27:14 p.m. from 10 chunk(s), model demo-1, prompt epcr-v3
+updated 10:58:56 p.m. from 30 chunk(s), model demo-1, prompt epcr-v4
 
 ## Incident
 
-- **Location:** side of the road near King Street East
 - **Dispatch reason:** car crash
+- **Units on scene:** fire (Jake, firefighter), paramedic
 - **Times:**
+  - **On scene:** 16:25
   - **Patient contact:** 16:24
 
 ## Scene
 
 - **Number of patients:** 1
+- **Others on scene:** fire (Jake, firefighter)
 
 ## Chief complaint
 
-leg pain
+L leg pain
 
 ## Mechanism / what happened
 
-leg entrapment
+leg entrapment under dash
 
 ## Timeline
 
-stuck for about 10-15 minutes
+patient stuck for 10-15 minutes, 12 minutes since impact
 
 ## Patient
 
 - **name:** Dan Weller
 - **age:** 58
-- **capacity:** capable
+- **sex:** male
 
 ## SAMPLE history
 
-- **Signs / symptoms:** leg pain, cut on hand
 - **Allergies:**
   - penicillin
 - **Medications:**
   - warfarin
+- **Past history:** on blood thinner (warfarin)
 
 ## OPQRST
 
-- **onset:** 10-15 minutes ago
+- **onset:** 10-15 minutes prior
+- **provocation:** leg stuck under dash
+- **quality:** pain
+- **time:** 16:24
+
+## Physical exam
+
+cut on hand, L leg entrapped under dash
 
 ## Narrative
 
-The responder identified the patient as Dan Weller, who is 58 years old and has leg pain due to being stuck in a truck for about 10-15 minutes. He is on warfarin and is allergic to penicillin. There was a cut on his hand. The incident occurred due to a car crash.
+Patient Dan Weller, 58 y/o male, found conscious with L leg entrapped under the dash after a car crash. Patient reports being stuck for 10-15 minutes. Patient states he is on warfarin and has a penicillin allergy. Firefighter Jake is on scene.
 
 ## Condition observed
 
@@ -56,4 +65,4 @@ conscious
 ## Meds / allergies mentioned
 
 - warfarin
-- penicillin
+- penicillin allergy

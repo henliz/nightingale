@@ -1,0 +1,161 @@
+5:10:57 p.m. server info: new drill session session_1792441653, saving to drills/2026-10-19_17-10-57_session_1792441653
+4:27:33 p.m. nightingale info: device nightingale is ON, v0.0.0, session session_1792441653, talking to http://Henriettas-MacBook-Air.local:8787
+4:27:33 p.m. nightingale info: 30 file(s) (13458 KB) waiting in the queue from before, uploading those first
+4:27:33 p.m. nightingale info: [button] POWER/RECORD on gpio 3
+4:27:33 p.m. nightingale info: [button] PHOTO on gpio 17
+4:27:33 p.m. nightingale info: [hw] no buzzer configured (NIGHTINGALE_BUZZER_PIN), ready tone skipped
+4:27:33 p.m. nightingale info: [notice] reminder for the responder: say "I'm recording for the medical record"
+4:27:33 p.m. nightingale info: [record] RECORDING (max 1800s). press POWER/RECORD to stop and power off, PHOTO for a photo
+4:27:38 p.m. nightingale warn: [live] can't stream live audio (request or response body error for url (http://henriettas-macbook-air.local:8787/live/session_1792441653/audio)), retrying. the 30s chunks still upload
+4:27:38 p.m. nightingale warn: [audio] upload of session_1792390847__1792441161360.wav failed, keeping it queued, retry in 2s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792390847/assets)
+4:27:45 p.m. nightingale warn: [audio] upload of session_1792390847__1792441161360.wav failed, keeping it queued, retry in 4s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792390847/assets)
+4:27:48 p.m. nightingale info: [audio] chunk #1 saved (15s), queued
+5:10:57 p.m. server info: live audio connected, transcribing as you speak
+4:27:54 p.m. nightingale warn: [audio] upload of session_1792390847__1792441161360.wav failed, keeping it queued, retry in 8s: complete failed: 409 Conflict
+5:10:58 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:10:59 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:10:59 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:01 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:01 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:02 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:03 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:03 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:03 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:04 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:05 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:05 p.m. nightingale warn: [audio] upload of session_1792390847__1792441161360.wav failed, keeping it queued, retry in 16s: complete failed: 409 Conflict
+5:11:05 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:06 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:06 p.m. nightingale info: [heartbeat] up 0m, queue 31 file(s) / 13919 KB, 0 uploaded, 4 failed attempts, cpu 32.7C, wifi -56 dBm
+5:11:06 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:06 p.m. nightingale info: [audio] chunk #2 saved (15s), queued
+5:11:07 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:08 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:08 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:09 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:09 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:10 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:11 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:11 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:12 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:12 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:13 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:14 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:14 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:14 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:15 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:16 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:16 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:17 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:17 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:18 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:18 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:19 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:19 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:20 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:20 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:21 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:21 p.m. nightingale warn: [audio] upload of session_1792390847__1792441161360.wav failed, keeping it queued, retry in 30s: complete failed: 409 Conflict
+5:11:21 p.m. nightingale info: [audio] chunk #3 saved (15s), queued
+5:11:21 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:22 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:23 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:23 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:24 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:25 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:25 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:26 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:27 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:27 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:28 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:28 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:29 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:30 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:30 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:31 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:31 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:32 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:32 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:33 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:33 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:34 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:34 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:35 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:35 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:36 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:36 p.m. nightingale info: [heartbeat] up 1m, queue 33 file(s) / 14856 KB, 0 uploaded, 5 failed attempts, cpu 32.7C, wifi -62 dBm
+5:11:37 p.m. nightingale info: [audio] chunk #4 saved (15s), queued
+5:11:37 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:37 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:38 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:39 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:39 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:40 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:41 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:42 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:42 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:43 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:44 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:44 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:45 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:47 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:47 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:48 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:49 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:49 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:50 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:51 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:51 p.m. nightingale warn: [audio] upload of session_1792390847__1792441161360.wav failed, keeping it queued, retry in 30s: complete failed: 409 Conflict
+5:11:51 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:52 p.m. nightingale info: [audio] chunk #5 saved (15s), queued
+5:11:52 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:52 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:53 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:53 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:54 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:54 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:55 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:55 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:56 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:56 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:57 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:58 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:59 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:11:59 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:00 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:01 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:02 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:02 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:04 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:05 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:06 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:07 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:06 p.m. nightingale info: [heartbeat] up 1m, queue 35 file(s) / 15786 KB, 0 uploaded, 6 failed attempts, cpu 33.2C, wifi -53 dBm
+5:12:07 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:08 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:07 p.m. nightingale info: [audio] chunk #6 saved (15s), queued
+5:12:08 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:09 p.m. nightingale info: [record] POWER/RECORD pressed, SAVING
+5:12:09 p.m. server warn: live transcription: You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.
+5:12:09 p.m. nightingale info: [audio] chunk #7 saved (2s), queued
+5:12:09 p.m. nightingale info: [record] QUEUED (7 chunk(s), 0 photo(s) this session), POWERING OFF
+5:12:09 p.m. nightingale info: [power] systemctl poweroff
+5:12:09 p.m. server info: live audio disconnected
+10:58:50 p.m. server info: got audio chunk 6a4f2b6b-cb17-43ff-a6f9-cae75a600dc9 (461 KB, loudest -23 dBFS), labelling speakers...
+10:58:51 p.m. server info: got audio chunk dae668c6-2d37-45cf-97b7-2491beb965e6 (469 KB, loudest -29 dBFS), labelling speakers...
+10:58:52 p.m. server info: speakers labelled for 6a4f2b6b-cb17-43ff-a6f9-cae75a600dc9 in 2.3s (nobody), updating the ePCR...
+10:58:52 p.m. server info: got audio chunk 80423b0a-aee5-4cfb-9cd6-7a6f8b388f5d (469 KB, loudest -28 dBFS), labelling speakers...
+10:58:53 p.m. server info: speakers labelled for dae668c6-2d37-45cf-97b7-2491beb965e6 in 2.6s (nobody), updating the ePCR...
+10:58:54 p.m. server info: got audio chunk 2fc3d507-2b73-4e42-818f-88a272c4e7d9 (465 KB, loudest -21 dBFS), labelling speakers...
+10:58:55 p.m. server info: speakers labelled for 80423b0a-aee5-4cfb-9cd6-7a6f8b388f5d in 2.4s (nobody), updating the ePCR...
+10:58:55 p.m. server info: got audio chunk fbc882a6-da58-41f4-95b2-50c241d5e32d (465 KB, loudest -29 dBFS), labelling speakers...
+10:58:56 p.m. server info: speakers labelled for 2fc3d507-2b73-4e42-818f-88a272c4e7d9 in 2.0s (nobody), updating the ePCR...
+10:58:56 p.m. server info: got audio chunk 93eadd36-5c7f-4fe1-b7e3-51acfabbd96f (469 KB, loudest -29 dBFS), labelling speakers...
+10:58:56 p.m. server info: got audio chunk f310e419-de37-4467-a6a0-4c12507c5d72 (66 KB, loudest -29 dBFS), labelling speakers...
+10:58:57 p.m. server info: new voice heard, calling it Person 1
+10:58:57 p.m. server info: speakers labelled for fbc882a6-da58-41f4-95b2-50c241d5e32d in 1.9s (Person 1), updating the ePCR...
+10:58:57 p.m. server info: ePCR updated from 1 transcript line(s) in 0.5s (0 sections filled)
+10:58:58 p.m. server info: speakers labelled for f310e419-de37-4467-a6a0-4c12507c5d72 in 1.8s (nobody), updating the ePCR...
+10:58:59 p.m. server info: speakers labelled for 93eadd36-5c7f-4fe1-b7e3-51acfabbd96f in 2.5s (nobody), updating the ePCR...
+10:58:59 p.m. server info: ePCR updated from 1 transcript line(s) in 0.6s (0 sections filled)
+10:58:59 p.m. server info: ePCR updated from 1 transcript line(s) in 0.6s (0 sections filled)

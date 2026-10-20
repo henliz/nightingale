@@ -1,0 +1,588 @@
+{
+  "captureId": "session_1792456661",
+  "dir": "2026-10-19_22-57-45_session_1792456661",
+  "deviceId": "nightingale",
+  "startedAt": 1792465065111,
+  "assets": [
+    {
+      "assetId": "dc82217b-d6ef-4b26-8195-48cfa975d0d4",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465383898,
+      "capturedAt": 1792456660952,
+      "status": "ready",
+      "file": "audio/230303_dc82217b.wav",
+      "durationMs": 14875,
+      "levelDbfs": -22.400629295149407,
+      "transcript": [],
+      "note": {
+        "id": "75a437db-a6b1-44db-96fe-ab5930946afe",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "6a856900-cac4-421b-a188-f956888e33b2",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465384536,
+      "capturedAt": 1792456676061,
+      "status": "ready",
+      "file": "audio/230304_6a856900.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.237365280830314,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "I",
+          "at": 1792456686661
+        }
+      ],
+      "note": {
+        "id": "9a6b7aa0-35e2-41ce-9766-c2aaaf879e5e",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "4df1529f-a921-47e1-893f-639692a7558e",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465385032,
+      "capturedAt": 1792456691130,
+      "status": "ready",
+      "file": "audio/230305_4df1529f.wav",
+      "durationMs": 15000,
+      "levelDbfs": -27.637381445632915,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "See you in the morning.",
+          "at": 1792456702030
+        },
+        {
+          "speaker": "Person 3",
+          "text": "Mhm.",
+          "at": 1792456703830
+        }
+      ],
+      "note": {
+        "id": "4348f8ad-a03b-4c98-9800-5b945d633456",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "e664b1d7-9839-4263-bf13-1c2e3450ea8b",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465385517,
+      "capturedAt": 1792456706214,
+      "status": "ready",
+      "file": "audio/230305_e664b1d7.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.036060159884265,
+      "transcript": [
+        {
+          "speaker": "Person 4",
+          "text": "It's tired.",
+          "at": 1792456711414
+        }
+      ],
+      "note": {
+        "id": "4582f9ae-c24a-4629-bad2-feda9f5b017d",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "Patient reports feeling tired.",
+          "conditionObserved": "tired"
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "6b5a63bf-0efc-4005-9103-5ac2ebd10d51",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465386143,
+      "capturedAt": 1792465094017,
+      "status": "ready",
+      "file": "audio/230306_6b5a63bf.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.001130216932513,
+      "transcript": [
+        {
+          "speaker": "Person 5",
+          "text": "You're thinking this just works. I don't I don't guess this is half of your marks. So",
+          "at": 1792465099117
+        }
+      ],
+      "note": {
+        "id": "9ac6bd53-e718-4fc0-8865-5a7eff076adc",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": [
+          {
+            "type": "unsupported_claim",
+            "ref": "condenser",
+            "note": "Person 5: \"I don't I don't guess this is half of your marks. So\""
+          }
+        ]
+      }
+    },
+    {
+      "assetId": "83d599db-9dde-4691-8105-dc35418022d5",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465387242,
+      "capturedAt": 1792465109083,
+      "status": "ready",
+      "file": "audio/230307_83d599db.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.292715862825123,
+      "transcript": [
+        {
+          "speaker": "Person 6",
+          "text": "right here.",
+          "at": 1792465110783
+        },
+        {
+          "speaker": "Person 7",
+          "text": "Is I think the rest of the year.",
+          "at": 1792465112383
+        },
+        {
+          "speaker": "Person 6",
+          "text": "I'm being marked on definition and application, focus and organization, and language.",
+          "at": 1792465114283
+        },
+        {
+          "speaker": "Person 7",
+          "text": "So using all these parts",
+          "at": 1792465123183
+        }
+      ],
+      "note": {
+        "id": "7c8f0ffb-e612-45ef-b9dd-811e4f5a0e2e",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "e60976d3-eeb3-4870-b46a-c60aaf07c491",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465388487,
+      "capturedAt": 1792465124161,
+      "status": "ready",
+      "file": "audio/230308_e60976d3.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.773425810265962,
+      "transcript": [
+        {
+          "speaker": "Person 8",
+          "text": "I think",
+          "at": 1792465125161
+        },
+        {
+          "speaker": "Person 9",
+          "text": "So there's three marks. I think yeah I think all these terms are going to come up the rest of the year so she wants to make sure that you understand all of these terms.",
+          "at": 1792465126961
+        }
+      ],
+      "note": {
+        "id": "21dbd29d-df65-4924-8368-9c023905e73d",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "d04d5011-e1d6-4e08-b121-a1c32ea0aad9",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465389759,
+      "capturedAt": 1792465139236,
+      "status": "ready",
+      "file": "audio/230309_d04d5011.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.460163789339745,
+      "transcript": [
+        {
+          "speaker": "Person 10",
+          "text": "Oh.",
+          "at": 1792465141636
+        }
+      ],
+      "note": {
+        "id": "ea7c2d80-7dff-4446-8ba3-fe62608f109f",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "8bbf67d8-4bbb-4707-91af-3c14cca8c54a",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465390466,
+      "capturedAt": 1792465154312,
+      "status": "ready",
+      "file": "audio/230310_8bbf67d8.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.687709451648075,
+      "transcript": [
+        {
+          "speaker": "Person 11",
+          "text": "I just got",
+          "at": 1792465161512
+        },
+        {
+          "speaker": "Person 12",
+          "text": "That was",
+          "at": 1792465165012
+        }
+      ],
+      "note": {
+        "id": "9f20edbd-ce4d-4db5-ab5f-2e6c60976453",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "c0cf0065-a44e-454a-bcdc-3df8309c9b5c",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465391041,
+      "capturedAt": 1792465169390,
+      "status": "ready",
+      "file": "audio/230311_c0cf0065.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.542378211628126,
+      "transcript": [
+        {
+          "speaker": "Person 13",
+          "text": "Joyful way.",
+          "at": 1792465169490
+        },
+        {
+          "speaker": "Person 14",
+          "text": "Yeah, I'm going to put anything",
+          "at": 1792465183290
+        }
+      ],
+      "note": {
+        "id": "1820fd7a-4da7-45ef-b037-3d8fdc8c4f0d",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "8e686673-39dd-44fb-ac73-a6bb400e9f4c",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465391483,
+      "capturedAt": 1792465184489,
+      "status": "ready",
+      "file": "audio/230311_8e686673.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.764802448969213,
+      "transcript": [
+        {
+          "speaker": "Person 15",
+          "text": "And what and what are you writing? Are you writing? Show me that. But but you're not writing what this is. Is this",
+          "at": 1792465186289
+        }
+      ],
+      "note": {
+        "id": "c6636c99-bd47-417c-b765-b56cb81f6ca0",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "0a959d72-c15e-4821-a1fc-d94d13ee27c9",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465392112,
+      "capturedAt": 1792465199592,
+      "status": "ready",
+      "file": "audio/230312_0a959d72.wav",
+      "durationMs": 15000,
+      "levelDbfs": -27.00937671051882,
+      "transcript": [
+        {
+          "speaker": "Person 16",
+          "text": "Context says identity says one of the seven things what is the section that you're writing about so you need to put that somewhere.",
+          "at": 1792465200092
+        },
+        {
+          "speaker": "Person 17",
+          "text": "Can I write",
+          "at": 1792465213492
+        }
+      ],
+      "note": {
+        "id": "592dcbb0-4cef-4154-bce2-cf0796ff8c1a",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "3625dd84-24f3-4df5-b9ea-e33b9a3d29ac",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465392617,
+      "capturedAt": 1792465214641,
+      "status": "ready",
+      "file": "audio/230312_3625dd84.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.692352822943946,
+      "transcript": [
+        {
+          "speaker": "Person 18",
+          "text": "that in like a uh like a pen so you can so you can spot it like right there",
+          "at": 1792465214741
+        },
+        {
+          "speaker": "Person 19",
+          "text": "You can do whatever you want. You can have different colors. But it has to be something that you can write nice and fine because they can write",
+          "at": 1792465221741
+        }
+      ],
+      "note": {
+        "id": "12b006b1-2a21-4ea0-af6b-e04955eaeaea",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "d9d99d3e-0a86-479f-b449-680ee8d2e4d1",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465393234,
+      "capturedAt": 1792465229737,
+      "status": "ready",
+      "file": "audio/230313_d9d99d3e.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.61292059242798,
+      "transcript": [
+        {
+          "speaker": "Person 20",
+          "text": "But you get why I what I'm saying? which one this thing connects.",
+          "at": 1792465230837
+        },
+        {
+          "speaker": "Person 21",
+          "text": "Mhm.",
+          "at": 1792465237237
+        }
+      ],
+      "note": {
+        "id": "89bbd453-7227-4f7e-8ba5-de524a6d8d66",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "ccfaeecf-e42d-4205-a793-5843ec631c10",
+      "captureId": "session_1792456661",
+      "kind": "audio",
+      "completedAt": 1792465393447,
+      "capturedAt": 1792465244796,
+      "status": "ready",
+      "file": "audio/230313_ccfaeecf.wav",
+      "durationMs": 2250,
+      "levelDbfs": -29.189461450592677,
+      "transcript": [],
+      "note": {
+        "id": "d56b2122-105d-4238-83df-e5974a29166c",
+        "captureId": "session_1792456661",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    }
+  ],
+  "liveTurns": [
+    {
+      "id": "gemini_4",
+      "startedAt": 1792465113339,
+      "endedAt": 1792465113470,
+      "text": "You're thinking like Mr."
+    },
+    {
+      "id": "gemini_5",
+      "startedAt": 1792465114092,
+      "endedAt": 1792465114364,
+      "text": "I don't I don't guess this is half of your marks."
+    },
+    {
+      "id": "gemini_3",
+      "startedAt": 1792465094814,
+      "endedAt": 1792465118651,
+      "text": "Is your first"
+    },
+    {
+      "id": "gemini_6",
+      "startedAt": 1792465114221,
+      "endedAt": 1792465118727,
+      "text": "I'm being more on definition and application."
+    },
+    {
+      "id": "gemini_7",
+      "startedAt": 1792465119649,
+      "endedAt": 1792465123085,
+      "text": "focus and organization and language"
+    },
+    {
+      "id": "gemini_8",
+      "startedAt": 1792465123487,
+      "endedAt": 1792465126992,
+      "text": "So using all these buzzwords."
+    },
+    {
+      "id": "gemini_9",
+      "startedAt": 1792465128489,
+      "endedAt": 1792465152982,
+      "text": "So, just clean mark. I think, yeah. I think. All these strands are going to come out the rest of the hair, so she wants to make sure that you understand all of these terms."
+    },
+    {
+      "id": "gemini_10",
+      "startedAt": 1792465161094,
+      "endedAt": 1792465173474,
+      "text": "Can you turn on the heating? I'm just cold."
+    },
+    {
+      "id": "gemini_11",
+      "startedAt": 1792465171627,
+      "endedAt": 1792465193652,
+      "text": "Just wondering. Is this good picture? And what are you writing?"
+    },
+    {
+      "id": "gemini_12",
+      "startedAt": 1792465197082,
+      "endedAt": 1792465208412,
+      "text": "But you're not writing what this is. Is this context? Is this identity? Is this one of the seven things? What is this section that you're writing about? So you need to put that"
+    },
+    {
+      "id": "gemini_13",
+      "startedAt": 1792465214472,
+      "endedAt": 1792465228386,
+      "text": "Can I write that in like a uh like a pen so you can so I can spot it? Like right there? You can do whatever you want. You can use different colors. But it has to be something that can write nice and fine. Because"
+    },
+    {
+      "id": "gemini_14",
+      "startedAt": 1792465244872,
+      "endedAt": 1792465247235,
+      "text": "Mhm."
+    }
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "72b00228-e5eb-41f3-931f-ae148e9edbc3",
+    "captureId": "session_1792456661",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v4",
+    "sections": {},
+    "spans": [],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1792465396623,
+  "epcrChunks": 23,
+  "liveCoverage": [
+    [
+      1792465065615,
+      1792465246887
+    ]
+  ],
+  "speakers": [
+    "Person 1",
+    "Person 2",
+    "Person 3",
+    "Person 4",
+    "Person 5",
+    "Person 6",
+    "Person 7",
+    "Person 8",
+    "Person 9",
+    "Person 10",
+    "Person 11",
+    "Person 12",
+    "Person 13",
+    "Person 14",
+    "Person 15",
+    "Person 16",
+    "Person 17",
+    "Person 18",
+    "Person 19",
+    "Person 20",
+    "Person 21"
+  ]
+}

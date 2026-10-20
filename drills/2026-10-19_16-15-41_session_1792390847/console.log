@@ -131,3 +131,4 @@
 4:23:15 p.m. server info: ePCR updated from 7 transcript line(s) in 1.7s (1 sections filled)
 4:23:20 p.m. server info: speakers labelled for 711e2834-9622-4e67-99af-989f3664e3cc in 6.3s (nobody), updating the ePCR...
 4:23:22 p.m. server info: ePCR updated from 7 transcript line(s) in 2.1s (1 sections filled)
+10:57:45 p.m. server warn: audio chunk 9371245a-2843-4769-88ec-098ff18792a7 has no audio in it (0 KB), the mic gave nothing. check `arecord -l` on the pi

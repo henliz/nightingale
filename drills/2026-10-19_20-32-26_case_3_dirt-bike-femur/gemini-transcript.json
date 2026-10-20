@@ -1,0 +1,3973 @@
+{
+  "id": "v1_ChczTnJXYXNXRk85aXV5dE1QOEx1djRBNBIXM05yV2FzV0ZPOWl1eXRNUDhMdXY0QTQ",
+  "status": "completed",
+  "usage": {
+    "total_tokens": 5841,
+    "total_input_tokens": 5211,
+    "input_tokens_by_modality": [
+      {
+        "modality": "audio",
+        "tokens": 5210
+      },
+      {
+        "modality": "text",
+        "tokens": 1
+      }
+    ],
+    "total_cached_tokens": 0,
+    "total_output_tokens": 630,
+    "total_tool_use_tokens": 0,
+    "total_thought_tokens": 0
+  },
+  "created": "2026-10-20T03:07:15Z",
+  "updated": "2026-10-20T03:07:15Z",
+  "service_tier": "standard",
+  "steps": [
+    {
+      "content": [
+        {
+          "text": "Oh, yeah.Oh, a femur.Oh, femur. Okay, that's a good one. What happened, buddy?Oh, I was uh I'm on my my dirt bike and uh whoo took a bail. I went off a jump and I took a bail and uh my leg's going the other way now. Oh, I feel so nauseous. Yeah.Oh, Jesus Christ. Yeah, and I know one. Yeah, my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted.Okay.Yeah, he's drunk. Yeah.He's drunk.He's always drunk.He's always drunk.Okay. All right. All right. Thanks. At uh 50 you know whatever we uh somewhere on Fake Street. Yeah. 19 Fake Street. That's right. All right. Thank you. Yeah, they're on their way, bud.All right.All right, fire's here.Fire okay? Yeah, he just wiped out on his bike. Well, you can tell him if you're still conscious.Uh yeah, I took a bad bail off this jump and uh yeah, I landed weird and my leg just snapped back soIt's supposed to be that way.Yeah.Right. Okay. Um are you feeling dizzy, lightheaded?Oh, hell yeah.How much blood do we got going on here? I can't It's hard to see in the dark.Yeah, do we have any blood pooling around the leg?There's a lump there. Oh my goodness.We have some obvious deformity of the femur there. Can you wiggle your toes still?Yeah. Yeah. Not a chance.Nope.No.Do we have a pedal pulse on top of the foot?You have a little bit of pulses. Oh yeah, right here.Okay, that's good sign. All right. Uh on a scale of 1 to 10, how is the pain?You know what? It's not horrible. It's just I think I'd say it's a six.A six? Okay, and where do you feel the pain the most?Uh just right here. Right there.Right there? Okay. What does it feel like?Like my bones havehalf? Okay. All right. Um and how long ago did this happen?Uh I can't remember anything. I don't know.Not about 10 minutes ago. Oh, 11 minutes ago.Okay. All right. And you haven't gone unconscious or anything since? No? Did you hit your head?Did I hit You forget?Maybe you hit your head.Yeah, uh I think so. You know.Okay, are you having any neck pain, any back pain?No, none none of that. Just the leg. No.Okay. All right. And do we notice any other deformities, blood, injuries?Yeah, it's good.Good",
+          "annotations": [
+            {
+              "start_index": 0,
+              "end_index": 3,
+              "text": "Oh,",
+              "start_offset": "2.100s",
+              "end_offset": "2.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 4,
+              "end_index": 9,
+              "text": "yeah.",
+              "start_offset": "2.200s",
+              "end_offset": "2.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 9,
+              "end_index": 12,
+              "text": "Oh,",
+              "start_offset": "2.400s",
+              "end_offset": "2.500s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 13,
+              "end_index": 14,
+              "text": "a",
+              "start_offset": "3.100s",
+              "end_offset": "3.100s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 15,
+              "end_index": 21,
+              "text": "femur.",
+              "start_offset": "3.100s",
+              "end_offset": "3.500s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 21,
+              "end_index": 24,
+              "text": "Oh,",
+              "start_offset": "4.400s",
+              "end_offset": "4.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 25,
+              "end_index": 31,
+              "text": "femur.",
+              "start_offset": "4.400s",
+              "end_offset": "4.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 32,
+              "end_index": 37,
+              "text": "Okay,",
+              "start_offset": "4.700s",
+              "end_offset": "4.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 38,
+              "end_index": 44,
+              "text": "that's",
+              "start_offset": "4.800s",
+              "end_offset": "5s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 45,
+              "end_index": 46,
+              "text": "a",
+              "start_offset": "5s",
+              "end_offset": "5s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 47,
+              "end_index": 51,
+              "text": "good",
+              "start_offset": "5s",
+              "end_offset": "5.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 52,
+              "end_index": 56,
+              "text": "one.",
+              "start_offset": "5.200s",
+              "end_offset": "5.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 57,
+              "end_index": 61,
+              "text": "What",
+              "start_offset": "5.700s",
+              "end_offset": "5.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 62,
+              "end_index": 71,
+              "text": "happened,",
+              "start_offset": "5.800s",
+              "end_offset": "6s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 72,
+              "end_index": 78,
+              "text": "buddy?",
+              "start_offset": "6s",
+              "end_offset": "6.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 78,
+              "end_index": 81,
+              "text": "Oh,",
+              "start_offset": "6.700s",
+              "end_offset": "6.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 82,
+              "end_index": 83,
+              "text": "I",
+              "start_offset": "6.800s",
+              "end_offset": "6.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 84,
+              "end_index": 87,
+              "text": "was",
+              "start_offset": "6.800s",
+              "end_offset": "7s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 88,
+              "end_index": 90,
+              "text": "uh",
+              "start_offset": "7.400s",
+              "end_offset": "7.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 91,
+              "end_index": 94,
+              "text": "I'm",
+              "start_offset": "7.400s",
+              "end_offset": "7.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 95,
+              "end_index": 97,
+              "text": "on",
+              "start_offset": "7.500s",
+              "end_offset": "7.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 98,
+              "end_index": 100,
+              "text": "my",
+              "start_offset": "8s",
+              "end_offset": "8s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 101,
+              "end_index": 103,
+              "text": "my",
+              "start_offset": "8s",
+              "end_offset": "8.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 104,
+              "end_index": 108,
+              "text": "dirt",
+              "start_offset": "8.100s",
+              "end_offset": "8.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 109,
+              "end_index": 113,
+              "text": "bike",
+              "start_offset": "8.400s",
+              "end_offset": "8.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 114,
+              "end_index": 117,
+              "text": "and",
+              "start_offset": "8.600s",
+              "end_offset": "8.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 118,
+              "end_index": 120,
+              "text": "uh",
+              "start_offset": "9s",
+              "end_offset": "9s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 121,
+              "end_index": 125,
+              "text": "whoo",
+              "start_offset": "10s",
+              "end_offset": "10.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 126,
+              "end_index": 130,
+              "text": "took",
+              "start_offset": "10.700s",
+              "end_offset": "10.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 131,
+              "end_index": 132,
+              "text": "a",
+              "start_offset": "10.800s",
+              "end_offset": "10.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 133,
+              "end_index": 138,
+              "text": "bail.",
+              "start_offset": "10.900s",
+              "end_offset": "11.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 139,
+              "end_index": 140,
+              "text": "I",
+              "start_offset": "11.200s",
+              "end_offset": "11.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 141,
+              "end_index": 145,
+              "text": "went",
+              "start_offset": "11.300s",
+              "end_offset": "11.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 146,
+              "end_index": 149,
+              "text": "off",
+              "start_offset": "11.500s",
+              "end_offset": "11.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 150,
+              "end_index": 151,
+              "text": "a",
+              "start_offset": "11.600s",
+              "end_offset": "11.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 152,
+              "end_index": 156,
+              "text": "jump",
+              "start_offset": "11.700s",
+              "end_offset": "11.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 157,
+              "end_index": 160,
+              "text": "and",
+              "start_offset": "11.900s",
+              "end_offset": "12s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 161,
+              "end_index": 162,
+              "text": "I",
+              "start_offset": "12s",
+              "end_offset": "12.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 163,
+              "end_index": 167,
+              "text": "took",
+              "start_offset": "12.100s",
+              "end_offset": "12.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 168,
+              "end_index": 169,
+              "text": "a",
+              "start_offset": "12.300s",
+              "end_offset": "12.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 170,
+              "end_index": 174,
+              "text": "bail",
+              "start_offset": "12.300s",
+              "end_offset": "12.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 175,
+              "end_index": 178,
+              "text": "and",
+              "start_offset": "12.700s",
+              "end_offset": "12.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 179,
+              "end_index": 181,
+              "text": "uh",
+              "start_offset": "13s",
+              "end_offset": "13.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 182,
+              "end_index": 184,
+              "text": "my",
+              "start_offset": "13.800s",
+              "end_offset": "13.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 185,
+              "end_index": 190,
+              "text": "leg's",
+              "start_offset": "13.800s",
+              "end_offset": "14s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 191,
+              "end_index": 196,
+              "text": "going",
+              "start_offset": "14s",
+              "end_offset": "14.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 197,
+              "end_index": 200,
+              "text": "the",
+              "start_offset": "14.200s",
+              "end_offset": "14.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 201,
+              "end_index": 206,
+              "text": "other",
+              "start_offset": "14.300s",
+              "end_offset": "14.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 207,
+              "end_index": 210,
+              "text": "way",
+              "start_offset": "14.500s",
+              "end_offset": "14.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 211,
+              "end_index": 215,
+              "text": "now.",
+              "start_offset": "14.600s",
+              "end_offset": "14.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 216,
+              "end_index": 219,
+              "text": "Oh,",
+              "start_offset": "15.400s",
+              "end_offset": "15.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 220,
+              "end_index": 221,
+              "text": "I",
+              "start_offset": "15.500s",
+              "end_offset": "15.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 222,
+              "end_index": 226,
+              "text": "feel",
+              "start_offset": "15.600s",
+              "end_offset": "15.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 227,
+              "end_index": 229,
+              "text": "so",
+              "start_offset": "16.200s",
+              "end_offset": "16.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 230,
+              "end_index": 239,
+              "text": "nauseous.",
+              "start_offset": "16.400s",
+              "end_offset": "17s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 240,
+              "end_index": 245,
+              "text": "Yeah.",
+              "start_offset": "17.300s",
+              "end_offset": "17.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 245,
+              "end_index": 248,
+              "text": "Oh,",
+              "start_offset": "16.200s",
+              "end_offset": "16.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 249,
+              "end_index": 254,
+              "text": "Jesus",
+              "start_offset": "16.500s",
+              "end_offset": "16.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 255,
+              "end_index": 262,
+              "text": "Christ.",
+              "start_offset": "16.700s",
+              "end_offset": "16.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 263,
+              "end_index": 268,
+              "text": "Yeah,",
+              "start_offset": "17.600s",
+              "end_offset": "17.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 269,
+              "end_index": 272,
+              "text": "and",
+              "start_offset": "17.700s",
+              "end_offset": "17.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 273,
+              "end_index": 274,
+              "text": "I",
+              "start_offset": "17.800s",
+              "end_offset": "17.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 275,
+              "end_index": 279,
+              "text": "know",
+              "start_offset": "17.900s",
+              "end_offset": "18s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 280,
+              "end_index": 284,
+              "text": "one.",
+              "start_offset": "18s",
+              "end_offset": "18.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 285,
+              "end_index": 290,
+              "text": "Yeah,",
+              "start_offset": "18.300s",
+              "end_offset": "18.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 291,
+              "end_index": 293,
+              "text": "my",
+              "start_offset": "18.500s",
+              "end_offset": "18.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 294,
+              "end_index": 299,
+              "text": "buddy",
+              "start_offset": "18.600s",
+              "end_offset": "18.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 300,
+              "end_index": 305,
+              "text": "Dave,",
+              "start_offset": "18.800s",
+              "end_offset": "19.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 306,
+              "end_index": 308,
+              "text": "he",
+              "start_offset": "19.200s",
+              "end_offset": "19.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 309,
+              "end_index": 311,
+              "text": "uh",
+              "start_offset": "19.800s",
+              "end_offset": "19.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 312,
+              "end_index": 314,
+              "text": "he",
+              "start_offset": "19.800s",
+              "end_offset": "20.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 315,
+              "end_index": 320,
+              "text": "wiped",
+              "start_offset": "20.400s",
+              "end_offset": "20.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 321,
+              "end_index": 324,
+              "text": "out",
+              "start_offset": "20.600s",
+              "end_offset": "20.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 325,
+              "end_index": 327,
+              "text": "on",
+              "start_offset": "20.700s",
+              "end_offset": "20.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 328,
+              "end_index": 331,
+              "text": "his",
+              "start_offset": "20.800s",
+              "end_offset": "20.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 332,
+              "end_index": 342,
+              "text": "motorcycle",
+              "start_offset": "20.900s",
+              "end_offset": "21.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 343,
+              "end_index": 346,
+              "text": "and",
+              "start_offset": "21.400s",
+              "end_offset": "21.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 347,
+              "end_index": 350,
+              "text": "his",
+              "start_offset": "21.500s",
+              "end_offset": "21.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 351,
+              "end_index": 354,
+              "text": "leg",
+              "start_offset": "21.800s",
+              "end_offset": "22s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 355,
+              "end_index": 357,
+              "text": "is",
+              "start_offset": "22s",
+              "end_offset": "22.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 358,
+              "end_index": 364,
+              "text": "messed",
+              "start_offset": "22.100s",
+              "end_offset": "22.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 365,
+              "end_index": 368,
+              "text": "up.",
+              "start_offset": "22.400s",
+              "end_offset": "22.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 369,
+              "end_index": 373,
+              "text": "It's",
+              "start_offset": "22.600s",
+              "end_offset": "22.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 374,
+              "end_index": 382,
+              "text": "twisted.",
+              "start_offset": "22.700s",
+              "end_offset": "23.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 382,
+              "end_index": 387,
+              "text": "Okay.",
+              "start_offset": "25.400s",
+              "end_offset": "25.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 387,
+              "end_index": 392,
+              "text": "Yeah,",
+              "start_offset": "25.800s",
+              "end_offset": "25.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 393,
+              "end_index": 397,
+              "text": "he's",
+              "start_offset": "25.900s",
+              "end_offset": "26.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 398,
+              "end_index": 404,
+              "text": "drunk.",
+              "start_offset": "26.100s",
+              "end_offset": "26.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 405,
+              "end_index": 410,
+              "text": "Yeah.",
+              "start_offset": "26.300s",
+              "end_offset": "26.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 410,
+              "end_index": 414,
+              "text": "He's",
+              "start_offset": "27.200s",
+              "end_offset": "27.400s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 415,
+              "end_index": 421,
+              "text": "drunk.",
+              "start_offset": "27.400s",
+              "end_offset": "27.700s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 421,
+              "end_index": 425,
+              "text": "He's",
+              "start_offset": "27.800s",
+              "end_offset": "27.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 426,
+              "end_index": 432,
+              "text": "always",
+              "start_offset": "27.900s",
+              "end_offset": "28.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 433,
+              "end_index": 439,
+              "text": "drunk.",
+              "start_offset": "28.300s",
+              "end_offset": "28.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 439,
+              "end_index": 443,
+              "text": "He's",
+              "start_offset": "29.100s",
+              "end_offset": "29.200s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 444,
+              "end_index": 450,
+              "text": "always",
+              "start_offset": "29.200s",
+              "end_offset": "29.600s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 451,
+              "end_index": 457,
+              "text": "drunk.",
+              "start_offset": "29.600s",
+              "end_offset": "29.900s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 457,
+              "end_index": 462,
+              "text": "Okay.",
+              "start_offset": "29.800s",
+              "end_offset": "30.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 463,
+              "end_index": 466,
+              "text": "All",
+              "start_offset": "30.200s",
+              "end_offset": "30.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 467,
+              "end_index": 473,
+              "text": "right.",
+              "start_offset": "30.300s",
+              "end_offset": "30.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 474,
+              "end_index": 477,
+              "text": "All",
+              "start_offset": "31s",
+              "end_offset": "31.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 478,
+              "end_index": 484,
+              "text": "right.",
+              "start_offset": "31.100s",
+              "end_offset": "31.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 485,
+              "end_index": 492,
+              "text": "Thanks.",
+              "start_offset": "31.300s",
+              "end_offset": "31.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 493,
+              "end_index": 495,
+              "text": "At",
+              "start_offset": "31.900s",
+              "end_offset": "32.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 496,
+              "end_index": 498,
+              "text": "uh",
+              "start_offset": "32.800s",
+              "end_offset": "32.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 499,
+              "end_index": 501,
+              "text": "50",
+              "start_offset": "32.900s",
+              "end_offset": "33.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 502,
+              "end_index": 505,
+              "text": "you",
+              "start_offset": "33.600s",
+              "end_offset": "33.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 506,
+              "end_index": 510,
+              "text": "know",
+              "start_offset": "33.600s",
+              "end_offset": "33.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 511,
+              "end_index": 519,
+              "text": "whatever",
+              "start_offset": "33.800s",
+              "end_offset": "34.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 520,
+              "end_index": 522,
+              "text": "we",
+              "start_offset": "34.100s",
+              "end_offset": "34.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 523,
+              "end_index": 525,
+              "text": "uh",
+              "start_offset": "35.400s",
+              "end_offset": "35.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 526,
+              "end_index": 535,
+              "text": "somewhere",
+              "start_offset": "35.400s",
+              "end_offset": "35.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 536,
+              "end_index": 538,
+              "text": "on",
+              "start_offset": "35.900s",
+              "end_offset": "36.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 539,
+              "end_index": 543,
+              "text": "Fake",
+              "start_offset": "36.400s",
+              "end_offset": "36.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 544,
+              "end_index": 551,
+              "text": "Street.",
+              "start_offset": "36.600s",
+              "end_offset": "36.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 552,
+              "end_index": 557,
+              "text": "Yeah.",
+              "start_offset": "36.900s",
+              "end_offset": "37.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 558,
+              "end_index": 560,
+              "text": "19",
+              "start_offset": "37.400s",
+              "end_offset": "37.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 561,
+              "end_index": 565,
+              "text": "Fake",
+              "start_offset": "37.800s",
+              "end_offset": "38s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 566,
+              "end_index": 573,
+              "text": "Street.",
+              "start_offset": "38s",
+              "end_offset": "38.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 574,
+              "end_index": 580,
+              "text": "That's",
+              "start_offset": "38.300s",
+              "end_offset": "38.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 581,
+              "end_index": 587,
+              "text": "right.",
+              "start_offset": "38.400s",
+              "end_offset": "38.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 588,
+              "end_index": 591,
+              "text": "All",
+              "start_offset": "38.800s",
+              "end_offset": "38.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 592,
+              "end_index": 598,
+              "text": "right.",
+              "start_offset": "38.900s",
+              "end_offset": "39.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 599,
+              "end_index": 604,
+              "text": "Thank",
+              "start_offset": "39.200s",
+              "end_offset": "39.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 605,
+              "end_index": 609,
+              "text": "you.",
+              "start_offset": "39.400s",
+              "end_offset": "39.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 610,
+              "end_index": 615,
+              "text": "Yeah,",
+              "start_offset": "40.900s",
+              "end_offset": "41s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 616,
+              "end_index": 623,
+              "text": "they're",
+              "start_offset": "41s",
+              "end_offset": "41.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 624,
+              "end_index": 626,
+              "text": "on",
+              "start_offset": "41.100s",
+              "end_offset": "41.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 627,
+              "end_index": 632,
+              "text": "their",
+              "start_offset": "41.200s",
+              "end_offset": "41.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 633,
+              "end_index": 637,
+              "text": "way,",
+              "start_offset": "41.300s",
+              "end_offset": "41.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 638,
+              "end_index": 642,
+              "text": "bud.",
+              "start_offset": "41.400s",
+              "end_offset": "41.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 642,
+              "end_index": 645,
+              "text": "All",
+              "start_offset": "42.100s",
+              "end_offset": "42.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 646,
+              "end_index": 652,
+              "text": "right.",
+              "start_offset": "42.200s",
+              "end_offset": "42.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 652,
+              "end_index": 655,
+              "text": "All",
+              "start_offset": "43.200s",
+              "end_offset": "43.300s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 656,
+              "end_index": 662,
+              "text": "right,",
+              "start_offset": "43.300s",
+              "end_offset": "43.500s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 663,
+              "end_index": 669,
+              "text": "fire's",
+              "start_offset": "43.500s",
+              "end_offset": "43.700s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 670,
+              "end_index": 675,
+              "text": "here.",
+              "start_offset": "43.700s",
+              "end_offset": "43.900s",
+              "speaker": "spk:1",
+              "type": "word_info"
+            },
+            {
+              "start_index": 675,
+              "end_index": 679,
+              "text": "Fire",
+              "start_offset": "44.600s",
+              "end_offset": "44.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 680,
+              "end_index": 685,
+              "text": "okay?",
+              "start_offset": "44.700s",
+              "end_offset": "45.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 686,
+              "end_index": 691,
+              "text": "Yeah,",
+              "start_offset": "45.800s",
+              "end_offset": "46s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 692,
+              "end_index": 694,
+              "text": "he",
+              "start_offset": "46s",
+              "end_offset": "46.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 695,
+              "end_index": 699,
+              "text": "just",
+              "start_offset": "46.100s",
+              "end_offset": "46.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 700,
+              "end_index": 705,
+              "text": "wiped",
+              "start_offset": "46.300s",
+              "end_offset": "46.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 706,
+              "end_index": 709,
+              "text": "out",
+              "start_offset": "46.600s",
+              "end_offset": "46.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 710,
+              "end_index": 712,
+              "text": "on",
+              "start_offset": "46.700s",
+              "end_offset": "46.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 713,
+              "end_index": 716,
+              "text": "his",
+              "start_offset": "46.800s",
+              "end_offset": "46.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 717,
+              "end_index": 722,
+              "text": "bike.",
+              "start_offset": "46.900s",
+              "end_offset": "47.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 723,
+              "end_index": 728,
+              "text": "Well,",
+              "start_offset": "47.200s",
+              "end_offset": "47.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 729,
+              "end_index": 732,
+              "text": "you",
+              "start_offset": "47.400s",
+              "end_offset": "47.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 733,
+              "end_index": 736,
+              "text": "can",
+              "start_offset": "47.500s",
+              "end_offset": "47.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 737,
+              "end_index": 741,
+              "text": "tell",
+              "start_offset": "47.600s",
+              "end_offset": "47.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 742,
+              "end_index": 745,
+              "text": "him",
+              "start_offset": "47.800s",
+              "end_offset": "47.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 746,
+              "end_index": 748,
+              "text": "if",
+              "start_offset": "47.900s",
+              "end_offset": "48s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 749,
+              "end_index": 755,
+              "text": "you're",
+              "start_offset": "48s",
+              "end_offset": "48.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 756,
+              "end_index": 761,
+              "text": "still",
+              "start_offset": "48.100s",
+              "end_offset": "48.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 762,
+              "end_index": 772,
+              "text": "conscious.",
+              "start_offset": "48.500s",
+              "end_offset": "49s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 772,
+              "end_index": 774,
+              "text": "Uh",
+              "start_offset": "49.500s",
+              "end_offset": "49.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 775,
+              "end_index": 780,
+              "text": "yeah,",
+              "start_offset": "49.600s",
+              "end_offset": "49.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 781,
+              "end_index": 782,
+              "text": "I",
+              "start_offset": "49.800s",
+              "end_offset": "49.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 783,
+              "end_index": 787,
+              "text": "took",
+              "start_offset": "49.900s",
+              "end_offset": "50.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 788,
+              "end_index": 789,
+              "text": "a",
+              "start_offset": "50.100s",
+              "end_offset": "50.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 790,
+              "end_index": 793,
+              "text": "bad",
+              "start_offset": "50.400s",
+              "end_offset": "50.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 794,
+              "end_index": 798,
+              "text": "bail",
+              "start_offset": "50.600s",
+              "end_offset": "50.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 799,
+              "end_index": 802,
+              "text": "off",
+              "start_offset": "50.900s",
+              "end_offset": "51s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 803,
+              "end_index": 807,
+              "text": "this",
+              "start_offset": "51s",
+              "end_offset": "51.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 808,
+              "end_index": 812,
+              "text": "jump",
+              "start_offset": "51.200s",
+              "end_offset": "51.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 813,
+              "end_index": 816,
+              "text": "and",
+              "start_offset": "51.600s",
+              "end_offset": "51.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 817,
+              "end_index": 819,
+              "text": "uh",
+              "start_offset": "51.900s",
+              "end_offset": "51.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 820,
+              "end_index": 825,
+              "text": "yeah,",
+              "start_offset": "52.800s",
+              "end_offset": "53s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 826,
+              "end_index": 827,
+              "text": "I",
+              "start_offset": "53s",
+              "end_offset": "53s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 828,
+              "end_index": 834,
+              "text": "landed",
+              "start_offset": "53.300s",
+              "end_offset": "53.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 835,
+              "end_index": 840,
+              "text": "weird",
+              "start_offset": "53.600s",
+              "end_offset": "53.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 841,
+              "end_index": 844,
+              "text": "and",
+              "start_offset": "53.800s",
+              "end_offset": "53.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 845,
+              "end_index": 847,
+              "text": "my",
+              "start_offset": "53.900s",
+              "end_offset": "54s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 848,
+              "end_index": 851,
+              "text": "leg",
+              "start_offset": "54s",
+              "end_offset": "54.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 852,
+              "end_index": 856,
+              "text": "just",
+              "start_offset": "54.300s",
+              "end_offset": "54.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 857,
+              "end_index": 864,
+              "text": "snapped",
+              "start_offset": "54.500s",
+              "end_offset": "54.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 865,
+              "end_index": 869,
+              "text": "back",
+              "start_offset": "54.800s",
+              "end_offset": "55.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 870,
+              "end_index": 872,
+              "text": "so",
+              "start_offset": "55.100s",
+              "end_offset": "55.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 872,
+              "end_index": 876,
+              "text": "It's",
+              "start_offset": "55.600s",
+              "end_offset": "55.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 877,
+              "end_index": 885,
+              "text": "supposed",
+              "start_offset": "55.700s",
+              "end_offset": "55.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 886,
+              "end_index": 888,
+              "text": "to",
+              "start_offset": "55.900s",
+              "end_offset": "56s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 889,
+              "end_index": 891,
+              "text": "be",
+              "start_offset": "56s",
+              "end_offset": "56s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 892,
+              "end_index": 896,
+              "text": "that",
+              "start_offset": "56s",
+              "end_offset": "56.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 897,
+              "end_index": 901,
+              "text": "way.",
+              "start_offset": "56.300s",
+              "end_offset": "56.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 901,
+              "end_index": 906,
+              "text": "Yeah.",
+              "start_offset": "56.400s",
+              "end_offset": "56.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 906,
+              "end_index": 912,
+              "text": "Right.",
+              "start_offset": "57.300s",
+              "end_offset": "57.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 913,
+              "end_index": 918,
+              "text": "Okay.",
+              "start_offset": "57.600s",
+              "end_offset": "58.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 919,
+              "end_index": 921,
+              "text": "Um",
+              "start_offset": "58.500s",
+              "end_offset": "58.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 922,
+              "end_index": 925,
+              "text": "are",
+              "start_offset": "58.700s",
+              "end_offset": "58.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 926,
+              "end_index": 929,
+              "text": "you",
+              "start_offset": "58.800s",
+              "end_offset": "58.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 930,
+              "end_index": 937,
+              "text": "feeling",
+              "start_offset": "58.900s",
+              "end_offset": "59.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 938,
+              "end_index": 944,
+              "text": "dizzy,",
+              "start_offset": "59.200s",
+              "end_offset": "59.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 945,
+              "end_index": 957,
+              "text": "lightheaded?",
+              "start_offset": "59.500s",
+              "end_offset": "59.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 957,
+              "end_index": 960,
+              "text": "Oh,",
+              "start_offset": "60s",
+              "end_offset": "60s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 961,
+              "end_index": 965,
+              "text": "hell",
+              "start_offset": "60.600s",
+              "end_offset": "60.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 966,
+              "end_index": 971,
+              "text": "yeah.",
+              "start_offset": "60.800s",
+              "end_offset": "61.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 971,
+              "end_index": 974,
+              "text": "How",
+              "start_offset": "61.300s",
+              "end_offset": "61.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 975,
+              "end_index": 979,
+              "text": "much",
+              "start_offset": "61.400s",
+              "end_offset": "61.600s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 980,
+              "end_index": 985,
+              "text": "blood",
+              "start_offset": "61.600s",
+              "end_offset": "61.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 986,
+              "end_index": 988,
+              "text": "do",
+              "start_offset": "61.800s",
+              "end_offset": "61.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 989,
+              "end_index": 991,
+              "text": "we",
+              "start_offset": "61.800s",
+              "end_offset": "61.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 992,
+              "end_index": 995,
+              "text": "got",
+              "start_offset": "61.900s",
+              "end_offset": "62.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 996,
+              "end_index": 1001,
+              "text": "going",
+              "start_offset": "62.100s",
+              "end_offset": "62.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1002,
+              "end_index": 1004,
+              "text": "on",
+              "start_offset": "62.300s",
+              "end_offset": "62.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1005,
+              "end_index": 1010,
+              "text": "here?",
+              "start_offset": "62.400s",
+              "end_offset": "62.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1011,
+              "end_index": 1012,
+              "text": "I",
+              "start_offset": "62.900s",
+              "end_offset": "63s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1013,
+              "end_index": 1018,
+              "text": "can't",
+              "start_offset": "63s",
+              "end_offset": "63.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1019,
+              "end_index": 1023,
+              "text": "It's",
+              "start_offset": "63.400s",
+              "end_offset": "63.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1024,
+              "end_index": 1028,
+              "text": "hard",
+              "start_offset": "63.500s",
+              "end_offset": "63.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1029,
+              "end_index": 1031,
+              "text": "to",
+              "start_offset": "63.700s",
+              "end_offset": "63.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1032,
+              "end_index": 1035,
+              "text": "see",
+              "start_offset": "63.800s",
+              "end_offset": "63.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1036,
+              "end_index": 1038,
+              "text": "in",
+              "start_offset": "63.900s",
+              "end_offset": "63.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1039,
+              "end_index": 1042,
+              "text": "the",
+              "start_offset": "63.900s",
+              "end_offset": "64s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1043,
+              "end_index": 1048,
+              "text": "dark.",
+              "start_offset": "64s",
+              "end_offset": "64.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1048,
+              "end_index": 1053,
+              "text": "Yeah,",
+              "start_offset": "64.500s",
+              "end_offset": "64.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1054,
+              "end_index": 1056,
+              "text": "do",
+              "start_offset": "64.600s",
+              "end_offset": "64.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1057,
+              "end_index": 1059,
+              "text": "we",
+              "start_offset": "64.700s",
+              "end_offset": "64.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1060,
+              "end_index": 1064,
+              "text": "have",
+              "start_offset": "64.900s",
+              "end_offset": "65.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1065,
+              "end_index": 1068,
+              "text": "any",
+              "start_offset": "65.100s",
+              "end_offset": "65.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1069,
+              "end_index": 1074,
+              "text": "blood",
+              "start_offset": "65.500s",
+              "end_offset": "65.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1075,
+              "end_index": 1082,
+              "text": "pooling",
+              "start_offset": "65.900s",
+              "end_offset": "66.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1083,
+              "end_index": 1089,
+              "text": "around",
+              "start_offset": "66.200s",
+              "end_offset": "66.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1090,
+              "end_index": 1093,
+              "text": "the",
+              "start_offset": "66.500s",
+              "end_offset": "66.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1094,
+              "end_index": 1098,
+              "text": "leg?",
+              "start_offset": "66.600s",
+              "end_offset": "67.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1098,
+              "end_index": 1105,
+              "text": "There's",
+              "start_offset": "67.700s",
+              "end_offset": "67.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1106,
+              "end_index": 1107,
+              "text": "a",
+              "start_offset": "67.900s",
+              "end_offset": "68s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1108,
+              "end_index": 1112,
+              "text": "lump",
+              "start_offset": "68s",
+              "end_offset": "68.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1113,
+              "end_index": 1119,
+              "text": "there.",
+              "start_offset": "68.200s",
+              "end_offset": "68.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1120,
+              "end_index": 1122,
+              "text": "Oh",
+              "start_offset": "68.400s",
+              "end_offset": "68.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1123,
+              "end_index": 1125,
+              "text": "my",
+              "start_offset": "68.500s",
+              "end_offset": "68.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1126,
+              "end_index": 1135,
+              "text": "goodness.",
+              "start_offset": "68.700s",
+              "end_offset": "69.100s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1135,
+              "end_index": 1137,
+              "text": "We",
+              "start_offset": "68.800s",
+              "end_offset": "68.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1138,
+              "end_index": 1142,
+              "text": "have",
+              "start_offset": "68.800s",
+              "end_offset": "68.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1143,
+              "end_index": 1147,
+              "text": "some",
+              "start_offset": "69.200s",
+              "end_offset": "69.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1148,
+              "end_index": 1155,
+              "text": "obvious",
+              "start_offset": "69.400s",
+              "end_offset": "69.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1156,
+              "end_index": 1165,
+              "text": "deformity",
+              "start_offset": "69.800s",
+              "end_offset": "70.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1166,
+              "end_index": 1168,
+              "text": "of",
+              "start_offset": "70.400s",
+              "end_offset": "70.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1169,
+              "end_index": 1172,
+              "text": "the",
+              "start_offset": "70.600s",
+              "end_offset": "70.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1173,
+              "end_index": 1178,
+              "text": "femur",
+              "start_offset": "70.700s",
+              "end_offset": "71.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1179,
+              "end_index": 1185,
+              "text": "there.",
+              "start_offset": "71.100s",
+              "end_offset": "71.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1186,
+              "end_index": 1189,
+              "text": "Can",
+              "start_offset": "72.100s",
+              "end_offset": "72.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1190,
+              "end_index": 1193,
+              "text": "you",
+              "start_offset": "72.200s",
+              "end_offset": "72.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1194,
+              "end_index": 1200,
+              "text": "wiggle",
+              "start_offset": "72.300s",
+              "end_offset": "72.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1201,
+              "end_index": 1205,
+              "text": "your",
+              "start_offset": "72.600s",
+              "end_offset": "72.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1206,
+              "end_index": 1210,
+              "text": "toes",
+              "start_offset": "72.800s",
+              "end_offset": "73.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1211,
+              "end_index": 1217,
+              "text": "still?",
+              "start_offset": "73.200s",
+              "end_offset": "73.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1217,
+              "end_index": 1222,
+              "text": "Yeah.",
+              "start_offset": "71.600s",
+              "end_offset": "71.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1223,
+              "end_index": 1228,
+              "text": "Yeah.",
+              "start_offset": "72s",
+              "end_offset": "72.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1229,
+              "end_index": 1232,
+              "text": "Not",
+              "start_offset": "74s",
+              "end_offset": "74.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1233,
+              "end_index": 1234,
+              "text": "a",
+              "start_offset": "74.200s",
+              "end_offset": "74.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1235,
+              "end_index": 1242,
+              "text": "chance.",
+              "start_offset": "74.200s",
+              "end_offset": "74.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1242,
+              "end_index": 1247,
+              "text": "Nope.",
+              "start_offset": "74.700s",
+              "end_offset": "74.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1247,
+              "end_index": 1250,
+              "text": "No.",
+              "start_offset": "75s",
+              "end_offset": "75.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1250,
+              "end_index": 1252,
+              "text": "Do",
+              "start_offset": "75.300s",
+              "end_offset": "75.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1253,
+              "end_index": 1255,
+              "text": "we",
+              "start_offset": "75.400s",
+              "end_offset": "75.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1256,
+              "end_index": 1260,
+              "text": "have",
+              "start_offset": "75.500s",
+              "end_offset": "75.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1261,
+              "end_index": 1262,
+              "text": "a",
+              "start_offset": "75.600s",
+              "end_offset": "75.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1263,
+              "end_index": 1268,
+              "text": "pedal",
+              "start_offset": "75.700s",
+              "end_offset": "76.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1269,
+              "end_index": 1274,
+              "text": "pulse",
+              "start_offset": "76.100s",
+              "end_offset": "76.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1275,
+              "end_index": 1277,
+              "text": "on",
+              "start_offset": "76.500s",
+              "end_offset": "76.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1278,
+              "end_index": 1281,
+              "text": "top",
+              "start_offset": "76.700s",
+              "end_offset": "76.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1282,
+              "end_index": 1284,
+              "text": "of",
+              "start_offset": "76.900s",
+              "end_offset": "77s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1285,
+              "end_index": 1288,
+              "text": "the",
+              "start_offset": "77s",
+              "end_offset": "77.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1289,
+              "end_index": 1294,
+              "text": "foot?",
+              "start_offset": "77.100s",
+              "end_offset": "77.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1294,
+              "end_index": 1297,
+              "text": "You",
+              "start_offset": "83.800s",
+              "end_offset": "83.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1298,
+              "end_index": 1302,
+              "text": "have",
+              "start_offset": "83.900s",
+              "end_offset": "84s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1303,
+              "end_index": 1304,
+              "text": "a",
+              "start_offset": "84s",
+              "end_offset": "84s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1305,
+              "end_index": 1311,
+              "text": "little",
+              "start_offset": "84s",
+              "end_offset": "84.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1312,
+              "end_index": 1315,
+              "text": "bit",
+              "start_offset": "84.200s",
+              "end_offset": "84.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1316,
+              "end_index": 1318,
+              "text": "of",
+              "start_offset": "84.300s",
+              "end_offset": "84.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1319,
+              "end_index": 1326,
+              "text": "pulses.",
+              "start_offset": "84.500s",
+              "end_offset": "84.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1327,
+              "end_index": 1329,
+              "text": "Oh",
+              "start_offset": "84.900s",
+              "end_offset": "85s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1330,
+              "end_index": 1335,
+              "text": "yeah,",
+              "start_offset": "85s",
+              "end_offset": "85.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1336,
+              "end_index": 1341,
+              "text": "right",
+              "start_offset": "85.200s",
+              "end_offset": "85.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1342,
+              "end_index": 1347,
+              "text": "here.",
+              "start_offset": "85.400s",
+              "end_offset": "85.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1347,
+              "end_index": 1352,
+              "text": "Okay,",
+              "start_offset": "85.400s",
+              "end_offset": "85.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1353,
+              "end_index": 1359,
+              "text": "that's",
+              "start_offset": "85.600s",
+              "end_offset": "85.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1360,
+              "end_index": 1364,
+              "text": "good",
+              "start_offset": "85.900s",
+              "end_offset": "86.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1365,
+              "end_index": 1370,
+              "text": "sign.",
+              "start_offset": "86.100s",
+              "end_offset": "86.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1371,
+              "end_index": 1374,
+              "text": "All",
+              "start_offset": "87s",
+              "end_offset": "87.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1375,
+              "end_index": 1381,
+              "text": "right.",
+              "start_offset": "87.100s",
+              "end_offset": "87.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1382,
+              "end_index": 1384,
+              "text": "Uh",
+              "start_offset": "87.800s",
+              "end_offset": "87.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1385,
+              "end_index": 1387,
+              "text": "on",
+              "start_offset": "88.200s",
+              "end_offset": "88.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1388,
+              "end_index": 1389,
+              "text": "a",
+              "start_offset": "88.300s",
+              "end_offset": "88.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1390,
+              "end_index": 1395,
+              "text": "scale",
+              "start_offset": "88.400s",
+              "end_offset": "88.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1396,
+              "end_index": 1398,
+              "text": "of",
+              "start_offset": "88.600s",
+              "end_offset": "88.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1399,
+              "end_index": 1400,
+              "text": "1",
+              "start_offset": "88.700s",
+              "end_offset": "88.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1401,
+              "end_index": 1403,
+              "text": "to",
+              "start_offset": "88.900s",
+              "end_offset": "89s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1404,
+              "end_index": 1407,
+              "text": "10,",
+              "start_offset": "89s",
+              "end_offset": "89.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1408,
+              "end_index": 1411,
+              "text": "how",
+              "start_offset": "89.200s",
+              "end_offset": "89.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1412,
+              "end_index": 1414,
+              "text": "is",
+              "start_offset": "89.300s",
+              "end_offset": "89.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1415,
+              "end_index": 1418,
+              "text": "the",
+              "start_offset": "89.400s",
+              "end_offset": "89.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1419,
+              "end_index": 1424,
+              "text": "pain?",
+              "start_offset": "89.500s",
+              "end_offset": "89.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1424,
+              "end_index": 1427,
+              "text": "You",
+              "start_offset": "90s",
+              "end_offset": "90s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1428,
+              "end_index": 1432,
+              "text": "know",
+              "start_offset": "90s",
+              "end_offset": "90.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1433,
+              "end_index": 1438,
+              "text": "what?",
+              "start_offset": "90.200s",
+              "end_offset": "90.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1439,
+              "end_index": 1443,
+              "text": "It's",
+              "start_offset": "90.400s",
+              "end_offset": "90.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1444,
+              "end_index": 1447,
+              "text": "not",
+              "start_offset": "90.500s",
+              "end_offset": "90.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1448,
+              "end_index": 1457,
+              "text": "horrible.",
+              "start_offset": "90.800s",
+              "end_offset": "91.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1458,
+              "end_index": 1462,
+              "text": "It's",
+              "start_offset": "91.300s",
+              "end_offset": "91.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1463,
+              "end_index": 1467,
+              "text": "just",
+              "start_offset": "91.500s",
+              "end_offset": "91.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1468,
+              "end_index": 1469,
+              "text": "I",
+              "start_offset": "92s",
+              "end_offset": "92s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1470,
+              "end_index": 1475,
+              "text": "think",
+              "start_offset": "92s",
+              "end_offset": "92.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1476,
+              "end_index": 1479,
+              "text": "I'd",
+              "start_offset": "92.300s",
+              "end_offset": "92.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1480,
+              "end_index": 1483,
+              "text": "say",
+              "start_offset": "92.400s",
+              "end_offset": "92.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1484,
+              "end_index": 1488,
+              "text": "it's",
+              "start_offset": "92.500s",
+              "end_offset": "92.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1489,
+              "end_index": 1490,
+              "text": "a",
+              "start_offset": "92.600s",
+              "end_offset": "92.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1491,
+              "end_index": 1495,
+              "text": "six.",
+              "start_offset": "92.700s",
+              "end_offset": "93.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1495,
+              "end_index": 1496,
+              "text": "A",
+              "start_offset": "93.200s",
+              "end_offset": "93.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1497,
+              "end_index": 1501,
+              "text": "six?",
+              "start_offset": "93.300s",
+              "end_offset": "93.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1502,
+              "end_index": 1507,
+              "text": "Okay,",
+              "start_offset": "93.700s",
+              "end_offset": "94s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1508,
+              "end_index": 1511,
+              "text": "and",
+              "start_offset": "94s",
+              "end_offset": "94.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1512,
+              "end_index": 1517,
+              "text": "where",
+              "start_offset": "94.100s",
+              "end_offset": "94.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1518,
+              "end_index": 1520,
+              "text": "do",
+              "start_offset": "94.300s",
+              "end_offset": "94.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1521,
+              "end_index": 1524,
+              "text": "you",
+              "start_offset": "94.400s",
+              "end_offset": "94.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1525,
+              "end_index": 1529,
+              "text": "feel",
+              "start_offset": "94.500s",
+              "end_offset": "94.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1530,
+              "end_index": 1533,
+              "text": "the",
+              "start_offset": "94.700s",
+              "end_offset": "94.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1534,
+              "end_index": 1538,
+              "text": "pain",
+              "start_offset": "94.800s",
+              "end_offset": "95s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1539,
+              "end_index": 1542,
+              "text": "the",
+              "start_offset": "95s",
+              "end_offset": "95.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1543,
+              "end_index": 1548,
+              "text": "most?",
+              "start_offset": "95.100s",
+              "end_offset": "95.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1548,
+              "end_index": 1550,
+              "text": "Uh",
+              "start_offset": "95.700s",
+              "end_offset": "95.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1551,
+              "end_index": 1555,
+              "text": "just",
+              "start_offset": "95.800s",
+              "end_offset": "96s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1556,
+              "end_index": 1561,
+              "text": "right",
+              "start_offset": "96s",
+              "end_offset": "96.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1562,
+              "end_index": 1567,
+              "text": "here.",
+              "start_offset": "96.200s",
+              "end_offset": "96.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1568,
+              "end_index": 1573,
+              "text": "Right",
+              "start_offset": "97.200s",
+              "end_offset": "97.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1574,
+              "end_index": 1580,
+              "text": "there.",
+              "start_offset": "97.300s",
+              "end_offset": "97.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1580,
+              "end_index": 1585,
+              "text": "Right",
+              "start_offset": "96.700s",
+              "end_offset": "96.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1586,
+              "end_index": 1592,
+              "text": "there?",
+              "start_offset": "96.900s",
+              "end_offset": "97.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1593,
+              "end_index": 1598,
+              "text": "Okay.",
+              "start_offset": "97.400s",
+              "end_offset": "97.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1599,
+              "end_index": 1603,
+              "text": "What",
+              "start_offset": "97.800s",
+              "end_offset": "98s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1604,
+              "end_index": 1608,
+              "text": "does",
+              "start_offset": "98s",
+              "end_offset": "98.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1609,
+              "end_index": 1611,
+              "text": "it",
+              "start_offset": "98.100s",
+              "end_offset": "98.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1612,
+              "end_index": 1616,
+              "text": "feel",
+              "start_offset": "98.300s",
+              "end_offset": "98.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1617,
+              "end_index": 1622,
+              "text": "like?",
+              "start_offset": "98.500s",
+              "end_offset": "98.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1622,
+              "end_index": 1626,
+              "text": "Like",
+              "start_offset": "99.400s",
+              "end_offset": "99.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1627,
+              "end_index": 1629,
+              "text": "my",
+              "start_offset": "100.100s",
+              "end_offset": "100.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1630,
+              "end_index": 1635,
+              "text": "bones",
+              "start_offset": "100.200s",
+              "end_offset": "100.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1636,
+              "end_index": 1640,
+              "text": "have",
+              "start_offset": "100.500s",
+              "end_offset": "100.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1640,
+              "end_index": 1645,
+              "text": "half?",
+              "start_offset": "102.200s",
+              "end_offset": "102.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1646,
+              "end_index": 1651,
+              "text": "Okay.",
+              "start_offset": "102.300s",
+              "end_offset": "102.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1652,
+              "end_index": 1655,
+              "text": "All",
+              "start_offset": "103.300s",
+              "end_offset": "103.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1656,
+              "end_index": 1662,
+              "text": "right.",
+              "start_offset": "103.400s",
+              "end_offset": "103.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1663,
+              "end_index": 1665,
+              "text": "Um",
+              "start_offset": "104s",
+              "end_offset": "104.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1666,
+              "end_index": 1669,
+              "text": "and",
+              "start_offset": "104.200s",
+              "end_offset": "104.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1670,
+              "end_index": 1673,
+              "text": "how",
+              "start_offset": "104.300s",
+              "end_offset": "104.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1674,
+              "end_index": 1678,
+              "text": "long",
+              "start_offset": "104.500s",
+              "end_offset": "104.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1679,
+              "end_index": 1682,
+              "text": "ago",
+              "start_offset": "104.800s",
+              "end_offset": "105s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1683,
+              "end_index": 1686,
+              "text": "did",
+              "start_offset": "105s",
+              "end_offset": "105.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1687,
+              "end_index": 1691,
+              "text": "this",
+              "start_offset": "105.100s",
+              "end_offset": "105.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1692,
+              "end_index": 1699,
+              "text": "happen?",
+              "start_offset": "105.400s",
+              "end_offset": "105.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1699,
+              "end_index": 1701,
+              "text": "Uh",
+              "start_offset": "106.500s",
+              "end_offset": "106.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1702,
+              "end_index": 1703,
+              "text": "I",
+              "start_offset": "106.800s",
+              "end_offset": "106.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1704,
+              "end_index": 1709,
+              "text": "can't",
+              "start_offset": "106.900s",
+              "end_offset": "107.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1710,
+              "end_index": 1718,
+              "text": "remember",
+              "start_offset": "107.100s",
+              "end_offset": "107.500s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1719,
+              "end_index": 1728,
+              "text": "anything.",
+              "start_offset": "107.500s",
+              "end_offset": "107.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1729,
+              "end_index": 1730,
+              "text": "I",
+              "start_offset": "107.800s",
+              "end_offset": "107.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1731,
+              "end_index": 1736,
+              "text": "don't",
+              "start_offset": "107.800s",
+              "end_offset": "107.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1737,
+              "end_index": 1742,
+              "text": "know.",
+              "start_offset": "107.900s",
+              "end_offset": "108.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1742,
+              "end_index": 1745,
+              "text": "Not",
+              "start_offset": "108.600s",
+              "end_offset": "108.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1746,
+              "end_index": 1751,
+              "text": "about",
+              "start_offset": "108.700s",
+              "end_offset": "108.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1752,
+              "end_index": 1754,
+              "text": "10",
+              "start_offset": "108.900s",
+              "end_offset": "109s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1755,
+              "end_index": 1762,
+              "text": "minutes",
+              "start_offset": "109s",
+              "end_offset": "109.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1763,
+              "end_index": 1767,
+              "text": "ago.",
+              "start_offset": "109.200s",
+              "end_offset": "109.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1768,
+              "end_index": 1771,
+              "text": "Oh,",
+              "start_offset": "109.600s",
+              "end_offset": "109.700s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1772,
+              "end_index": 1774,
+              "text": "11",
+              "start_offset": "109.900s",
+              "end_offset": "110.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1775,
+              "end_index": 1782,
+              "text": "minutes",
+              "start_offset": "110.200s",
+              "end_offset": "110.300s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1783,
+              "end_index": 1787,
+              "text": "ago.",
+              "start_offset": "110.300s",
+              "end_offset": "110.500s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1787,
+              "end_index": 1792,
+              "text": "Okay.",
+              "start_offset": "110.800s",
+              "end_offset": "111.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1793,
+              "end_index": 1796,
+              "text": "All",
+              "start_offset": "111.500s",
+              "end_offset": "111.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1797,
+              "end_index": 1803,
+              "text": "right.",
+              "start_offset": "111.600s",
+              "end_offset": "111.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1804,
+              "end_index": 1807,
+              "text": "And",
+              "start_offset": "111.900s",
+              "end_offset": "112s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1808,
+              "end_index": 1811,
+              "text": "you",
+              "start_offset": "112s",
+              "end_offset": "112.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1812,
+              "end_index": 1819,
+              "text": "haven't",
+              "start_offset": "112.100s",
+              "end_offset": "112.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1820,
+              "end_index": 1824,
+              "text": "gone",
+              "start_offset": "112.300s",
+              "end_offset": "112.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1825,
+              "end_index": 1836,
+              "text": "unconscious",
+              "start_offset": "112.600s",
+              "end_offset": "113.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1837,
+              "end_index": 1839,
+              "text": "or",
+              "start_offset": "113.200s",
+              "end_offset": "113.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1840,
+              "end_index": 1848,
+              "text": "anything",
+              "start_offset": "113.300s",
+              "end_offset": "113.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1849,
+              "end_index": 1855,
+              "text": "since?",
+              "start_offset": "113.800s",
+              "end_offset": "114.400s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1856,
+              "end_index": 1859,
+              "text": "No?",
+              "start_offset": "114.500s",
+              "end_offset": "114.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1860,
+              "end_index": 1863,
+              "text": "Did",
+              "start_offset": "114.700s",
+              "end_offset": "114.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1864,
+              "end_index": 1867,
+              "text": "you",
+              "start_offset": "114.900s",
+              "end_offset": "115s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1868,
+              "end_index": 1871,
+              "text": "hit",
+              "start_offset": "115s",
+              "end_offset": "115.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1872,
+              "end_index": 1876,
+              "text": "your",
+              "start_offset": "115.200s",
+              "end_offset": "115.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1877,
+              "end_index": 1882,
+              "text": "head?",
+              "start_offset": "115.300s",
+              "end_offset": "115.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1882,
+              "end_index": 1885,
+              "text": "Did",
+              "start_offset": "116.800s",
+              "end_offset": "116.900s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1886,
+              "end_index": 1887,
+              "text": "I",
+              "start_offset": "116.900s",
+              "end_offset": "117s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1888,
+              "end_index": 1891,
+              "text": "hit",
+              "start_offset": "117s",
+              "end_offset": "117.200s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1892,
+              "end_index": 1895,
+              "text": "You",
+              "start_offset": "118.300s",
+              "end_offset": "118.400s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1896,
+              "end_index": 1903,
+              "text": "forget?",
+              "start_offset": "118.400s",
+              "end_offset": "118.800s",
+              "speaker": "spk:0",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1903,
+              "end_index": 1908,
+              "text": "Maybe",
+              "start_offset": "118.600s",
+              "end_offset": "118.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1909,
+              "end_index": 1912,
+              "text": "you",
+              "start_offset": "118.900s",
+              "end_offset": "119s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1913,
+              "end_index": 1916,
+              "text": "hit",
+              "start_offset": "119s",
+              "end_offset": "119.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1917,
+              "end_index": 1921,
+              "text": "your",
+              "start_offset": "119.100s",
+              "end_offset": "119.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1922,
+              "end_index": 1927,
+              "text": "head.",
+              "start_offset": "119.200s",
+              "end_offset": "119.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1927,
+              "end_index": 1932,
+              "text": "Yeah,",
+              "start_offset": "120s",
+              "end_offset": "120.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1933,
+              "end_index": 1935,
+              "text": "uh",
+              "start_offset": "120.500s",
+              "end_offset": "120.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1936,
+              "end_index": 1937,
+              "text": "I",
+              "start_offset": "121.100s",
+              "end_offset": "121.200s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1938,
+              "end_index": 1943,
+              "text": "think",
+              "start_offset": "121.200s",
+              "end_offset": "121.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1944,
+              "end_index": 1947,
+              "text": "so.",
+              "start_offset": "121.400s",
+              "end_offset": "121.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1948,
+              "end_index": 1951,
+              "text": "You",
+              "start_offset": "121.800s",
+              "end_offset": "121.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1952,
+              "end_index": 1957,
+              "text": "know.",
+              "start_offset": "121.900s",
+              "end_offset": "122s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1957,
+              "end_index": 1962,
+              "text": "Okay,",
+              "start_offset": "122.300s",
+              "end_offset": "122.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1963,
+              "end_index": 1966,
+              "text": "are",
+              "start_offset": "122.600s",
+              "end_offset": "122.700s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1967,
+              "end_index": 1970,
+              "text": "you",
+              "start_offset": "122.700s",
+              "end_offset": "122.900s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1971,
+              "end_index": 1977,
+              "text": "having",
+              "start_offset": "122.900s",
+              "end_offset": "123.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1978,
+              "end_index": 1981,
+              "text": "any",
+              "start_offset": "123.100s",
+              "end_offset": "123.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1982,
+              "end_index": 1986,
+              "text": "neck",
+              "start_offset": "123.300s",
+              "end_offset": "123.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1987,
+              "end_index": 1992,
+              "text": "pain,",
+              "start_offset": "123.600s",
+              "end_offset": "124s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1993,
+              "end_index": 1996,
+              "text": "any",
+              "start_offset": "124s",
+              "end_offset": "124.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 1997,
+              "end_index": 2001,
+              "text": "back",
+              "start_offset": "124.200s",
+              "end_offset": "124.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2002,
+              "end_index": 2007,
+              "text": "pain?",
+              "start_offset": "124.500s",
+              "end_offset": "125s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2007,
+              "end_index": 2010,
+              "text": "No,",
+              "start_offset": "125.200s",
+              "end_offset": "125.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2011,
+              "end_index": 2015,
+              "text": "none",
+              "start_offset": "125.400s",
+              "end_offset": "125.700s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2016,
+              "end_index": 2020,
+              "text": "none",
+              "start_offset": "125.700s",
+              "end_offset": "125.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2021,
+              "end_index": 2023,
+              "text": "of",
+              "start_offset": "125.900s",
+              "end_offset": "125.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2024,
+              "end_index": 2029,
+              "text": "that.",
+              "start_offset": "125.900s",
+              "end_offset": "126.100s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2030,
+              "end_index": 2034,
+              "text": "Just",
+              "start_offset": "126.100s",
+              "end_offset": "126.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2035,
+              "end_index": 2038,
+              "text": "the",
+              "start_offset": "126.300s",
+              "end_offset": "126.400s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2039,
+              "end_index": 2043,
+              "text": "leg.",
+              "start_offset": "126.400s",
+              "end_offset": "126.800s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2044,
+              "end_index": 2047,
+              "text": "No.",
+              "start_offset": "126.800s",
+              "end_offset": "127s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2047,
+              "end_index": 2052,
+              "text": "Okay.",
+              "start_offset": "127.300s",
+              "end_offset": "127.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2053,
+              "end_index": 2056,
+              "text": "All",
+              "start_offset": "128.100s",
+              "end_offset": "128.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2057,
+              "end_index": 2063,
+              "text": "right.",
+              "start_offset": "128.200s",
+              "end_offset": "128.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2064,
+              "end_index": 2067,
+              "text": "And",
+              "start_offset": "128.600s",
+              "end_offset": "129s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2068,
+              "end_index": 2070,
+              "text": "do",
+              "start_offset": "129s",
+              "end_offset": "129.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2071,
+              "end_index": 2073,
+              "text": "we",
+              "start_offset": "129.100s",
+              "end_offset": "129.200s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2074,
+              "end_index": 2080,
+              "text": "notice",
+              "start_offset": "129.200s",
+              "end_offset": "129.600s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2081,
+              "end_index": 2084,
+              "text": "any",
+              "start_offset": "129.600s",
+              "end_offset": "129.800s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2085,
+              "end_index": 2090,
+              "text": "other",
+              "start_offset": "129.800s",
+              "end_offset": "130.100s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2091,
+              "end_index": 2103,
+              "text": "deformities,",
+              "start_offset": "130.100s",
+              "end_offset": "131s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2104,
+              "end_index": 2110,
+              "text": "blood,",
+              "start_offset": "131s",
+              "end_offset": "131.500s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2111,
+              "end_index": 2120,
+              "text": "injuries?",
+              "start_offset": "131.500s",
+              "end_offset": "132.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2120,
+              "end_index": 2125,
+              "text": "Yeah,",
+              "start_offset": "134.700s",
+              "end_offset": "134.900s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2126,
+              "end_index": 2130,
+              "text": "it's",
+              "start_offset": "135.200s",
+              "end_offset": "135.300s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2131,
+              "end_index": 2136,
+              "text": "good.",
+              "start_offset": "135.300s",
+              "end_offset": "135.600s",
+              "speaker": "spk:2",
+              "type": "word_info"
+            },
+            {
+              "start_index": 2136,
+              "end_index": 2140,
+              "text": "Good",
+              "start_offset": "136s",
+              "end_offset": "136.300s",
+              "speaker": "spk:3",
+              "type": "word_info"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "type": "model_output"
+    }
+  ],
+  "object": "interaction",
+  "model": "gemini-3.5-transcribe"
+}
