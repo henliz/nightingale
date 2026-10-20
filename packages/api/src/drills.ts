@@ -241,6 +241,8 @@ const LABELS: Record<string, string> = {
   safety: "Safety",
   othersOnScene: "Others on scene",
   patient: "Patient",
+  capacityNote: "Capacity reason",
+  decisionMaker: "Decision maker",
   chiefComplaint: "Chief complaint",
   mechanismOrComplaint: "Mechanism / what happened",
   timeline: "Timeline",

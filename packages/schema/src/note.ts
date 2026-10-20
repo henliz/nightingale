@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { IsoDateTime } from "./common.js";
 
-export const Capacity = z.enum(["capable", "incapable", "unknown"]);
+export const Capacity = z.enum(["capable", "impaired", "incapable", "unknown"]);
 export type Capacity = z.infer<typeof Capacity>;
 
 export const PhotoNote = z.object({
@@ -105,6 +105,8 @@ export const NoteSections = z.object({
       dob: z.string().optional(),
       weight: z.string().optional(),
       capacity: Capacity.optional(),
+      /** why, in what was said, e.g. "unresponsive" or "intoxicated per bystanders, ?head strike" */
+      capacityNote: z.string().optional(),
       decisionMaker: z.string().optional(),
     })
     .optional(),

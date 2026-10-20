@@ -101,6 +101,10 @@ export const dashboardHtml = `<!doctype html>
   table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
   table.grid th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #5f6471; font-weight: 600; }
   table.grid th, table.grid td { padding: 5px 8px; border-top: 1px solid #22262e; }
+  /* vitals have 11 columns, scroll sideways instead of squashing them */
+  .grid-scroll { overflow-x: auto; }
+  .grid-scroll table.grid { width: auto; min-width: 100%; }
+  .grid-scroll table.grid th, .grid-scroll table.grid td { white-space: nowrap; }
   .sec .photos { padding: 8px 10px 0; margin-bottom: 8px; }
   .sec .flag { padding: 0 10px 8px; }
   .draft-badge {
@@ -223,11 +227,11 @@ function kv(cells) {
   return '<div class="kv">' + cells.join("") + '</div>';
 }
 
-function table(cols, rows, path) {
+function table(cols, rows, path, scroll) {
   if (!rows || !rows.length) return kv([cell(path, "none recorded yet", "", true)]);
-  const html = '<table class="grid"><tr>' + cols.map((c) => '<th>' + c[1] + '</th>').join("") + '</tr>' +
+  const html = (scroll ? '<div class="grid-scroll">' : '') + '<table class="grid"><tr>' + cols.map((c) => '<th>' + c[1] + '</th>').join("") + '</tr>' +
     rows.map((r) => '<tr>' + cols.map((c) => '<td>' + esc(r[c[0]] || "") + '</td>').join("") + '</tr>').join("") +
-    '</table>';
+    '</table>' + (scroll ? '</div>' : '');
   const key = JSON.stringify(rows);
   const changed = prevValues[path] !== undefined && prevValues[path] !== key;
   nextValues[path] = key;
@@ -271,7 +275,7 @@ function renderEpcr(session, photos) {
   ]) + (photos.length ? '<div class="k" style="padding:8px 10px 0">scene photos, click to enlarge</div>' + renderPhotos(session, photos) : ""));
   html += sec("Patient", kv([
     cell("p.name", "Name", p.name), cell("p.age", "Age", p.age), cell("p.sex", "Sex", p.sex),
-    cell("p.dob", "DOB", p.dob), cell("p.weight", "Weight", p.weight), cell("p.capacity", "Capacity", p.capacity),
+    cell("p.dob", "DOB", p.dob), cell("p.weight", "Weight", p.weight), cell("p.capacity", "Capacity", [p.capacity, p.capacityNote].filter(Boolean).join(": "), true),
     cell("p.dm", "Decision maker", p.decisionMaker), cell("p.family", "Family contact", s.familyContact, true),
   ]));
   html += sec("Chief complaint and history", kv([
@@ -288,7 +292,7 @@ function renderEpcr(session, photos) {
     cell("sa.events", "Events leading up", sa.events, true),
   ]));
   html += sec("Vitals", table([["time", "Time"], ["loc", "LOC"], ["bp", "BP"], ["hr", "HR"], ["rr", "RR"],
-    ["spo2", "SpO2"], ["gcs", "GCS"], ["temp", "Temp"], ["glucose", "BGL"], ["pain", "Pain"], ["skin", "Skin"]], s.vitals, "vitals"));
+    ["spo2", "SpO2"], ["gcs", "GCS"], ["temp", "Temp"], ["glucose", "BGL"], ["pain", "Pain"], ["skin", "Skin"]], s.vitals, "vitals", true));
   html += sec("Assessment", kv([
     cell("cond", "Condition observed (LOC, ABCs)", s.conditionObserved, true),
     cell("exam", "Physical exam", s.physicalExam, true),

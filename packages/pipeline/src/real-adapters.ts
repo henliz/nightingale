@@ -346,32 +346,68 @@ type ExtractedSections = Record<string, unknown> & { uncertain?: string[] };
 // in the truck, leg under the dash" came out as mechanism "leg entrapment" and no
 // dispatch reason. now: restating + combining what was said in ems wording is the job,
 // only adding facts nobody said is off limits
-export const CONDENSE_PROMPT_VERSION = "epcr-v4";
+//
+// v5 (oct 19 2026, after the field test): v4 wrote "L leg" when nobody said a side (it
+// happened to be right, which is worse, it looks trustworthy), made up an "at
+// destination" time, and dropped a bystander naming the patient and saying he was drunk.
+// examples in here are placeholders on purpose: a real name used as an example got
+// copied into a case where nobody said any name
+//
+// v6: the call's milestones (911 call, crew arrival, handoff) go into the time slots the
+// form already has, and fields read like a medic charted them
+//
+// v7 (oct 20 2026, after the bbq/allergy/dirt bike cases): missed "give a call" as the
+// 911 call, left # patients / capacity / decision maker blank when the scene made them
+// obvious, and put where it hurts in radiation. times go to the second now, a drill fits
+// in 6 minutes so hh:mm made every milestone the same minute
+export const CONDENSE_PROMPT_VERSION = "epcr-v7";
 
 const CONDENSE_SYSTEM_PROMPT = `you fill in a draft ePCR (electronic patient care report) from a transcript of an emergency-response drill. a responder will review every field before anything is shared.
 
 rules:
 - write it like an experienced paramedic would: pull every fact that was said into the right field, restated in standard ems wording, combining what different people said about the same thing. e.g. "I was up the ladder cleaning the gutter" + "he came down maybe eight feet" + "landed flat on his back" -> mechanism "fall ~8 ft from ladder, landed on back"
 - what's off limits is adding a fact nobody said: no diagnosis, no clinical impression, no treatment advice, no invented numbers, nothing because it "seems likely". restating and summarizing what was said is not inferring
+- never fill in a body side (left/right), a time, a name, an age or a number that nobody said. a wrong side or time in a patient record is dangerous even when it's a good guess. if it matters and wasn't said (e.g. which leg), leave it out and add it to "uncertain"
+- times: only use a line's "(hh:mm:ss)" for something happening at that moment, copied to the second. never fill transport/destination times unless arriving somewhere is actually described
+- the call's milestones go in the time slots, using the "(hh:mm:ss)" of the line where they happen (in drills people narrate them, "we can say the ambulance is here", treat that as it happening):
+  - the 911 call -> incident.times.callReceived: the line where the caller starts reporting to dispatch, or dispatch answering ("911, do you need..."). if the call itself isn't heard, the line where someone says to call ("let's call 911", "give a call")
+  - "fire arriving", "we're on scene", a crew announcing arrival -> incident.times.onScene
+  - the first responder starting to talk to or assess the patient -> incident.times.patientContact
+  - "ambulance is here", "paramedics arriving", a transfer of care / handoff report -> transport.handoffTo (who to) plus an interventions entry "transfer of care to <who>" at that time
+  - leaving the scene / arriving at hospital -> departScene / atDestination, only if it's described
+- timeline: the key moments in order, each as "hh:mm:ss event" separated by "; " (call, arrival, patient contact, each intervention, handoff), in plain words ("911 call", not "callReceived")
+- write every field the way a paramedic charts it: short clinical phrases with the body part, not fragments ("chest tightness" not "tightening", "pain 6/10" not "six")
+- bystanders count for scene facts: a name they use for the patient ("my friend <name>") is the patient's name, and what they say about the patient or scene (e.g. intoxication, what happened, who else is around) goes in the matching field (sample.events, hazards, scene) as well as bystanderStatements
+- bystanderStatements and any quotes must use the words actually said. never add a name, age or detail into a quote
+- when people disagree (two different ages, two different times), the field holds each value with who said it ("32 per cousin; 57 per responder at handoff") and the conflict goes in "uncertain". never pick one
 - fill every field the transcript supports, including the obvious one-word summaries a paramedic would write: dispatchReason is the call type that was described (what dispatch said if that's quoted, otherwise e.g. "fall", "MVC", "chest pain"), chiefComplaint is the patient's main problem with the body part and side ("R wrist pain"), hazards / environment / safety come from what's described about the scene
 - other responders count: who's on scene and what they said or did goes in unitsOnScene / othersOnScene (e.g. "fire (Sam, firefighter), police"), a responder giving a report to another (a handoff) goes in the narrative, a radio report to command is an intervention/communication worth noting
 - anything a responder reports about the patient (age, meds, time trapped, injuries) counts the same as the patient saying it
 - lines are tagged with who spoke: [Person 1], [Person 2], ... are different voices, numbered in the order they were first heard (not by role). [unlabelled] means the speaker isn't known yet. work out who is the patient only from what they say (e.g. describing their own pain or history), and never put a "Person N" label in the form
 - lines marked [bystander] are not the responder or patient, that content only goes in bystanderStatements
-- vitals: only record a number if someone actually said it out loud (e.g. "bp 140 over 90", "sats 96"). never estimate one. qualitative findings (alert, pale, breathing fast) go in conditionObserved / physicalExam / vitals.loc / vitals.skin
+- vitals: only record a number if someone actually said it out loud (e.g. "bp 140 over 90", "sats 96"). never estimate one, and "no pulse" is hr "absent", not 0. qualitative findings (alert, pale, breathing fast) go in conditionObserved / physicalExam / vitals.loc / vitals.skin
 - "(hh:mm:ss)" at the start of a line is the clock time that part was recorded. you may use it for a vitals/intervention/incident time when the speech is about that moment ("giving aspirin now"), otherwise leave times out
 - interventions are things the responder actually did, each as its own entry, with the patient's response if it was said
 - medications and allergies: the patient's own, as said. also list them in medsAndAllergiesMentioned for the short handoff view
-- the transcript is speech-to-text and has errors. if a word is clearly a mis-hearing of a common ems term, use the obvious term, but if you're not sure, keep it out and add a short note to "uncertain"
-- patient.capacity only if someone explicitly says the patient can or can't make decisions (alert and oriented alone is NOT capacity). scene.numberOfPatients only if a number of patients is said. sex only if said or the speaker uses he/she about the patient
-- opqrst.severity is the pain score ("seven out of ten"), opqrst.quality is how it feels (sharp, dull, crushing)
-- times are hh:mm (24h), no brackets
+- the transcript is speech-to-text and has errors. if a word or phrase is clearly a mis-hearing (an ems term, or an everyday phrase where one word is obviously misheard), use the obvious intended words, but if you're not sure, keep it out and add a short note to "uncertain"
+- scene.numberOfPatients: the number of patients described. one person hurt or sick and nobody mentions another -> "1"
+- patient.capacity is charted from what was said, the way a medic would, with the reasons in patient.capacityNote:
+  - "incapable": unresponsive, pulseless, not answering, or clearly confused / disoriented
+  - "impaired": answering but with something said that undermines it, e.g. intoxicated (even per bystanders), possible head strike, can't remember the event, dizzy / near syncope. list each reason said ("intoxicated per bystanders, ?head strike, can't recall event")
+  - "capable": an adult, alert, answering questions appropriately, and nothing said that undermines it
+  - pain on its own is not a capacity reason. only "unknown" if nothing about responsiveness or behaviour was said
+- patient.decisionMaker: "self" when capable; when incapable or impaired, "implied consent (emergency)" plus any family / substitute decision maker on scene by their relation as said ("implied consent (emergency), cousin on scene")
+- sex only if said or the speaker uses he/she about the patient
+- opqrst.severity is the pain score ("seven out of ten"), and the same score goes in that moment's vitals row as pain. opqrst.quality is how it feels (sharp, dull, crushing)
+- opqrst.radiation is ONLY pain spreading or moving from where it starts to somewhere else ("goes down my arm", "into my jaw"). where it hurts most / pointing at a spot is the location, that goes in chiefComplaint, not radiation. "doesn't go anywhere" -> "non-radiating". nothing said about spreading -> leave it out
+- opqrst.provocation is what makes it better or worse (moving, breathing in, rest). a symptom isn't a provocation
+- times are hh:mm:ss (24h), no brackets. in the timeline too
 - if a field has no information, leave it out of the json entirely. empty strings and empty arrays are not allowed
 - respond with a single json object only, matching this shape, every field optional:
 {"incident": {"location": "", "dispatchReason": "", "unitsOnScene": "", "times": {"callReceived": "", "enRoute": "", "onScene": "", "patientContact": "", "departScene": "", "atDestination": ""}},
  "scene": {"numberOfPatients": "", "environment": "", "safety": "", "othersOnScene": ""},
  "chiefComplaint": "", "mechanismOrComplaint": "", "timeline": "",
- "patient": {"name": "", "age": "", "sex": "", "dob": "", "weight": "", "capacity": "capable|incapable|unknown", "decisionMaker": ""},
+ "patient": {"name": "", "age": "", "sex": "", "dob": "", "weight": "", "capacity": "capable|impaired|incapable|unknown", "capacityNote": "", "decisionMaker": ""},
  "sample": {"signsSymptoms": "", "allergies": [""], "medications": [""], "pastHistory": "", "lastOralIntake": "", "events": ""},
  "opqrst": {"onset": "", "provocation": "", "quality": "", "radiation": "", "severity": "", "time": ""},
  "vitals": [{"time": "", "loc": "", "bp": "", "hr": "", "rr": "", "spo2": "", "gcs": "", "temp": "", "glucose": "", "pain": "", "skin": ""}],

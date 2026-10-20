@@ -299,6 +299,10 @@ export function createApp(
         modelVersion: "demo-1",
         promptVersion: CONDENSE_PROMPT_VERSION,
       });
+      // nobody narrates leaving in a drill, the recording stopping is when the crew
+      // cleared. only a fallback, a described departure from the condenser wins
+      const times = ((epcr.sections.incident ??= {}).times ??= {});
+      times.departScene ??= `${new Date(entries.at(-1)!.at).toLocaleTimeString("en-GB")} (end of recording)`;
       Object.assign(session, {
         epcr,
         epcrStatus: "ready",
