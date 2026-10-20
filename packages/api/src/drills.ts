@@ -53,6 +53,10 @@ export interface DrillSession {
   assets: LiveAsset[];
   /** audio from an earlier boot that was still queued on the pi, uploaded late */
   backlog?: boolean;
+  /** a name for the dropdown, e.g. "Case 2 · Shellfish allergy" (scripts/split-cases.mjs) */
+  title?: string;
+  /** the recording a case was split out of */
+  caseOf?: string;
   /** the session-wide draft epcr, rebuilt from the whole transcript after every chunk */
   epcr?: DraftNote;
   epcrStatus?: "updating" | "ready" | "failed";
@@ -170,7 +174,7 @@ const time = (ms: number) => new Date(ms).toLocaleTimeString();
 
 export function transcriptMarkdown(session: DrillSession) {
   const lines = [
-    `# transcript, ${session.captureId}`,
+    `# transcript, ${session.title ?? session.captureId}`,
     "",
     `device ${session.deviceId ?? "unknown"}, started ${new Date(session.startedAt).toLocaleString()}`,
     "",
@@ -280,7 +284,7 @@ function valueLines(value: unknown, depth: number): string[] {
 }
 
 export function epcrMarkdown(session: DrillSession) {
-  const lines = [`# draft ePCR, ${session.captureId}`, "", "_draft, pending responder review. ai-generated from the transcript, nothing here is approved._", ""];
+  const lines = [`# draft ePCR, ${session.title ?? session.captureId}`, "", "_draft, pending responder review. ai-generated from the transcript, nothing here is approved._", ""];
   const epcr = session.epcr;
   if (!epcr) lines.push("_no epcr yet_", "");
   else {

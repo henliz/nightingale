@@ -406,15 +406,22 @@ function render() {
 
   const pick = document.getElementById("session-pick");
   pick.hidden = sessions.length < 2;
+  pick.title = "pick a session or case";
   // following = the newest session that isn't old queued audio from an earlier boot
   const newest = (sessions.find((s) => !s.backlog) || sessions[0]).captureId;
   const current = pickedSession && sessions.find((s) => s.captureId === pickedSession)
     ? pickedSession : newest;
-  const ordered = [sessions.find((s) => s.captureId === newest)].concat(sessions.filter((s) => s.captureId !== newest));
+  // latest first, then named cases (in name order), then everything else newest first
+  const named = sessions.filter((s) => s.title && s.captureId !== newest)
+    .sort((x, y) => x.title.localeCompare(y.title, undefined, { numeric: true }));
+  const ordered = [sessions.find((s) => s.captureId === newest)].concat(named,
+    sessions.filter((s) => s.captureId !== newest && !s.title));
+  const label = (s) => s.title
+    ? s.title + ' \u00b7 ' + new Date(s.startedAt).toLocaleDateString()
+    : new Date(s.startedAt).toLocaleString() + ' \u00b7 ' + s.captureId + (s.backlog ? " (from an earlier boot)" : "");
   pick.innerHTML = ordered.map((s, i) =>
     '<option value="' + esc(s.captureId) + '"' + (s.captureId === current ? " selected" : "") + '>' +
-    esc(new Date(s.startedAt).toLocaleString()) + ' \u00b7 ' + esc(s.captureId) +
-    (i === 0 ? " (latest)" : s.backlog ? " (from an earlier boot)" : "") + '</option>').join("");
+    esc(label(s)) + (i === 0 ? " (latest)" : "") + '</option>').join("");
 
   const session = sessions.find((s) => s.captureId === current);
   if (!currentSession || currentSession.captureId !== session.captureId) prevValues = {}; // no flashing on switch

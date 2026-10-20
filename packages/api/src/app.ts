@@ -672,6 +672,16 @@ export function createApp(
 
   app.get("/dev/sessions", (c) => c.json([...sessions.values()]));
 
+  // rebuilds a session's whole-session epcr from its transcript, e.g. after a case was
+  // split out of a longer recording (scripts/split-cases.mjs)
+  app.post("/dev/sessions/:captureId/epcr", async (c) => {
+    const captureId = c.req.param("captureId");
+    if (!sessions.has(captureId)) throw new HttpError(404, `no session ${captureId}`);
+    await refreshEpcr(captureId, reviewCondenser);
+    const session = sessions.get(captureId)!;
+    return c.json({ status: session.epcrStatus, sections: Object.keys(session.epcr?.sections ?? {}).length });
+  });
+
   // the dashboard's "new session" button. starts a fresh session (own drills/ folder,
   // empty epcr, speakers from Person 1) for everything the device sends from now on,
   // without touching the pi. the previous session is kept as it is
