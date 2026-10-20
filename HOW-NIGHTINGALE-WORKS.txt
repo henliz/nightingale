@@ -1,0 +1,414 @@
+HOW NIGHTINGALE WORKS
+a plain-english guide for people who don't write code
+(written oct 20 2026, describes the system as it is today)
+
+================================================================
+FIRST, THE NAMES
+================================================================
+
+"Nightingale" is two things, so here's how to keep them straight:
+
+  - NIGHTINGALE THE DEVICE. A tiny computer called a Raspberry Pi
+    (the model is a "Pi Zero 2 W", about the size of a stick of gum).
+    We named this particular Pi "nightingale". When anything on the
+    network talks to it, that's the name it answers to. It has a
+    camera, a microphone and two buttons, and it's meant to be worn
+    by a first responder.
+
+  - NIGHTINGALE THE SYSTEM. The whole project: the device, plus the
+    server that receives what the device records, plus the AI that
+    turns the recording into a draft patient report, plus the
+    dashboard where you watch it all happen.
+
+When this guide says "the Pi" or "the device", it means the little
+computer named nightingale. When it says "the server" or "the
+laptop", it means the computer receiving the recordings (right now
+that's Hen's MacBook).
+
+
+================================================================
+THE BIG PICTURE IN ONE PARAGRAPH
+================================================================
+
+A firefighter presses a button on the Pi. It turns on and starts
+recording what's being said at the scene. Whenever they press the
+other button, it takes a photo. The recording is cut into short
+15-second pieces, and each piece is sent over Wi-Fi to the server
+as soon as it's ready. The server turns the speech into text, works
+out who is speaking, and fills in a draft ePCR (electronic patient
+care report: the form paramedics fill out for every patient). It
+updates that draft every time a new piece arrives, so the form fills
+itself in while the call is still happening. When the firefighter
+presses the first button again, the Pi saves everything and turns
+itself off. Nothing is ever deleted from the Pi until the server has
+confirmed it has a perfect copy.
+
+
+================================================================
+PART 1: THE DEVICE (the Pi named nightingale)
+================================================================
+
+WHAT'S PHYSICALLY ON IT
+
+  - The Pi itself (the small computer).
+  - A camera with autofocus (Arducam 16MP), so photos are sharp
+    even though the person wearing it is moving.
+  - A microphone. Right now it's the Pi's basic input, which is very
+    quiet. A better USB sound card is coming.
+  - Two buttons.
+  - A memory card (like a phone's storage), which is where
+    recordings wait until they've been uploaded.
+  - Battery or power bank power.
+
+THE TWO BUTTONS (this is the whole interface, on purpose)
+
+  1. POWER / RECORD
+     - If the device is off: pressing it turns the Pi on. As soon as
+       it has started up (it takes a little while to boot), it starts
+       recording automatically. You don't have to press anything else.
+     - If it's recording: pressing it stops the recording, saves it
+       safely, and turns the Pi off.
+     - Safety net: if someone forgets it's on, it stops by itself
+       after 30 minutes and does the same thing.
+
+  2. PHOTO
+     - While it's recording, a press takes one photo.
+     - While it's not recording, the button does nothing.
+
+One press always means one action. There are no "hold for 3
+seconds" tricks. The device NEVER takes photos by itself, and it
+never records unless someone pressed the button to turn it on.
+
+When recording starts, the device reminds the responder to say out
+loud: "I'm recording for the medical record", so everyone at the
+scene knows.
+
+HOW IT RECORDS AUDIO
+
+  - It records in good-quality, uncompressed sound (the format is
+    called WAV). That's plain enough for speech-to-text to work
+    well, and it's never squashed in a way that loses detail.
+  - The recording is quietly split into 15-second pieces ("chunks")
+    one after another, with no gap between them. The person wearing
+    it never notices. This is so pieces can be sent off and turned
+    into text while the call is still going, instead of waiting
+    until the end.
+  - At the same time, it also sends a "live" feed of the microphone
+    straight to the server, so words can appear on the dashboard
+    almost as they're spoken. The live feed is a bonus. The saved
+    15-second pieces are the real record. If the live feed drops,
+    nothing is lost.
+
+HOW IT TAKES A PHOTO
+
+  - On a PHOTO press, the camera takes a quick burst of several
+    frames, not just one.
+  - The Pi scores each frame for sharpness (basically, "how crisp
+    are the edges in this picture?"), keeps only the sharpest one,
+    and immediately deletes the rest. So a shaky hand doesn't ruin
+    the shot, and no extra images are kept.
+  - Autofocus happens at the moment of capture.
+
+THE WAITING ROOM (the "queue") AND WHY NOTHING GETS LOST
+
+This is the most important safety idea in the device.
+
+  1. While a piece of audio or a photo is being written, it lives in
+     a holding folder called "incoming". That way a half-finished
+     file is never sent.
+  2. Once it's finished, it moves into the queue: a line of files
+     waiting to be sent.
+  3. Separate background helpers on the Pi keep taking the oldest
+     file in the line and sending it to the server.
+  4. The file is only deleted from the Pi once the server replies
+     "got it, and it's a perfect copy". (How does it know it's
+     perfect? See "fingerprints" below.)
+  5. If the Wi-Fi drops, the files just wait in line. If the battery
+     dies mid-recording, whatever was half-written is rescued the
+     next time the Pi turns on, and uploaded then.
+  6. Turning the Pi off never waits for the internet. If you press
+     stop with no Wi-Fi, everything stays in the queue and uploads
+     the next time the device is on and connected.
+
+This pattern has a name: STORE-AND-FORWARD. Store it safely first,
+forward it when you can.
+
+FINGERPRINTS (sha256)
+
+Before sending a file, the Pi calculates a "fingerprint" of it: a
+long code that's different for every possible file. Change a single
+bit and the fingerprint is completely different. The server
+calculates the fingerprint of what it received. If the two match,
+the copy is perfect. If not, the Pi keeps its copy and tries again.
+
+WHAT THE PI DOES NOT DO
+
+  - No AI, no speech-to-text, no thinking on the device. It just
+    records, takes photos and sends them. All the smart work happens
+    on the server. (The Pi is small and has very little memory.)
+  - No video. Photos and audio only. That was a deliberate decision.
+  - It never listens to anything except its own microphone. If a
+    transcript ever looks like radio chatter or something nobody
+    said, that's the speech-to-text AI making things up from quiet
+    audio, not the device picking up outside signals.
+
+HOW THE PI KNOWS WHAT IT'S DOING (logs)
+
+The Pi keeps a running diary of what it's doing ("started
+recording", "photo saved", "uploaded piece 4", "Wi-Fi lost"). During
+drills it also sends that diary to the server so it shows up live
+on the dashboard. Every 30 seconds it sends a "heartbeat": I'm on,
+here's how many files are waiting, how full my storage is, how hot
+I am. The diary NEVER contains what was said or any images. It's
+only "what happened", never "what was recorded".
+
+
+================================================================
+PART 2: HOW THE PI TALKS TO THE SERVER (today)
+================================================================
+
+THE CONNECTION
+
+  - Today, the Pi uses Wi-Fi. It remembers networks it has joined
+    before (home Wi-Fi, or Hen's phone hotspot) and connects to
+    whichever one it can see.
+  - The server is Hen's laptop, and the two have to be on the SAME
+    Wi-Fi network to find each other. The Pi finds the laptop by
+    name (Henriettas-MacBook-Air.local), so nobody has to type
+    addresses.
+  - This is fine for drills, but it means the laptop has to be
+    nearby, awake, and on the same network. That's the main
+    limitation of today's setup (see Part 5).
+
+WHAT ACTUALLY GETS SENT, AND HOW
+
+Everything travels the same way any website does: over the internet
+standard called HTTP. Behind the scenes, the data is chopped into
+tiny "packets" that travel separately and get reassembled at the
+other end. That's true of everything on the internet, including
+this.
+
+For each file (an audio piece or a photo), the Pi does three steps:
+
+  1. "I'm about to send you a file. Here's what kind it is and its
+     fingerprint." The server replies with a ticket number.
+  2. It sends the file itself (in parts if it's big, though in
+     practice our files fit in one part).
+  3. "I'm done." The server puts the parts together, checks the
+     fingerprint, and replies "verified" or "no, try again".
+
+If the connection drops halfway, the Pi can ask "where did I get
+to?" and pick up from there instead of starting over.
+
+And separately, the whole time it's recording:
+
+  - the live microphone feed (for words appearing on screen as
+    they're spoken),
+  - the diary and heartbeat (for the dashboard's console).
+
+
+================================================================
+PART 3: WHAT THE SERVER DOES WITH IT
+================================================================
+
+STEP 1: KEEP IT SAFE FIRST
+
+Before the server says "verified" to the Pi, it writes the exact
+bytes it received into a protected folder on the laptop called the
+CRASH PAD. That folder is read-only, sits outside the project, and
+keeps its own list of fingerprints. The Pi deletes its copy as soon
+as it hears "verified", so the crash pad is what guarantees there's
+always one untouched original somewhere. If the crash pad can't save
+the file, the server tells the Pi "no", and the Pi keeps its copy.
+
+The file also goes into the VAULT, a secure storage service running
+on the laptop. Everything after this point (text, the report, the
+dashboard) works on copies. Any of those steps can fail without
+losing the recording.
+
+STEP 2: SKIP SILENCE
+
+If a 15-second piece is basically silent, it isn't sent to the AI at
+all. Speech-to-text AIs tend to invent words out of silence, and we
+don't want made-up sentences ending up in a patient report.
+
+STEP 3: SPEECH TO TEXT, WITH WHO SAID WHAT
+
+Each piece is sent to Google's Gemini speech-to-text AI. It returns
+the words, labelled by voice: "Person 1", "Person 2", and so on.
+Those are numbered in the order the voices were first heard, NOT by
+role. The AI doesn't know who the firefighter is.
+
+To keep "Person 2" as the same human from one piece to the next, the
+server plays a short sample of each voice it has already heard in
+front of the new piece. That way the AI can match voices up.
+
+STEP 4: FILL IN THE DRAFT ePCR
+
+Every time new text arrives, the server hands the WHOLE transcript
+so far to a second AI. That AI fills in the patient report the way a
+paramedic would chart it:
+
+  - incident: where, why the call was made, who's on scene, and the
+    times (call placed, crew arrived, patient contact, handoff,
+    departure)
+  - scene: number of patients, environment, hazards
+  - patient: name, age, sex, whether they can make their own
+    decisions ("capacity") and who decides for them if not
+  - chief complaint and what happened
+  - SAMPLE history and OPQRST (standard paramedic checklists about
+    symptoms, allergies, medications, and what the pain is like)
+  - vitals (blood pressure, pulse, and so on, but only numbers
+    someone actually said out loud)
+  - interventions (what the responders did, and when)
+  - handoff to paramedics, and a short written summary
+
+The rules it follows are strict:
+
+  - It can restate and combine what people said in proper medical
+    wording.
+  - It can NOT add facts nobody said: no diagnosis, no guessed
+    numbers, no guessed left or right side, no guessed names or
+    ages.
+  - If two people disagree (one says 32 years old, another says
+    57), it records both and flags it.
+  - Anything it's unsure about goes in a "needs review" list.
+
+STEP 5: PHOTOS
+
+Each photo gets a one-sentence description of only what's visible
+(for example "a person lying on a mat, attended by two others").
+No guessing, no diagnosis.
+
+STEP 6: THE DASHBOARD
+
+Open http://localhost:8787 on the laptop to see three panels:
+
+  - the draft ePCR, filling itself in, with changed fields briefly
+    lighting up
+  - the transcript, with who said what and when
+  - the console: the Pi's diary, live
+
+The dashboard updates the moment new data arrives. It doesn't
+wait to refresh.
+
+Every session is also saved to a "drills" folder on the laptop
+(audio, photos, transcript, report) and comes back if the server
+restarts.
+
+IMPORTANT: EVERYTHING IS A DRAFT
+
+Nothing the AI writes is final. Every field is meant to be reviewed
+and approved by the responder before it goes anywhere. The system
+summarizes what was said. It does not diagnose, and it never gives
+treatment advice.
+
+
+================================================================
+PART 4: ONE CALL, START TO FINISH
+================================================================
+
+  1. A firefighter presses POWER/RECORD. Nightingale starts up and
+     begins recording. The responder says "I'm recording for the
+     medical record".
+  2. They talk to the patient and bystanders. Every 15 seconds a
+     piece of audio joins the queue and is sent to the laptop.
+  3. They press PHOTO once at the scene. Nightingale takes a burst,
+     keeps the sharpest frame, and queues it.
+  4. On the laptop, each piece is fingerprint-checked, copied to the
+     crash pad and the vault, turned into labelled text, and the
+     draft ePCR is updated. The dashboard shows it all as it lands.
+  5. Paramedics arrive. The firefighter gives the handoff report out
+     loud, and the ePCR records "transfer of care to paramedics".
+  6. The firefighter presses POWER/RECORD again. Nightingale saves
+     the last piece and turns off. Anything that hadn't uploaded yet
+     goes up the next time it's on and connected.
+  7. The finished draft is waiting on the dashboard for review.
+
+
+================================================================
+PART 5: WHAT'S NEXT, MOVING OFF THE LAPTOP
+================================================================
+
+THE PROBLEM WITH TODAY'S SETUP
+
+The server is Hen's laptop. The Pi can only send things when the
+laptop is on, awake, and on the same Wi-Fi. If the laptop closes, or
+the folder on it gets messed up, recordings are at risk. Real first
+responders can't depend on someone's laptop, so the server has to
+move to the cloud: computers that are always on and reachable from
+anywhere.
+
+The plan is Vercel, a cloud hosting service. It happens in two
+steps.
+
+STEP A: CLOUD SERVER, PI STILL ON WI-FI (next)
+
+  - The server moves to a web address (something like
+    https://nightingale.vercel.app) instead of the laptop.
+  - The Pi still connects over Wi-Fi, but ANY Wi-Fi with internet
+    now works: home, the venue, or a phone hotspot. The laptop
+    doesn't have to be there at all.
+  - No new hardware is needed. The Pi already has Wi-Fi. For a phone
+    hotspot on an iPhone, turn on "Maximize Compatibility", because
+    this Pi only speaks the older 2.4 GHz kind of Wi-Fi.
+  - Behind the scenes, a few things change to fit how the cloud
+    works:
+      - Files go straight from the Pi into cloud storage (Vercel
+        Blob or similar) through a one-time, short-lived upload
+        link. The cloud's storage takes over the crash pad's job of
+        being the safe original.
+      - Sessions and reports live in a proper database instead of a
+        folder on the laptop.
+      - Speech-to-text and the report run as background jobs,
+        triggered each time a new piece arrives.
+      - The dashboard gets its live updates through a "realtime"
+        service.
+  - The safety rule stays the same: the Pi only deletes a file once
+    the cloud confirms a perfect copy (matching fingerprint).
+  - Because this is patient information, it also needs: a login so
+    only the right people can see anything, encryption, and data
+    stored in Canada (Ontario's health privacy law, PHIPA).
+
+STEP B: PROPERLY WIRELESS (later)
+
+  - The goal is a device that works anywhere, with no Wi-Fi network
+    to join.
+  - Option 1, tether to a phone: the Pi connects to the responder's
+    phone (over Wi-Fi hotspot, or Bluetooth), and the phone's
+    cellular data carries everything to the cloud. No extra
+    hardware.
+  - Option 2, its own cellular connection: add a small cellular
+    modem (a USB stick or an add-on board, for example a SIM7600)
+    and a SIM card with a data plan, like a phone's. It works
+    anywhere there's cell signal. The cost is a bit of extra size
+    and more battery drain.
+  - Either way, store-and-forward means a weak or patchy signal is
+    fine. The files wait in the queue and catch up when the signal
+    comes back.
+
+
+================================================================
+QUICK GLOSSARY
+================================================================
+
+  Raspberry Pi    a tiny, cheap computer. Ours is named
+                  "nightingale".
+  ePCR            electronic patient care report, the official form
+                  for each patient.
+  chunk / piece   a 15-second slice of the recording.
+  queue           the line of files on the Pi waiting to be sent.
+  store-and-      save it safely first, send it when there's a
+  forward         connection.
+  sha256 /        a unique code for a file, used to prove a copy
+  fingerprint     is perfect.
+  crash pad       today's protected, read-only folder on the laptop
+                  that keeps the exact original of everything
+                  received.
+  vault           the secure storage where originals are kept.
+  HTTP / packets  how all data moves over the internet: in small
+                  pieces, reassembled at the other end.
+  cloud /         computers run by a company (Vercel) that are
+  Vercel          always on and reachable from anywhere.
+  tethering       a device using a phone's internet connection.
+  diarization     the AI working out which voice is speaking.
