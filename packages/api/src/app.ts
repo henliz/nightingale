@@ -11,6 +11,7 @@ import {
   wavLoudestSecondDbfs,
   wavSeconds,
   wavSlice,
+  type Condenser,
   type KnownSpeaker,
   type RawSegment,
   type PhotoCaptioner,
@@ -21,6 +22,7 @@ import type { Context } from "hono";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
 import { z } from "zod";
+import { noopCrashpad, type Crashpad } from "./crashpad.js";
 import { dashboardHtml } from "./dashboard.js";
 import {
   clockStamp,
@@ -95,10 +97,30 @@ export function createApp(
     // word-by-word live transcription (live-transcribe.ts). without it the device's
     // live audio stream is refused and everything falls back to the 30s chunks
     liveAsr,
-  }: { silenceDbfs?: number; drills?: DrillStore; liveAsr?: LiveAsrFactory } = {},
+    // where every upload is saved byte for byte before the device is told "verified"
+    // (crashpad.ts). if that save fails the device keeps its copy
+    crashpad = noopCrashpad,
+    // answer the device as soon as the crash pad copy is safe and transcribe after, so a
+    // slow model can't make it time out and retry. off in tests so the note's ready
+    // by the time the response comes back
+    processInBackground = false,
+    // a slower, stronger model for rebuilding a finished session's epcr (after a drill,
+    // speed doesn't matter, getting who's who right does). falls back to the live one
+    reviewCondenser,
+  }: {
+    silenceDbfs?: number;
+    drills?: DrillStore;
+    liveAsr?: LiveAsrFactory;
+    crashpad?: Crashpad;
+    processInBackground?: boolean;
+    reviewCondenser?: Condenser;
+  } = {},
 ) {
   const tracker = createUploadTracker(vault);
   const capturedAtById = new Map<string, number>();
+  // the device's own stamp from its file name, untouched, so the crash pad copy keeps
+  // the exact name it had on the device
+  const piStampById = new Map<string, number>();
   const draftNotes = new Map<string, DraftNote>();
   const captions = new Map<string, string>();
 
@@ -227,7 +249,7 @@ export function createApp(
   // whole session transcript so the form fills in and corrects itself. one run at a time
   // per session, and if chunks pile up meanwhile only the latest state gets condensed
   const epcrRuns = new Map<string, { running: boolean; again: boolean }>();
-  const refreshEpcr = async (captureId: string) => {
+  const refreshEpcr = async (captureId: string, condenser: Condenser = pipelineDeps.condenser) => {
     const state = epcrRuns.get(captureId) ?? { running: false, again: false };
     epcrRuns.set(captureId, state);
     if (state.running) {
@@ -238,14 +260,14 @@ export function createApp(
     try {
       do {
         state.again = false;
-        await condenseSession(captureId);
+        await condenseSession(captureId, condenser);
       } while (state.again);
     } finally {
       state.running = false;
     }
   };
 
-  const condenseSession = async (captureId: string) => {
+  const condenseSession = async (captureId: string, condenser: Condenser = pipelineDeps.condenser) => {
     const session = sessions.get(captureId);
     if (!session) return;
     // live turns + any chunks the live stream missed, in order. "(hh:mm:ss)" in front of
@@ -272,7 +294,7 @@ export function createApp(
     live.update(`epcr:${captureId}`);
     const started = Date.now();
     try {
-      const epcr = await pipelineDeps.condenser.condense(transcript, {
+      const epcr = await condenser.condense(transcript, {
         captureId,
         modelVersion: "demo-1",
         promptVersion: CONDENSE_PROMPT_VERSION,
@@ -306,6 +328,7 @@ export function createApp(
     const body = InitAssetRequest.parse(await c.req.json());
     const result = await tracker.initAsset(c.req.param("captureId"), body);
     if (body.capturedAt) {
+      piStampById.set(result.assetId, body.capturedAt);
       const offset = body.deviceNow ? Date.now() - body.deviceNow : 0;
       capturedAtById.set(result.assetId, body.capturedAt + offset);
     }
@@ -355,9 +378,35 @@ export function createApp(
       reason: "complete + sha256 verify",
     });
 
-    // only audio goes through the pipeline, a photo has nothing to transcribe.
-    // runs inline (not a background job/queue, that's later) so the note is
-    // actually ready by the time you ask for it
+    // the crash pad copy comes before anything else and before the device hears
+    // "verified" (it deletes its copy on that). can't save it = the device keeps it
+    const piStamp = piStampById.get(assetId);
+    piStampById.delete(assetId);
+    try {
+      crashpad.save({ captureId: result.captureId, piStamp, kind: result.kind, bytes: result.bytes });
+    } catch (err) {
+      live.log("server", "error", `couldn't save ${assetId} to the crash pad, telling the device to keep it: ${(err as Error).message}`);
+      throw new HttpError(500, "couldn't save it safely on the laptop, keep it on the device");
+    }
+    const actor = actorFrom(c);
+    const { bytes: _bytes, ...response } = result;
+    const processing = processUpload(assetId, result, actor);
+    if (processInBackground) {
+      processing.catch((err) => console.error(`processing ${assetId} failed:`, err));
+    } else {
+      await processing;
+    }
+    return c.json(response);
+  });
+
+  // everything after the crash pad: drills/ copy, transcription / captions, dashboard.
+  // works off copies, a failure here never loses the upload
+  const processUpload = async (
+    assetId: string,
+    result: Awaited<ReturnType<typeof tracker.complete>>,
+    actor: ReturnType<typeof actorFrom>,
+  ) => {
+    // only audio goes through the pipeline, a photo has nothing to transcribe
     const kb = Math.round(result.bytes.length / 1024);
     // a chunk cut off by power loss has a header that says "0 bytes", fix it up first
     const bytes = result.kind === "audio" ? repairWav(result.bytes) : result.bytes;
@@ -399,7 +448,7 @@ export function createApp(
     const chunkStart = capturedAt ?? completedAt - durationMs;
     if (result.kind === "audio") Object.assign(asset, { capturedAt: chunkStart, durationMs });
 
-    if (result.kind === "audio" && (wavSeconds(bytes) ?? 1) < 0.2) {
+    if (result.kind === "audio" && (wavSeconds(bytes) ?? (bytes.length <= 44 ? 0 : 1)) < 0.2) {
       // header only, arecord produced nothing (mic not detected / wrong card)
       setLive(assetId, { status: "silent" });
       live.log(
@@ -466,7 +515,7 @@ export function createApp(
         draftNotes.set(assetId, draftNote);
         setLive(assetId, { note: draftNote });
         await auditLog.record({
-          ...actorFrom(c),
+          ...actor,
           action: "edit",
           recordType: "DraftNote",
           recordId: draftNote.id,
@@ -485,7 +534,7 @@ export function createApp(
         setLive(assetId, { status: "ready", caption });
         live.log("server", "info", `caption ready for ${assetId} in ${secs()}s`, { sessionId });
         await auditLog.record({
-          ...actorFrom(c),
+          ...actor,
           action: "edit",
           recordType: "Asset",
           recordId: assetId,
@@ -497,10 +546,7 @@ export function createApp(
         live.log("server", "error", `captioning failed for ${assetId}: ${(err as Error).message}`, { sessionId });
       }
     }
-
-    const { bytes: _bytes, ...response } = result;
-    return c.json(response);
-  });
+  };
 
   // the whole point of this one: see the note the pipeline produced, as plain json
   app.get("/assets/:assetId/note", (c) => {
@@ -690,7 +736,7 @@ export function createApp(
   );
 
   app.onError((err, c) => {
-    if (err instanceof HttpError) return c.json({ error: err.message }, err.status as 400 | 404 | 409);
+    if (err instanceof HttpError) return c.json({ error: err.message }, err.status as 400 | 404 | 409 | 500);
     if (err instanceof z.ZodError) return c.json({ error: "bad request", issues: err.issues }, 400);
     console.error(err);
     return c.json({ error: "something broke on our end" }, 500);

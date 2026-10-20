@@ -21,6 +21,8 @@ export interface InitAssetInput {
   photoPurpose?: PhotoPurpose;
 }
 
+const EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
 function sha256Hex(bytes: Uint8Array) {
   return createHash("sha256").update(bytes).digest("hex");
 }
@@ -85,6 +87,21 @@ export function createUploadTracker(vault: VaultStore) {
 
   async function complete(assetId: string) {
     const session = requireSession(assetId);
+    // an empty file (the pi lost power before anything reached its disk) has no parts.
+    // accept it instead of refusing forever: older pi software retried an empty file
+    // endlessly and nothing queued behind it ever uploaded
+    if (session.parts.length === 0 && session.expectedSha256 === EMPTY_SHA256 && session.status === "uploading") {
+      session.status = "complete";
+      return {
+        assetId,
+        captureId: session.captureId,
+        vaultKey: session.vaultKey,
+        kind: session.kind,
+        sha256: EMPTY_SHA256,
+        verified: true,
+        bytes: new Uint8Array(0),
+      };
+    }
     if (session.parts.length === 0) throw new HttpError(409, "no parts uploaded yet");
 
     await vault.completeMultipartUpload(session.vaultKey, session.uploadId, session.parts);

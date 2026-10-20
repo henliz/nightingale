@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { createApp } from "./app.js";
-import { mkdtempSync, readFileSync, existsSync, readdirSync, rmSync } from "node:fs";
+import { createFsCrashpad } from "./crashpad.js";
+import { mkdtempSync, readFileSync, existsSync, readdirSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createFsDrillStore, transcriptEntries, type DrillSession } from "./drills.js";
@@ -687,3 +688,77 @@ describe("new session button", () => {
   });
 });
 
+
+describe("crash pad (laptop copy before the device deletes its own)", () => {
+  // init -> one part (if any) -> complete, the way the pi does it
+  async function piUpload(app: ReturnType<typeof createApp>, captureId: string, bytes: Uint8Array, capturedAt?: number, kind = "photo") {
+    const init = await json<InitAssetResponse>(
+      await app.request(`/captures/${captureId}/assets`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ kind, sha256: sha256Hex(bytes), capturedAt }),
+      }),
+    );
+    if (bytes.length) await app.request(`/assets/${init.assetId}/parts/1`, { method: "PUT", body: bytes });
+    return app.request(`/assets/${init.assetId}/complete`, { method: "POST" });
+  }
+
+  it("saves the exact bytes under the device's own file name, read-only, in the manifest, before saying verified", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "crashpad-"));
+    const app = createApp(new MemoryVaultStore(), undefined, undefined, undefined, undefined, {
+      crashpad: createFsCrashpad(dir),
+    });
+    const bytes = new TextEncoder().encode("a photo from the field test");
+    const res = await piUpload(app, "session_1792500000", bytes, 1792500012345);
+    expect(res.status).toBe(200);
+    expect((await json<CompleteResponse>(res)).verified).toBe(true);
+
+    const file = join(dir, "session_1792500000", "session_1792500000__1792500012345.jpg");
+    expect(Array.from(readFileSync(file))).toEqual(Array.from(bytes));
+    expect(statSync(file).mode & 0o222).toBe(0); // nobody can write to it
+    expect(readFileSync(join(dir, "manifest.sha256"), "utf8")).toBe(
+      `${sha256Hex(bytes)}  session_1792500000/session_1792500000__1792500012345.jpg\n`,
+    );
+
+    // the device retrying the same file doesn't make a second copy
+    await piUpload(app, "session_1792500000", bytes, 1792500012345);
+    expect(readdirSync(join(dir, "session_1792500000"))).toHaveLength(1);
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  it("tells the device NOT verified if the crash pad copy can't be saved, so it keeps its own", async () => {
+    const app = createApp(new MemoryVaultStore(), undefined, undefined, undefined, undefined, {
+      crashpad: { save: () => { throw new Error("disk full"); } },
+    });
+    const res = await piUpload(app, "session_1", new TextEncoder().encode("x"));
+    expect(res.status).toBe(500);
+  });
+
+  it("accepts an empty file instead of refusing it forever (old pi software jammed on those)", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "crashpad-"));
+    const app = createApp(new MemoryVaultStore(), undefined, undefined, undefined, undefined, {
+      crashpad: createFsCrashpad(dir),
+    });
+    const res = await piUpload(app, "session_2", new Uint8Array(0), 1792500000000, "audio");
+    expect(res.status).toBe(200);
+    expect((await json<CompleteResponse>(res)).verified).toBe(true);
+    expect(statSync(join(dir, "session_2", "session_2__1792500000000.wav")).size).toBe(0);
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  it("answers before processing is done when processing runs in the background", async () => {
+    let release!: () => void;
+    const slow = new Promise<void>((r) => (release = r));
+    const app = createApp(
+      new MemoryVaultStore(),
+      undefined,
+      undefined,
+      { caption: async () => { await slow; return "late"; } },
+      undefined,
+      { processInBackground: true },
+    );
+    const res = await piUpload(app, "session_3", new TextEncoder().encode("photo"));
+    expect(res.status).toBe(200); // didn't wait for the caption
+    release();
+  });
+});

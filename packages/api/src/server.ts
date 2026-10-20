@@ -12,8 +12,11 @@ import {
   type PhotoCaptioner,
   type PipelineDeps,
 } from "@nightingale/pipeline";
+import os from "node:os";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createApp } from "./app.js";
+import { createFsCrashpad } from "./crashpad.js";
 import { createFsDrillStore } from "./drills.js";
 import { geminiLiveAsr, openAiLiveAsr } from "./live-transcribe.js";
 import { createLiveHub } from "./live.js";
@@ -98,11 +101,26 @@ const liveAsr = useGemini
   : apiKey
     ? openAiLiveAsr(apiKey, process.env.NIGHTINGALE_LIVE_MODEL)
     : undefined;
-const app = createApp(vault, undefined, pipelineDeps, captioner, live, { silenceDbfs, drills, liveAsr });
+// every upload lands here byte for byte before the device is told it can delete its
+// copy (crashpad.ts). outside the repo so nothing in it ever gets committed
+const crashpadDir = process.env.NIGHTINGALE_CRASHPAD_DIR ?? path.join(os.homedir(), "nightingale-crashpad", "from-pi");
+const crashpad = createFsCrashpad(crashpadDir);
+const app = createApp(vault, undefined, pipelineDeps, captioner, live, {
+  silenceDbfs,
+  drills,
+  liveAsr,
+  crashpad,
+  processInBackground: true,
+  // rebuilding a finished case's epcr: 3.8-flash got the field test's who's-who right
+  // (patient vs bystander names, intoxication, no guessed leg) where 2.5-flash didn't
+  reviewCondenser: chat
+    ? new OpenAICondenser({ ...chat, model: process.env.NIGHTINGALE_REVIEW_MODEL ?? (useGemini ? "gemini-3.8-flash" : undefined) })
+    : undefined,
+});
 const port = Number(process.env.PORT ?? 8787);
 
 await vault.ensureBucket();
 
 serve({ fetch: app.fetch, port }, (info) => {
-  live.log("server", "info", `api is ON, listening on :${info.port}, dashboard at http://localhost:${info.port}, saving drills to ${drillsDir}`);
+  live.log("server", "info", `api is ON, listening on :${info.port}, dashboard at http://localhost:${info.port}, saving drills to ${drillsDir}, crash pad at ${crashpadDir}`);
 });
