@@ -1,0 +1,134 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-12);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: 56px;
+  padding: 0 var(--space-24);
+}
+
+.title {
+  font: var(--text-heading);
+}
+
+.confidential {
+  margin-left: auto;
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.tabs {
+  display: flex;
+  padding: 0 var(--space-24);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.tab {
+  position: relative;
+  width: 156px;
+  height: 48px;
+  font: var(--text-label);
+  color: var(--color-muted);
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: -2px;
+}
+
+.tabActive {
+  color: var(--color-blue);
+}
+
+.tabActive::after {
+  background: var(--color-blue);
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding: var(--space-24);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  max-width: 766px;
+}
+
+.sectionTitle {
+  font: var(--text-heading);
+  color: var(--color-blue);
+}
+
+.sectionTitleNeutral {
+  color: var(--color-neutral-accent);
+}
+
+.sectionTitleNote {
+  color: #d1d1d1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12) var(--space-16);
+}
+
+.grid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: 0 var(--space-24) 8px;
+}
+
+.draftStatus {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.tabDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 4px;
+  background: var(--color-flag);
+  vertical-align: middle;
+}

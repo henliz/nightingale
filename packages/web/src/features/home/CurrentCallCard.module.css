@@ -1,0 +1,60 @@
+.identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 24px;
+}
+
+.callId {
+  font: var(--text-caption);
+  color: var(--color-blue);
+  white-space: nowrap;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.firstContact {
+  font: var(--text-small);
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.iconButton {
+  display: flex;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+}
+.iconButton:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+.title {
+  font: var(--text-heading);
+  max-width: 648px;
+}
+
+.patient {
+  font: var(--text-body);
+  color: var(--color-muted);
+  white-space: pre-wrap;
+  max-width: 648px;
+}
+
+.banners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 760px;
+  max-width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: 44px;
+}

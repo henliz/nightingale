@@ -1,0 +1,25 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: var(--radius-pill);
+  font: 500 11px/1 var(--font-sans);
+  white-space: nowrap;
+}
+
+.neutral {
+  background: var(--color-chip);
+  color: var(--color-muted);
+}
+
+.active {
+  background: #d1f9cc;
+  color: #537360;
+}
+
+.warning {
+  background: #fff3db;
+  color: #a0640a;
+}

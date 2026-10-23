@@ -1,0 +1,24 @@
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.title {
+  font: var(--text-title);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.context {
+  font: var(--text-body);
+  color: var(--color-muted);
+}
+
+.work {
+  display: grid;
+  grid-template-columns: minmax(0, 809fr) minmax(0, 539fr);
+  gap: var(--space-24);
+  align-items: start;
+}

@@ -1,0 +1,154 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  flex-shrink: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-12);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+}
+
+.title {
+  font: var(--text-heading);
+}
+
+.subtitle {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.toggle {
+  display: flex;
+  padding: 0 var(--space-16);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.toggleTab {
+  position: relative;
+  width: 163px;
+  height: 48px;
+  font: var(--text-label);
+  color: var(--color-muted);
+}
+
+.toggleTab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+}
+
+.toggleActive {
+  color: var(--color-blue);
+}
+
+.toggleActive::after {
+  background: var(--color-blue);
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.excerpt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  border-radius: var(--radius-8);
+}
+
+.turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-8);
+  border-radius: var(--radius-6);
+  text-align: left;
+}
+
+.turn:hover {
+  background: var(--color-canvas);
+}
+
+.turnSelected,
+.turnSelected:hover {
+  background: var(--color-blue-soft);
+}
+
+.turnHead {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  height: 20px;
+}
+
+.speaker {
+  font: var(--text-label);
+}
+
+.turnSelected .speaker {
+  color: var(--color-blue);
+}
+
+.time {
+  margin-left: auto;
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.text {
+  font: var(--text-reading);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 8px var(--space-16);
+  background: var(--color-canvas);
+  border-top: 1px solid var(--color-line);
+}
+
+.footerHint {
+  flex: 1;
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.overviewRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.overviewLabel {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.overviewValue {
+  font: var(--text-body);
+}
