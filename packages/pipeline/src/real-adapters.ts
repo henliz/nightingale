@@ -336,7 +336,8 @@ export interface OpenAICondenserConfig {
   baseUrl?: string;
 }
 
-type ExtractedSections = Record<string, unknown> & { uncertain?: string[] };
+// uncertain items were plain strings up to v7, still accepted in case the model slips back
+type ExtractedSections = Record<string, unknown> & { uncertain?: (string | { field?: string; note?: string })[] };
 
 // v2 (oct 17 2026): fills the whole epcr shape, not just the handoff basics. the server
 // runs this over the whole session's transcript so far, so the form keeps filling in
@@ -360,7 +361,10 @@ type ExtractedSections = Record<string, unknown> & { uncertain?: string[] };
 // 911 call, left # patients / capacity / decision maker blank when the scene made them
 // obvious, and put where it hurts in radiation. times go to the second now, a drill fits
 // in 6 minutes so hh:mm made every milestone the same minute
-export const CONDENSE_PROMPT_VERSION = "epcr-v7";
+//
+// v8 (oct 23 2026): each "uncertain" item says which field it's about, so the dashboard
+// can outline that field red instead of the flag pointing at nothing
+export const CONDENSE_PROMPT_VERSION = "epcr-v8";
 
 const CONDENSE_SYSTEM_PROMPT = `you fill in a draft ePCR (electronic patient care report) from a transcript of an emergency-response drill. a responder will review every field before anything is shared.
 
@@ -402,6 +406,7 @@ rules:
 - opqrst.radiation is ONLY pain spreading or moving from where it starts to somewhere else ("goes down my arm", "into my jaw"). where it hurts most / pointing at a spot is the location, that goes in chiefComplaint, not radiation. "doesn't go anywhere" -> "non-radiating". nothing said about spreading -> leave it out
 - opqrst.provocation is what makes it better or worse (moving, breathing in, rest). a symptom isn't a provocation
 - times are hh:mm:ss (24h), no brackets. in the timeline too
+- each "uncertain" item is {"field": "<top-level key it's about>", "note": "<what's unsure>"}, field is one of the top-level keys in the shape below (e.g. "patient" for a name or age conflict, "vitals", "opqrst", "incident"). an age conflict -> field "patient"
 - if a field has no information, leave it out of the json entirely. empty strings and empty arrays are not allowed
 - respond with a single json object only, matching this shape, every field optional:
 {"incident": {"location": "", "dispatchReason": "", "unitsOnScene": "", "times": {"callReceived": "", "enRoute": "", "onScene": "", "patientContact": "", "departScene": "", "atDestination": ""}},
@@ -416,7 +421,7 @@ rules:
  "medsAndAllergiesMentioned": [""], "hazards": "", "bystanderStatements": "", "belongings": "", "familyContact": "",
  "transport": {"destination": "", "priority": "", "position": "", "handoffTo": ""},
  "narrative": "2-4 plain sentences of what was said and done, in order",
- "uncertain": [""]}`;
+ "uncertain": [{"field": "", "note": ""}]}`;
 
 // the model sometimes sends "" or [] or {} despite being told not to, strip those so
 // an empty field never shows up as a filled one
@@ -518,8 +523,12 @@ export class OpenAICondenser implements Condenser {
       });
     }
 
-    for (const note of extracted.uncertain ?? []) {
-      flags.push({ type: "unsupported_claim", ref: "condenser", note });
+    for (const item of extracted.uncertain ?? []) {
+      const { field, note } = typeof item === "string" ? { field: undefined, note: item } : item;
+      if (!note?.trim()) continue;
+      // points at the field when the model named a real one, otherwise the whole note
+      const ref = field && field in shape ? `sections.${field}` : "condenser";
+      flags.push({ type: "unsupported_claim", ref, note });
     }
 
     return DraftNote.parse({
