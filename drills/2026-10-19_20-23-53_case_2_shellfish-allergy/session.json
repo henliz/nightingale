@@ -513,15 +513,15 @@
   ],
   "epcrStatus": "ready",
   "epcr": {
-    "id": "c1d8e622-2e16-4ae9-b350-c0feb14e21d8",
+    "id": "88bf015d-b474-467c-8159-88f22700b273",
     "captureId": "case_2_shellfish-allergy",
     "modelVersion": "demo-1",
-    "promptVersion": "epcr-v8",
+    "promptVersion": "epcr-v9",
     "sections": {
       "incident": {
         "location": "123 Fake Street",
         "dispatchReason": "allergic reaction",
-        "unitsOnScene": "fire, EMS / ambulance",
+        "unitsOnScene": "fire, EMS / paramedics",
         "times": {
           "callReceived": "20:24:39",
           "onScene": "20:24:56",
@@ -533,77 +533,74 @@
         "numberOfPatients": "1",
         "othersOnScene": "friend / brother"
       },
-      "chiefComplaint": "difficulty breathing and itching",
-      "mechanismOrComplaint": "allergic reaction following shellfish ingestion",
-      "timeline": "20:24:39 911 call; 20:24:56 fire on scene; 20:25:26 patient contact; 20:25:34 airway and radial pulse assessment; 20:26:07 blood pressure taken; 20:27:14 pupil assessment; 20:27:24 transfer of care to paramedic",
+      "chiefComplaint": "difficulty breathing and itching following shellfish ingestion",
+      "mechanismOrComplaint": "allergic reaction secondary to shellfish ingestion",
+      "timeline": "20:24:39 911 call; 20:24:56 fire on scene; 20:25:26 patient contact; 20:25:34 airway and lung assessment; 20:26:07 blood pressure taken; 20:27:14 pupil assessment; 20:27:24 transfer of care to paramedics",
       "patient": {
         "name": "Dave",
         "age": "18",
         "sex": "male",
         "capacity": "capable",
-        "capacityNote": "alert, oriented, answering questions appropriately",
+        "capacityNote": "alert, oriented, and answering questions appropriately",
         "decisionMaker": "self"
       },
       "sample": {
-        "signsSymptoms": "difficulty breathing, throat/airway swelling, hives on neck, pruritus, breathing hurts, dilated pupils",
+        "signsSymptoms": "difficulty breathing, pruritus, hives on neck, visible airway swelling, breathing hurts; no wheezing audible, radial pulse strong",
         "allergies": [
           "shellfish"
         ],
-        "medications": [
-          "denies EpiPen"
-        ],
-        "pastHistory": "prior mild reactions/itching to shellfish",
+        "pastHistory": "prior mild itching reactions to shellfish; does not carry an EpiPen",
         "lastOralIntake": "shellfish ~15-20 minutes prior",
-        "events": "ingested shellfish approximately 15-20 minutes prior, resulting in neck hives, airway swelling, and dyspnea"
+        "events": "ingested shellfish ~15-20 minutes prior, developed hives on neck, pruritus, airway swelling, and dyspnea"
       },
       "opqrst": {
-        "onset": "~15-20 minutes prior",
+        "onset": "~15-20 minutes prior after shellfish ingestion",
         "provocation": "breathing hurts",
-        "quality": "itchy, hard to breathe",
-        "time": "15-20 minutes"
+        "quality": "itchy",
+        "time": "15-20 minutes ago"
       },
       "vitals": [
         {
           "time": "20:26:07",
           "loc": "alert",
-          "bp": "140/80 per Person 3; 140/90 per responder at handoff",
-          "skin": "hives on neck, itchy"
+          "bp": "140/80 per assessment at 20:26:07; 140/90 per handoff report at 20:27:38",
+          "skin": "hives on neck, pruritic"
         }
       ],
-      "physicalExam": "Airway: swelling noted upon oral inspection. Respiratory: no wheezing heard, reports dyspnea and pain with breathing. Cardiovascular: radial pulse strong. Neuro: pupils equal and dilated bilaterally. Integumentary: urticaria noted on neck.",
+      "physicalExam": "Airway: visible swelling inside mouth/airway. Lungs: no wheezes audible bilaterally. Cardiovascular: radial pulse present, strong. Skin: hives present on neck. Eyes: pupils equal and bilaterally dilated.",
       "interventions": [
         {
           "time": "20:25:34",
-          "intervention": "airway inspection and radial pulse check",
-          "response": "intraoral swelling noted, pulse strong"
+          "intervention": "airway inspection, lung auscultation, and radial pulse assessment",
+          "response": "airway swelling noted, no wheezes heard, radial pulse strong"
         },
         {
           "time": "20:26:07",
-          "intervention": "blood pressure measurement",
-          "response": "140/80 obtained"
+          "intervention": "blood pressure assessment",
+          "response": "140/80 mmHg"
         },
         {
           "time": "20:27:14",
           "intervention": "pupil assessment",
-          "response": "pupils equal and dilated"
+          "response": "pupils equal and bilaterally dilated"
         },
         {
           "time": "20:27:24",
-          "intervention": "transfer of care to paramedic",
-          "response": "verbal handoff report provided"
+          "intervention": "transfer of care to paramedics",
+          "response": "verbal report provided to arriving paramedic"
         }
       ],
       "transport": {
-        "handoffTo": "paramedic / ambulance crew"
+        "position": "seated",
+        "handoffTo": "paramedics"
       },
-      "narrative": "Responders were dispatched to 123 Fake Street for an 18-year-old male experiencing an allergic reaction after eating shellfish 15 to 20 minutes prior. Patient presented with urticaria to the neck, visualized intraoral airway swelling, and difficulty breathing, with strong radial pulses and no audible wheezing. Vital signs and pupil assessments were completed, showing blood pressure of 140/80 and equal, dilated pupils. Care was transferred with a verbal report to the arriving paramedic crew.",
-      "conditionObserved": "alert, dyspneic, hives present on neck, oral swelling visualized",
-      "interventionsPerformed": "airway exam, pulse check, blood pressure measurement, pupil exam, handoff report",
+      "narrative": "Fire responded to a residence for an 18-year-old male experiencing an acute allergic reaction after ingesting shellfish approximately 15 to 20 minutes prior. Patient presented alert and seated with dyspnea, pruritus, hives on the neck, and visible airway swelling, with no wheezes audible and a strong radial pulse. Vitals revealed a blood pressure of 140/80 mmHg and equal, dilated pupils. Care and report were transferred to arriving paramedics on scene.",
+      "conditionObserved": "alert, seated, breathing with difficulty, hives visible on neck",
+      "interventionsPerformed": "airway assessment, auscultation, radial pulse check, blood pressure check, pupil check, transfer of care",
       "medsAndAllergiesMentioned": [
-        "shellfish",
-        "EpiPen"
+        "shellfish"
       ],
-      "bystanderStatements": "He ate some shellfish and sometimes it gives them a little bit of reaction but now he's got some hives and he's having a really He's got some hives in the neck and he's starting to have a bit of a hard time breathing."
+      "bystanderStatements": "\"He ate some shellfish and sometimes it gives them a little bit of reaction but now he's got some hives and he's having a really He's got some hives in the neck and he's starting to have a bit of a hard time breathing.\""
     },
     "spans": [
       {
@@ -1558,16 +1555,16 @@
     "flags": [
       {
         "type": "unsupported_claim",
-        "ref": "sections.patient",
-        "note": "Patient initially referred to as 'Scott' by Person 3, but later identified as 'Dave' by both Person 3 and responder."
+        "ref": "sections.vitals",
+        "note": "blood pressure reported as 140/80 at 20:26:07, but restated as 140/90 during handoff at 20:27:38"
       },
       {
         "type": "unsupported_claim",
-        "ref": "sections.vitals",
-        "note": "Blood pressure stated as 140/80 at 20:26:07, but reported as 140/90 during responder handoff at 20:27:38."
+        "ref": "sections.patient",
+        "note": "patient was initially addressed as Scott at 20:24:20 before being identified as Dave at 20:27:35"
       }
     ]
   },
-  "epcrUpdatedAt": 1792802149068,
+  "epcrUpdatedAt": 1792804439707,
   "epcrChunks": 54
 }

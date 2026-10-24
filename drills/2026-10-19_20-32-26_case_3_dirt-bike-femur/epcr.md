@@ -2,7 +2,7 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 8:36:07 p.m. from 46 chunk(s), model demo-1, prompt epcr-v8
+updated 9:14:17 p.m. from 46 chunk(s), model demo-1, prompt epcr-v9
 
 ## Incident
 
@@ -23,35 +23,35 @@ updated 8:36:07 p.m. from 46 chunk(s), model demo-1, prompt epcr-v8
 
 ## Chief complaint
 
-leg deformity and pain
+femur deformity and leg pain
 
 ## Mechanism / what happened
 
-dirt bike jump bail, landed awkwardly with twisted leg
+dirt bike jump crash ~10-11 minutes prior with awkward landing
 
 ## Timeline
 
-20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:38 motor function assessed; 20:33:51 pedal pulse assessed
+20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:51 pedal pulse assessed; 20:33:57 pain assessed
 
 ## Patient
 
 - **name:** Dave
 - **sex:** male
 - **capacity:** impaired
-- **Capacity reason:** intoxicated per bystanders, ?head strike, can't recall event, dizzy/lightheaded
+- **Capacity reason:** intoxicated per bystanders, dizzy and lightheaded, ?head strike, unable to recall event timeline
 - **Decision maker:** implied consent (emergency)
 
 ## SAMPLE history
 
-- **Signs / symptoms:** femur deformity, leg pain, unable to wiggle toes, nausea, dizziness, lightheadedness, possible head strike
-- **Events leading up:** jump on dirt bike, bailed and landed awkwardly ~10-11 minutes prior
+- **Signs / symptoms:** leg pain, nausea, dizziness, lightheadedness, inability to wiggle toes, no neck pain, no back pain
+- **Events leading up:** bailing off dirt bike during a jump ~10-11 minutes prior, leg rotated/snapped on landing
 
 ## OPQRST
 
-- **onset:** sudden
-- **quality:** like bones snapped in half
+- **onset:** sudden upon landing dirt bike jump
+- **quality:** feels like bones snapped in half
 - **severity:** 6/10
-- **time:** ~10-11 minutes prior to assessment
+- **time:** ~10-11 minutes prior
 
 ## Vitals
 
@@ -61,15 +61,25 @@ dirt bike jump bail, landed awkwardly with twisted leg
 
 ## Physical exam
 
-Obvious deformity of femur with localized lump; no blood pooling noted; unable to wiggle toes; pedal pulse present; denies neck and back pain; no other apparent deformities or bleeding
+femur: obvious deformity, palpable lump, abnormal rotation; pedal pulse present; inability to wiggle toes; possible head strike with amnesia; no other obvious injuries or external hemorrhage noted
+
+## Interventions
+
+| time | intervention | response |
+|---|---|---|
+| 20:33:51 | pedal pulse assessment | pedal pulse present |
 
 ## Narrative
 
-Fire arrived on scene at 19 Fake Street for an adult male, Dave, who crashed while jumping a dirt bike approximately 10 to 11 minutes prior. Bystanders reported the patient was intoxicated. Assessment revealed an obvious femur deformity with a palpable lump, intact distal pedal pulse, and inability to wiggle toes, accompanied by nausea, dizziness, and a suspected head strike. Patient denied loss of consciousness, neck pain, or back pain, and rated pain at 6/10.
+Fire arrived on scene for a male patient who crashed a dirt bike off a jump approximately 10-11 minutes prior. Patient was found conscious with an obvious femur deformity, reporting 6/10 pain, dizziness, nausea, and possible head strike with retrograde amnesia, alongside reported alcohol intoxication. Physical assessment revealed an intact pedal pulse but inability to wiggle toes, with no reported neck or back pain.
 
 ## Condition observed
 
-conscious, reporting dizziness and nausea
+conscious, alert, reports nausea and dizziness
+
+## Interventions (summary)
+
+pedal pulse assessment
 
 ## Hazards
 
@@ -77,12 +87,11 @@ poor lighting / dark
 
 ## Bystander statements
 
-"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted." "Yeah, he's drunk. Yeah." "He's always drunk." "Not about 10 minutes ago. Oh, 11 minutes ago."
+"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted", "he's drunk", "He's always drunk", "There's a lump there", "Not about 10 minutes ago. Oh, 11 minutes ago."
 
 ## Needs review
 
-- unsupported claim: Laterality of injured leg/femur (left vs right) was not specified
-- unsupported claim: Patient age and date of birth were not stated
+- unsupported claim: affected leg/femur side (left vs right) was not specified
 
 ## Scene photos
 

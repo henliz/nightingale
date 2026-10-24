@@ -432,10 +432,10 @@
   ],
   "epcrStatus": "ready",
   "epcr": {
-    "id": "883cffdb-7ecd-4a59-b5a4-a428f2917e62",
+    "id": "24bf39e7-b0cf-4116-b70a-e7dfcaa8befe",
     "captureId": "case_3_dirt-bike-femur",
     "modelVersion": "demo-1",
-    "promptVersion": "epcr-v8",
+    "promptVersion": "epcr-v9",
     "sections": {
       "incident": {
         "location": "19 Fake Street",
@@ -453,25 +453,25 @@
         "environment": "dark",
         "othersOnScene": "bystanders"
       },
-      "chiefComplaint": "leg deformity and pain",
-      "mechanismOrComplaint": "dirt bike jump bail, landed awkwardly with twisted leg",
-      "timeline": "20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:38 motor function assessed; 20:33:51 pedal pulse assessed",
+      "chiefComplaint": "femur deformity and leg pain",
+      "mechanismOrComplaint": "dirt bike jump crash ~10-11 minutes prior with awkward landing",
+      "timeline": "20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:51 pedal pulse assessed; 20:33:57 pain assessed",
       "patient": {
         "name": "Dave",
         "sex": "male",
         "capacity": "impaired",
-        "capacityNote": "intoxicated per bystanders, ?head strike, can't recall event, dizzy/lightheaded",
+        "capacityNote": "intoxicated per bystanders, dizzy and lightheaded, ?head strike, unable to recall event timeline",
         "decisionMaker": "implied consent (emergency)"
       },
       "sample": {
-        "signsSymptoms": "femur deformity, leg pain, unable to wiggle toes, nausea, dizziness, lightheadedness, possible head strike",
-        "events": "jump on dirt bike, bailed and landed awkwardly ~10-11 minutes prior"
+        "signsSymptoms": "leg pain, nausea, dizziness, lightheadedness, inability to wiggle toes, no neck pain, no back pain",
+        "events": "bailing off dirt bike during a jump ~10-11 minutes prior, leg rotated/snapped on landing"
       },
       "opqrst": {
-        "onset": "sudden",
-        "quality": "like bones snapped in half",
+        "onset": "sudden upon landing dirt bike jump",
+        "quality": "feels like bones snapped in half",
         "severity": "6/10",
-        "time": "~10-11 minutes prior to assessment"
+        "time": "~10-11 minutes prior"
       },
       "vitals": [
         {
@@ -479,11 +479,19 @@
           "pain": "6/10"
         }
       ],
-      "physicalExam": "Obvious deformity of femur with localized lump; no blood pooling noted; unable to wiggle toes; pedal pulse present; denies neck and back pain; no other apparent deformities or bleeding",
-      "narrative": "Fire arrived on scene at 19 Fake Street for an adult male, Dave, who crashed while jumping a dirt bike approximately 10 to 11 minutes prior. Bystanders reported the patient was intoxicated. Assessment revealed an obvious femur deformity with a palpable lump, intact distal pedal pulse, and inability to wiggle toes, accompanied by nausea, dizziness, and a suspected head strike. Patient denied loss of consciousness, neck pain, or back pain, and rated pain at 6/10.",
-      "conditionObserved": "conscious, reporting dizziness and nausea",
+      "physicalExam": "femur: obvious deformity, palpable lump, abnormal rotation; pedal pulse present; inability to wiggle toes; possible head strike with amnesia; no other obvious injuries or external hemorrhage noted",
+      "interventions": [
+        {
+          "time": "20:33:51",
+          "intervention": "pedal pulse assessment",
+          "response": "pedal pulse present"
+        }
+      ],
+      "narrative": "Fire arrived on scene for a male patient who crashed a dirt bike off a jump approximately 10-11 minutes prior. Patient was found conscious with an obvious femur deformity, reporting 6/10 pain, dizziness, nausea, and possible head strike with retrograde amnesia, alongside reported alcohol intoxication. Physical assessment revealed an intact pedal pulse but inability to wiggle toes, with no reported neck or back pain.",
+      "conditionObserved": "conscious, alert, reports nausea and dizziness",
+      "interventionsPerformed": "pedal pulse assessment",
       "hazards": "poor lighting / dark",
-      "bystanderStatements": "\"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted.\" \"Yeah, he's drunk. Yeah.\" \"He's always drunk.\" \"Not about 10 minutes ago. Oh, 11 minutes ago.\""
+      "bystanderStatements": "\"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted\", \"he's drunk\", \"He's always drunk\", \"There's a lump there\", \"Not about 10 minutes ago. Oh, 11 minutes ago.\""
     },
     "spans": [
       {
@@ -997,6 +1005,57 @@
         ]
       },
       {
+        "field": "sections.interventions",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]",
+          "segment[27]",
+          "segment[28]",
+          "segment[29]",
+          "segment[30]",
+          "segment[31]",
+          "segment[32]",
+          "segment[33]",
+          "segment[34]",
+          "segment[35]",
+          "segment[36]",
+          "segment[37]",
+          "segment[38]",
+          "segment[39]",
+          "segment[40]",
+          "segment[41]",
+          "segment[42]",
+          "segment[43]",
+          "segment[44]",
+          "segment[45]"
+        ]
+      },
+      {
         "field": "sections.narrative",
         "transcriptSegmentIds": [
           "segment[0]",
@@ -1049,6 +1108,57 @@
       },
       {
         "field": "sections.conditionObserved",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]",
+          "segment[27]",
+          "segment[28]",
+          "segment[29]",
+          "segment[30]",
+          "segment[31]",
+          "segment[32]",
+          "segment[33]",
+          "segment[34]",
+          "segment[35]",
+          "segment[36]",
+          "segment[37]",
+          "segment[38]",
+          "segment[39]",
+          "segment[40]",
+          "segment[41]",
+          "segment[42]",
+          "segment[43]",
+          "segment[44]",
+          "segment[45]"
+        ]
+      },
+      {
+        "field": "sections.interventionsPerformed",
         "transcriptSegmentIds": [
           "segment[0]",
           "segment[1]",
@@ -1158,15 +1268,10 @@
       {
         "type": "unsupported_claim",
         "ref": "sections.chiefComplaint",
-        "note": "Laterality of injured leg/femur (left vs right) was not specified"
-      },
-      {
-        "type": "unsupported_claim",
-        "ref": "sections.patient",
-        "note": "Patient age and date of birth were not stated"
+        "note": "affected leg/femur side (left vs right) was not specified"
       }
     ]
   },
-  "epcrUpdatedAt": 1792802167589,
+  "epcrUpdatedAt": 1792804457166,
   "epcrChunks": 46
 }
