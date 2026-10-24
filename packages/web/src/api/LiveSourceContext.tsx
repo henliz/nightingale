@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { CaptureExcerpt } from "../data/epcr";
 import type { PatientRecord } from "../data/record";
 import { fetchSessions, subscribeToChanges } from "./client";
-import { mapExcerpts, mapNoteToEpcr, mapSessionToRecord, type NoteFieldOverride } from "./mapNote";
+import { mapExcerpts, mapNoteToEpcr, mapSessionToRecord, sortedSessions, type NoteFieldOverride } from "./mapNote";
 import type { DrillSession } from "./types";
 
 export type DataSource = "demo" | "api";
@@ -14,7 +14,11 @@ interface LiveSourceValue {
   error: string | null;
   sessions: DrillSession[];
   session: DrillSession | null;
-  selectSession: (captureId: string) => void;
+  /** null = unpin, follow the newest call */
+  selectSession: (captureId: string | null) => void;
+  /** null when following the newest call */
+  pinned: string | null;
+  setSource: (source: DataSource) => void;
   /** what the record modal shows when a session is selected, null in demo mode */
   record: PatientRecord | null;
   excerpts: CaptureExcerpt[] | null;
@@ -44,14 +48,12 @@ function readSource(): DataSource {
 
 function pickSession(sessions: DrillSession[], wanted: string | null): DrillSession | null {
   const byId = wanted ? sessions.find((s) => s.captureId === wanted) : undefined;
-  if (byId) return byId;
-  // named cases (split out of drills, e.g. "Case 3 · dirt bike femur") first, then the newest ePCR
-  const withEpcr = [...sessions].filter((s) => s.epcr).sort((a, b) => b.startedAt - a.startedAt);
-  return withEpcr.find((s) => s.title) ?? withEpcr[0] ?? sessions[0] ?? null;
+  // nothing pinned = follow whatever call is newest, so a fresh one from the pi shows up on its own
+  return byId ?? sortedSessions(sessions)[0] ?? null;
 }
 
 export function LiveSourceProvider({ children }: { children: ReactNode }) {
-  const [source] = useState<DataSource>(readSource);
+  const [source, setSourceState] = useState<DataSource>(readSource);
   const [status, setStatus] = useState<LiveSourceValue["status"]>(source === "api" ? "loading" : "idle");
   const [error, setError] = useState<string | null>(null);
   const [sessions, setSessions] = useState<DrillSession[]>([]);
@@ -95,10 +97,22 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     error,
     sessions,
     session,
+    pinned: wanted,
     selectSession: (captureId) => {
       setWanted(captureId);
       try {
-        sessionStorage.setItem(SESSION_KEY, captureId);
+        if (captureId) sessionStorage.setItem(SESSION_KEY, captureId);
+        else sessionStorage.removeItem(SESSION_KEY);
+      } catch {
+        /* storage unavailable */
+      }
+    },
+    setSource: (next) => {
+      if (next === source) return;
+      setSourceState(next);
+      if (next === "api") setStatus("loading");
+      try {
+        sessionStorage.setItem(SOURCE_KEY, next);
       } catch {
         /* storage unavailable */
       }

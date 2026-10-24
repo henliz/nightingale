@@ -19,6 +19,11 @@ function joinList(v: string[] | undefined): string {
   return v && v.length > 0 ? v.join(", ") : "";
 }
 
+/** newest first, empty device connects (no assets yet) left out */
+export function sortedSessions(sessions: DrillSession[]): DrillSession[] {
+  return sessions.filter((s) => s.assets.length > 0).sort((a, b) => b.startedAt - a.startedAt);
+}
+
 /** every speaker-labelled line across the session's chunks, in capture order */
 export function sessionLines(session: DrillSession): LiveLine[] {
   return session.assets
