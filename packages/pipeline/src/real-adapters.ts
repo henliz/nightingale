@@ -364,7 +364,11 @@ type ExtractedSections = Record<string, unknown> & { uncertain?: (string | { fie
 //
 // v8 (oct 23 2026): each "uncertain" item says which field it's about, so the dashboard
 // can outline that field red instead of the flag pointing at nothing
-export const CONDENSE_PROMPT_VERSION = "epcr-v8";
+//
+// v9 (oct 23 2026): the shellfish case charted "denies EpiPen" under medications and put
+// EpiPen in the meds-mentioned list when he just doesn't carry one. things the patient
+// doesn't have/take go in plain words in the history, never "denies", never as a med
+export const CONDENSE_PROMPT_VERSION = "epcr-v9";
 
 const CONDENSE_SYSTEM_PROMPT = `you fill in a draft ePCR (electronic patient care report) from a transcript of an emergency-response drill. a responder will review every field before anything is shared.
 
@@ -392,7 +396,9 @@ rules:
 - vitals: only record a number if someone actually said it out loud (e.g. "bp 140 over 90", "sats 96"). never estimate one, and "no pulse" is hr "absent", not 0. qualitative findings (alert, pale, breathing fast) go in conditionObserved / physicalExam / vitals.loc / vitals.skin
 - "(hh:mm:ss)" at the start of a line is the clock time that part was recorded. you may use it for a vitals/intervention/incident time when the speech is about that moment ("giving aspirin now"), otherwise leave times out
 - interventions are things the responder actually did, each as its own entry, with the patient's response if it was said
-- medications and allergies: the patient's own, as said. also list them in medsAndAllergiesMentioned for the short handoff view
+- medications and allergies: only ones the patient actually takes or has, as said. also list them in medsAndAllergiesMentioned for the short handoff view
+- something the patient doesn't have or take (no EpiPen, no blood thinners, no allergies) is a pertinent negative: write it in plain words ("doesn't carry an EpiPen", "no known allergies") in sample.pastHistory or sample.signsSymptoms where it fits. never write "denies", it reads like they refused something. never put it in medications or medsAndAllergiesMentioned
+- a responder asking a yes/no question and moving on ("you don't carry an EpiPen? no? okay") is the responder's understanding, not the patient's answer. chart it the same way but don't quote the patient as saying it
 - the transcript is speech-to-text and has errors. if a word or phrase is clearly a mis-hearing (an ems term, or an everyday phrase where one word is obviously misheard), use the obvious intended words, but if you're not sure, keep it out and add a short note to "uncertain"
 - scene.numberOfPatients: the number of patients described. one person hurt or sick and nobody mentions another -> "1"
 - patient.capacity is charted from what was said, the way a medic would, with the reasons in patient.capacityNote:
