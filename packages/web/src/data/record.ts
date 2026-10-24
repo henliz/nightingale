@@ -1,6 +1,6 @@
 import { hasReached, type Stage } from "../incident/types";
 
-/** Fictional drill patient. */
+/** fictional drill patient */
 export const PATIENT = { name: "Eleanor Walsh", recordNumber: "1044" } as const;
 
 export interface LabelledValue {
@@ -24,7 +24,7 @@ export interface RecordFile {
   name: string;
   kind: string;
   stamp: string;
-  /** Where the bytes live when the file came from the api. */
+  /** where the bytes live when the file came from the api */
   url?: string;
 }
 
@@ -46,7 +46,7 @@ export interface PatientRecord {
 
 const NOT_RECORDED = "Not recorded";
 
-/** Overlay A: what the captain knows on the way, dispatch text only. */
+/** overlay A: what the captain knows on the way, dispatch text only */
 const BEFORE_ARRIVAL: PatientRecord = {
   latestNote: {
     source: "13:22 / reported from call",
@@ -76,7 +76,7 @@ const BEFORE_ARRIVAL: PatientRecord = {
   transcript: [],
 };
 
-/** Overlay B: the transcribed record once the crew has assessed the scene. */
+/** overlay B: the transcribed record once the crew has assessed the scene */
 const AFTER_SCENE: PatientRecord = {
   latestNote: {
     source: "14:28 / recorded by FF-12",
@@ -134,7 +134,7 @@ const SHARED_TIMELINE_EVENT: TimelineEvent = {
   source: "Woolwich Fire / FF-12",
 };
 
-/** The incident fields from the Woolwich Fire on-scene sheet, grouped as on the Incident tab. */
+/** incident fields from the Woolwich Fire on-scene sheet, grouped like the Incident tab */
 export const INCIDENT_SECTIONS: readonly { title: string; fields: readonly LabelledValue[] }[] = [
   {
     title: "Call and location",
@@ -157,7 +157,7 @@ export const INCIDENT_SECTIONS: readonly { title: string; fields: readonly Label
   { title: "Crew, transport and service", fields: [] },
 ];
 
-/** The record as it reads at a given point in the story. */
+/** the record as it reads at a given point in the story */
 export function recordForStage(stage: Stage): PatientRecord {
   if (!hasReached(stage, "on_scene")) return BEFORE_ARRIVAL;
   if (!hasReached(stage, "shared")) return AFTER_SCENE;
@@ -174,7 +174,7 @@ export interface RecordInputs {
   }[];
   files: readonly { name: string; addedBy: string; at: string }[];
   deletedFileKeys?: readonly string[];
-  /** A record from the api replaces the stage fixture; responder additions still layer on top. */
+  /** an api record replaces the stage fixture, responder additions still layer on top */
   base?: PatientRecord | null;
 }
 
@@ -190,7 +190,7 @@ const MEASUREMENT_LABEL: Record<string, string> = {
   gcs: "GCS",
 };
 
-/** The stage snapshot plus anything responders typed in themselves. */
+/** stage snapshot + anything responders typed in themselves */
 export function buildRecord({ stage, observations, files, deletedFileKeys = [], base: liveBase }: RecordInputs): PatientRecord {
   const base = liveBase ?? recordForStage(stage);
   if (observations.length === 0 && files.length === 0 && deletedFileKeys.length === 0) return base;
@@ -216,8 +216,8 @@ export function buildRecord({ stage, observations, files, deletedFileKeys = [], 
   return {
     ...base,
     latestNote,
-    // Appended in the order they were added: the drill's sample times are afternoon, a live
-    // clock may not be, and a sort would bury what was just typed.
+    // kept in the order they were added. drill sample times are afternoon, a live clock might
+    // not be, so sorting would bury what was just typed
     timeline: [...base.timeline, ...addedEvents],
     files: [...base.files, ...addedFiles].filter((f) => !deletedFileKeys.includes(fileKey(f))),
   };

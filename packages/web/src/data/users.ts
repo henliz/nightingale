@@ -2,14 +2,14 @@ export type Role = "firefighter" | "paramedic";
 
 export interface User {
   id: string;
-  /** Short first name used in greetings */
+  /** short first name for greetings */
   firstName: string;
   fullName: string;
-  /** Account row title, e.g. "Captain" */
+  /** account row title, e.g. "Captain" */
   title: string;
-  /** Account row subtitle, e.g. "Woolwich Township Fire, Station 2" */
+  /** account row subtitle, e.g. "Woolwich Township Fire, Station 2" */
   org: string;
-  /** Short unit/station label shown under the greeting */
+  /** short unit/station label under the greeting */
   station: string;
   role: Role;
 }

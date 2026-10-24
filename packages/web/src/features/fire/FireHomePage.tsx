@@ -12,7 +12,7 @@ import { RecordsList } from "../records/RecordsList";
 import { ShareRecordDialog } from "../share/ShareRecordDialog";
 import { FireReviewCard } from "./FireReviewCard";
 
-/** Fire Steps 1, 2, 3 and 5: the captain's queue, driven by the shared incident. */
+/** fire steps 1, 2, 3, 5: the captain's queue, driven by the shared incident */
 export function FireHomePage() {
   const { user } = useSession();
   const incident = useIncident();
@@ -28,7 +28,7 @@ export function FireHomePage() {
     setRecordTab("overview");
     setRecordOpen(true);
   };
-  /** "Review note": the transcript with the latest observation summarised above it. */
+  /** "Review note": transcript with the latest observation summarised on top */
   const reviewNote = () => {
     setRecordTab("transcript");
     setRecordOpen(true);

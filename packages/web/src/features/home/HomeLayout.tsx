@@ -10,13 +10,13 @@ interface HomeLayoutProps {
   user: User;
   currentCall: ReactNode;
   review: ReactNode;
-  /** Receives the app bar search text so the list can filter. */
+  /** gets the app bar search text so the list can filter */
   records: (query: string) => ReactNode;
-  /** Dialogs and overlays. */
+  /** dialogs + overlays */
   children?: ReactNode;
 }
 
-/** Greeting, current call beside what needs review, then recent records. Same shape for every role. */
+/** greeting, current call beside what needs review, then recent records. same shape for every role */
 export function HomeLayout({ user, currentCall, review, records, children }: HomeLayoutProps) {
   const [query, setQuery] = useState("");
   const live = useLiveSource();

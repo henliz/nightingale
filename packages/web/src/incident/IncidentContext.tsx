@@ -7,17 +7,15 @@ const DispatchContext = createContext<Dispatch<IncidentAction> | null>(null);
 
 const STORAGE_KEY = "medfi.incident.v2";
 
-/**
- * The story lives in sessionStorage: it survives a reload and a sign-out/sign-in in the
- * same tab, but nothing anyone types during a demo outlives the tab.
- */
+// story lives in sessionStorage: survives a reload + sign-out/sign-in in the same tab,
+// but nothing typed during a demo outlives the tab
 function loadState(): IncidentState {
   try {
     localStorage.removeItem("medfi.incident.v1");
     const raw = sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return initialIncidentState;
     const parsed = JSON.parse(raw) as Partial<IncidentState>;
-    // Older saved shapes may lack the list fields; never trust storage for arrays.
+    // older saved shapes might be missing the list fields, never trust storage for arrays
     return {
       ...initialIncidentState,
       ...parsed,
@@ -34,10 +32,8 @@ function loadState(): IncidentState {
   }
 }
 
-/**
- * The single shared record. Persisted so the story survives a reload and
- * carries across sign-ins (Alvin shares, Rick accepts, in the same browser).
- */
+// the one shared record. persisted so it survives a reload and carries across sign-ins
+// (Alvin shares, Rick accepts, same browser)
 export function IncidentProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(incidentReducer, undefined, loadState);
 
@@ -45,7 +41,7 @@ export function IncidentProvider({ children }: { children: ReactNode }) {
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
-      /* storage unavailable; the in-memory state still works */
+      /* storage unavailable, in-memory state still works */
     }
   }, [state]);
 

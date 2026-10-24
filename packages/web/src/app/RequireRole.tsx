@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router";
 import type { Role } from "../data/users";
 import { useSession } from "../session/SessionContext";
 
-/** Gate a route subtree to a signed-in user with the given role. */
+/** only lets a signed-in user with this role into the routes below */
 export function RequireRole({ role }: { role: Role }) {
   const { user } = useSession();
   if (!user) return <Navigate to="/" replace />;

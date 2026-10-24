@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-/** Current time in ms, re-rendering every `intervalMs` while `enabled`. */
+/** current time in ms, re-renders every `intervalMs` while `enabled` */
 export function useNow(enabled: boolean, intervalMs = 1000): number {
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {

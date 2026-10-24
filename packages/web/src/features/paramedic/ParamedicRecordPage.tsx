@@ -7,7 +7,7 @@ import { clockTime } from "../../lib/time";
 import { useSession } from "../../session/SessionContext";
 import { EpcrReviewPage } from "../epcr/EpcrReviewPage";
 
-/** Paramedic Step 5: verify every field the ER nurse reads first, then mark Info verified. */
+/** paramedic step 5: verify every field the ER nurse reads first, then mark Info verified */
 export function ParamedicRecordPage() {
   const { user } = useSession();
   const incident = useIncident();

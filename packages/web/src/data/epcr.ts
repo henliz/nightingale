@@ -1,8 +1,5 @@
-/**
- * The ePCR draft the captain reviews in fire Step 4, in the field order of the
- * Woolwich Fire paper on-scene sheet. Values are only ever what was said aloud;
- * unsure fields are flagged, never filled in. Fictional drill data.
- */
+// the ePCR draft the captain reviews in fire step 4, in Woolwich Fire paper sheet order.
+// values are only ever what was said out loud, unsure fields get flagged never filled. fictional drill data
 export type EpcrTab = "summary" | "patient" | "clinical" | "fire" | "service";
 
 export const EPCR_TABS: readonly { id: EpcrTab; label: string }[] = [
@@ -16,24 +13,24 @@ export const EPCR_TABS: readonly { id: EpcrTab; label: string }[] = [
 export interface EpcrField {
   key: string;
   label: string;
-  /** What the pipeline suggested from the transcript; null means nothing was captured. */
+  /** what the pipeline suggested from the transcript, null = nothing captured */
   suggested: string | null;
   kind?: "input" | "textarea" | "checkbox";
-  /** Unsure: shown with the red outline until the captain reviews it. */
+  /** unsure, red outline until the captain reviews it */
   flagged?: boolean;
-  /** Transcript turn ids that support the suggestion. */
+  /** transcript turn ids backing the suggestion */
   evidence?: readonly string[];
-  /** Takes the full row instead of half. */
+  /** takes the full row instead of half */
   wide?: boolean;
 }
 
 export interface EpcrSection {
   title: string;
-  /** Optional muted suffix after the title, e.g. "@ 14:08". */
+  /** optional muted suffix after the title, e.g. "@ 14:08" */
   titleNote?: string;
   tab: EpcrTab;
   fields: readonly EpcrField[];
-  /** Columns per row; 2 by default. */
+  /** columns per row, 2 by default */
   columns?: 2 | 3;
 }
 
@@ -160,7 +157,7 @@ export interface CaptureExcerpt {
   turns: readonly CaptureTurn[];
 }
 
-/** Who said what on scene, grouped the way the design shows them. */
+/** who said what on scene, grouped like the design */
 export const CAPTURE_EXCERPTS: readonly CaptureExcerpt[] = [
   {
     time: "14:03",
@@ -217,7 +214,7 @@ export function turnsById(excerpts: readonly CaptureExcerpt[]): ReadonlyMap<stri
 
 export const CAPTURE_TURN_BY_ID: ReadonlyMap<string, CaptureTurn> = turnsById(CAPTURE_EXCERPTS);
 
-/** The first field a transcript turn supports, so clicking speech selects a field. */
+/** first field a transcript turn supports, so clicking speech selects a field */
 export function fieldForTurn(turnId: string, sections: readonly EpcrSection[] = EPCR_SECTIONS): EpcrField | undefined {
   for (const section of sections) {
     for (const field of section.fields) {
@@ -233,7 +230,7 @@ export interface FieldOverride {
   flagged: boolean;
 }
 
-/** The same sections with values from a real note in place of the fixture's. */
+/** same sections, with values from a real note instead of the fixture's */
 export function applyOverrides(sections: readonly EpcrSection[], overrides: ReadonlyMap<string, FieldOverride>): EpcrSection[] {
   return sections.map((section) => ({
     ...section,

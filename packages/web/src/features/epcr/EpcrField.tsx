@@ -4,7 +4,7 @@ import styles from "./EpcrField.module.css";
 
 interface EpcrFieldProps {
   resolved: ResolvedField;
-  /** Red outline regardless of the pipeline flag (e.g. required for handoff, still empty). */
+  /** red outline whatever the pipeline flag says (e.g. required for handoff, still empty) */
   attention?: boolean;
   selected: boolean;
   onSelect: () => void;
@@ -12,10 +12,8 @@ interface EpcrFieldProps {
   onToggleCheckbox: (checked: boolean) => void;
 }
 
-/**
- * One ePCR line. It looks like an input but is a button: values only change
- * through the review dialog, so every change keeps who confirmed it and when.
- */
+// one ePCR line. looks like an input but it's a button, values only change through the
+// review dialog so every change keeps who confirmed it + when
 export function EpcrField({ resolved, attention = false, selected, onSelect, onOpen, onToggleCheckbox }: EpcrFieldProps) {
   const { field, value, review } = resolved;
   const flagged = resolved.flagged || attention;

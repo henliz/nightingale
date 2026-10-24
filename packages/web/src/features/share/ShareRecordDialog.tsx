@@ -9,12 +9,12 @@ export const HANDOFF_LINK = "handoff.medfi.ca/h/7Q4K-29XZ";
 
 interface ShareRecordDialogProps {
   open: boolean;
-  /** Called once the captain sends the link (Copy link or Done). */
+  /** called once the captain sends the link (Copy link or Done) */
   onShared: () => void;
   onClose: () => void;
 }
 
-/** Overlay E: sends the reviewed record to the paramedic crew; they must accept it. */
+/** overlay E: sends the reviewed record to the paramedic crew, they have to accept it */
 export function ShareRecordDialog({ open, onShared, onClose }: ShareRecordDialogProps) {
   const [copied, setCopied] = useState(false);
 
@@ -23,7 +23,7 @@ export function ShareRecordDialog({ open, onShared, onClose }: ShareRecordDialog
       await navigator.clipboard.writeText(`https://${HANDOFF_LINK}`);
       setCopied(true);
     } catch {
-      /* clipboard blocked; the link is still visible to copy by hand */
+      /* clipboard blocked, link is still there to copy by hand */
     }
     onShared();
   }

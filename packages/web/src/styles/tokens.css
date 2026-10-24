@@ -1,4 +1,4 @@
-/* Design tokens, mirrored from the Figma "Clear blue" variables. */
+/* design tokens, mirrored from the Figma "Clear blue" variables */
 :root {
   --color-canvas: #f6f8fb;
   --color-white: #ffffff;
@@ -31,7 +31,7 @@
 
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Type scale: size / line-height / weight */
+  /* type scale: size / line-height / weight */
   --text-title: 600 28px/36px var(--font-sans);
   --text-heading: 600 18px/26px var(--font-sans);
   --text-body: 400 14px/22px var(--font-sans);

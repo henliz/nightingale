@@ -1,4 +1,4 @@
-/** Fictional drill data. No real patient information anywhere in this prototype. */
+/** fictional drill data, no real patient info anywhere in this prototype */
 import type { Role } from "./users";
 
 export const CURRENT_CALL = {
@@ -33,7 +33,7 @@ const UNITS_BY_ROLE: Record<Role, readonly string[]> = {
   paramedic: ["EMS-12", "EMS-17", "EMS-21", "EMS-05"],
 };
 
-/** Each service sees its own recent calls. */
+/** each service sees its own recent calls */
 export function recentRecordsFor(role: Role): RecordRow[] {
   return RECORD_ROWS.map((row, i) => ({ ...row, unit: UNITS_BY_ROLE[role][i] ?? "" }));
 }
@@ -48,13 +48,13 @@ export interface Observation {
   text: string;
 }
 
-/** The latest captured line waiting on the captain, by story step. */
+/** latest captured line waiting on the captain, by story step */
 export const LATEST_OBSERVATION = {
   on_scene: { receivedAt: "13:34", text: "Patient is found awake and confused at the foot of the stairs" },
   needs_review: { receivedAt: "13:42", text: "Patient blood pressure is 140/84" },
 } as const satisfies Partial<Record<string, Observation>>;
 
-/** What the paramedic crew sees before and after accepting the fire record. */
+/** what the paramedic crew sees before + after accepting the fire record */
 export const PARAMEDIC_OBSERVATION = {
   fromCall: { receivedAt: "13:22", text: "Patient continues to respond to voice. Left hip pain reported during reassessment." },
   fromFire: { receivedAt: "13:32", text: "Patient is found awake and confused at the foot of the stairs" },

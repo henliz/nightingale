@@ -3,16 +3,16 @@ import type { FieldReview, IncidentState } from "./types";
 
 export interface ResolvedField {
   field: EpcrField;
-  /** What the form shows right now. */
+  /** what the form shows right now */
   value: string;
-  /** True while no responder has confirmed or cleared the field. */
+  /** true until a responder confirms or clears the field */
   unreviewed: boolean;
-  /** Red outline: flagged by the pipeline and still unreviewed. */
+  /** red outline: pipeline flagged it and nobody's reviewed it yet */
   flagged: boolean;
   review: FieldReview | undefined;
 }
 
-/** The value in the ePCR form once reviews are applied over the suggestion. */
+/** the ePCR form value once reviews are applied over the suggestion */
 export function resolveField(field: EpcrField, state: IncidentState): ResolvedField {
   const review = state.fieldReviews[field.key];
   const value = review ? review.value : (field.suggested ?? "");
@@ -25,7 +25,7 @@ export function resolveField(field: EpcrField, state: IncidentState): ResolvedFi
   };
 }
 
-/** The nine lines the ER nurse reads first (IMIST-AMBO); the paramedic must fill or confirm them. */
+/** the nine lines the ER nurse reads first (IMIST-AMBO), paramedic has to fill or confirm them */
 export const HANDOFF_REQUIRED_KEYS: readonly string[] = [
   "dob",
   "mailingAddress",
@@ -38,7 +38,7 @@ export const HANDOFF_REQUIRED_KEYS: readonly string[] = [
   "handoffTo",
 ];
 
-/** Required handoff fields that are still empty or flagged and unreviewed. */
+/** required handoff fields still empty or flagged + unreviewed */
 export function unfilledHandoffKeys(state: IncidentState): string[] {
   return HANDOFF_REQUIRED_KEYS.filter((key) => {
     const field = EPCR_FIELD_BY_KEY.get(key);

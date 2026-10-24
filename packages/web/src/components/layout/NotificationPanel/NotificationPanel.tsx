@@ -20,7 +20,7 @@ interface NotificationPanelProps {
   onDismiss: (ids: string[]) => void;
 }
 
-/** The bell with its count, and the right-hand panel it opens: today, yesterday, dismissable. */
+/** the bell + its count, and the right-hand panel it opens: today, yesterday, dismissable */
 export function NotificationPanel({ alerts, unseen, onOpen, onDismiss }: NotificationPanelProps) {
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState<Filter>("all");

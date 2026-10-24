@@ -8,15 +8,15 @@ import styles from "../home/ReviewCard.module.css";
 interface FireReviewCardProps {
   incident: IncidentState;
   onCrewEnRoute: () => void;
-  /** Step 2: takes the captain into the review (Step 3). */
+  /** step 2: takes the captain into the review (step 3) */
   onStartReview: () => void;
-  /** Step 3: peeks at the record without leaving the queue. */
+  /** step 3: peeks at the record without leaving the queue */
   onPeekRecord: () => void;
   onFinishReview: () => void;
   onExpand: () => void;
 }
 
-/** "Needs your review" for the fire captain, by story step. */
+/** "Needs your review" for the fire captain, by story step */
 export function FireReviewCard({ incident, onCrewEnRoute, onStartReview, onPeekRecord, onFinishReview, onExpand }: FireReviewCardProps) {
   const { stage } = incident;
 

@@ -27,7 +27,7 @@ function valueOf(key: string, state: IncidentState): string {
   return v || NOT_CAPTURED;
 }
 
-/** The Letter page, in the Woolwich Fire sheet order. Left column: patient; right: service. */
+/** the letter page in Woolwich Fire sheet order. left column patient, right column service */
 export function buildPrintLayout(state: IncidentState): { left: PrintBlock[]; right: PrintBlock[]; bottom: PrintBlock[] } {
   const v = (key: string) => valueOf(key, state);
   const cell = (label: string, key: string): PrintCell => ({ label, value: v(key) });

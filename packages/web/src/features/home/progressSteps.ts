@@ -3,13 +3,13 @@ import type { Stage } from "../../incident/types";
 
 export interface ProgressStep {
   label: string;
-  /** Label once the step is reached, when it reads differently (e.g. "Info verified"). */
+  /** label once the step is reached, if it reads differently (e.g. "Info verified") */
   labelReached?: string;
-  /** The incident stage at which this step lights up. */
+  /** incident stage where this step lights up */
   reachedAt: Stage;
-  /** The stage whose recorded time is shown under the label. */
+  /** stage whose recorded time shows under the label */
   timeFrom: Stage;
-  /** Text shown while no time has been recorded yet. */
+  /** text shown until a time is recorded */
   placeholder?: string;
 }
 

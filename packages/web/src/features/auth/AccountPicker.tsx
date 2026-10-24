@@ -9,10 +9,8 @@ interface AccountPickerProps {
   onChange: (user: User) => void;
 }
 
-/**
- * The "Username" field: looks like an input, but clicking it lists the people signed up on
- * this device instead of asking anyone to type. Arrow keys, Enter and Escape work too.
- */
+// the "Username" field. looks like an input but clicking it lists who's signed up on this
+// device so nobody has to type. arrow keys, enter + escape work too
 export function AccountPicker({ users, value, onChange }: AccountPickerProps) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);

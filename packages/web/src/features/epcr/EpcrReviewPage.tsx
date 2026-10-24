@@ -13,28 +13,28 @@ import styles from "./EpcrReviewPage.module.css";
 
 interface EpcrReviewPageProps {
   user: User;
-  /** Who gets credited on confirmed fields, e.g. "FF-12". */
+  /** who gets credited on confirmed fields, e.g. "FF-12" */
   responder: string;
   title: string;
   meta: string;
   tabs: readonly { id: EpcrTab; label: string }[];
   sections: readonly EpcrSection[];
-  /** The transcript beside the draft; defaults to the fixture. */
+  /** transcript beside the draft, defaults to the fixture */
   excerpts?: readonly CaptureExcerpt[];
   captureSummary?: string;
   initialTab: EpcrTab;
   saveLabel: string;
   savePrimary?: boolean;
-  /** Fire shows the transcript beside the draft; the paramedic verifies without it. */
+  /** fire sees the transcript beside the draft, paramedic verifies without it */
   showCapture?: boolean;
-  /** Fields that still need attention (red outline, dot on their tab). */
+  /** fields that still need attention (red outline, dot on their tab) */
   attentionKeys?: ReadonlySet<string>;
-  /** Fires after a confirm that changed the stored value. */
+  /** fires after a confirm that changed the stored value */
   onFieldChanged?: (label: string, previous: string, next: string) => void;
   onSave: () => void;
 }
 
-/** Transcript beside the structured draft; every field is checked against what was said. */
+/** transcript beside the structured draft, every field gets checked against what was said */
 export function EpcrReviewPage(props: EpcrReviewPageProps) {
   const { user, responder, title, meta, tabs, sections, excerpts, captureSummary, initialTab, saveLabel, savePrimary, showCapture = true, attentionKeys, onFieldChanged, onSave } = props;
   const fieldByKey = new Map(sections.flatMap((s) => s.fields.map((f) => [f.key, f] as const)));

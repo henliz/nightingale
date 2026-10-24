@@ -16,15 +16,15 @@ export type IconName = keyof typeof ICONS;
 
 interface IconProps {
   name: IconName;
-  /** Rendered width in px; defaults to the asset's natural size. */
+  /** rendered width in px, defaults to the asset's natural size */
   width?: number;
   height?: number;
-  /** Shorthand for a square icon. */
+  /** shorthand for a square icon */
   size?: number;
   className?: string;
 }
 
-/** Static Figma-exported icon. Decorative by default (alt=""). */
+/** static Figma-exported icon, decorative by default (alt="") */
 export function Icon({ name, size, width = size, height = size, className }: IconProps) {
   return (
     <img

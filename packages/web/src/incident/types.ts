@@ -1,7 +1,5 @@
-/**
- * Where the shared record is in the handoff story. One linear path, shared by the
- * firefighter, paramedic and triage views so each side sees the same record.
- */
+// where the shared record is in the handoff story. one linear path for fire, paramedic and
+// triage so every side sees the same record
 export const STAGES = [
   "dispatched", // fire step 1: dispatch created the incident, nothing captured
   "on_scene", // fire step 2: device is recording, first observations in
@@ -20,22 +18,22 @@ export function stageIndex(stage: Stage): number {
   return STAGES.indexOf(stage);
 }
 
-/** True when `state` is at or past `target` on the path. */
+/** true when `state` is at or past `target` */
 export function hasReached(state: Stage, target: Stage): boolean {
   return stageIndex(state) >= stageIndex(target);
 }
 
-/** Clock times (HH:MM) recorded as the record moves along. */
+/** clock times (HH:MM) stamped as the record moves along */
 export type StageTimes = Partial<Record<Stage, string>>;
 
-/** A change the paramedic crew made after accepting the record. Both sides see it. */
+/** a change the paramedic crew made after accepting, both sides see it */
 export interface ParamedicUpdate {
   by: string;
   summary: string;
   at: string;
 }
 
-/** An observation typed in by a responder (not transcribed by the device). */
+/** an observation a responder typed in (not transcribed by the device) */
 export interface AddedObservation {
   id: string;
   observedAt: string;
@@ -53,7 +51,7 @@ export interface AddedFile {
 
 export type FieldReviewStatus = "confirmed" | "cleared";
 
-/** A responder's decision on one ePCR field. Keeps who and when, for both sides. */
+/** a responder's call on one ePCR field, keeps who + when for both sides */
 export interface FieldReview {
   value: string;
   status: FieldReviewStatus;
@@ -64,26 +62,26 @@ export interface FieldReview {
 export interface IncidentState {
   stage: Stage;
   times: StageTimes;
-  /** Wall-clock ms when the device started recording; drives the "active mm:ss" chip. */
+  /** wall-clock ms when the device started recording, drives the "active mm:ss" chip */
   recordingStartedAt: number | null;
   lastParamedicUpdate: ParamedicUpdate | null;
   observations: AddedObservation[];
   files: AddedFile[];
-  /** Keyed by ePCR field key. Missing means the suggestion stands, unreviewed. */
+  /** keyed by ePCR field key, missing = suggestion stands, unreviewed */
   fieldReviews: Record<string, FieldReview>;
-  /** Paramedic step 6: when the QR code was first shown. */
+  /** paramedic step 6: when the QR code was first shown */
   qrRevealedAt: string | null;
-  /** Paramedic step 7: when the triage nurse first opened the secure link. */
+  /** paramedic step 7: when the triage nurse first opened the secure link */
   handoffOpenedAt: string | null;
-  /** Paramedic step 8: when the triage nurse marked the summary as read. */
+  /** paramedic step 8: when the triage nurse marked the summary as read */
   handoffReadAt: string | null;
-  /** Alert ids the signed-in person swiped away. */
+  /** alert ids the signed-in person swiped away */
   dismissedAlertIds: string[];
-  /** Alert ids already seen in the panel; the bell badge counts the rest. */
+  /** alert ids already seen in the panel, the bell badge counts the rest */
   seenAlertIds: string[];
-  /** Files removed from the record, by their display key. */
+  /** files removed from the record, by display key */
   deletedFileKeys: string[];
-  /** Free-text notes added to Incident sections, keyed by section title. */
+  /** free-text notes on Incident sections, keyed by section title */
   incidentNotes: Record<string, { text: string; by: string; at: string }>;
 }
 

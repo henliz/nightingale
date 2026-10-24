@@ -7,11 +7,11 @@ import styles from "./PrintableEpcr.module.css";
 
 interface PrintableEpcrProps {
   incident: IncidentState;
-  /** Version number so the hospital can tell copies apart. */
+  /** version number so the hospital can tell copies apart */
   version: number;
 }
 
-/** One Letter page of the ePCR, laid out like the paper on-scene sheet. */
+/** one letter page of the ePCR, laid out like the paper on-scene sheet */
 export function PrintableEpcr({ incident, version }: PrintableEpcrProps) {
   const layout = buildPrintLayout(incident);
   const reviewed = incident.stage !== "dispatched" && incident.stage !== "on_scene" && incident.stage !== "needs_review";

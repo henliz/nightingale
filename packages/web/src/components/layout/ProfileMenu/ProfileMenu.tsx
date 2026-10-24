@@ -11,7 +11,7 @@ interface ProfileMenuProps {
   onRestartDemo: () => void;
 }
 
-/** The name in the app bar opens a small menu: who is signed in, restart the demo, sign out. */
+/** the app bar name opens a little menu: who's signed in, restart demo, sign out */
 export function ProfileMenu({ user, onSignOut, onRestartDemo }: ProfileMenuProps) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);

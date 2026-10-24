@@ -27,6 +27,6 @@ export const router = createBrowserRouter([
       { path: "record", element: <ParamedicRecordPage /> },
     ],
   },
-  /* The secure link the triage nurse scans: no account, read-only. */
+  /* the secure link the triage nurse scans, no account, read-only */
   { path: "/handoff/:token", element: <HandoffPage /> },
 ]);

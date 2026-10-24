@@ -7,14 +7,14 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        // Imported directly so Babel does not resolve the plugin from the server's cwd.
+        // imported directly so babel doesn't resolve the plugin from the server's cwd
         plugins: [[reactCompiler, {}]],
       },
     }),
   ],
   optimizeDeps: {
-    // Pre-bundle the compiler runtime with React up front, otherwise Vite discovers it
-    // late, re-optimizes, and the first load briefly runs two copies of React.
+    // pre-bundle the compiler runtime with react, otherwise vite finds it late, re-optimizes,
+    // and the first load briefly runs two copies of react
     include: ["react/compiler-runtime"],
   },
   server: {

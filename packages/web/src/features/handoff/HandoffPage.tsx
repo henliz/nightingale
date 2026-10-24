@@ -9,7 +9,7 @@ import { clockTime } from "../../lib/time";
 import { PrintEpcrDialog } from "../print/PrintEpcrDialog";
 import styles from "./HandoffPage.module.css";
 
-/** Paramedic Steps 7 and 8: what the ER triage nurse sees after scanning the QR code. No account, read-only. */
+/** paramedic steps 7 + 8: what the ER triage nurse sees after scanning the QR. no account, read-only */
 export function HandoffPage() {
   const incident = useIncident();
   const dispatch = useIncidentDispatch();

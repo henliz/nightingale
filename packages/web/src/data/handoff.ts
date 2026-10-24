@@ -1,7 +1,7 @@
-/** The hospital handoff summary in IMIST-AMBO order. Fictional drill data. */
+/** hospital handoff summary in IMIST-AMBO order, fictional drill data */
 export const HANDOFF_TOKEN = "7Q4K-29XZ";
 
-/** The secure link encoded in the QR code; opens on this same origin. */
+/** the secure link in the QR code, opens on this same origin */
 export function handoffUrl(): string {
   return `${window.location.origin}/handoff/${HANDOFF_TOKEN}`;
 }
@@ -9,7 +9,7 @@ export function handoffUrl(): string {
 export interface HandoffRow {
   label: string;
   text: string;
-  /** Hidden until the triage nurse confirms receipt. */
+  /** hidden until the triage nurse confirms receipt */
   identity?: boolean;
 }
 

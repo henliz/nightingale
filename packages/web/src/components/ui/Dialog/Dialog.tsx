@@ -4,17 +4,15 @@ import styles from "./Dialog.module.css";
 interface DialogProps {
   open: boolean;
   onClose: () => void;
-  /** Accessible name for the dialog. */
+  /** accessible name for the dialog */
   label: string;
   width: number;
   height?: number;
   children: ReactNode;
 }
 
-/**
- * Native <dialog> modal: focus trapping, Escape and the scrim all come from the browser.
- * Clicking the scrim (outside the panel) closes it, as the design annotates.
- */
+// native <dialog> modal, focus trapping + escape + scrim all come free from the browser.
+// clicking the scrim (outside the panel) closes it, per the design notes
 export function Dialog({ open, onClose, label, width, height, children }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
 

@@ -11,7 +11,7 @@
 }
 
 .dialog::backdrop {
-  /* Light, see-through grey so the queue stays visible behind the record. */
+  /* light see-through grey so the queue stays visible behind the record */
   background: rgba(32, 43, 61, 0.28);
 }
 

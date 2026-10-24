@@ -13,7 +13,7 @@ interface FieldReviewDialogProps {
   onClose: () => void;
 }
 
-/** Overlay C: the original capture stays visible beside the value being confirmed. */
+/** overlay C: original capture stays visible beside the value being confirmed */
 export function FieldReviewDialog({ resolved, turns = CAPTURE_TURN_BY_ID, onConfirm, onClose }: FieldReviewDialogProps) {
   return (
     <Dialog open={resolved !== null} onClose={onClose} label="Review field" width={640}>

@@ -6,7 +6,7 @@ interface FieldProps {
   className?: string;
 }
 
-/** Small muted label over a body-size value. An empty value renders as an empty input outline. */
+/** small muted label over a body-size value, empty value renders as an empty input outline */
 export function Field({ label, value, className }: FieldProps) {
   return (
     <div className={[styles.field, className].filter(Boolean).join(" ")}>

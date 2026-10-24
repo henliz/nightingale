@@ -14,7 +14,7 @@ interface QrHandoffDialogProps {
   onClose: () => void;
 }
 
-/** Paramedic Step 6 overlay: the triage nurse scans this to open the read-only summary. */
+/** paramedic step 6 overlay: triage nurse scans this to open the read-only summary */
 export function QrHandoffDialog({ open, version, onPrint, onClose }: QrHandoffDialogProps) {
   const incident = useIncident();
   const url = handoffUrl();

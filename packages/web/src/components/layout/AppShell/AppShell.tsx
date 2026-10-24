@@ -9,13 +9,13 @@ import styles from "./AppShell.module.css";
 
 interface AppShellProps {
   user: User;
-  /** "compact" uses the 24px gutter of the record review frames. */
+  /** "compact" uses the 24px gutter from the record review frames */
   density?: "default" | "compact";
   search?: { value: string; onChange: (value: string) => void };
   children: ReactNode;
 }
 
-/** Application bar plus the scrollable workspace underneath it. */
+/** app bar + the scrollable workspace under it */
 export function AppShell({ user, density = "default", search, children }: AppShellProps) {
   const { signOut } = useSession();
   const incident = useIncident();

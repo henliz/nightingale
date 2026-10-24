@@ -1,9 +1,9 @@
-/** "13:52" for the given instant, 24-hour local time. */
+/** "13:52" for the given instant, 24h local time */
 export function clockTime(date: Date = new Date()): string {
   return date.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
 }
 
-/** "15:21" style elapsed mm:ss. */
+/** "15:21" style elapsed mm:ss */
 export function elapsed(fromMs: number, nowMs: number): string {
   const total = Math.max(0, Math.floor((nowMs - fromMs) / 1000));
   const mm = String(Math.floor(total / 60)).padStart(2, "0");

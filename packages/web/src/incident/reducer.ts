@@ -17,7 +17,7 @@ export const initialIncidentState: IncidentState = {
   incidentNotes: {},
 };
 
-/** Only ever move forward; replaying an action is a no-op. */
+/** only ever moves forward, replaying an action is a no-op */
 function advance(state: IncidentState, to: Stage, at: string): IncidentState {
   if (hasReached(state.stage, to)) return state;
   return { ...state, stage: to, times: { ...state.times, [to]: at } };

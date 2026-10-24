@@ -25,7 +25,7 @@ function writeStoredUser(user: User | null) {
     if (user) sessionStorage.setItem(STORAGE_KEY, user.id);
     else sessionStorage.removeItem(STORAGE_KEY);
   } catch {
-    /* storage unavailable (private mode); session simply won't survive a reload */
+    /* storage unavailable (private mode), session just won't survive a reload */
   }
 }
 

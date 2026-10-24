@@ -15,7 +15,7 @@ import styles from "./CurrentCallCard.module.css";
 interface CurrentCallCardProps {
   role: Role;
   incident: IncidentState;
-  /** Paramedic side before acceptance: the record opens as a locked summary. */
+  /** paramedic side before accepting, record opens as a locked summary */
   locked?: boolean;
   onOpenRecord: () => void;
   onShare?: () => void;

@@ -36,14 +36,14 @@ const TABS = [
 
 interface PatientRecordModalProps {
   open: boolean;
-  /** Which tab to show when the modal opens; "Review note" opens the transcript. */
+  /** tab to open on, "Review note" opens the transcript */
   initialTab?: Tab;
-  /** Paramedic step 2: shared but not yet accepted. Hazards show, identity stays locked. */
+  /** paramedic step 2: shared, not accepted yet. hazards show, identity stays locked */
   locked?: boolean;
   onClose: () => void;
 }
 
-/** Overlays A and B: the patient record, read from the shared incident. */
+/** overlays A + B: the patient record, read from the shared incident */
 export type RecordTab = Tab;
 
 export function PatientRecordModal({ open, initialTab = "overview", locked = false, onClose }: PatientRecordModalProps) {
@@ -53,7 +53,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
   const [tab, setTab] = useState<Tab>(initialTab);
   const [subView, setSubView] = useState<SubView>(null);
 
-  // Each opening starts on the tab the caller asked for (state adjusted during render, no effect).
+  // every open starts on the tab the caller asked for (state adjusted during render, no effect)
   const [wasOpen, setWasOpen] = useState(open);
   if (open !== wasOpen) {
     setWasOpen(open);

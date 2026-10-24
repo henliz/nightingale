@@ -6,7 +6,7 @@ import { clockTime } from "../../lib/time";
 import { useSession } from "../../session/SessionContext";
 import { EpcrReviewPage } from "../epcr/EpcrReviewPage";
 
-/** Fire Step 4: the captain checks every field before anything leaves the device. */
+/** fire step 4: captain checks every field before anything leaves the device */
 export function FireRecordPage() {
   const { user } = useSession();
   const dispatch = useIncidentDispatch();

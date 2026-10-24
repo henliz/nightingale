@@ -11,7 +11,7 @@ const HOME_BY_ROLE: Record<User["role"], string> = {
   paramedic: "/paramedic",
 };
 
-/** Any 4-digit PIN unlocks the shared department device in this prototype. */
+/** any 4-digit PIN unlocks the shared department device in this prototype */
 const PIN_PATTERN = /^\d{4}$/;
 
 export function SignInPage() {
@@ -45,7 +45,7 @@ export function SignInPage() {
     setSelected(user);
     setPin("");
     setError(null);
-    // The PIN field appears once a person is chosen; put the cursor there.
+    // PIN field shows up once someone's picked, put the cursor there
     requestAnimationFrame(() => pinRef.current?.focus());
   }
 
@@ -53,7 +53,7 @@ export function SignInPage() {
     const digits = next.replace(/\D/g, "").slice(0, 4);
     setPin(digits);
     setError(null);
-    // Four digits is a complete sign-in; no extra button needed.
+    // 4 digits = signed in, no extra button
     if (digits.length === 4 && selected) complete(selected);
   }
 

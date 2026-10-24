@@ -15,7 +15,7 @@ interface ParamedicReviewCardProps {
   onExpand: () => void;
 }
 
-/** "Needs your review" for the paramedic crew, by story step. */
+/** "Needs your review" for the paramedic crew, by story step */
 export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
   const { incident, unfilledCount, onReviewNote, onAccept, onViewNote, onRevealQr, onExpand } = props;
   const { stage } = incident;

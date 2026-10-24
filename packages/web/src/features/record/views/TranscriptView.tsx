@@ -3,11 +3,11 @@ import styles from "./views.module.css";
 
 interface TranscriptViewProps {
   turns: readonly TranscriptTurn[];
-  /** The latest observation, shown as a summary before the full transcript. */
+  /** latest observation, shown as a summary above the full transcript */
   latest: ResponderNote;
 }
 
-/** Summary first, then who said what and when, as the device heard it. */
+/** summary first, then who said what + when, as the device heard it */
 export function TranscriptView({ turns, latest }: TranscriptViewProps) {
   return (
     <div className={styles.view}>

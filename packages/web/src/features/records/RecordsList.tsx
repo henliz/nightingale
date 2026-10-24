@@ -5,7 +5,7 @@ import styles from "./RecordsList.module.css";
 interface RecordsListProps {
   records: readonly RecordRow[];
   totalCount: number;
-  /** App bar search text; matches call id, unit or call number. */
+  /** app bar search text, matches call id, unit or call number */
   query?: string;
   onView: (record: RecordRow) => void;
 }

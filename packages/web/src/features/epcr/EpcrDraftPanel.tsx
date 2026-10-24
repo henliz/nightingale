@@ -15,7 +15,7 @@ interface EpcrDraftPanelProps {
   onSelectField: (key: string) => void;
   onOpenField: (key: string) => void;
   onToggleCheckbox: (key: string, checked: boolean) => void;
-  /** Field keys that still need attention; their tabs get a red dot. */
+  /** field keys that still need attention, their tabs get a red dot */
   attentionKeys?: ReadonlySet<string>;
   draftStatus: string;
   saveLabel: string;

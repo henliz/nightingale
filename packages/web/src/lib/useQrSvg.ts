@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import QRCode from "qrcode";
 
-/** An SVG string for `text`, or null while it renders. */
+/** svg string for `text`, null while it renders */
 export function useQrSvg(text: string): string | null {
   const [svg, setSvg] = useState<string | null>(null);
   useEffect(() => {

@@ -6,7 +6,7 @@ export interface Alert {
   title: string;
   body: string;
   time: string;
-  /** "today" alerts come from the live story; "yesterday" is sample history. */
+  /** "today" alerts come from the live story, "yesterday" is sample history */
   day: "today" | "yesterday";
   source: "fire" | "paramedic" | "handoff";
 }
@@ -24,7 +24,7 @@ const YESTERDAY: Record<Role, Alert[]> = {
   ],
 };
 
-/** Everything that happened on the shared record, as the signed-in role would hear about it. */
+/** everything that happened on the shared record, as the signed-in role would hear it */
 export function alertsFor(role: Role, state: IncidentState): Alert[] {
   const t = state.times;
   const live: Alert[] = [];

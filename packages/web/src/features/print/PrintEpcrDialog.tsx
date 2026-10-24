@@ -10,10 +10,10 @@ interface PrintEpcrDialogProps {
   onClose: () => void;
 }
 
-/** Overlay D: one Letter page preview, printed through the browser's print dialog. */
+/** overlay D: one letter page preview, printed through the browser's print dialog */
 export function PrintEpcrDialog({ open, onClose }: PrintEpcrDialogProps) {
   const incident = useIncident();
-  // Each confirmed field bumps the version so the hospital can tell copies apart.
+  // every confirmed field bumps the version so the hospital can tell copies apart
   const version = 1 + Object.keys(incident.fieldReviews).length;
 
   return (

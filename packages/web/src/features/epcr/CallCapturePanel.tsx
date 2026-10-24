@@ -9,10 +9,10 @@ type CaptureView = "overview" | "transcript";
 interface CallCapturePanelProps {
   excerpts?: readonly CaptureExcerpt[];
   summary?: string;
-  /** Transcript turn ids that support the selected ePCR field. */
+  /** transcript turn ids backing the selected ePCR field */
   highlightedTurnIds: ReadonlySet<string>;
   onSelectTurn: (turnId: string) => void;
-  /** Footer text explaining what the selection means right now. */
+  /** footer text for what the selection means right now */
   hint: string;
   canReview: boolean;
   onReviewField: () => void;

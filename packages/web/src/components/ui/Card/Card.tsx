@@ -5,7 +5,7 @@ export function Card({ className, ...rest }: HTMLAttributes<HTMLElement>) {
   return <section className={[styles.card, className].filter(Boolean).join(" ")} {...rest} />;
 }
 
-/** A labelled column: muted heading above a card. */
+/** labelled column, muted heading above a card */
 export function LabelledSection({
   label,
   children,

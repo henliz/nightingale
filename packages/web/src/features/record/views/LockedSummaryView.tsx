@@ -3,7 +3,7 @@ import { HANDOFF_HAZARDS } from "../../../data/handoff";
 import { CURRENT_CALL } from "../../../data/incident";
 import styles from "./views.module.css";
 
-/** What the paramedic crew can see before accepting: hazards and the dispatch summary, no identity. */
+/** what the paramedic crew sees before accepting: hazards + dispatch summary, no identity */
 export function LockedSummaryView({ showSummary }: { showSummary: boolean }) {
   if (!showSummary) {
     return (
