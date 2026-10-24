@@ -29,6 +29,7 @@ export function ParamedicRecordPage() {
       sections={form.sections}
       initialTab={live.source === "demo" ? "patient" : (form.tabs[0]?.id ?? "summary")}
       showCapture={false}
+      excerpts={live.excerpts ?? undefined}
       attentionKeys={new Set(unfilledHandoffKeys(incident, form))}
       saveLabel="Save changes"
       savePrimary
