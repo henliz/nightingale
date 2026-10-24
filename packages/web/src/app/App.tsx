@@ -7,11 +7,11 @@ import { router } from "./router";
 export function App() {
   return (
     <SessionProvider>
-      <IncidentProvider>
-        <LiveSourceProvider>
+      <LiveSourceProvider>
+        <IncidentProvider>
           <RouterProvider router={router} />
-        </LiveSourceProvider>
-      </IncidentProvider>
+        </IncidentProvider>
+      </LiveSourceProvider>
     </SessionProvider>
   );
 }

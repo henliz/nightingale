@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { CaptureExcerpt } from "../data/epcr";
 import type { PatientRecord } from "../data/record";
+import { callInfo, SAMPLE_CALL, type CallInfo } from "./call";
 import { fetchSessions, subscribeToChanges } from "./client";
 import { mapExcerpts, mapIncidentSections, mapNoteToEpcr, mapSessionToRecord, sortedSessions, type IncidentSection, type NoteFieldOverride } from "./mapNote";
 import type { DrillSession } from "./types";
@@ -9,11 +10,12 @@ export type DataSource = "demo" | "api";
 
 interface LiveSourceValue {
   source: DataSource;
-  /** "idle" in demo mode, otherwise where the api connection is at */
-  status: "idle" | "loading" | "ready" | "error";
+  status: "loading" | "ready" | "error";
   error: string | null;
   sessions: DrillSession[];
   session: DrillSession | null;
+  /** what every card and dialog says about the call on screen, real or the sample */
+  call: CallInfo;
   /** null = unpin, follow the newest call */
   selectSession: (captureId: string | null) => void;
   /** null when following the newest call */
@@ -32,20 +34,14 @@ const LiveSourceContext = createContext<LiveSourceValue | null>(null);
 const SOURCE_KEY = "medfi.source";
 const SESSION_KEY = "medfi.source.session";
 
-/** `?source=api` (or demo) sticks for the tab, else VITE_DATA_SOURCE, else demo */
+/** real calls by default. the sample call is one of the records, picking it flips to "demo" for the tab */
 function readSource(): DataSource {
   try {
-    const fromUrl = new URLSearchParams(window.location.search).get("source");
-    if (fromUrl === "api" || fromUrl === "demo") {
-      sessionStorage.setItem(SOURCE_KEY, fromUrl);
-      return fromUrl;
-    }
-    const stored = sessionStorage.getItem(SOURCE_KEY);
-    if (stored === "api" || stored === "demo") return stored;
+    if (sessionStorage.getItem(SOURCE_KEY) === "demo") return "demo";
   } catch {
     /* storage unavailable */
   }
-  return import.meta.env.VITE_DATA_SOURCE === "api" ? "api" : "demo";
+  return "api";
 }
 
 function pickSession(sessions: DrillSession[], wanted: string | null): DrillSession | null {
@@ -56,7 +52,7 @@ function pickSession(sessions: DrillSession[], wanted: string | null): DrillSess
 
 export function LiveSourceProvider({ children }: { children: ReactNode }) {
   const [source, setSourceState] = useState<DataSource>(readSource);
-  const [status, setStatus] = useState<LiveSourceValue["status"]>(source === "api" ? "loading" : "idle");
+  const [status, setStatus] = useState<LiveSourceValue["status"]>("loading");
   const [error, setError] = useState<string | null>(null);
   const [sessions, setSessions] = useState<DrillSession[]>([]);
   const [wanted, setWanted] = useState<string | null>(() => {
@@ -67,8 +63,8 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     }
   });
 
+  // always loaded, even on the sample call, so the records list can switch back to a real one
   useEffect(() => {
-    if (source !== "api") return;
     let cancelled = false;
     async function load() {
       try {
@@ -89,7 +85,7 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
       cancelled = true;
       unsubscribe();
     };
-  }, [source]);
+  }, []);
 
   const session = source === "api" ? pickSession(sessions, wanted) : null;
 
@@ -99,6 +95,7 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     error,
     sessions,
     session,
+    call: source === "demo" ? SAMPLE_CALL : callInfo(session),
     pinned: wanted,
     selectSession: (captureId) => {
       setWanted(captureId);
@@ -112,7 +109,6 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     setSource: (next) => {
       if (next === source) return;
       setSourceState(next);
-      if (next === "api") setStatus("loading");
       try {
         sessionStorage.setItem(SOURCE_KEY, next);
       } catch {

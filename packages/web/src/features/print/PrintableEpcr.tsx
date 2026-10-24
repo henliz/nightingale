@@ -1,6 +1,5 @@
-import { CAPTURE_META } from "../../data/epcr";
-import { CURRENT_CALL } from "../../data/incident";
-import { PATIENT } from "../../data/record";
+import { useLiveSource } from "../../api/LiveSourceContext";
+import { UNNAMED } from "../../api/call";
 import type { IncidentState } from "../../incident/types";
 import { buildPrintLayout, type PrintBlock } from "./printLayout";
 import styles from "./PrintableEpcr.module.css";
@@ -14,6 +13,7 @@ interface PrintableEpcrProps {
 /** one letter page of the ePCR, laid out like the paper on-scene sheet */
 export function PrintableEpcr({ incident, version }: PrintableEpcrProps) {
   const layout = buildPrintLayout(incident);
+  const { call } = useLiveSource();
   const reviewed = incident.stage !== "dispatched" && incident.stage !== "on_scene" && incident.stage !== "needs_review";
 
   return (
@@ -21,7 +21,7 @@ export function PrintableEpcr({ incident, version }: PrintableEpcrProps) {
       <div className={styles.identity}>
         <p className={styles.identityTitle}>Electronic Patient Care Record</p>
         <p className={styles.identityMeta}>
-          {`${PATIENT.name} / ${CAPTURE_META.patientLabel} / Call ${CURRENT_CALL.callId} / ${reviewed ? "Reviewed" : "Review pending"} / Version ${version}`}
+          {`${call.patientName ?? UNNAMED} / ${call.callId} / ${reviewed ? "Reviewed" : "Review pending"} / Version ${version}`}
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export function PrintableEpcr({ incident, version }: PrintableEpcrProps) {
 
       <div className={styles.flex} />
       <p className={styles.footer}>
-        {CAPTURE_META.patientLabel} / Not captured means no value recorded / Page 1
+        {call.callId} / Not captured means no value recorded / Page 1
       </p>
     </article>
   );

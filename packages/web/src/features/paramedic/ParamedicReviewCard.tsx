@@ -1,5 +1,6 @@
 import { Button } from "../../components/ui/Button/Button";
 import { Card } from "../../components/ui/Card/Card";
+import { useLiveSource } from "../../api/LiveSourceContext";
 import { PARAMEDIC_OBSERVATION } from "../../data/incident";
 import { hasReached, type IncidentState } from "../../incident/types";
 import { ReviewExcerpt, ReviewHead } from "../home/ReviewCardParts";
@@ -19,9 +20,16 @@ interface ParamedicReviewCardProps {
 export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
   const { incident, unfilledCount, onReviewNote, onAccept, onViewNote, onRevealQr, onExpand } = props;
   const { stage } = incident;
+  const { source, call } = useLiveSource();
+  // real call: dispatch first, then what fire saw on arrival
+  const fromCall = source === "demo" ? PARAMEDIC_OBSERVATION.fromCall : { receivedAt: call.dispatchAt, text: call.dispatchText };
+  const fromFire =
+    source === "demo"
+      ? PARAMEDIC_OBSERVATION.fromFire
+      : { receivedAt: call.firstContact, text: call.sections.conditionObserved ?? call.latest?.text ?? "Nothing observed yet." };
 
   if (!hasReached(stage, "shared")) {
-    const o = PARAMEDIC_OBSERVATION.fromCall;
+    const o = fromCall;
     return (
       <Card className={styles.card}>
         <ReviewHead title="View the latest observation" onExpand={onExpand}>{`Received ${o.receivedAt} | Not yet reviewed`}</ReviewHead>
@@ -39,7 +47,7 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
     return (
       <Card className={styles.card}>
         <ReviewHead title="Accept record to view" onExpand={onExpand}>{`Shared ${incident.times.shared ?? ""} | Not yet accepted`}</ReviewHead>
-        <ReviewExcerpt text="Patient 007 ePCR" />
+        <ReviewExcerpt text={`${call.callId} ePCR`} />
         <div className={styles.actions}>
           <Button variant="secondary" onClick={onAccept}>
             Accept record
@@ -50,7 +58,7 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
   }
 
   if (stage === "accepted") {
-    const o = PARAMEDIC_OBSERVATION.fromFire;
+    const o = fromFire;
     return (
       <Card className={styles.card}>
         <ReviewHead title="View the latest observation" onExpand={onExpand}>{`Received ${incident.times.accepted ?? o.receivedAt} | Not yet reviewed`}</ReviewHead>

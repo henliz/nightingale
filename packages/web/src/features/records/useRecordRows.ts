@@ -15,22 +15,27 @@ function sessionRow(s: DrillSession): RecordRow {
   };
 }
 
-const DEMO_ROW: RecordRow = { callId: "Demo case", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
+const DEMO_ROW: RecordRow = { callId: "Sample call", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
 
-/** the records list: the named cases from the api (plus the demo case), or the fixture rows in demo mode.
- * a fresh untitled call from the pi shows as the current call instead */
+/** the records list: the named cases from the api plus the sample call. a fresh untitled call from the pi shows as the current call instead */
 export function useRecordRows(role: Role) {
   const live = useLiveSource();
-  const rows = live.source === "api" && live.status === "ready" ? [...sortedSessions(live.sessions).filter((s) => s.title).map(sessionRow), DEMO_ROW] : recentRecordsFor(role);
+  const ready = live.status === "ready";
+  const rows = ready ? [...sortedSessions(live.sessions).filter((s) => s.title).map(sessionRow), DEMO_ROW] : recentRecordsFor(role);
   return {
     rows,
-    total: live.source === "api" && live.status === "ready" ? rows.length : TOTAL_RECORDS,
+    total: ready ? rows.length : TOTAL_RECORDS,
     /** points the record modal + review pages at this row's call */
     select: (row: RecordRow) => {
       if (row.demo) live.setSource("demo");
-      else if (row.captureId) live.selectSession(row.captureId);
+      else if (row.captureId) {
+        live.setSource("api");
+        live.selectSession(row.captureId);
+      }
     },
-    /** current call = the newest one, so opening it stops pinning an older record */
-    followNewest: () => live.selectSession(null),
+    /** current call = the newest real one */
+    followNewest: () => {
+      if (live.source === "api") live.selectSession(null);
+    },
   };
 }

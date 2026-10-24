@@ -1,10 +1,10 @@
 import { Field } from "../../../components/ui/Field/Field";
-import { HANDOFF_HAZARDS } from "../../../data/handoff";
-import { CURRENT_CALL } from "../../../data/incident";
+import { useLiveSource } from "../../../api/LiveSourceContext";
 import styles from "./views.module.css";
 
 /** what the paramedic crew sees before accepting: hazards + dispatch summary, no identity */
 export function LockedSummaryView({ showSummary }: { showSummary: boolean }) {
+  const { call } = useLiveSource();
   if (!showSummary) {
     return (
       <div className={styles.view}>
@@ -21,12 +21,12 @@ export function LockedSummaryView({ showSummary }: { showSummary: boolean }) {
       </p>
       <div className={styles.note}>
         <p className={styles.noteSource}>Scene safety</p>
-        <p className={styles.noteText}>{HANDOFF_HAZARDS}</p>
+        <p className={styles.noteText}>{call.hazards}</p>
       </div>
       <div className={styles.columnTight} style={{ maxWidth: 560 }}>
-        <Field label="Call" value={`${CURRENT_CALL.callId} · ${CURRENT_CALL.title}`} />
-        <Field label="Dispatch" value={CURRENT_CALL.dispatch.text} />
-        <Field label="Patient" value="Patient 007 · identity locked until accepted" />
+        <Field label="Call" value={`${call.callId} · ${call.headline}`} />
+        <Field label="Dispatch" value={call.dispatchText} />
+        <Field label="Patient" value="Identity locked until accepted" />
         <Field label="Shared by" value="Woolwich Township Fire, FF-12" />
       </div>
     </div>

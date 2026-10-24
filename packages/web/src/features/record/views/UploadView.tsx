@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../../../components/ui/Button/Button";
 import { Icon } from "../../../components/ui/Icon/Icon";
-import { PATIENT } from "../../../data/record";
+import { useLiveSource } from "../../../api/LiveSourceContext";
 import type { AddedFile } from "../../../incident/types";
 import { clockTime } from "../../../lib/time";
 import styles from "./views.module.css";
@@ -14,11 +14,12 @@ interface UploadViewProps {
 
 export function UploadView({ addedBy, onAttach, onCancel }: UploadViewProps) {
   const [fileName, setFileName] = useState<string | null>(null);
+  const { call } = useLiveSource();
 
   return (
     <div className={styles.view}>
       <h3 className={styles.heading}>Import a file or recording</h3>
-      <p className={styles.recordNumber}>Record {PATIENT.recordNumber}</p>
+      <p className={styles.recordNumber}>{call.callId}</p>
       <p className={styles.lede}>Check that the file belongs to this patient before attaching it.</p>
       <div className={styles.dropzone}>
         <Icon name="file" size={24} />

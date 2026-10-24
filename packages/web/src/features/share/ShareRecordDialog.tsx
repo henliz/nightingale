@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button } from "../../components/ui/Button/Button";
 import { Dialog } from "../../components/ui/Dialog/Dialog";
 import { Icon } from "../../components/ui/Icon/Icon";
-import { PATIENT } from "../../data/record";
+import { useLiveSource } from "../../api/LiveSourceContext";
+import { UNNAMED } from "../../api/call";
 import styles from "./ShareRecordDialog.module.css";
 
 export const HANDOFF_LINK = "handoff.medfi.ca/h/7Q4K-29XZ";
@@ -17,6 +18,7 @@ interface ShareRecordDialogProps {
 /** overlay E: sends the reviewed record to the paramedic crew, they have to accept it */
 export function ShareRecordDialog({ open, onShared, onClose }: ShareRecordDialogProps) {
   const [copied, setCopied] = useState(false);
+  const { call } = useLiveSource();
 
   async function copyLink() {
     try {
@@ -42,7 +44,7 @@ export function ShareRecordDialog({ open, onShared, onClose }: ShareRecordDialog
             Close
           </Button>
         </div>
-        <p className={styles.patient}>{PATIENT.name}</p>
+        <p className={styles.patient}>{call.patientName ?? UNNAMED}</p>
         <p className={styles.lede}>Share this record with the paramedic crew. They must accept it before identity unlocks.</p>
         <div className={styles.access}>
           <p className={styles.accessTitle}>People with record access</p>

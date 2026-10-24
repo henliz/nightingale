@@ -1,6 +1,7 @@
 import { Button } from "../../components/ui/Button/Button";
 import { Card } from "../../components/ui/Card/Card";
-import { CURRENT_CALL, LATEST_OBSERVATION } from "../../data/incident";
+import { useLiveSource } from "../../api/LiveSourceContext";
+import { LATEST_OBSERVATION } from "../../data/incident";
 import type { IncidentState } from "../../incident/types";
 import { ReviewExcerpt, ReviewHead } from "../home/ReviewCardParts";
 import styles from "../home/ReviewCard.module.css";
@@ -19,14 +20,15 @@ interface FireReviewCardProps {
 /** "Needs your review" for the fire captain, by story step */
 export function FireReviewCard({ incident, onCrewEnRoute, onStartReview, onPeekRecord, onFinishReview, onExpand }: FireReviewCardProps) {
   const { stage } = incident;
+  const { source, call } = useLiveSource();
 
   if (stage === "dispatched") {
     return (
       <Card className={styles.card}>
         <ReviewHead title="Incident created from dispatch" onExpand={onExpand}>
-          {`Created ${CURRENT_CALL.dispatch.createdAt} by dispatch  |  Nothing captured yet`}
+          {`Created ${call.dispatchAt} by dispatch  |  Nothing captured yet`}
         </ReviewHead>
-        <ReviewExcerpt text={CURRENT_CALL.dispatch.text} hint="Updates on its own as the crew captures information on scene." />
+        <ReviewExcerpt text={call.dispatchText} hint="Updates on its own as the crew captures information on scene." />
         <div className={styles.actions}>
           <Button variant="secondary" onClick={onCrewEnRoute}>
             Crew en route
@@ -37,7 +39,8 @@ export function FireReviewCard({ incident, onCrewEnRoute, onStartReview, onPeekR
   }
 
   if (stage === "on_scene" || stage === "needs_review") {
-    const observation = LATEST_OBSERVATION[stage];
+    // a real call shows the newest line heard on scene
+    const observation = source === "demo" ? LATEST_OBSERVATION[stage] : { receivedAt: call.latest?.at ?? "", text: call.latest?.text ?? "Nothing heard yet." };
     return (
       <Card className={styles.card}>
         <ReviewHead title="Review the latest observation" onExpand={onExpand}>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../../components/ui/Button/Button";
 import { CAPTURE_EXCERPTS, CAPTURE_META, type CaptureExcerpt } from "../../data/epcr";
-import { CURRENT_CALL } from "../../data/incident";
+import { useLiveSource } from "../../api/LiveSourceContext";
 import styles from "./CallCapturePanel.module.css";
 
 type CaptureView = "overview" | "transcript";
@@ -106,11 +106,12 @@ function Transcript({
 
 function Overview({ excerpts }: { excerpts: readonly CaptureExcerpt[] }) {
   const turns = excerpts.flatMap((e) => e.turns);
+  const live = useLiveSource();
   const speakers = Array.from(new Set(turns.map((t) => t.speaker)));
   const others = speakers.filter((s) => s !== "Responder" && s !== "Captain");
   const rows = [
-    ["Dispatch", CURRENT_CALL.dispatch.text],
-    ["Capture", `Ended ${CAPTURE_META.captureEnded}, imported ${CAPTURE_META.imported}`],
+    ["Dispatch", live.call.dispatchText],
+    ["Capture", live.session ? `${live.session.assets.length} chunks from ${live.session.deviceId ?? "the device"}` : `Ended ${CAPTURE_META.captureEnded}, imported ${CAPTURE_META.imported}`],
     ["Speakers", speakers.join(", ") || "none yet"],
     ["Turns", `${turns.length} turns across ${excerpts.length} excerpts`],
     ["Non-responder voices", others.length ? `${others.join(", ")}: flagged for review before anything is shared` : "none heard"],

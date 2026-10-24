@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "../../../components/ui/Button/Button";
 import { Field } from "../../../components/ui/Field/Field";
-import { PATIENT } from "../../../data/record";
+import { useLiveSource } from "../../../api/LiveSourceContext";
+import { UNNAMED } from "../../../api/call";
 import type { AddedObservation } from "../../../incident/types";
 import { clockTime } from "../../../lib/time";
 import styles from "./views.module.css";
@@ -21,6 +22,7 @@ const MEASUREMENTS = [
 ] as const;
 
 export function NoteFormView({ recordedBy, onSave, onCancel }: NoteFormViewProps) {
+  const patientName = useLiveSource().call.patientName ?? UNNAMED;
   const [observedAt, setObservedAt] = useState(clockTime);
   const [note, setNote] = useState("");
   const [measurements, setMeasurements] = useState<AddedObservation["measurements"]>({});
@@ -37,7 +39,7 @@ export function NoteFormView({ recordedBy, onSave, onCancel }: NoteFormViewProps
       <p className={styles.lede}>Check the captured note and add any measurements you recorded.</p>
       <div className={styles.formRow}>
         <Field label="Recorded by" value={recordedBy} />
-        <Field label="Patient" value={PATIENT.name} />
+        <Field label="Patient" value={patientName} />
       </div>
       <label className={styles.input} style={{ width: 240 }}>
         <span className={styles.inputLabel}>Observed at *</span>

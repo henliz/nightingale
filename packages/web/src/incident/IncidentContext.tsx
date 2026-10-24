@@ -1,18 +1,20 @@
-import { createContext, useContext, useEffect, useReducer, type Dispatch, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type Dispatch, type ReactNode } from "react";
+import { useLiveSource } from "../api/LiveSourceContext";
 import { incidentReducer, initialIncidentState } from "./reducer";
 import type { IncidentAction, IncidentState } from "./types";
 
 const StateContext = createContext<IncidentState | null>(null);
 const DispatchContext = createContext<Dispatch<IncidentAction> | null>(null);
 
-const STORAGE_KEY = "medfi.incident.v2";
+const STORAGE_PREFIX = "medfi.incident.v3.";
 
 // story lives in sessionStorage: survives a reload + sign-out/sign-in in the same tab,
 // but nothing typed during a demo outlives the tab
-function loadState(): IncidentState {
+function loadState(storageKey: string): IncidentState {
   try {
     localStorage.removeItem("medfi.incident.v1");
-    const raw = sessionStorage.getItem(STORAGE_KEY);
+    sessionStorage.removeItem("medfi.incident.v2");
+    const raw = sessionStorage.getItem(storageKey);
     if (!raw) return initialIncidentState;
     const parsed = JSON.parse(raw) as Partial<IncidentState>;
     // older saved shapes might be missing the list fields, never trust storage for arrays
@@ -32,21 +34,28 @@ function loadState(): IncidentState {
   }
 }
 
-// the one shared record. persisted so it survives a reload and carries across sign-ins
+// one story per call (each case, the sample call, a live one), so reviews on case 1 never
+// show up on case 2. persisted so it survives a reload and carries across sign-ins
 // (Alvin shares, Rick accepts, same browser)
 export function IncidentProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(incidentReducer, undefined, loadState);
+  const live = useLiveSource();
+  const storageKey = STORAGE_PREFIX + (live.source === "demo" ? "sample" : (live.session?.captureId ?? "none"));
+  const [store, setStore] = useState(() => ({ key: storageKey, state: loadState(storageKey) }));
+  // switched calls: load that call's story (state adjusted during render, no effect)
+  if (store.key !== storageKey) setStore({ key: storageKey, state: loadState(storageKey) });
+
+  const dispatch = useCallback<Dispatch<IncidentAction>>((action) => setStore((s) => ({ ...s, state: incidentReducer(s.state, action) })), []);
 
   useEffect(() => {
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      sessionStorage.setItem(store.key, JSON.stringify(store.state));
     } catch {
       /* storage unavailable, in-memory state still works */
     }
-  }, [state]);
+  }, [store]);
 
   return (
-    <StateContext.Provider value={state}>
+    <StateContext.Provider value={store.state}>
       <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
     </StateContext.Provider>
   );

@@ -3,8 +3,8 @@ import { Button } from "../../components/ui/Button/Button";
 import { Card } from "../../components/ui/Card/Card";
 import { Chip } from "../../components/ui/Chip/Chip";
 import { Icon } from "../../components/ui/Icon/Icon";
-import { CURRENT_CALL } from "../../data/incident";
-import type { Role } from "../../data/users";
+import { useLiveSource } from "../../api/LiveSourceContext";
+import { PARAMEDIC_UNIT, type Role } from "../../data/users";
 import { hasReached, type IncidentState } from "../../incident/types";
 import { elapsed } from "../../lib/time";
 import { useNow } from "../../lib/useNow";
@@ -39,11 +39,12 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
   const shared = hasReached(incident.stage, "shared");
   const accepted = hasReached(incident.stage, "accepted");
   const showExpand = isFire ? !reviewed : true;
+  const { call } = useLiveSource();
 
   return (
     <Card aria-labelledby="current-call-title">
       <div className={styles.identity}>
-        <span className={styles.callId}>CALL ID: {CURRENT_CALL.callId}</span>
+        <span className={styles.callId}>{call.callId}</span>
         {isFire ? <FireDeviceChip incident={incident} /> : !shared && <Chip>NEW</Chip>}
         {isFire && reviewed && onShare && (
           <Button variant="small" onClick={onShare}>
@@ -52,7 +53,7 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
           </Button>
         )}
         <span className={styles.spacer} />
-        <span className={styles.firstContact}>First contact {CURRENT_CALL.firstContact}</span>
+        <span className={styles.firstContact}>First contact {call.firstContact}</span>
         {showExpand && (
           <button type="button" className={styles.iconButton} onClick={onOpenRecord} aria-label="Expand record">
             <Icon name="arrowsOut" size={22} />
@@ -61,22 +62,22 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
       </div>
 
       <h2 id="current-call-title" className={styles.title}>
-        {CURRENT_CALL.title}
+        {call.headline}
       </h2>
-      <p className={styles.patient}>{CURRENT_CALL.patientLineByRole[role]}</p>
+      <p className={styles.patient}>{call.patientLine}</p>
 
       {isFire && shared && (
         <div className={styles.banners}>
           {accepted ? (
             <Alert
               tone="success"
-              title={`Shared with ${CURRENT_CALL.paramedicUnit}  ·  Accepted`}
+              title={`Shared with ${PARAMEDIC_UNIT}  ·  Accepted`}
               body={`Accepted ${incident.times.accepted ?? ""}. The paramedic crew confirmed receipt and identity is unlocked on their side.`}
             />
           ) : (
             <Alert
               tone="warning"
-              title={`Shared with ${CURRENT_CALL.paramedicUnit}  ·  delivered, not yet opened`}
+              title={`Shared with ${PARAMEDIC_UNIT}  ·  delivered, not yet opened`}
               body={`Sent ${incident.times.shared ?? ""}. You will see this change to Accepted when the paramedic crew confirms receipt. Identity stays locked until then.`}
             />
           )}

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router";
+import { useLiveSource } from "../../../api/LiveSourceContext";
 import type { User } from "../../../data/users";
 import { alertsFor, unseenCount } from "../../../incident/alerts";
 import { useIncident, useIncidentDispatch } from "../../../incident/IncidentContext";
@@ -21,8 +22,9 @@ export function AppShell({ user, density = "default", search, children }: AppShe
   const incident = useIncident();
   const dispatch = useIncidentDispatch();
   const navigate = useNavigate();
+  const live = useLiveSource();
 
-  const alerts = alertsFor(user.role, incident);
+  const alerts = alertsFor(user.role, incident, live.call, live.source === "demo");
 
   function handleSignOut() {
     signOut();

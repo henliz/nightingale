@@ -1,8 +1,9 @@
 import { Button } from "../../components/ui/Button/Button";
 import { Dialog } from "../../components/ui/Dialog/Dialog";
 import { handoffUrl } from "../../data/handoff";
-import { CURRENT_CALL } from "../../data/incident";
-import { PATIENT } from "../../data/record";
+import { useLiveSource } from "../../api/LiveSourceContext";
+import { UNNAMED } from "../../api/call";
+import { PARAMEDIC_UNIT } from "../../data/users";
 import { useIncident } from "../../incident/IncidentContext";
 import { useQrSvg } from "../../lib/useQrSvg";
 import styles from "./QrHandoffDialog.module.css";
@@ -17,6 +18,7 @@ interface QrHandoffDialogProps {
 /** paramedic step 6 overlay: triage nurse scans this to open the read-only summary */
 export function QrHandoffDialog({ open, version, onPrint, onClose }: QrHandoffDialogProps) {
   const incident = useIncident();
+  const { call } = useLiveSource();
   const url = handoffUrl();
   const svg = useQrSvg(url);
 
@@ -29,10 +31,10 @@ export function QrHandoffDialog({ open, version, onPrint, onClose }: QrHandoffDi
         <div className={styles.identity}>
           <h2 className={styles.title}>Hospital handoff</h2>
           <div className={styles.chips}>
-            <span className={styles.chip}>Call {CURRENT_CALL.callId}</span>
-            <span className={styles.chip}>{PATIENT.name}</span>
+            <span className={styles.chip}>{call.callId}</span>
+            <span className={styles.chip}>{call.patientName ?? UNNAMED}</span>
             <span className={styles.chip}>{`Verified ${incident.times.verified ?? ""}`}</span>
-            <span className={styles.chip}>{`Rick · ${CURRENT_CALL.paramedicUnit}`}</span>
+            <span className={styles.chip}>{`Rick · ${PARAMEDIC_UNIT}`}</span>
           </div>
         </div>
         <Button variant="secondary" onClick={onClose}>

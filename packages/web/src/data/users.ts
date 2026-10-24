@@ -35,6 +35,9 @@ export const USERS: readonly User[] = [
   },
 ];
 
+/** Rick's ambulance, shared with + accepted by */
+export const PARAMEDIC_UNIT = "Unit 4471";
+
 export function findUser(id: string): User | undefined {
   return USERS.find((u) => u.id === id);
 }

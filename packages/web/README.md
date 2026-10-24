@@ -17,16 +17,18 @@ pnpm --filter @nightingale/web typecheck
 pnpm --filter @nightingale/web build    # tsc -b && vite build
 ```
 
-## two data sources
+## where the data comes from
 
-- **demo** (default): the in-browser story below. no server needed.
-- **api**: the record modal and the review pages read the newest named drill session from
-  `packages/api` (`GET /dev/sessions`): its condensed ePCR (`DraftNote`), the speaker-labelled
-  transcript, and scene photos. start the api (`pnpm --filter @nightingale/api dev` with docker, or
-  `pnpm --filter @nightingale/api dev:memory` without; port 8787, vite proxies `/api` there) and open any page with `?source=api`, or set
-  `VITE_DATA_SOURCE=api` (see `.env.example`). the server-sent event stream refreshes the
-  record whenever the api says something changed. the story (shared, accepted, verified…) is
-  still the in-browser one until milestones 4 and 5 add those routes; see `docs/integration-plan.md`.
+the dashboard reads real calls from `packages/api` (`GET /dev/sessions`): each call's condensed
+ePCR (`DraftNote`), the speaker-labelled transcript, and scene photos. start the api first
+(`pnpm --filter @nightingale/api dev` with docker, or `pnpm --filter @nightingale/api dev:memory`
+without; port 8787, vite proxies `/api` there), then just open `localhost:5173`. the
+server-sent event stream refreshes whenever the api says something changed.
+
+the records list is the named cases from `drills/` plus the sample call (the original figma
+story with its made-up patient). the current call card follows the newest call, so a fresh one
+from the pi shows up there. each call keeps its own story (shared, accepted, verified…) in the
+browser until milestones 4 and 5 add those routes; see `docs/integration-plan.md`.
 
 `src/api/`: `client.ts` (fetch + zod parse against `@nightingale/schema`), `mapNote.ts`
 (`NoteSections` → record and ePCR fields, `spans` → supporting speech, `flags` → red fields),

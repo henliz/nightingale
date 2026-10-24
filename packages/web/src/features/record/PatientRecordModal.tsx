@@ -5,6 +5,7 @@ import { Dialog } from "../../components/ui/Dialog/Dialog";
 import { Icon } from "../../components/ui/Icon/Icon";
 import { Tabs } from "../../components/ui/Tabs/Tabs";
 import { useLiveSource } from "../../api/LiveSourceContext";
+import { UNNAMED } from "../../api/call";
 import { buildRecord, fileKey, PATIENT } from "../../data/record";
 import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext";
 import { clockTime, elapsed } from "../../lib/time";
@@ -69,8 +70,9 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
   const recording = incident.recordingStartedAt !== null;
   const now = useNow(open && recording);
   const record = buildRecord({ ...incident, base: live.record });
-  const patientName = live.session?.epcr?.sections.patient?.name ?? PATIENT.name;
-  const recordLabel = live.session ? (live.session.title ?? live.session.captureId) : `Record ${PATIENT.recordNumber}`;
+  // the sample call keeps its sample patient, a real call is unnamed until someone says the name
+  const patientName = live.call.patientName ?? UNNAMED;
+  const recordLabel = live.source === "demo" ? `Record ${PATIENT.recordNumber}` : live.call.callId;
   const responder = user?.role === "paramedic" ? "Unit 4471" : "FF-12";
 
   function close() {

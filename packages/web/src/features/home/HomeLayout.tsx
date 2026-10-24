@@ -21,13 +21,13 @@ export function HomeLayout({ user, currentCall, review, records, children }: Hom
   const [query, setQuery] = useState("");
   const live = useLiveSource();
   const sourceLine =
-    live.source === "api"
-      ? live.status === "ready" && live.session
-        ? ` · Live from the api${live.pinned ? "" : ", following the newest call"}`
-        : live.status === "error"
-          ? ` · api unreachable (${live.error}), showing demo data`
-          : " · connecting to the api…"
-      : "";
+    live.source === "demo"
+      ? " · Showing the sample call"
+      : live.status === "error"
+        ? ` · api unreachable (${live.error})`
+        : live.status === "loading"
+          ? " · connecting to the api…"
+          : "";
   return (
     <AppShell user={user} search={{ value: query, onChange: setQuery }}>
       <header className={styles.greeting}>
