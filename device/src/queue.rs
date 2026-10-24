@@ -44,7 +44,10 @@ impl Queue {
             }
             if path.extension().is_some_and(|e| e == "wav") {
                 if let Err(e) = fix_wav_sizes(&path) {
-                    crate::devlog::warn(format!("couldn't fix the header of {}: {e}", path.display()));
+                    crate::devlog::warn(format!(
+                        "couldn't fix the header of {}: {e}",
+                        path.display()
+                    ));
                 }
             }
             if let Some(name) = path.file_name() {

@@ -222,7 +222,9 @@ fn spawn_uploader(
             // empty, or a wav that's only a header: nothing in it to upload
             let size = std::fs::metadata(&file.path).map(|m| m.len()).unwrap_or(0);
             if size == 0 || (ext == "wav" && size <= 44) {
-                warn(format!("[{kind}] {name} is empty ({size} bytes), nothing to upload, moved to stuck/"));
+                warn(format!(
+                    "[{kind}] {name} is empty ({size} bytes), nothing to upload, moved to stuck/"
+                ));
                 queue.set_aside(&file.path).ok();
                 continue;
             }
