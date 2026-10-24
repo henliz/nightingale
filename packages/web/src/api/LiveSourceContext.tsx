@@ -9,13 +9,13 @@ export type DataSource = "demo" | "api";
 
 interface LiveSourceValue {
   source: DataSource;
-  /** "idle" in demo mode; otherwise where the api connection is at. */
+  /** "idle" in demo mode, otherwise where the api connection is at */
   status: "idle" | "loading" | "ready" | "error";
   error: string | null;
   sessions: DrillSession[];
   session: DrillSession | null;
   selectSession: (captureId: string) => void;
-  /** What the record modal shows when a session is selected; null in demo mode. */
+  /** what the record modal shows when a session is selected, null in demo mode */
   record: PatientRecord | null;
   excerpts: CaptureExcerpt[] | null;
   epcr: Map<string, NoteFieldOverride> | null;
@@ -26,7 +26,7 @@ const LiveSourceContext = createContext<LiveSourceValue | null>(null);
 const SOURCE_KEY = "medfi.source";
 const SESSION_KEY = "medfi.source.session";
 
-/** `?source=api` (or demo) sticks for the tab; otherwise VITE_DATA_SOURCE, otherwise demo. */
+/** `?source=api` (or demo) sticks for the tab, else VITE_DATA_SOURCE, else demo */
 function readSource(): DataSource {
   try {
     const fromUrl = new URLSearchParams(window.location.search).get("source");

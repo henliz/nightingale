@@ -19,7 +19,7 @@ function joinList(v: string[] | undefined): string {
   return v && v.length > 0 ? v.join(", ") : "";
 }
 
-/** Every speaker-labelled line across the session's chunks, in capture order. */
+/** every speaker-labelled line across the session's chunks, in capture order */
 export function sessionLines(session: DrillSession): LiveLine[] {
   return session.assets
     .filter((a) => a.kind === "audio" && a.transcript)
@@ -27,7 +27,7 @@ export function sessionLines(session: DrillSession): LiveLine[] {
     .flatMap((a) => a.transcript ?? []);
 }
 
-/** "Person 1" is the responder wearing the device; everyone else is a bystander or the patient. */
+/** the first voice heard is whoever's wearing the device, everyone else is a bystander or the patient */
 function speakerLabel(speaker: string, responder: string | undefined): string {
   if (responder && speaker === responder) return "Responder";
   return speaker;
@@ -42,7 +42,7 @@ export function mapTranscript(session: DrillSession): TranscriptTurn[] {
   }));
 }
 
-/** Excerpts for the review page: lines grouped by minute, ids that the note's spans can point at. */
+/** review page excerpts, grouped by minute, with the segment[i] ids the note's spans point at */
 export function mapExcerpts(session: DrillSession): CaptureExcerpt[] {
   const responder = session.speakers?.[0];
   const groups = new Map<string, CaptureTurn[]>();
@@ -85,7 +85,7 @@ function timeline(sections: NoteSections): TimelineEvent[] {
   return events;
 }
 
-/** The record modal's content from a session's DraftNote (what the pipeline heard, nothing more). */
+/** the record modal from a session's DraftNote, only what the pipeline actually heard */
 export function mapSessionToRecord(session: DrillSession): PatientRecord {
   const s: NoteSections = session.epcr?.sections ?? {};
   const v = latestVitals(s);
@@ -127,7 +127,7 @@ export interface NoteFieldOverride {
   flagged: boolean;
 }
 
-/** DraftNote → values for the review page's ePCR keys. Missing in the note means "Not captured". */
+/** DraftNote → the review page's ePCR keys. missing in the note = "Not captured" */
 export function mapNoteToEpcr(note: DraftNote | undefined): Map<string, NoteFieldOverride> {
   const out = new Map<string, NoteFieldOverride>();
   if (!note) return out;

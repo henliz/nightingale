@@ -1,7 +1,7 @@
 import { DraftNote } from "@nightingale/schema";
 import { z } from "zod";
 
-/** One speaker-labelled line from a saved chunk (`LiveAsset.transcript` in packages/api). */
+/** one speaker-labelled line from a saved chunk (`LiveAsset.transcript` in packages/api) */
 export const LiveLine = z.object({
   speaker: z.string(),
   text: z.string(),
@@ -24,7 +24,7 @@ export const LiveAsset = z.object({
 });
 export type LiveAsset = z.infer<typeof LiveAsset>;
 
-/** `GET /dev/sessions` entry (`DrillSession` in packages/api). Only what the dashboard reads. */
+/** `GET /dev/sessions` entry (`DrillSession` in packages/api), only what the dashboard reads */
 export const DrillSession = z.object({
   captureId: z.string(),
   dir: z.string(),
