@@ -1,4 +1,4 @@
-import { EPCR_FIELD_BY_KEY, NOT_CAPTURED, type EpcrField } from "../data/epcr";
+import { NOT_CAPTURED, type EpcrField, type EpcrSection } from "../data/epcr";
 import type { FieldReview, IncidentState } from "./types";
 
 export interface ResolvedField {
@@ -25,7 +25,7 @@ export function resolveField(field: EpcrField, state: IncidentState): ResolvedFi
   };
 }
 
-/** the nine lines the ER nurse reads first (IMIST-AMBO), paramedic has to fill or confirm them */
+/** the sample call's nine lines the ER nurse reads first (IMIST-AMBO), paramedic has to fill or confirm them */
 export const HANDOFF_REQUIRED_KEYS: readonly string[] = [
   "dob",
   "mailingAddress",
@@ -39,9 +39,10 @@ export const HANDOFF_REQUIRED_KEYS: readonly string[] = [
 ];
 
 /** required handoff fields still empty or flagged + unreviewed */
-export function unfilledHandoffKeys(state: IncidentState): string[] {
-  return HANDOFF_REQUIRED_KEYS.filter((key) => {
-    const field = EPCR_FIELD_BY_KEY.get(key);
+export function unfilledHandoffKeys(state: IncidentState, form: { sections: readonly EpcrSection[]; requiredKeys: readonly string[] }): string[] {
+  const byKey = new Map(form.sections.flatMap((s) => s.fields.map((f) => [f.key, f] as const)));
+  return form.requiredKeys.filter((key) => {
+    const field = byKey.get(key);
     if (!field) return false;
     const r = resolveField(field, state);
     return r.value === NOT_CAPTURED || r.flagged;

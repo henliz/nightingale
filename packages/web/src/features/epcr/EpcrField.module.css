@@ -88,3 +88,8 @@
   background: var(--color-blue);
   border-color: var(--color-blue);
 }
+
+.flagNote {
+  font: var(--text-small);
+  color: var(--color-flag);
+}

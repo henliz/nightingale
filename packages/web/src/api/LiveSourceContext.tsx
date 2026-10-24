@@ -3,7 +3,7 @@ import type { CaptureExcerpt } from "../data/epcr";
 import type { PatientRecord } from "../data/record";
 import { callInfo, SAMPLE_CALL, type CallInfo } from "./call";
 import { fetchSessions, subscribeToChanges } from "./client";
-import { mapExcerpts, mapIncidentSections, mapNoteToEpcr, mapSessionToRecord, sortedSessions, type IncidentSection, type NoteFieldOverride } from "./mapNote";
+import { mapExcerpts, mapIncidentSections, mapSessionToRecord, sortedSessions, type IncidentSection } from "./mapNote";
 import type { DrillSession } from "./types";
 
 export type DataSource = "demo" | "api";
@@ -24,7 +24,6 @@ interface LiveSourceValue {
   /** what the record modal shows when a session is selected, null in demo mode */
   record: PatientRecord | null;
   excerpts: CaptureExcerpt[] | null;
-  epcr: Map<string, NoteFieldOverride> | null;
   /** the incident tab from the real note, null in demo mode */
   incident: IncidentSection[] | null;
 }
@@ -117,7 +116,6 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     },
     record: session ? mapSessionToRecord(session) : null,
     excerpts: session ? mapExcerpts(session) : null,
-    epcr: session ? mapNoteToEpcr(session.epcr) : null,
     incident: session ? mapIncidentSections(session.epcr) : null,
   };
 

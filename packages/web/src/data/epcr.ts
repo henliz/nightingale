@@ -1,6 +1,7 @@
 // the ePCR draft the captain reviews in fire step 4, in Woolwich Fire paper sheet order.
 // values are only ever what was said out loud, unsure fields get flagged never filled. fictional drill data
-export type EpcrTab = "summary" | "patient" | "clinical" | "fire" | "service";
+// sample call tabs are summary / patient / clinical / fire / service, real calls bring their own per role
+export type EpcrTab = string;
 
 export const EPCR_TABS: readonly { id: EpcrTab; label: string }[] = [
   { id: "summary", label: "Summary" },
@@ -18,6 +19,10 @@ export interface EpcrField {
   kind?: "input" | "textarea" | "checkbox";
   /** unsure, red outline until the captain reviews it */
   flagged?: boolean;
+  /** why it's flagged, from the note */
+  flagNote?: string;
+  /** which note section it came from (`sections.patient`), so a flag on that section can find it */
+  flagPath?: string;
   /** transcript turn ids backing the suggestion */
   evidence?: readonly string[];
   /** takes the full row instead of half */
@@ -222,26 +227,6 @@ export function fieldForTurn(turnId: string, sections: readonly EpcrSection[] = 
     }
   }
   return undefined;
-}
-
-export interface FieldOverride {
-  suggested: string | null;
-  evidence: string[];
-  flagged: boolean;
-}
-
-/** same sections, with values from a real note instead of the fixture's */
-export function applyOverrides(sections: readonly EpcrSection[], overrides: ReadonlyMap<string, FieldOverride>): EpcrSection[] {
-  return sections.map((section) => ({
-    ...section,
-    // the fixture's "@ 14:08" belongs to the fixture; a real note carries its own times in the values
-    titleNote: undefined,
-    fields: section.fields.map((field) => {
-      const o = overrides.get(field.key);
-      if (!o) return field.kind === "checkbox" ? field : { ...field, suggested: null, evidence: [], flagged: false };
-      return { ...field, suggested: o.suggested, evidence: o.evidence, flagged: o.flagged || (field.flagged === true && o.suggested === null) };
-    }),
-  }));
 }
 
 export const CAPTURE_META = {

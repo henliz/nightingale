@@ -77,7 +77,7 @@ export function FireHomePage() {
       )}
     >
       <PatientRecordModal open={recordOpen} initialTab={recordTab} onClose={() => setRecordOpen(false)} />
-      <PrintEpcrDialog open={printOpen} onClose={() => setPrintOpen(false)} />
+      <PrintEpcrDialog role="firefighter" open={printOpen} onClose={() => setPrintOpen(false)} />
       <ShareRecordDialog open={shareOpen} onShared={() => dispatch({ type: "shared", at: clockTime() })} onClose={() => setShareOpen(false)} />
     </HomeLayout>
   );

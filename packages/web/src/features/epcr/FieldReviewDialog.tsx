@@ -59,6 +59,13 @@ function ReviewForm({
         </Button>
       </div>
 
+      {field.flagNote && (
+        <div className={styles.flagBox}>
+          <p className={styles.flagTitle}>Why it's flagged</p>
+          <p className={styles.speechLine}>{field.flagNote}</p>
+        </div>
+      )}
+
       <div className={styles.speech}>
         <p className={styles.speechTitle}>Supporting speech</p>
         {speech.length === 0 ? (

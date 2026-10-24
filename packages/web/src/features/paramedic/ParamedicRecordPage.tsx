@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router";
 import { useLiveSource } from "../../api/LiveSourceContext";
-import { applyOverrides, CAPTURE_META, EPCR_SECTIONS, EPCR_TABS } from "../../data/epcr";
+import { CAPTURE_META } from "../../data/epcr";
+import { PARAMEDIC_UNIT } from "../../data/users";
 import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext";
 import { unfilledHandoffKeys } from "../../incident/selectors";
 import { clockTime } from "../../lib/time";
 import { useSession } from "../../session/SessionContext";
 import { EpcrReviewPage } from "../epcr/EpcrReviewPage";
+import { useEpcrForm } from "../epcr/useEpcrForm";
 
 /** paramedic step 5: verify every field the ER nurse reads first, then mark Info verified */
 export function ParamedicRecordPage() {
@@ -14,27 +16,26 @@ export function ParamedicRecordPage() {
   const dispatch = useIncidentDispatch();
   const navigate = useNavigate();
   const live = useLiveSource();
+  const form = useEpcrForm("paramedic");
   if (!user) return null;
-
-  const sections = live.epcr ? applyOverrides(EPCR_SECTIONS, live.epcr) : EPCR_SECTIONS;
 
   return (
     <EpcrReviewPage
       user={user}
-      responder="Unit 4471"
-      title={live.session?.title ?? CAPTURE_META.patientLabel}
-      meta={live.session ? "Fire crew's record · live from the api" : `Capture ended ${CAPTURE_META.captureEnded} | Imported ${CAPTURE_META.imported}`}
-      tabs={EPCR_TABS}
-      sections={sections}
-      initialTab="patient"
+      responder={PARAMEDIC_UNIT}
+      title={live.source === "demo" ? CAPTURE_META.patientLabel : live.call.callId}
+      meta={live.session ? `${live.call.patientLine} · fire crew's record, verify before handoff` : `Capture ended ${CAPTURE_META.captureEnded} | Imported ${CAPTURE_META.imported}`}
+      tabs={form.tabs}
+      sections={form.sections}
+      initialTab={live.source === "demo" ? "patient" : (form.tabs[0]?.id ?? "summary")}
       showCapture={false}
-      attentionKeys={new Set(unfilledHandoffKeys(incident))}
+      attentionKeys={new Set(unfilledHandoffKeys(incident, form))}
       saveLabel="Save changes"
       savePrimary
       onFieldChanged={(label, previous, next) =>
         dispatch({
           type: "paramedic_updated",
-          update: { by: "Rick (Unit 4471)", summary: `changed ${label}: ${previous} → ${next || "cleared"}`, at: clockTime() },
+          update: { by: `Rick (${PARAMEDIC_UNIT})`, summary: `changed ${label}: ${previous} → ${next || "cleared"}`, at: clockTime() },
         })
       }
       onSave={() => {

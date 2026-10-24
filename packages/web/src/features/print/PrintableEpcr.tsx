@@ -1,19 +1,24 @@
 import { useLiveSource } from "../../api/LiveSourceContext";
 import { UNNAMED } from "../../api/call";
 import type { IncidentState } from "../../incident/types";
-import { buildPrintLayout, type PrintBlock } from "./printLayout";
+import type { Role } from "../../data/users";
+import { useEpcrForm } from "../epcr/useEpcrForm";
+import { buildFormPrintLayout, buildPrintLayout, type PrintBlock } from "./printLayout";
 import styles from "./PrintableEpcr.module.css";
 
 interface PrintableEpcrProps {
+  role: Role;
   incident: IncidentState;
   /** version number so the hospital can tell copies apart */
   version: number;
 }
 
 /** one letter page of the ePCR, laid out like the paper on-scene sheet */
-export function PrintableEpcr({ incident, version }: PrintableEpcrProps) {
-  const layout = buildPrintLayout(incident);
-  const { call } = useLiveSource();
+export function PrintableEpcr({ role, incident, version }: PrintableEpcrProps) {
+  const live = useLiveSource();
+  const form = useEpcrForm(role);
+  const call = live.call;
+  const layout = live.source === "demo" ? buildPrintLayout(incident) : buildFormPrintLayout(form.sections, incident);
   const reviewed = incident.stage !== "dispatched" && incident.stage !== "on_scene" && incident.stage !== "needs_review";
 
   return (

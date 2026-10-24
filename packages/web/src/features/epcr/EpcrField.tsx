@@ -52,6 +52,7 @@ export function EpcrField({ resolved, attention = false, selected, onSelect, onO
         <span className={value === NOT_CAPTURED ? styles.placeholder : undefined}>{value}</span>
         {review && <span className={styles.reviewed}>{review.status === "cleared" ? "Cleared" : "Confirmed"}</span>}
       </button>
+      {resolved.flagged && field.flagNote && <span className={styles.flagNote}>⚠ {field.flagNote}</span>}
     </div>
   );
 }

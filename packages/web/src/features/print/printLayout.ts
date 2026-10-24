@@ -1,4 +1,4 @@
-import type { EpcrField } from "../../data/epcr";
+import type { EpcrField, EpcrSection } from "../../data/epcr";
 import { EPCR_FIELD_BY_KEY } from "../../data/epcr";
 import { resolveField } from "../../incident/selectors";
 import type { IncidentState } from "../../incident/types";
@@ -27,7 +27,7 @@ function valueOf(key: string, state: IncidentState): string {
   return v || NOT_CAPTURED;
 }
 
-/** the letter page in Woolwich Fire sheet order. left column patient, right column service */
+/** the sample call's letter page in Woolwich Fire sheet order. left column patient, right column service */
 export function buildPrintLayout(state: IncidentState): { left: PrintBlock[]; right: PrintBlock[]; bottom: PrintBlock[] } {
   const v = (key: string) => valueOf(key, state);
   const cell = (label: string, key: string): PrintCell => ({ label, value: v(key) });
@@ -102,4 +102,32 @@ export function buildPrintLayout(state: IncidentState): { left: PrintBlock[]; ri
       },
     ],
   };
+}
+
+/** a real call's letter page: the role's own form, one block per section. long fields get their own row */
+export function buildFormPrintLayout(sections: readonly EpcrSection[], state: IncidentState): { left: PrintBlock[]; right: PrintBlock[]; bottom: PrintBlock[] } {
+  const block = (section: EpcrSection): PrintBlock => {
+    const rows: PrintRow[] = [];
+    let pending: PrintCell[] = [];
+    const per = section.columns ?? 2;
+    const flush = () => {
+      if (pending.length) rows.push({ cells: pending });
+      pending = [];
+    };
+    for (const field of section.fields) {
+      const cell = { label: field.label, value: resolveField(field, state).value || NOT_CAPTURED };
+      if (field.wide) {
+        flush();
+        rows.push({ cells: [cell], height: field.kind === "textarea" ? 48 : undefined });
+      } else {
+        pending.push(cell);
+        if (pending.length === per) flush();
+      }
+    }
+    flush();
+    return { heading: section.title, rows };
+  };
+  const blocks = sections.map(block);
+  // first two sections side by side up top, the rest full width
+  return { left: blocks.slice(0, 1), right: blocks.slice(1, 2), bottom: blocks.slice(2) };
 }

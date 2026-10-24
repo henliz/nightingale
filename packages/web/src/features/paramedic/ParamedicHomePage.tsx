@@ -11,6 +11,7 @@ import { PrintEpcrDialog } from "../print/PrintEpcrDialog";
 import { PatientRecordModal } from "../record/PatientRecordModal";
 import { RecordsList } from "../records/RecordsList";
 import { useRecordRows } from "../records/useRecordRows";
+import { useEpcrForm } from "../epcr/useEpcrForm";
 import { ParamedicReviewCard } from "./ParamedicReviewCard";
 import { QrHandoffDialog } from "./QrHandoffDialog";
 
@@ -24,6 +25,7 @@ export function ParamedicHomePage() {
   const [qrOpen, setQrOpen] = useState(false);
   const [printOpen, setPrintOpen] = useState(false);
   const records = useRecordRows("paramedic");
+  const form = useEpcrForm("paramedic");
   if (!user) return null;
 
   const accepted = hasReached(incident.stage, "accepted");
@@ -52,7 +54,7 @@ export function ParamedicHomePage() {
       review={
         <ParamedicReviewCard
           incident={incident}
-          unfilledCount={unfilledHandoffKeys(incident).length}
+          unfilledCount={unfilledHandoffKeys(incident, form).length}
           // prototype's step 1 → 2: fire crew shares their record
           onReviewNote={() => dispatch({ type: "shared", at: clockTime() })}
           onAccept={() => dispatch({ type: "accepted", at: clockTime() })}
@@ -83,7 +85,7 @@ export function ParamedicHomePage() {
         onPrint={() => setPrintOpen(true)}
         onClose={() => setQrOpen(false)}
       />
-      <PrintEpcrDialog open={printOpen} onClose={() => setPrintOpen(false)} />
+      <PrintEpcrDialog role="paramedic" open={printOpen} onClose={() => setPrintOpen(false)} />
     </HomeLayout>
   );
 }

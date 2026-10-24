@@ -126,53 +126,6 @@ export function mapSessionToRecord(session: DrillSession): PatientRecord {
   };
 }
 
-export interface NoteFieldOverride {
-  suggested: string | null;
-  evidence: string[];
-  flagged: boolean;
-}
-
-/** DraftNote → the review page's ePCR keys. missing in the note = "Not captured" */
-export function mapNoteToEpcr(note: DraftNote | undefined): Map<string, NoteFieldOverride> {
-  const out = new Map<string, NoteFieldOverride>();
-  if (!note) return out;
-  const s = note.sections;
-  const v = latestVitals(s);
-  const evidence = (path: string) => note.spans.find((sp) => sp.field === path)?.transcriptSegmentIds ?? [];
-  const flaggedPaths = new Set(note.flags.map((f) => f.ref));
-  const set = (key: string, value: string | undefined, path: string) =>
-    out.set(key, { suggested: value?.trim() ? value : null, evidence: evidence(path), flagged: flaggedPaths.has(path) });
-
-  const [first, ...rest] = (s.patient?.name ?? "").split(" ");
-  set("firstName", first, "sections.patient");
-  set("surname", rest.join(" "), "sections.patient");
-  set("patientName", s.patient?.name, "sections.patient");
-  set("dob", s.patient?.dob, "sections.patient");
-  set("sex", s.patient?.sex, "sections.patient");
-  set("chiefComplaint", s.chiefComplaint, "sections.chiefComplaint");
-  set("timeOfOccurrence", s.opqrst?.time ?? s.incident?.times?.callReceived, "sections.opqrst");
-  set("incidentHistory", s.narrative ?? s.timeline, "sections.narrative");
-  set("pulse", v?.hr, "sections.vitals");
-  set("resp", v?.rr, "sections.vitals");
-  set("bp", v?.bp, "sections.vitals");
-  set("spo2", v?.spo2, "sections.vitals");
-  set("levelOfConsciousness", s.conditionObserved ?? v?.loc, "sections.conditionObserved");
-  set("painLocation", s.opqrst?.radiation ?? s.physicalExam, "sections.physicalExam");
-  set("headStrike", s.patient?.capacityNote?.toLowerCase().includes("head") ? s.patient.capacityNote : undefined, "sections.patient");
-  set("medications", joinList(s.sample?.medications) || joinList(s.medsAndAllergiesMentioned), "sections.sample");
-  set("allergies", joinList(s.sample?.allergies), "sections.sample");
-  set("pastHistory", s.sample?.pastHistory, "sections.sample");
-  set("lastOralIntake", s.sample?.lastOralIntake, "sections.sample");
-  set("careAndResponse", s.interventionsPerformed ?? s.interventions?.map((i) => i.intervention).join("; "), "sections.interventionsPerformed");
-  set("occurrenceLocation", s.incident?.location, "sections.incident");
-  set("dispatchNumber", s.incident?.dispatchReason, "sections.incident");
-  set("unit", s.incident?.unitsOnScene, "sections.incident");
-  set("crew", s.scene?.othersOnScene, "sections.scene");
-  set("handoffTo", s.transport?.handoffTo, "sections.transport");
-  set("destination", s.transport?.destination, "sections.transport");
-  return out;
-}
-
 export type IncidentSection = { title: string; fields: LabelledValue[] };
 
 /** the incident tab, every NoteSections field in the same six groups as the on-scene sheet. blanks are left out */

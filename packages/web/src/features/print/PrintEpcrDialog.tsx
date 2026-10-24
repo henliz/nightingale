@@ -1,17 +1,20 @@
 import { createPortal } from "react-dom";
 import { Button } from "../../components/ui/Button/Button";
 import { Dialog } from "../../components/ui/Dialog/Dialog";
+import type { Role } from "../../data/users";
 import { useIncident } from "../../incident/IncidentContext";
 import { PrintableEpcr } from "./PrintableEpcr";
 import styles from "./PrintEpcrDialog.module.css";
 
 interface PrintEpcrDialogProps {
+  /** whose form gets printed */
+  role: Role;
   open: boolean;
   onClose: () => void;
 }
 
 /** overlay D: one letter page preview, printed through the browser's print dialog */
-export function PrintEpcrDialog({ open, onClose }: PrintEpcrDialogProps) {
+export function PrintEpcrDialog({ role, open, onClose }: PrintEpcrDialogProps) {
   const incident = useIncident();
   // every confirmed field bumps the version so the hospital can tell copies apart
   const version = 1 + Object.keys(incident.fieldReviews).length;
@@ -34,14 +37,14 @@ export function PrintEpcrDialog({ open, onClose }: PrintEpcrDialogProps) {
             <Button onClick={() => window.print()}>Print</Button>
           </div>
           <div className={styles.preview}>
-            <PrintableEpcr incident={incident} version={version} />
+            <PrintableEpcr role={role} incident={incident} version={version} />
           </div>
         </div>
       </Dialog>
       {open &&
         createPortal(
           <div className={styles.sheet}>
-            <PrintableEpcr incident={incident} version={version} />
+            <PrintableEpcr role={role} incident={incident} version={version} />
           </div>,
           document.body,
         )}
