@@ -8,7 +8,7 @@ import styles from "./views.module.css";
 
 interface IncidentViewProps {
   /** real sections from the api, otherwise the fixture */
-  sections?: readonly { title: string; fields: readonly { label: string; value: string }[] }[];
+  sections?: readonly { title: string; fields: readonly { label: string; value: string; flag?: string; note?: string }[] }[];
   notes: IncidentState["incidentNotes"];
   onSaveNote: (section: string, text: string) => void;
 }
@@ -43,7 +43,7 @@ export function IncidentView({ sections = INCIDENT_SECTIONS, notes, onSaveNote }
                   {section.fields.length === 0 ? (
                     <p className={styles.hint}>Nothing recorded for this section.</p>
                   ) : (
-                    section.fields.map((f) => <Field key={f.label} label={f.label} value={f.value} />)
+                    section.fields.map((f) => <Field key={f.label} label={f.label} value={f.value} flag={f.flag} note={f.note} />)
                   )}
                 </div>
                 <SectionNote section={section.title} note={note} onSave={onSaveNote} />

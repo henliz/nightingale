@@ -6,6 +6,9 @@ import { Icon } from "../../components/ui/Icon/Icon";
 import { Tabs } from "../../components/ui/Tabs/Tabs";
 import { useLiveSource } from "../../api/LiveSourceContext";
 import { UNNAMED } from "../../api/call";
+import { NOT_CAPTURED } from "../../data/epcr";
+import { resolveField } from "../../incident/selectors";
+import { useEpcrForm } from "../epcr/useEpcrForm";
 import { buildRecord, fileKey, PATIENT } from "../../data/record";
 import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext";
 import { clockTime, elapsed } from "../../lib/time";
@@ -74,6 +77,25 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
   const patientName = live.call.patientName ?? UNNAMED;
   const recordLabel = live.source === "demo" ? `Record ${PATIENT.recordNumber}` : live.call.callId;
   const responder = user?.role === "paramedic" ? "Unit 4471" : "FF-12";
+  const form = useEpcrForm(user?.role ?? "firefighter");
+  // a real call's ePCR tab is that role's whole form, read-only, reviews + flags included
+  const tabLabel = new Map(form.tabs.map((t) => [t.id, t.label]));
+  const epcrSections =
+    live.source === "demo"
+      ? undefined
+      : form.sections.map((section) => ({
+          title: `${tabLabel.get(section.tab) ?? ""} · ${section.title}`,
+          fields: section.fields.map((field) => {
+            const r = resolveField(field, incident);
+            return {
+              label: field.label,
+              value: r.value === NOT_CAPTURED ? "" : r.value,
+              flag: r.flagged ? field.flagNote : undefined,
+              note: r.review ? `${r.review.status === "cleared" ? "Cleared" : "Confirmed"} by ${r.review.by} at ${r.review.at}` : undefined,
+            };
+          }),
+        }));
+  const flags = form.sections.flatMap((s) => s.fields).filter((f) => resolveField(f, incident).flagged && f.flagNote);
 
   function close() {
     setSubView(null);
@@ -113,6 +135,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
         return (
           <OverviewView
             record={record}
+            flags={live.source === "demo" ? [] : flags.map((f) => `${f.label}: ${f.flagNote}`)}
             deviceActive={recording}
             deviceElapsed={incident.recordingStartedAt !== null ? elapsed(incident.recordingStartedAt, now) : null}
             onAddObservation={() => setSubView("noteform")}
@@ -135,7 +158,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
       case "incident":
         return (
           <IncidentView
-            sections={live.incident ?? undefined}
+            sections={epcrSections}
             notes={incident.incidentNotes}
             onSaveNote={(section, text) => dispatch({ type: "incident_note_saved", section, text, by: responder, at: clockTime() })}
           />
@@ -159,7 +182,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
         </Button>
       </header>
 
-      <Tabs tabs={TABS} value={tab} onChange={(next) => { setSubView(null); setTab(next); }} label="Record sections" />
+      <Tabs tabs={live.source === "demo" ? TABS : TABS.map((t) => (t.id === "incident" ? { ...t, label: "ePCR" } : t))} value={tab} onChange={(next) => { setSubView(null); setTab(next); }} label="Record sections" />
 
       <div className={styles.body} role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
         {renderBody()}

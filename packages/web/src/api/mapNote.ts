@@ -1,4 +1,4 @@
-import type { DraftNote, NoteSections, VitalsSet } from "@nightingale/schema";
+import type { NoteSections, VitalsSet } from "@nightingale/schema";
 import type { CaptureExcerpt, CaptureTurn } from "../data/epcr";
 import type { LabelledValue, PatientRecord, RecordFile, ResponderNote, TimelineEvent, TranscriptTurn } from "../data/record";
 import { assetUrl } from "./client";
@@ -104,6 +104,8 @@ export function mapSessionToRecord(session: DrillSession): PatientRecord {
     { label: "Blood pressure", value: v?.bp ?? "--" },
     { label: "SpO2", value: v?.spo2 ?? "--" },
     { label: "GCS", value: v?.gcs ?? "---" },
+    { label: "LOC", value: v?.loc ?? "--" },
+    { label: "Pain", value: v?.pain ?? s.opqrst?.severity ?? "--" },
   ];
   return {
     latestNote,
@@ -112,106 +114,20 @@ export function mapSessionToRecord(session: DrillSession): PatientRecord {
       { label: "Medication list", value: joinList(s.sample?.medications) || joinList(s.medsAndAllergiesMentioned) },
       { label: "Allergies", value: joinList(s.sample?.allergies) || NOT_RECORDED },
       { label: "Relevant past history", value: s.sample?.pastHistory ?? NOT_RECORDED },
+      { label: "Last oral intake", value: s.sample?.lastOralIntake ?? NOT_RECORDED },
     ],
     sceneAccount: [
+      { label: "Patient", value: [s.patient?.age, s.patient?.sex, s.patient?.capacity && `capacity: ${s.patient.capacity}`].filter(Boolean).join(", ") || NOT_RECORDED },
       { label: "Chief complaint", value: s.chiefComplaint ?? NOT_RECORDED },
       { label: "Found on arrival", value: s.conditionObserved ?? s.physicalExam ?? "--" },
       { label: "Reported mechanism", value: s.mechanismOrComplaint ?? s.sample?.events ?? "--" },
       { label: "Family or witness", value: s.bystanderStatements ?? "--" },
-      { label: "Contact number", value: s.familyContact ?? "--" },
+      { label: "Hazards", value: [s.scene?.safety, s.hazards].filter(Boolean).join(". ") || "None mentioned" },
+      { label: "# patients", value: s.scene?.numberOfPatients ?? "--" },
+      { label: "Family contact", value: s.familyContact ?? "--" },
     ],
     timeline: timeline(s),
     files: photos(session),
     transcript: mapTranscript(session),
   };
-}
-
-export type IncidentSection = { title: string; fields: LabelledValue[] };
-
-/** the incident tab, every NoteSections field in the same six groups as the on-scene sheet. blanks are left out */
-export function mapIncidentSections(note: DraftNote | undefined): IncidentSection[] {
-  const s: NoteSections = note?.sections ?? {};
-  const t = s.incident?.times ?? {};
-  const f = (label: string, value: string | undefined): LabelledValue[] => (value?.trim() ? [{ label, value }] : []);
-  const vitals = (s.vitals ?? []).flatMap((v, i) => {
-    const parts = [v.loc && `LOC ${v.loc}`, v.hr && `HR ${v.hr}`, v.rr && `RR ${v.rr}`, v.bp && `BP ${v.bp}`, v.spo2 && `SpO2 ${v.spo2}`, v.gcs && `GCS ${v.gcs}`, v.temp && `temp ${v.temp}`, v.glucose && `BGL ${v.glucose}`, v.pain && `pain ${v.pain}`, v.skin && `skin ${v.skin}`].filter(Boolean);
-    return f(`Vitals ${v.time ?? `set ${i + 1}`}`, parts.join(" / "));
-  });
-  const interventions = (s.interventions ?? []).flatMap((i) => f(i.time ? `Intervention ${i.time}` : "Intervention", [i.intervention, i.response].filter(Boolean).join(", response: ")));
-  return [
-    {
-      title: "Call and location",
-      fields: [
-        ...f("Dispatch reason", s.incident?.dispatchReason),
-        ...f("Occurrence location", s.incident?.location),
-        ...f("Call received", t.callReceived),
-        ...f("En route", t.enRoute),
-        ...f("On scene", t.onScene),
-        ...f("Patient contact", t.patientContact),
-        ...f("Departed scene", t.departScene),
-        ...f("At destination", t.atDestination),
-        ...f("Timeline", s.timeline),
-      ],
-    },
-    {
-      title: "Patient identity and contacts",
-      fields: [
-        ...f("Name", s.patient?.name),
-        ...f("Age", s.patient?.age),
-        ...f("Sex", s.patient?.sex),
-        ...f("Date of birth", s.patient?.dob),
-        ...f("Weight", s.patient?.weight),
-        ...f("Capacity", [s.patient?.capacity, s.patient?.capacityNote].filter(Boolean).join(", ")),
-        ...f("Decision maker", s.patient?.decisionMaker),
-        ...f("Family contact", s.familyContact),
-      ],
-    },
-    {
-      title: "Clinical information and injury",
-      fields: [
-        ...f("Chief complaint", s.chiefComplaint),
-        ...f("Mechanism", s.mechanismOrComplaint),
-        ...f("Condition observed", s.conditionObserved),
-        ...f("Physical exam", s.physicalExam),
-        ...f("Signs and symptoms", s.sample?.signsSymptoms),
-        ...f("Allergies", joinList(s.sample?.allergies)),
-        ...f("Medications", joinList(s.sample?.medications) || joinList(s.medsAndAllergiesMentioned)),
-        ...f("Past history", s.sample?.pastHistory),
-        ...f("Last oral intake", s.sample?.lastOralIntake),
-        ...f("Events", s.sample?.events),
-        ...f("Onset", s.opqrst?.onset),
-        ...f("Provocation", s.opqrst?.provocation),
-        ...f("Quality", s.opqrst?.quality),
-        ...f("Radiation", s.opqrst?.radiation),
-        ...f("Severity", s.opqrst?.severity),
-        ...f("Pain time", s.opqrst?.time),
-        ...vitals,
-        ...f("Interventions performed", s.interventionsPerformed),
-        ...interventions,
-      ],
-    },
-    {
-      title: "Scene, hazards and witnesses",
-      fields: [
-        ...f("Number of patients", s.scene?.numberOfPatients),
-        ...f("Environment", s.scene?.environment),
-        ...f("Scene safety", s.scene?.safety),
-        ...f("Hazards", s.hazards),
-        ...f("Bystander statements", s.bystanderStatements),
-        ...f("Belongings", s.belongings),
-      ],
-    },
-    {
-      title: "Crew, transport and service",
-      fields: [
-        ...f("Units on scene", s.incident?.unitsOnScene),
-        ...f("Others on scene", s.scene?.othersOnScene),
-        ...f("Destination", s.transport?.destination),
-        ...f("Priority", s.transport?.priority),
-        ...f("Position", s.transport?.position),
-        ...f("Handoff to", s.transport?.handoffTo),
-      ],
-    },
-    { title: "Narrative", fields: f("What was said and done", s.narrative) },
-  ];
 }

@@ -3,7 +3,7 @@ import type { CaptureExcerpt } from "../data/epcr";
 import type { PatientRecord } from "../data/record";
 import { callInfo, SAMPLE_CALL, type CallInfo } from "./call";
 import { fetchSessions, subscribeToChanges } from "./client";
-import { mapExcerpts, mapIncidentSections, mapSessionToRecord, sortedSessions, type IncidentSection } from "./mapNote";
+import { mapExcerpts, mapSessionToRecord, sortedSessions } from "./mapNote";
 import type { DrillSession } from "./types";
 
 export type DataSource = "demo" | "api";
@@ -24,8 +24,6 @@ interface LiveSourceValue {
   /** what the record modal shows when a session is selected, null in demo mode */
   record: PatientRecord | null;
   excerpts: CaptureExcerpt[] | null;
-  /** the incident tab from the real note, null in demo mode */
-  incident: IncidentSection[] | null;
 }
 
 const LiveSourceContext = createContext<LiveSourceValue | null>(null);
@@ -116,7 +114,6 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     },
     record: session ? mapSessionToRecord(session) : null,
     excerpts: session ? mapExcerpts(session) : null,
-    incident: session ? mapIncidentSections(session.epcr) : null,
   };
 
   return <LiveSourceContext.Provider value={value}>{children}</LiveSourceContext.Provider>;

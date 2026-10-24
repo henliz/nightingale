@@ -1,3 +1,4 @@
+import { Alert } from "../../../components/ui/Alert/Alert";
 import { Button } from "../../../components/ui/Button/Button";
 import { Chip } from "../../../components/ui/Chip/Chip";
 import { Field } from "../../../components/ui/Field/Field";
@@ -6,6 +7,8 @@ import styles from "./views.module.css";
 
 interface OverviewViewProps {
   record: PatientRecord;
+  /** flagged fields + why, "Age: 32 per cousin vs 57 per responder" */
+  flags?: readonly string[];
   deviceActive: boolean;
   deviceElapsed: string | null;
   onAddObservation: () => void;
@@ -13,7 +16,7 @@ interface OverviewViewProps {
   onViewFiles: () => void;
 }
 
-export function OverviewView({ record, deviceActive, deviceElapsed, onAddObservation, onViewTimeline, onViewFiles }: OverviewViewProps) {
+export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, onAddObservation, onViewTimeline, onViewFiles }: OverviewViewProps) {
   const hasFiles = record.files.length > 0;
   return (
     <div className={styles.view}>
@@ -30,6 +33,8 @@ export function OverviewView({ record, deviceActive, deviceElapsed, onAddObserva
         <span className={styles.spacer} />
         <Button onClick={onAddObservation}>Add observation</Button>
       </div>
+
+      {flags.length > 0 && <Alert tone="warning" title={`${flags.length} field${flags.length === 1 ? "" : "s"} need a look before sharing`} body={flags.join(" · ")} />}
 
       <div className={styles.columns}>
         <div className={styles.column}>
