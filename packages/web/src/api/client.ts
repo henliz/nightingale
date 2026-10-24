@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { DrillSession } from "./types";
 
-/** Same-origin prefix; vite proxies it to packages/api in dev, hono serves both in prod. */
+/** same origin, vite proxies it to packages/api in dev */
 export const API_BASE = "/api";
 
 async function getJson<T>(path: string, schema: z.ZodType<T>): Promise<T> {
@@ -14,7 +14,7 @@ export function fetchSessions(): Promise<DrillSession[]> {
   return getJson("/dev/sessions", z.array(DrillSession));
 }
 
-/** Raw photo or audio bytes for an asset, served by the api from the vault or drill folder. */
+/** raw photo/audio bytes, from the drill folder or the vault */
 export function assetUrl(session: DrillSession, asset: { assetId: string; file?: string }): string {
   if (asset.file) {
     const [sub, name] = asset.file.split("/");
@@ -23,16 +23,16 @@ export function assetUrl(session: DrillSession, asset: { assetId: string; file?:
   return `${API_BASE}/assets/${asset.assetId}/download`;
 }
 
-/**
- * Subscribe to the api's server-sent events. Any event means "something changed";
- * the caller refetches. Returns an unsubscribe function.
- */
+/** calls onChange whenever the api says a session changed, returns an unsubscribe */
 export function subscribeToChanges(onChange: () => void, onStatus?: (open: boolean) => void): () => void {
   const source = new EventSource(`${API_BASE}/dev/stream`);
   source.onopen = () => onStatus?.(true);
   source.onerror = () => onStatus?.(false);
-  source.onmessage = onChange;
-  // the api names its events; listen to the ones that carry record changes
-  for (const name of ["asset", "session", "transcript", "epcr", "change"]) source.addEventListener(name, onChange);
+  // "update" = an asset landed, an ePCR got rebuilt, or a new session started (live.update in packages/api).
+  // live transcript events fire on every partial word, so only refetch once a turn is final
+  source.addEventListener("update", onChange);
+  source.addEventListener("transcript", (e) => {
+    if ((JSON.parse((e as MessageEvent<string>).data) as { final?: boolean }).final) onChange();
+  });
   return () => source.close();
 }
