@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "../../../components/ui/Button/Button";
 import { Icon } from "../../../components/ui/Icon/Icon";
 import type { RecordFile } from "../../../data/record";
+import { PhotoViewer } from "./PhotoViewer";
 import styles from "./views.module.css";
 
 interface FilesViewProps {
@@ -10,6 +12,9 @@ interface FilesViewProps {
 }
 
 export function FilesView({ files, onAddFile, onRemove }: FilesViewProps) {
+  const photos = files.filter((f) => f.url);
+  const [viewing, setViewing] = useState<number | null>(null);
+  const open = (f: RecordFile) => setViewing(photos.indexOf(f));
   return (
     <div className={styles.view}>
       <div className={styles.headingRow}>
@@ -26,15 +31,17 @@ export function FilesView({ files, onAddFile, onRemove }: FilesViewProps) {
             <div key={f.name + f.stamp} className={styles.file}>
               {f.url ? (
                 // raw photos stay on the laptop that ran the drill; when the bytes are not here, fall back to the icon
-                <img className={styles.thumb} src={f.url} alt="" onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("span"), { textContent: "" }))} />
+                <button type="button" className={styles.thumbButton} onClick={() => open(f)} aria-label={`Open ${f.name}`}>
+                  <img className={styles.thumb} src={f.url} alt="" onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("span"), { textContent: "" }))} />
+                </button>
               ) : (
                 <Icon name="file" size={24} />
               )}
               <span className={styles.fileInfo}>
                 {f.url ? (
-                  <a className={styles.fileName} href={f.url} target="_blank" rel="noreferrer">
+                  <button type="button" className={[styles.fileName, styles.fileLink].join(" ")} onClick={() => open(f)}>
                     {f.name}
-                  </a>
+                  </button>
                 ) : (
                   <span className={styles.fileName}>{f.name}</span>
                 )}
@@ -48,6 +55,7 @@ export function FilesView({ files, onAddFile, onRemove }: FilesViewProps) {
           ))}
         </div>
       )}
+      {viewing !== null && <PhotoViewer photos={photos} index={viewing} onIndex={setViewing} onClose={() => setViewing(null)} />}
     </div>
   );
 }

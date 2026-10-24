@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Alert } from "../../../components/ui/Alert/Alert";
 import { Button } from "../../../components/ui/Button/Button";
 import { Chip } from "../../../components/ui/Chip/Chip";
 import { Field } from "../../../components/ui/Field/Field";
 import type { PatientRecord } from "../../../data/record";
+import { PhotoViewer } from "./PhotoViewer";
 import styles from "./views.module.css";
 
 interface OverviewViewProps {
@@ -18,6 +20,8 @@ interface OverviewViewProps {
 
 export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, onAddObservation, onViewTimeline, onViewFiles }: OverviewViewProps) {
   const hasFiles = record.files.length > 0;
+  const photos = record.files.filter((f) => f.url);
+  const [viewing, setViewing] = useState<number | null>(null);
   return (
     <div className={styles.view}>
       <div className={styles.headingRow}>
@@ -69,6 +73,15 @@ export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, 
           {record.sceneAccount.map((f) => (
             <Field key={f.label} label={f.label} value={f.value} />
           ))}
+          {photos.length > 0 && (
+            <div className={styles.photoStrip}>
+              {photos.map((p, i) => (
+                <button key={p.name} type="button" className={styles.thumbButton} onClick={() => setViewing(i)} aria-label={`Open scene photo ${i + 1}`}>
+                  <img className={styles.thumb} src={p.url} alt="" />
+                </button>
+              ))}
+            </div>
+          )}
           <div>
             <Button variant="ghostInk" onClick={onViewFiles} disabled={!hasFiles}>
               View documents and images
@@ -76,6 +89,7 @@ export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, 
           </div>
         </div>
       </div>
+      {viewing !== null && <PhotoViewer photos={photos} index={viewing} onIndex={setViewing} onClose={() => setViewing(null)} />}
     </div>
   );
 }
