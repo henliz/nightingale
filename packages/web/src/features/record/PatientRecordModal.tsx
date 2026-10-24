@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Button } from "../../components/ui/Button/Button";
 import { Dialog } from "../../components/ui/Dialog/Dialog";
 import { Icon } from "../../components/ui/Icon/Icon";
@@ -50,6 +51,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
   const incident = useIncident();
   const dispatch = useIncidentDispatch();
   const { user } = useSession();
+  const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>(initialTab);
   const [subView, setSubView] = useState<SubView>(null);
 
@@ -131,6 +133,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
       case "incident":
         return (
           <IncidentView
+            sections={live.incident ?? undefined}
             notes={incident.incidentNotes}
             onSaveNote={(section, text) => dispatch({ type: "incident_note_saved", section, text, by: responder, at: clockTime() })}
           />
@@ -161,6 +164,11 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
       </div>
 
       <footer className={styles.footer}>
+        {!locked && (
+          <Button variant="ghost" onClick={() => navigate(user?.role === "paramedic" ? "/paramedic/record" : "/fire/record")}>
+            Open full ePCR
+          </Button>
+        )}
         <Button variant="secondary" onClick={close}>
           {locked ? "Close" : "Save"}
         </Button>

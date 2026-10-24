@@ -7,18 +7,20 @@ import type { IncidentState } from "../../../incident/types";
 import styles from "./views.module.css";
 
 interface IncidentViewProps {
+  /** real sections from the api, otherwise the fixture */
+  sections?: readonly { title: string; fields: readonly { label: string; value: string }[] }[];
   notes: IncidentState["incidentNotes"];
   onSaveNote: (section: string, text: string) => void;
 }
 
-export function IncidentView({ notes, onSaveNote }: IncidentViewProps) {
-  const [openTitle, setOpenTitle] = useState<string | null>(INCIDENT_SECTIONS[0]?.title ?? null);
+export function IncidentView({ sections = INCIDENT_SECTIONS, notes, onSaveNote }: IncidentViewProps) {
+  const [openTitle, setOpenTitle] = useState<string | null>(sections[0]?.title ?? null);
 
   return (
     <div className={styles.view}>
       <h3 className={styles.heading}>Patient and incident details</h3>
       <p className={styles.lede}>Keep call reporting alongside the patient record. Open only the sections needed for this incident.</p>
-      {INCIDENT_SECTIONS.map((section) => {
+      {sections.map((section) => {
         const open = openTitle === section.title;
         const panelId = `incident-${section.title.replace(/\W+/g, "-").toLowerCase()}`;
         const note = notes[section.title];

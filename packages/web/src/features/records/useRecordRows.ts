@@ -17,10 +17,11 @@ function sessionRow(s: DrillSession): RecordRow {
 
 const DEMO_ROW: RecordRow = { callId: "Demo case", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
 
-/** the records list: the saved calls from the api (plus the demo case), or the fixture rows in demo mode */
+/** the records list: the named cases from the api (plus the demo case), or the fixture rows in demo mode.
+ * a fresh untitled call from the pi shows as the current call instead */
 export function useRecordRows(role: Role) {
   const live = useLiveSource();
-  const rows = live.source === "api" && live.status === "ready" ? [...sortedSessions(live.sessions).map(sessionRow), DEMO_ROW] : recentRecordsFor(role);
+  const rows = live.source === "api" && live.status === "ready" ? [...sortedSessions(live.sessions).filter((s) => s.title).map(sessionRow), DEMO_ROW] : recentRecordsFor(role);
   return {
     rows,
     total: live.source === "api" && live.status === "ready" ? rows.length : TOTAL_RECORDS,

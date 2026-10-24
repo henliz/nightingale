@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { CaptureExcerpt } from "../data/epcr";
 import type { PatientRecord } from "../data/record";
 import { fetchSessions, subscribeToChanges } from "./client";
-import { mapExcerpts, mapNoteToEpcr, mapSessionToRecord, sortedSessions, type NoteFieldOverride } from "./mapNote";
+import { mapExcerpts, mapIncidentSections, mapNoteToEpcr, mapSessionToRecord, sortedSessions, type IncidentSection, type NoteFieldOverride } from "./mapNote";
 import type { DrillSession } from "./types";
 
 export type DataSource = "demo" | "api";
@@ -23,6 +23,8 @@ interface LiveSourceValue {
   record: PatientRecord | null;
   excerpts: CaptureExcerpt[] | null;
   epcr: Map<string, NoteFieldOverride> | null;
+  /** the incident tab from the real note, null in demo mode */
+  incident: IncidentSection[] | null;
 }
 
 const LiveSourceContext = createContext<LiveSourceValue | null>(null);
@@ -120,6 +122,7 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     record: session ? mapSessionToRecord(session) : null,
     excerpts: session ? mapExcerpts(session) : null,
     epcr: session ? mapNoteToEpcr(session.epcr) : null,
+    incident: session ? mapIncidentSections(session.epcr) : null,
   };
 
   return <LiveSourceContext.Provider value={value}>{children}</LiveSourceContext.Provider>;

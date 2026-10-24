@@ -65,6 +65,7 @@
 .footer {
   display: flex;
   justify-content: flex-end;
+  gap: var(--space-8);
   padding: 8px var(--space-24);
   background: var(--color-white);
   border-top: 1px solid var(--color-line);
