@@ -2,13 +2,13 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 2:41:03 p.m. from 54 chunk(s), model demo-1, prompt epcr-v7
+updated 8:35:49 p.m. from 54 chunk(s), model demo-1, prompt epcr-v8
 
 ## Incident
 
 - **Location:** 123 Fake Street
 - **Dispatch reason:** allergic reaction
-- **Units on scene:** Fire, EMS / Paramedics
+- **Units on scene:** fire, EMS / ambulance
 - **Times:**
   - **Call received:** 20:24:39
   - **On scene:** 20:24:56
@@ -18,94 +18,95 @@ updated 2:41:03 p.m. from 54 chunk(s), model demo-1, prompt epcr-v7
 ## Scene
 
 - **Number of patients:** 1
-- **Safety:** clear
+- **Others on scene:** friend / brother
 
 ## Chief complaint
 
-difficulty breathing and hives following shellfish ingestion
+difficulty breathing and itching
 
 ## Mechanism / what happened
 
-allergic reaction secondary to shellfish ingestion
+allergic reaction following shellfish ingestion
 
 ## Timeline
 
-20:24:39 911 call; 20:24:56 fire on scene; 20:25:26 patient contact; 20:25:34 airway and pulse assessment; 20:26:07 blood pressure checked; 20:27:14 pupil assessment; 20:27:24 transfer of care to paramedic
+20:24:39 911 call; 20:24:56 fire on scene; 20:25:26 patient contact; 20:25:34 airway and radial pulse assessment; 20:26:07 blood pressure taken; 20:27:14 pupil assessment; 20:27:24 transfer of care to paramedic
 
 ## Patient
 
-- **name:** Dave per patient and handoff; Scott per bystander
+- **name:** Dave
 - **age:** 18
 - **sex:** male
 - **capacity:** capable
-- **Capacity reason:** alert, speaking in sentences, oriented
+- **Capacity reason:** alert, oriented, answering questions appropriately
 - **Decision maker:** self
 
 ## SAMPLE history
 
-- **Signs / symptoms:** difficulty breathing, airway swelling, hives on neck, generalized itching, breathing hurts; no wheezing noted
+- **Signs / symptoms:** difficulty breathing, throat/airway swelling, hives on neck, pruritus, breathing hurts, dilated pupils
 - **Allergies:**
   - shellfish
 - **Medications:**
-  - denies carrying EpiPen
-- **Past history:** mild allergic reactions/itching previously to shellfish; denies prior severe reactions
-- **Last oral intake:** shellfish ~15-20 minutes prior to assessment
-- **Events leading up:** ate shellfish ~15-20 minutes prior, developed hives on neck, airway swelling, and acute dyspnea
+  - denies EpiPen
+- **Past history:** prior mild reactions/itching to shellfish
+- **Last oral intake:** shellfish ~15-20 minutes prior
+- **Events leading up:** ingested shellfish approximately 15-20 minutes prior, resulting in neck hives, airway swelling, and dyspnea
 
 ## OPQRST
 
-- **onset:** acute, ~15-20 minutes prior
+- **onset:** ~15-20 minutes prior
 - **provocation:** breathing hurts
-- **quality:** itchy itchy itchy
-- **time:** started ~15-20 minutes ago
+- **quality:** itchy, hard to breathe
+- **time:** 15-20 minutes
 
 ## Vitals
 
 | time | LOC | BP | HR | RR | SpO2 | GCS | temp | glucose | pain | skin |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 20:26:07 | alert | 140/80 per assessment; 140/90 per responder at handoff |  |  |  |  |  |  |  | hives on neck, itchy |
+| 20:26:07 | alert | 140/80 per Person 3; 140/90 per responder at handoff |  |  |  |  |  |  |  | hives on neck, itchy |
 
 ## Physical exam
 
-airway: oral swelling noted, no audible wheezing; cardiovascular: radial pulse present, strong; skin: urticaria present on neck; eyes: pupils equal and dilated
+Airway: swelling noted upon oral inspection. Respiratory: no wheezing heard, reports dyspnea and pain with breathing. Cardiovascular: radial pulse strong. Neuro: pupils equal and dilated bilaterally. Integumentary: urticaria noted on neck.
 
 ## Interventions
 
 | time | intervention | response |
 |---|---|---|
-| 20:25:34 | airway and radial pulse assessment | airway swelling identified, radial pulse strong |
-| 20:26:07 | blood pressure measurement | BP 140/80 |
-| 20:27:14 | pupil check | pupils equal and dilated |
-| 20:27:24 | transfer of care to paramedic | verbal report provided to incoming paramedic |
+| 20:25:34 | airway inspection and radial pulse check | intraoral swelling noted, pulse strong |
+| 20:26:07 | blood pressure measurement | 140/80 obtained |
+| 20:27:14 | pupil assessment | pupils equal and dilated |
+| 20:27:24 | transfer of care to paramedic | verbal handoff report provided |
 
 ## Transport
 
-- **handoffTo:** paramedic
+- **handoffTo:** paramedic / ambulance crew
 
 ## Narrative
 
-Fire responded to 123 Fake Street for an 18-year-old male experiencing an acute allergic reaction after ingesting shellfish approximately 15 to 20 minutes prior. Patient presented with difficulty breathing, airway swelling, and hives on the neck, with no audible wheezing heard and strong radial pulses. Vital signs showed a blood pressure of 140/80 (stated as 140/90 during handoff), and the patient reported no prior severe reactions and no prescribed EpiPen. Care was transferred on scene to the incoming paramedic unit.
+Responders were dispatched to 123 Fake Street for an 18-year-old male experiencing an allergic reaction after eating shellfish 15 to 20 minutes prior. Patient presented with urticaria to the neck, visualized intraoral airway swelling, and difficulty breathing, with strong radial pulses and no audible wheezing. Vital signs and pupil assessments were completed, showing blood pressure of 140/80 and equal, dilated pupils. Care was transferred with a verbal report to the arriving paramedic crew.
 
 ## Condition observed
 
-alert, in mild-to-moderate respiratory distress, airway swelling noted, hives present on neck
+alert, dyspneic, hives present on neck, oral swelling visualized
 
 ## Interventions (summary)
 
-airway assessment, radial pulse check, blood pressure measurement, pupil assessment, transfer of care
+airway exam, pulse check, blood pressure measurement, pupil exam, handoff report
 
 ## Meds / allergies mentioned
 
-- shellfish allergy
+- shellfish
+- EpiPen
 
 ## Bystander statements
 
-Oh I just ate some shellfish and I have always reacted a little bit to it but now it's just so much more severe.
+He ate some shellfish and sometimes it gives them a little bit of reaction but now he's got some hives and he's having a really He's got some hives in the neck and he's starting to have a bit of a hard time breathing.
 
 ## Needs review
 
-- unsupported claim: patient name: addressed initially as 'Scott' by bystander/caller, but stated as 'Dave' by patient and during handoff
-- unsupported claim: blood pressure: recorded as 140/80 at 20:26:07 but reported as 140/90 at handoff (20:27:38)
+- unsupported claim: Patient initially referred to as 'Scott' by Person 3, but later identified as 'Dave' by both Person 3 and responder.
+- unsupported claim: Blood pressure stated as 140/80 at 20:26:07, but reported as 140/90 during responder handoff at 20:27:38.
 
 ## Scene photos
 

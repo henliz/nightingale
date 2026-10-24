@@ -2,7 +2,7 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 2:41:19 p.m. from 46 chunk(s), model demo-1, prompt epcr-v7
+updated 8:36:07 p.m. from 46 chunk(s), model demo-1, prompt epcr-v8
 
 ## Incident
 
@@ -19,7 +19,7 @@ updated 2:41:19 p.m. from 46 chunk(s), model demo-1, prompt epcr-v7
 
 - **Number of patients:** 1
 - **Environment:** dark
-- **Others on scene:** fire
+- **Others on scene:** bystanders
 
 ## Chief complaint
 
@@ -27,31 +27,31 @@ leg deformity and pain
 
 ## Mechanism / what happened
 
-dirt bike jump crash, landed awkwardly
+dirt bike jump bail, landed awkwardly with twisted leg
 
 ## Timeline
 
-20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact
+20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:38 motor function assessed; 20:33:51 pedal pulse assessed
 
 ## Patient
 
 - **name:** Dave
 - **sex:** male
 - **capacity:** impaired
-- **Capacity reason:** intoxicated per bystanders, ?head strike, memory loss regarding incident timing, dizziness/lightheadedness
+- **Capacity reason:** intoxicated per bystanders, ?head strike, can't recall event, dizzy/lightheaded
 - **Decision maker:** implied consent (emergency)
 
 ## SAMPLE history
 
-- **Signs / symptoms:** leg deformity and pain, nausea, dizziness, lightheadedness, inability to wiggle toes; denies neck or back pain
-- **Events leading up:** jumped dirt bike, crashed, landed awkwardly causing leg to snap back ~10-11 minutes prior
+- **Signs / symptoms:** femur deformity, leg pain, unable to wiggle toes, nausea, dizziness, lightheadedness, possible head strike
+- **Events leading up:** jump on dirt bike, bailed and landed awkwardly ~10-11 minutes prior
 
 ## OPQRST
 
-- **onset:** sudden post-crash
-- **quality:** like bones have snapped in half
+- **onset:** sudden
+- **quality:** like bones snapped in half
 - **severity:** 6/10
-- **time:** ~10-11 minutes ago per bystander; patient unable to recall
+- **time:** ~10-11 minutes prior to assessment
 
 ## Vitals
 
@@ -61,23 +61,28 @@ dirt bike jump crash, landed awkwardly
 
 ## Physical exam
 
-Obvious femur deformity with localized lump. No blood pooling noted. Pedal pulse present. Unable to wiggle toes. No neck or back tenderness reported; no other deformities or bleeding noted.
+Obvious deformity of femur with localized lump; no blood pooling noted; unable to wiggle toes; pedal pulse present; denies neck and back pain; no other apparent deformities or bleeding
 
 ## Narrative
 
-Responders were dispatched to a reported dirt bike crash. Patient was found conscious complaining of nausea, dizziness, and severe leg pain following an awkward landing off a jump, with possible head strike and intoxication noted by bystanders. Assessment revealed an obvious femur deformity with a lump, an intact pedal pulse, and inability to wiggle toes, with no blood pooling or spinal pain identified.
+Fire arrived on scene at 19 Fake Street for an adult male, Dave, who crashed while jumping a dirt bike approximately 10 to 11 minutes prior. Bystanders reported the patient was intoxicated. Assessment revealed an obvious femur deformity with a palpable lump, intact distal pedal pulse, and inability to wiggle toes, accompanied by nausea, dizziness, and a suspected head strike. Patient denied loss of consciousness, neck pain, or back pain, and rated pain at 6/10.
 
 ## Condition observed
 
-Conscious, nauseous, dizzy, lightheaded
+conscious, reporting dizziness and nausea
+
+## Hazards
+
+poor lighting / dark
 
 ## Bystander statements
 
-"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted."; "he's drunk. Yeah."; "He's always drunk."
+"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted." "Yeah, he's drunk. Yeah." "He's always drunk." "Not about 10 minutes ago. Oh, 11 minutes ago."
 
 ## Needs review
 
-- unsupported claim: body side (left vs right) of injured femur/leg
+- unsupported claim: Laterality of injured leg/femur (left vs right) was not specified
+- unsupported claim: Patient age and date of birth were not stated
 
 ## Scene photos
 

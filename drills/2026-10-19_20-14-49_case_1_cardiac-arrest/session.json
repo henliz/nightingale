@@ -821,96 +821,95 @@
   ],
   "epcrStatus": "ready",
   "epcr": {
-    "id": "3576d8a4-c921-441b-b34d-1176eee64d2b",
+    "id": "9afba3b4-9293-4c4e-abfe-16a557d6032a",
     "captureId": "case_1_cardiac-arrest",
     "modelVersion": "demo-1",
-    "promptVersion": "epcr-v7",
+    "promptVersion": "epcr-v8",
     "sections": {
       "incident": {
-        "dispatchReason": "cardiac arrest",
-        "unitsOnScene": "Fire, Paramedics (arriving)",
+        "location": "backyard",
+        "dispatchReason": "chest pain / unresponsive",
+        "unitsOnScene": "fire",
         "times": {
           "callReceived": "20:15:53",
           "onScene": "20:16:25",
-          "patientContact": "20:16:25",
+          "patientContact": "20:16:39",
           "departScene": "20:21:05 (end of recording)"
         }
       },
       "scene": {
         "numberOfPatients": "1",
-        "environment": "Backyard barbecue",
-        "safety": "Scene secure",
-        "othersOnScene": "Cousin"
+        "environment": "backyard barbecue",
+        "othersOnScene": "cousin (Luke)"
       },
-      "chiefComplaint": "Cardiac arrest / unresponsive",
-      "mechanismOrComplaint": "Witnessed sudden collapse following chest tightness and diaphoresis",
-      "timeline": "20:15:53 911 call; 20:16:25 fire on scene and patient contact; 20:16:39 no pulse detected; 20:16:43 CPR initiated; 20:16:59 AED pads applied; 20:17:26 O2 15 L/min started; 20:18:32 AED analyzes, no shock advised, CPR resumed; 20:19:48 AED shock advised, 1 shock delivered; 20:20:18 transfer of care to paramedics",
+      "chiefComplaint": "cardiac arrest",
+      "mechanismOrComplaint": "sudden collapse following chest tightness and diaphoresis",
+      "timeline": "20:15:53 911 call; 20:16:25 fire on scene; 20:16:39 patient contact, pulse check absent; 20:16:43 CPR started; 20:16:59 AED pads applied; 20:17:23 oxygen 15 L/min and ventilations started; 20:18:32 AED rhythm analysis, no shock indicated; 20:19:48 AED rhythm analysis, 1 shock delivered; 20:20:15 paramedics on scene; 20:20:18 transfer of care to paramedics",
       "patient": {
         "age": "32 per cousin; 57 per responder at handoff",
         "sex": "male",
         "capacity": "incapable",
-        "capacityNote": "Unresponsive, pulseless",
+        "capacityNote": "unresponsive, pulseless",
         "decisionMaker": "implied consent (emergency), cousin on scene"
       },
       "sample": {
-        "signsSymptoms": "Pale, diaphoretic, clammy, chest tightness/chest pain prior to collapse; unresponsive, pulseless",
-        "pastHistory": "Hypertension; no prior myocardial infarction",
-        "lastOralIntake": "Barbecue, a couple beers",
-        "events": "Attending backyard barbecue, developed diaphoresis and chest tightness/pain, then collapsed suddenly"
+        "signsSymptoms": "chest tightness, diaphoresis, pallor, sudden collapse, unresponsiveness, pulselessness",
+        "pastHistory": "hypertension",
+        "lastOralIntake": "beer, barbecue",
+        "events": "attending a backyard barbecue, drank beer, became pale and clammy with chest tightness, then collapsed unresponsive"
       },
       "opqrst": {
-        "onset": "Sudden onset ~20 minutes prior to handoff",
-        "quality": "Tightness",
-        "time": "~20 minutes prior to handoff"
+        "onset": "chest tightness started ~20 minutes prior to handoff",
+        "quality": "tightening"
       },
       "vitals": [
         {
           "time": "20:16:39",
           "loc": "unresponsive",
-          "hr": "absent",
-          "skin": "pale, sweaty, clammy"
+          "hr": "absent"
         }
       ],
-      "physicalExam": "Head-to-toe: unresponsive, pulseless. Chest: good chest rise and compliance with positive-pressure ventilations",
+      "physicalExam": "bilateral chest rise and compliance noted with ventilations",
       "interventions": [
         {
           "time": "20:16:43",
           "intervention": "CPR initiated",
-          "response": "CPR in progress"
+          "response": "chest compressions in progress"
         },
         {
           "time": "20:16:59",
           "intervention": "AED pads applied",
-          "response": "Pads attached"
+          "response": "monitoring cardiac rhythm"
         },
         {
-          "time": "20:17:26",
-          "intervention": "Supplemental oxygen initiated at 15 L/min via BVM ventilations",
-          "response": "Good chest rise and compliance noted"
+          "time": "20:17:23",
+          "intervention": "oxygen administered at 15 L/min with assisted ventilations",
+          "response": "good chest rise and compliance"
         },
         {
           "time": "20:18:32",
-          "intervention": "AED rhythm analysis, no shock advised; CPR immediately resumed",
-          "response": "CPR continued"
+          "intervention": "AED rhythm analysis",
+          "response": "no shock advised; CPR immediately resumed"
         },
         {
           "time": "20:19:48",
-          "intervention": "AED rhythm analysis, shock advised; 1 shock delivered, CPR immediately resumed",
-          "response": "CPR continued"
+          "intervention": "AED rhythm analysis and defibrillation",
+          "response": "1 shock delivered; CPR immediately resumed"
         },
         {
           "time": "20:20:18",
-          "intervention": "Transfer of care to paramedics",
-          "response": "Verbal report provided to incoming ambulance crew"
+          "intervention": "transfer of care to paramedics",
+          "response": "verbal report provided"
         }
       ],
       "transport": {
-        "handoffTo": "Paramedics / incoming ambulance crew"
+        "handoffTo": "paramedics"
       },
-      "narrative": "Fire arrived on scene to find a male patient unresponsive and pulseless in a backyard following a reported collapse preceded by chest pain, diaphoresis, and clamminess. CPR was initiated immediately, AED pads were placed, and ventilations were provided via high-flow oxygen at 15 L/min with good chest rise. Initial AED analysis indicated no shock; subsequent analysis advised shock, and one shock was administered before CPR was resumed. Paramedic crew arrived on scene, and care was transferred with CPR ongoing.",
-      "conditionObserved": "Unresponsive, apneic, pulseless, pale, and clammy on the ground",
-      "interventionsPerformed": "CPR, AED application, BVM ventilations with O2 at 15 L/min, defibrillation (1 shock), handoff to paramedics",
-      "bystanderStatements": "Cousin: \"this is my cousin. He's uh he's 32 years old. We're having a barbecue in our backyard. He started getting a little bit pale and sweaty and he said he was his chest was starting to tighten up and then he just fell right over and that's where he's been since. So I don't have any medical training, but yeah, that's all I know for now.\" / \"we were having a barbecue. Cousin came over. We had a couple beers and uh started getting all sweaty and clammy and then he just fell over. He was complaining of chest pain as well and he just fell over and he's unresponsive now.\""
+      "narrative": "Fire crew arrived on scene to find an unresponsive and pulseless male in a backyard following a sudden collapse preceded by chest tightness. High-quality CPR was immediately initiated, ventilations were assisted with oxygen at 15 L/min, and AED pads were placed. After an initial analysis indicated no shock, a second analysis advised a shock, which was delivered with immediate resumption of CPR. Care was transferred on scene to the arriving paramedic crew.",
+      "conditionObserved": "unresponsive, pulseless, apneic",
+      "interventionsPerformed": "CPR, AED application, ventilations with oxygen at 15 L/min, 1 shock delivered, transfer of care",
+      "bystanderStatements": "Cousin: \"He's uh he's 32 years old. We're having a barbecue in our backyard. He started getting a little bit pale and sweaty and he said he was his chest was starting to tighten up and then he just fell right over and that's where he's been since.\" and \"We were having a barbecue. Cousin came over. We had a couple beers and uh started getting all sweaty and clammy and then he just fell over. He was complaining of chest pain as well and he just fell over and he's unresponsive now.\"",
+      "familyContact": "cousin on scene"
     },
     "spans": [
       {
@@ -2296,21 +2295,108 @@
       {
         "field": "sections.bystanderStatements",
         "transcriptSegmentIds": []
+      },
+      {
+        "field": "sections.familyContact",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]",
+          "segment[27]",
+          "segment[28]",
+          "segment[29]",
+          "segment[30]",
+          "segment[31]",
+          "segment[32]",
+          "segment[33]",
+          "segment[34]",
+          "segment[35]",
+          "segment[36]",
+          "segment[37]",
+          "segment[38]",
+          "segment[39]",
+          "segment[40]",
+          "segment[41]",
+          "segment[42]",
+          "segment[43]",
+          "segment[44]",
+          "segment[45]",
+          "segment[46]",
+          "segment[47]",
+          "segment[48]",
+          "segment[49]",
+          "segment[50]",
+          "segment[51]",
+          "segment[52]",
+          "segment[53]",
+          "segment[54]",
+          "segment[55]",
+          "segment[56]",
+          "segment[57]",
+          "segment[58]",
+          "segment[59]",
+          "segment[60]",
+          "segment[61]",
+          "segment[62]",
+          "segment[63]",
+          "segment[64]",
+          "segment[65]",
+          "segment[66]",
+          "segment[67]",
+          "segment[68]",
+          "segment[69]",
+          "segment[70]",
+          "segment[71]",
+          "segment[72]",
+          "segment[73]",
+          "segment[74]",
+          "segment[75]",
+          "segment[76]",
+          "segment[77]",
+          "segment[78]",
+          "segment[79]",
+          "segment[80]",
+          "segment[81]",
+          "segment[82]",
+          "segment[83]",
+          "segment[84]",
+          "segment[85]",
+          "segment[86]"
+        ]
       }
     ],
     "flags": [
       {
         "type": "unsupported_claim",
-        "ref": "condenser",
-        "note": "Patient age discrepancy: 32 per cousin, 19 or 50-some mentioned by dispatch, 57 per responder at handoff"
-      },
-      {
-        "type": "unsupported_claim",
-        "ref": "condenser",
-        "note": "Patient name not explicitly confirmed (Luke mentioned during drill planning, unclear if Luke refers to cousin or patient)"
+        "ref": "sections.patient",
+        "note": "Age reported as 32 by cousin, 50-some by dispatch, and 57 by responder during handoff."
       }
     ]
   },
-  "epcrUpdatedAt": 1792521633307,
+  "epcrUpdatedAt": 1792802070921,
   "epcrChunks": 87
 }
