@@ -167,6 +167,8 @@ describe("OpenAICondenser", () => {
     expect(note.sections.vitals).toEqual([{ time: "18:40", bp: "140/90" }]);
     expect(note.sections.interventions).toEqual([{ intervention: "gave ASA 162 mg" }]);
     expect(note.sections.sample).toEqual({ allergies: ["penicillin"] });
+    // built from the patient's own meds + allergies, never the model's list
+    expect(note.sections.medsAndAllergiesMentioned).toEqual(["penicillin"]);
     expect(note.sections.hazards).toBeUndefined();
     expect(note.sections.transport).toBeUndefined();
     expect(note.flags.some((f) => f.ref === "sections.transport")).toBe(true);

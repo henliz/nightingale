@@ -117,7 +117,7 @@ export function buildEpcrForm(note: DraftNote | undefined, role: Role): EpcrForm
   const condition = f("conditionObserved", "Condition observed (LOC, ABCs)", s.conditionObserved, "conditionObserved", long);
   const exam = f("physicalExam", "Physical exam", s.physicalExam, "physicalExam", long);
   const allergies = f("sample.allergies", "Allergies", join(sa.allergies), "sample");
-  const meds = f("sample.medications", "Medications", join(sa.medications) ?? join(s.medsAndAllergiesMentioned), "sample");
+  const meds = f("sample.medications", "Medications", join(sa.medications), "sample");
   const bystanders = f("bystanderStatements", "What bystanders said (review before sharing)", s.bystanderStatements, "bystanderStatements", long);
   const belongings = f("belongings", "Belongings", s.belongings, "belongings", wide);
   const handoffTo = f("transport.handoffTo", "Handed off to", tr.handoffTo, "transport");

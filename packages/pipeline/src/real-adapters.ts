@@ -529,6 +529,12 @@ export class OpenAICondenser implements Condenser {
       });
     }
 
+    // the short handoff list is just the patient's own meds + allergies. built here, not by the
+    // model, which kept adding things the patient doesn't have (v9, "EpiPen" when he carries none)
+    const own = [...(sections.sample?.medications ?? []), ...(sections.sample?.allergies ?? [])];
+    if (own.length) sections.medsAndAllergiesMentioned = own;
+    else delete sections.medsAndAllergiesMentioned;
+
     for (const item of extracted.uncertain ?? []) {
       const { field, note } = typeof item === "string" ? { field: undefined, note: item } : item;
       if (!note?.trim()) continue;

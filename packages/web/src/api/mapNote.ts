@@ -111,7 +111,7 @@ export function mapSessionToRecord(session: DrillSession): PatientRecord {
     latestNote,
     readings,
     medicalBackground: [
-      { label: "Medication list", value: joinList(s.sample?.medications) || joinList(s.medsAndAllergiesMentioned) },
+      { label: "Medication list", value: joinList(s.sample?.medications) || NOT_RECORDED },
       { label: "Allergies", value: joinList(s.sample?.allergies) || NOT_RECORDED },
       { label: "Relevant past history", value: s.sample?.pastHistory ?? NOT_RECORDED },
       { label: "Last oral intake", value: s.sample?.lastOralIntake ?? NOT_RECORDED },
