@@ -19,6 +19,10 @@ export interface RecordRow {
   unit: string;
   callNumber: string;
   sharedAt: string;
+  /** set on rows that are a real call from the api */
+  captureId?: string;
+  /** the sample-data story, picking it flips the dashboard to demo mode */
+  demo?: boolean;
 }
 
 const RECORD_ROWS = [

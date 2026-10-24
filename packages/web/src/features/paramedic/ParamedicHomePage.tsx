@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { recentRecordsFor, TOTAL_RECORDS } from "../../data/incident";
 import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext";
 import { unfilledHandoffKeys } from "../../incident/selectors";
 import { hasReached } from "../../incident/types";
@@ -11,6 +10,7 @@ import { HomeLayout } from "../home/HomeLayout";
 import { PrintEpcrDialog } from "../print/PrintEpcrDialog";
 import { PatientRecordModal } from "../record/PatientRecordModal";
 import { RecordsList } from "../records/RecordsList";
+import { useRecordRows } from "../records/useRecordRows";
 import { ParamedicReviewCard } from "./ParamedicReviewCard";
 import { QrHandoffDialog } from "./QrHandoffDialog";
 
@@ -23,6 +23,7 @@ export function ParamedicHomePage() {
   const [recordOpen, setRecordOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [printOpen, setPrintOpen] = useState(false);
+  const records = useRecordRows("paramedic");
   if (!user) return null;
 
   const accepted = hasReached(incident.stage, "accepted");
@@ -37,7 +38,17 @@ export function ParamedicHomePage() {
   return (
     <HomeLayout
       user={user}
-      currentCall={<CurrentCallCard role="paramedic" incident={incident} locked={!accepted} onOpenRecord={openRecord} />}
+      currentCall={
+        <CurrentCallCard
+          role="paramedic"
+          incident={incident}
+          locked={!accepted}
+          onOpenRecord={() => {
+            records.followNewest();
+            openRecord();
+          }}
+        />
+      }
       review={
         <ParamedicReviewCard
           incident={incident}
@@ -54,7 +65,15 @@ export function ParamedicHomePage() {
         />
       }
       records={(query) => (
-        <RecordsList records={recentRecordsFor("paramedic")} totalCount={TOTAL_RECORDS} query={query} onView={() => setRecordOpen(true)} />
+        <RecordsList
+          records={records.rows}
+          totalCount={records.total}
+          query={query}
+          onView={(row) => {
+            records.select(row);
+            setRecordOpen(true);
+          }}
+        />
       )}
     >
       <PatientRecordModal open={recordOpen} locked={!accepted} onClose={() => setRecordOpen(false)} />

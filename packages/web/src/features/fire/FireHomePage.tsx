@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { recentRecordsFor, TOTAL_RECORDS } from "../../data/incident";
 import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext";
 import { clockTime } from "../../lib/time";
 import { useSession } from "../../session/SessionContext";
@@ -9,6 +8,7 @@ import { HomeLayout } from "../home/HomeLayout";
 import { PrintEpcrDialog } from "../print/PrintEpcrDialog";
 import { PatientRecordModal, type RecordTab } from "../record/PatientRecordModal";
 import { RecordsList } from "../records/RecordsList";
+import { useRecordRows } from "../records/useRecordRows";
 import { ShareRecordDialog } from "../share/ShareRecordDialog";
 import { FireReviewCard } from "./FireReviewCard";
 
@@ -22,6 +22,7 @@ export function FireHomePage() {
   const [recordTab, setRecordTab] = useState<RecordTab>("overview");
   const [shareOpen, setShareOpen] = useState(false);
   const [printOpen, setPrintOpen] = useState(false);
+  const records = useRecordRows("firefighter");
   if (!user) return null;
 
   const openRecord = () => {
@@ -41,7 +42,10 @@ export function FireHomePage() {
         <CurrentCallCard
           role="firefighter"
           incident={incident}
-          onOpenRecord={openRecord}
+          onOpenRecord={() => {
+            records.followNewest();
+            openRecord();
+          }}
           onShare={() => setShareOpen(true)}
           onPrint={() => setPrintOpen(true)}
           onSeeChanges={openRecord}
@@ -60,7 +64,17 @@ export function FireHomePage() {
           onExpand={openRecord}
         />
       }
-      records={(query) => <RecordsList records={recentRecordsFor("firefighter")} totalCount={TOTAL_RECORDS} query={query} onView={openRecord} />}
+      records={(query) => (
+        <RecordsList
+          records={records.rows}
+          totalCount={records.total}
+          query={query}
+          onView={(row) => {
+            records.select(row);
+            openRecord();
+          }}
+        />
+      )}
     >
       <PatientRecordModal open={recordOpen} initialTab={recordTab} onClose={() => setRecordOpen(false)} />
       <PrintEpcrDialog open={printOpen} onClose={() => setPrintOpen(false)} />

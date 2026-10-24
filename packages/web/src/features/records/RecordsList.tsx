@@ -25,9 +25,9 @@ export function RecordsList({ records, totalCount, query = "", onView }: Records
       <ul className={styles.list} style={{ listStyle: "none", margin: 0, padding: 0 }}>
         {shown.length === 0 && <li className={styles.row}><span className={styles.unit}>No records match “{query.trim()}”.</span></li>}
         {shown.map((record) => (
-          <li key={record.callId} className={styles.row}>
+          <li key={record.captureId ?? record.callId} className={styles.row}>
             <div className={styles.callColumn}>
-              <span className={styles.callId}>Call ID: {record.callId}</span>
+              <span className={styles.callId}>{record.captureId || record.demo ? record.callId : `Call ID: ${record.callId}`}</span>
               <span className={styles.unit}>{record.unit}</span>
             </div>
             <Button variant="ghost" onClick={() => onView(record)}>
@@ -35,11 +35,11 @@ export function RecordsList({ records, totalCount, query = "", onView }: Records
             </Button>
             <div className={styles.meta}>
               <span className={styles.metaRow}>
-                <span>Call</span>
+                <span>{record.captureId ? "Date" : "Call"}</span>
                 <span>{record.callNumber}</span>
               </span>
               <span className={styles.metaRow}>
-                <span>Shared</span>
+                <span>{record.captureId ? "Recorded" : "Shared"}</span>
                 <span>{record.sharedAt}</span>
               </span>
             </div>
