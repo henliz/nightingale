@@ -6,7 +6,7 @@ import type { RecordRow } from "../../data/incident";
 function sessionRow(s: DrillSession): RecordRow {
   const at = new Date(s.startedAt);
   return {
-    callId: s.title ?? `Call ${at.toLocaleDateString("en-CA", { month: "short", day: "numeric" })}`,
+    callId: s.title ?? untitledName(s, at),
     unit: s.epcr?.sections.chiefComplaint ?? "No ePCR yet",
     callNumber: at.toLocaleDateString("en-CA", { month: "short", day: "numeric" }),
     sharedAt: at.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false }),
@@ -14,13 +14,20 @@ function sessionRow(s: DrillSession): RecordRow {
   };
 }
 
+// a call from new call / a pi boot has no title, so name it after what it was
+function untitledName(s: DrillSession, at: Date): string {
+  const what = s.epcr?.sections.chiefComplaint ?? s.epcr?.sections.incident?.dispatchReason;
+  const time = at.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
+  return what ? `${what.charAt(0).toUpperCase()}${what.slice(1)} · ${time}` : `Call at ${time}`;
+}
+
 const DEMO_ROW: RecordRow = { callId: "Sample call", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
 
-/** the records list: the named cases from the api plus the sample call. a fresh untitled call from the pi shows as the current call instead */
+/** the records list: every real call that has something in it (named cases + whatever got recorded since), plus the sample call */
 export function useRecordRows() {
   const live = useLiveSource();
   // api down or still booting = just the sample call, never the old made-up figma rows (looked real, weren't)
-  const rows = [...sortedSessions(live.sessions).filter((s) => s.title).map(sessionRow), DEMO_ROW];
+  const rows = [...sortedSessions(live.sessions).filter((s) => s.title || s.assets.length > 0).map(sessionRow), DEMO_ROW];
   return {
     rows,
     total: rows.length,
