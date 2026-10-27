@@ -161,6 +161,22 @@ export function createApp(
   };
   // the device session most recently heard from, what the button splits
   let lastDeviceSessionId: string | undefined;
+  // heartbeat is every 30s, so a pi quiet for longer than this is off (or off the wifi)
+  let lastDeviceHeardAt = 0;
+  const deviceOn = () => lastDeviceSessionId !== undefined && Date.now() - lastDeviceHeardAt < 45_000;
+  // "new call" pressed before any pi was on: the next pi that boots records into this one
+  // instead of starting its own
+  let waitingCallId: string | undefined;
+  const adoptWaitingCall = (deviceSessionId: string) => {
+    if (!waitingCallId || sessions.has(deviceSessionId) || splits.has(deviceSessionId)) return;
+    const waiting = sessions.get(waitingCallId);
+    waitingCallId = undefined;
+    if (!waiting) return;
+    waiting.deviceSessionId = deviceSessionId;
+    splits.set(deviceSessionId, [{ since: 0, sessionId: waiting.captureId }]);
+    drills.saveSession(waiting);
+    live.log("server", "info", `pi connected, recording into the new call (drills/${waiting.dir})`, { sessionId: waiting.captureId });
+  };
 
   // backlog = chunks from an earlier boot that sat in the pi's queue (laptop was off, or
   // the pi lost power) and only upload now. they get their own session like any other,
@@ -417,6 +433,7 @@ export function createApp(
     // the device's current session comes from its logs / live stream. an upload alone
     // doesn't count, it can be an old chunk from an earlier boot sitting in the queue
     lastDeviceSessionId ??= result.captureId;
+    if (result.captureId === lastDeviceSessionId) lastDeviceHeardAt = Date.now();
     const completedAt = Date.now();
     const sessionId = resolveSession(result.captureId, capturedAtById.get(assetId) ?? completedAt);
     const session = sessionFor(sessionId, undefined, result.captureId !== lastDeviceSessionId);
@@ -607,6 +624,10 @@ export function createApp(
     const batch = DevLogBatch.parse(await c.req.json());
     // a device announcing a session it hasn't uploaded anything for yet still gets its
     // own folder, that's what makes every new connection a new test
+    if (batch.sessionId) {
+      adoptWaitingCall(batch.sessionId);
+      lastDeviceHeardAt = Date.now();
+    }
     const target = batch.sessionId ? resolveSession(batch.sessionId) : undefined;
     if (batch.sessionId) lastDeviceSessionId = batch.sessionId;
     if (target) sessionFor(target, batch.deviceId);
@@ -622,7 +643,9 @@ export function createApp(
   // get saved to the session
   app.post("/live/:sessionId/audio", async (c) => {
     const deviceSessionId = c.req.param("sessionId");
+    adoptWaitingCall(deviceSessionId);
     lastDeviceSessionId = deviceSessionId;
+    lastDeviceHeardAt = Date.now();
     // resolved per utterance, so pressing "new session" mid-stream switches over cleanly
     const sessionNow = () => resolveSession(deviceSessionId);
     const sessionId = sessionNow();
@@ -690,6 +713,13 @@ export function createApp(
   // empty epcr, speakers from Person 1) for everything the device sends from now on,
   // without touching the pi. the previous session is kept as it is
   app.post("/dev/sessions/new", (c) => {
+    // already waiting on the pi with an empty call, clicking again just keeps that one
+    const waiting = waitingCallId ? sessions.get(waitingCallId) : undefined;
+    if (waiting && waiting.assets.length === 0) {
+      currentSessionId = waiting.captureId;
+      return c.json(waiting, 201);
+    }
+    const piOn = deviceOn();
     const startedAt = Date.now();
     const captureId = `test_${startedAt}`;
     const session: DrillSession = {
@@ -697,10 +727,11 @@ export function createApp(
       dir: sessionDirName(captureId, startedAt),
       startedAt,
       assets: [],
-      deviceSessionId: lastDeviceSessionId,
+      deviceSessionId: piOn ? lastDeviceSessionId : undefined,
     };
     sessions.set(captureId, session);
-    if (lastDeviceSessionId) {
+    if (!piOn) waitingCallId = captureId;
+    if (piOn && lastDeviceSessionId) {
       const list = splits.get(lastDeviceSessionId) ?? [];
       list.push({ since: startedAt, sessionId: captureId });
       splits.set(lastDeviceSessionId, list);
@@ -710,9 +741,9 @@ export function createApp(
     live.log(
       "server",
       "info",
-      lastDeviceSessionId
+      piOn
         ? `NEW SESSION started from the dashboard, everything from now on saves to drills/${session.dir}`
-        : `NEW SESSION started from the dashboard (no device connected yet), saving to drills/${session.dir}`,
+        : `NEW SESSION started from the dashboard, the next pi that turns on records into drills/${session.dir}`,
       { sessionId: captureId },
     );
     live.update(`session:${captureId}`);

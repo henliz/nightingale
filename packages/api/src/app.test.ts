@@ -686,6 +686,26 @@ describe("new session button", () => {
     const sessions = await json<{ captureId: string }[]>(await app.request("/dev/sessions"));
     expect(sessions).toHaveLength(1);
   });
+
+  it("pressed before the pi is on: the pi records into that call when it boots, extra presses reuse it", async () => {
+    const app = createApp(new MemoryVaultStore());
+    const first = await json<{ captureId: string }>(await app.request("/dev/sessions/new", { method: "POST" }));
+    const again = await json<{ captureId: string }>(await app.request("/dev/sessions/new", { method: "POST" }));
+    expect(again.captureId).toBe(first.captureId);
+
+    // pi boots with its own session id, says hello, then uploads
+    await app.request("/dev/logs", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ deviceId: "nightingale", sessionId: "boot_1", lines: [{ ts: Date.now(), level: "info", msg: "recording" }] }),
+    });
+    await uploadAudioChunk(app, "boot_1", "on scene");
+
+    type S = { captureId: string; assets: { transcript?: { text: string }[] }[] };
+    const all = await json<S[]>(await app.request("/dev/sessions"));
+    expect(all.map((x) => x.captureId)).toEqual([first.captureId]);
+    expect(all[0]!.assets.map((a) => a.transcript?.[0]?.text)).toEqual(["on scene"]);
+  });
 });
 
 
