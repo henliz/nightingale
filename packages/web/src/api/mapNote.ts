@@ -19,9 +19,10 @@ function joinList(v: string[] | undefined): string {
   return v && v.length > 0 ? v.join(", ") : "";
 }
 
-/** newest first, empty device connects (no assets yet) left out */
+/** newest first, backlog from an earlier boot left out */
 export function sortedSessions(sessions: DrillSession[]): DrillSession[] {
-  return sessions.filter((s) => s.assets.length > 0).sort((a, b) => b.startedAt - a.startedAt);
+  // a just-started call has nothing in it yet but it's still the current one
+  return sessions.filter((s) => !s.backlog).sort((a, b) => b.startedAt - a.startedAt);
 }
 
 /** every speaker-labelled line across the session's chunks, in capture order */
