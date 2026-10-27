@@ -1,0 +1,93 @@
+{
+  "captureId": "session_1792467124",
+  "dir": "2026-10-27_10-44-36_session_1792467124",
+  "startedAt": 1793112276912,
+  "assets": [
+    {
+      "assetId": "1313b342-9356-49da-80b5-a64cd35080b9",
+      "captureId": "session_1792467124",
+      "kind": "audio",
+      "completedAt": 1793112276912,
+      "capturedAt": 1792884983256,
+      "status": "ready",
+      "file": "audio/104436_1313b342.wav",
+      "durationMs": 14875,
+      "levelDbfs": -22.49789431770479,
+      "transcript": [],
+      "note": {
+        "id": "b37420a8-ec37-41d5-ba0b-b0716f2e5337",
+        "captureId": "session_1792467124",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "4748be8a-9e89-430d-8adb-75e2a9d92ee4",
+      "captureId": "session_1792467124",
+      "kind": "audio",
+      "completedAt": 1793112277186,
+      "capturedAt": 1792884998364,
+      "status": "ready",
+      "file": "audio/104437_4748be8a.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.524937201398064,
+      "transcript": [],
+      "note": {
+        "id": "e46c53cc-0f8f-43c3-a270-194f9afae87c",
+        "captureId": "session_1792467124",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "774a237a-010c-4254-a69b-b17e9fb89b30",
+      "captureId": "session_1792467124",
+      "kind": "audio",
+      "completedAt": 1793112277522,
+      "capturedAt": 1792634169637,
+      "status": "ready",
+      "file": "audio/104437_774a237a.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.599788049781562,
+      "transcript": [],
+      "note": {
+        "id": "ab8932b6-1426-4bf7-a59c-72db2af0fe97",
+        "captureId": "session_1792467124",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "a13513d1-dddc-4d4e-ad3d-007f7ebf044c",
+      "captureId": "session_1792467124",
+      "kind": "audio",
+      "completedAt": 1793112277621,
+      "capturedAt": 1792634184712,
+      "status": "ready",
+      "file": "audio/104437_a13513d1.wav",
+      "durationMs": 1625,
+      "levelDbfs": -28.946975584575398,
+      "transcript": [],
+      "note": {
+        "id": "44490d68-f54a-4281-93b9-1165f1b7e258",
+        "captureId": "session_1792467124",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    }
+  ],
+  "backlog": true,
+  "speakers": []
+}

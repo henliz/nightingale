@@ -1,0 +1,30 @@
+{
+  "captureId": "session_1792634270",
+  "dir": "2026-10-27_10-44-37_session_1792634270",
+  "startedAt": 1793112277745,
+  "assets": [
+    {
+      "assetId": "faf2f5c4-ce59-4bec-b9d0-ad46a4d71f84",
+      "captureId": "session_1792634270",
+      "kind": "audio",
+      "completedAt": 1793112277745,
+      "capturedAt": 1792634270731,
+      "status": "ready",
+      "file": "audio/104437_faf2f5c4.wav",
+      "durationMs": 4500,
+      "levelDbfs": -25.146769688558066,
+      "transcript": [],
+      "note": {
+        "id": "5ab7f088-c16c-4983-8392-036d62bf1bd3",
+        "captureId": "session_1792634270",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    }
+  ],
+  "backlog": true,
+  "speakers": []
+}

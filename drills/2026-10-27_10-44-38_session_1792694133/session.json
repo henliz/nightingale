@@ -1,0 +1,636 @@
+{
+  "captureId": "session_1792694133",
+  "dir": "2026-10-27_10-44-38_session_1792694133",
+  "startedAt": 1793112278818,
+  "assets": [
+    {
+      "assetId": "7074ec8f-52b0-4c3a-8ede-c5f41d1e69ec",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112278818,
+      "capturedAt": 1792694133992,
+      "status": "ready",
+      "file": "audio/104438_7074ec8f.wav",
+      "durationMs": 14875,
+      "levelDbfs": -20.832145398586857,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "has to manually input just like a brief like sentence about the call and tails. So this is the first thing so like patient can",
+          "at": 1792694134992
+        },
+        {
+          "speaker": "Person 2",
+          "text": "Like they have to input or you mean it'll come from the device?",
+          "at": 1792694144692
+        },
+        {
+          "speaker": "Person 1",
+          "text": "That's where I'm like",
+          "at": 1792694147492
+        }
+      ],
+      "note": {
+        "id": "b50373c6-b091-4eed-8247-3a77c01c2eab",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "b1c38cbc-fb75-4e56-bf6b-3d4961a6e4be",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112279058,
+      "capturedAt": 1792694149102,
+      "status": "ready",
+      "file": "audio/104439_b1c38cbc.wav",
+      "durationMs": 15000,
+      "levelDbfs": -29.764606845948727,
+      "transcript": [
+        {
+          "speaker": "Person 4",
+          "text": "Okay.",
+          "at": 1792694149902
+        },
+        {
+          "speaker": "Person 5",
+          "text": "Pardon?",
+          "at": 1792694153602
+        },
+        {
+          "speaker": "Person 4",
+          "text": "This like this this",
+          "at": 1792694154302
+        },
+        {
+          "speaker": "Person 5",
+          "text": "Oh yeah, so this is like their last known observation on the 911 call.",
+          "at": 1792694157202
+        },
+        {
+          "speaker": "Person 4",
+          "text": "Oh.",
+          "at": 1792694163102
+        },
+        {
+          "speaker": "Person 5",
+          "text": "So um",
+          "at": 1792694163302
+        }
+      ],
+      "note": {
+        "id": "28f408c8-d0bf-4bdc-87c3-969299bf1ff7",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "The transcript provided does not contain enough information to generate a patient care report. It appears to be a discussion about a 911 call, but no patient details, chief complaint, or scene information are available."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]",
+              "segment[3]",
+              "segment[4]",
+              "segment[5]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "7b66a212-0116-4c77-bc05-b0435e93172d",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112279304,
+      "capturedAt": 1792694200463,
+      "status": "ready",
+      "file": "audio/104439_7b66a212.wav",
+      "durationMs": 15000,
+      "levelDbfs": -27.88723842778614,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "They get this information. It will be custom to whatever they received per call cuz that's what Henrietta said that Gallagher said. Um information is given based on call type. Um but someone would have to manually input that that wouldn't be based on like what the Nightingale",
+          "at": 1792694201263
+        }
+      ],
+      "note": {
+        "id": "f5b80683-569c-4a67-b91e-c67d34b1295a",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "341d6f16-e1e0-4c00-83af-ac42ab57c162",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112279569,
+      "capturedAt": 1792694215537,
+      "status": "ready",
+      "file": "audio/104439_341d6f16.wav",
+      "durationMs": 14875,
+      "levelDbfs": -29.002061080679447,
+      "transcript": [
+        {
+          "speaker": "Person 6",
+          "text": "transcribed because obviously they're not at the scene yet. Um, so the captain or whoever's the higher up still has to review the note for it to go into the care history. Um, so that's just the first step in order to go to info collect and they have to arrive on scene in the night and go has to feature",
+          "at": 1792694215737
+        }
+      ],
+      "note": {
+        "id": "3056f26b-c14f-4bbe-92d6-67bc30f773e5",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "3268221a-d621-432b-baf2-df9a16dd8284",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112279830,
+      "capturedAt": 1792694230609,
+      "status": "ready",
+      "file": "audio/104439_3268221a.wav",
+      "durationMs": 14875,
+      "levelDbfs": -29.1936418457361,
+      "transcript": [
+        {
+          "speaker": "Person 9",
+          "text": "on and start subscribing. Um, here I also added a view record. This one is also password protected, so not just everybody. Yeah, I put it on a comment just so that in the later flows we can implement that, but that",
+          "at": 1792694230709
+        }
+      ],
+      "note": {
+        "id": "98632c4a-46d9-4031-b14a-c6814b385ed7",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "8c8c443d-bd2a-40cf-a7e0-43eca462c643",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112280059,
+      "capturedAt": 1792694245685,
+      "status": "ready",
+      "file": "audio/104440_8c8c443d.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.927307692207343,
+      "transcript": [
+        {
+          "speaker": "Person 7",
+          "text": "for MVP I'm just having the button.",
+          "at": 1792694245885
+        },
+        {
+          "speaker": "Person 8",
+          "text": "Okay.",
+          "at": 1792694247985
+        },
+        {
+          "speaker": "Person 7",
+          "text": "Um but yeah that's password protected so we can decide who gets to access these records after the call has been completed. Um what else? Next is info collected um",
+          "at": 1792694248685
+        }
+      ],
+      "note": {
+        "id": "8b461332-4e6d-4159-88a3-688a8303252e",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "No patient contact or incident information was provided in the transcript."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "912dfacf-c599-47be-89f8-79808d6c7c1a",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112280345,
+      "capturedAt": 1792694260812,
+      "status": "ready",
+      "file": "audio/104440_912dfacf.wav",
+      "durationMs": 15000,
+      "levelDbfs": -27.499268097275618,
+      "transcript": [
+        {
+          "speaker": "Person 16",
+          "text": "is just where um the module looks like right like when they are on scene. There's also a module that looks like it looks like before they get on scene.",
+          "at": 1792694261212
+        },
+        {
+          "speaker": "Person 17",
+          "text": "So this is just",
+          "at": 1792694272312
+        },
+        {
+          "speaker": "Person 18",
+          "text": "So this is if they click",
+          "at": 1792694272912
+        }
+      ],
+      "note": {
+        "id": "74b35694-90b0-4f39-a699-3130a0a8769c",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "7d5dac4f-2c3a-4df1-8a43-d0cda0f42857",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112280569,
+      "capturedAt": 1792694275878,
+      "status": "ready",
+      "file": "audio/104440_7d5dac4f.wav",
+      "durationMs": 14875,
+      "levelDbfs": -29.019298342484504,
+      "transcript": [
+        {
+          "speaker": "Person 12",
+          "text": "when they're en route. So this is what they would see, and they would just have the chief complaint um that report.",
+          "at": 1792694276078
+        },
+        {
+          "speaker": "Person 13",
+          "text": "Where this is from, view recorder, right?",
+          "at": 1792694281678
+        },
+        {
+          "speaker": "Person 14",
+          "text": "View records, right?",
+          "at": 1792694283978
+        },
+        {
+          "speaker": "Person 12",
+          "text": "Yes. This is the record from the information the person inputted before they actually arrived on scene.",
+          "at": 1792694285178
+        }
+      ],
+      "note": {
+        "id": "438670a8-0d60-4699-876a-ff396d253b5a",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "This is a record from information inputted before arrival on scene."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]",
+              "segment[3]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "0cc3b6ff-66a5-4faf-aa06-eda8112c3adc",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112280800,
+      "capturedAt": 1792694290952,
+      "status": "ready",
+      "file": "audio/104440_0cc3b6ff.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.278739477270292,
+      "transcript": [
+        {
+          "speaker": "Person 15",
+          "text": "Um and then this is what it would look like filled out based on what the Nightingale transcripts And you can see here that it says Nightingale is active and you can also see the last time that the Nightingale is recorded. I put the transcript here",
+          "at": 1792694291552
+        }
+      ],
+      "note": {
+        "id": "a417d30b-10a3-40a5-b429-39579cd7909f",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "No patient contact or incident details were provided in the transcript. The transcript discusses a Nightingale system and its recording status."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": [
+          {
+            "type": "unsupported_claim",
+            "ref": "sections.incident",
+            "note": "No incident details, patient information, or medical context were provided in the transcript."
+          }
+        ]
+      }
+    },
+    {
+      "assetId": "b90f2ade-e7e3-4169-a59e-badf50686967",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112281021,
+      "capturedAt": 1792694306026,
+      "status": "ready",
+      "file": "audio/104441_b90f2ade.wav",
+      "durationMs": 15000,
+      "levelDbfs": -27.71352496715858,
+      "transcript": [
+        {
+          "speaker": "Person 19",
+          "text": "flush that out yet just because we're not sure if whether we want that. So right now it's just a it's just text not like an actual screen.",
+          "at": 1792694306826
+        },
+        {
+          "speaker": "Person 20",
+          "text": "Mhm.",
+          "at": 1792694314926
+        },
+        {
+          "speaker": "Person 19",
+          "text": "Um yeah.",
+          "at": 1792694315826
+        }
+      ],
+      "note": {
+        "id": "a93f131a-3025-4df8-b47a-420c91ffde4f",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "5242b8a9-a479-4b71-b94e-ded9103605ad",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112281247,
+      "capturedAt": 1792694321096,
+      "status": "ready",
+      "file": "audio/104441_5242b8a9.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.7655530438243,
+      "transcript": [
+        {
+          "speaker": "Person 10",
+          "text": "Yeah, so once it fills out, you can see it links to here where it was the timeline.",
+          "at": 1792694322096
+        },
+        {
+          "speaker": "Person 11",
+          "text": "See, that's where I was like confused. I wanted to ask you if I could have the variables cuz you had the different",
+          "at": 1792694330296
+        }
+      ],
+      "note": {
+        "id": "fe0be9e4-4e3b-40e1-9695-a0a6ec0171bc",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "4c47c4e2-9291-44f4-b3ec-483fdecf6e69",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112281506,
+      "capturedAt": 1792694336175,
+      "status": "ready",
+      "file": "audio/104441_4c47c4e2.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.915626314826067,
+      "transcript": [
+        {
+          "speaker": "Person 21",
+          "text": "screens here. So they're connected to different variables that you created.",
+          "at": 1792694336375
+        },
+        {
+          "speaker": "Person 22",
+          "text": "Um",
+          "at": 1792694343675
+        },
+        {
+          "speaker": "Person 21",
+          "text": "And I can't access them.",
+          "at": 1792694343775
+        },
+        {
+          "speaker": "Person 22",
+          "text": "Okay, they are all attached up here.",
+          "at": 1792694345375
+        },
+        {
+          "speaker": "Person 21",
+          "text": "Yeah. So um it's kind of hard for me to like actually see all",
+          "at": 1792694347475
+        }
+      ],
+      "note": {
+        "id": "7ea747cb-983e-495b-8720-10c28900bf6c",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "ed4f0e11-6bb7-432f-99b9-fa4f556de81f",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112281728,
+      "capturedAt": 1792694351239,
+      "status": "ready",
+      "file": "audio/104441_ed4f0e11.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.798468469128863,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "screen without having to go to prototype and then But yeah. It will go to the care timeline um which I can show you. Well you made it here we go. Um but um yeah. So",
+          "at": 1792694352039
+        }
+      ],
+      "note": {
+        "id": "ae312410-53e4-4fd0-8560-efe0177a2147",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "494bae09-21cc-4309-a346-780346d4a41a",
+      "captureId": "session_1792694133",
+      "kind": "audio",
+      "completedAt": 1793112281916,
+      "capturedAt": 1792694366324,
+      "status": "ready",
+      "file": "audio/104441_494bae09.wav",
+      "durationMs": 11250,
+      "levelDbfs": -28.740245936347605,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "filled out. This is just for the transcript is if they go into records, but now that we decided to do a one screen device, this will just be what the expanded version looks",
+          "at": 1792694367024
+        }
+      ],
+      "note": {
+        "id": "9dad48ae-7b6e-4b53-919a-9e3d8983a339",
+        "captureId": "session_1792694133",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "This is a drill transcript, no patient contact or incident details were described."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    }
+  ],
+  "backlog": true,
+  "speakers": [
+    "Person 1",
+    "Person 2",
+    "Person 3",
+    "Person 4",
+    "Person 5",
+    "Person 6",
+    "Person 7",
+    "Person 8",
+    "Person 9",
+    "Person 10",
+    "Person 11",
+    "Person 12",
+    "Person 13",
+    "Person 14",
+    "Person 15",
+    "Person 16",
+    "Person 17",
+    "Person 18",
+    "Person 19",
+    "Person 20",
+    "Person 21",
+    "Person 22"
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "088c77d9-14dc-403f-a5f4-56e45a107a11",
+    "captureId": "session_1792694133",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v9",
+    "sections": {
+      "narrative": "This is a drill. No patient contact was made and no incident was described. The transcript discusses the design of an ePCR system, including how information is input, reviewed, and displayed, and how the system integrates with a 'Nightingale' transcription service. It also covers access controls for patient records and the flow of information from dispatch to on-scene arrival.",
+      "incident": {
+        "times": {
+          "departScene": "14:39:27 (end of recording)"
+        }
+      }
+    },
+    "spans": [
+      {
+        "field": "sections.narrative",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]",
+          "segment[27]",
+          "segment[28]",
+          "segment[29]",
+          "segment[30]",
+          "segment[31]",
+          "segment[32]",
+          "segment[33]",
+          "segment[34]"
+        ]
+      }
+    ],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1793112288382,
+  "epcrChunks": 35
+}

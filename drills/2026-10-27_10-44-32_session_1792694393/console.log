@@ -1,0 +1,92 @@
+10:44:32 a.m. server info: new drill session session_1792694393, saving to drills/2026-10-27_10-44-32_session_1792694393
+2:39:53 p.m. nightingale info: device nightingale is ON, v0.0.0, session session_1792694393, talking to http://Henriettas-MacBook-Air.local:8787
+2:39:53 p.m. nightingale info: 39 file(s) (16864 KB) waiting in the queue from before, uploading those first
+2:39:53 p.m. nightingale info: [button] POWER/RECORD on gpio 3
+2:39:53 p.m. nightingale info: [button] PHOTO on gpio 17
+2:39:53 p.m. nightingale info: [hw] no buzzer configured (NIGHTINGALE_BUZZER_PIN), ready tone skipped
+2:39:53 p.m. nightingale info: [notice] reminder for the responder: say "I'm recording for the medical record"
+2:39:53 p.m. nightingale info: [record] RECORDING (max 1800s). press POWER/RECORD to stop and power off, PHOTO for a photo
+2:39:58 p.m. nightingale warn: [live] can't stream live audio (request or response body error for url (http://henriettas-macbook-air.local:8787/live/session_1792694393/audio)), retrying. the 30s chunks still upload
+2:39:58 p.m. nightingale warn: [audio] upload of session_1792465334__1792466404369.wav failed, keeping it queued, retry in 2s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792465334/assets)
+2:40:05 p.m. nightingale warn: [audio] upload of session_1792465334__1792466404369.wav failed, keeping it queued, retry in 4s: error sending request for url (http://henriettas-macbook-air.local:8787/captures/session_1792465334/assets)
+2:40:08 p.m. nightingale info: [audio] chunk #1 saved (15s), queued
+10:44:32 a.m. server info: live audio connected, transcribing as you speak
+2:40:14 p.m. nightingale info: [audio] uploaded session_1792465334__1792466404369.wav (464 KB) in 5.4s, asset d46043cc-3f88-459d-a990-0d114b555ddc
+2:40:14 p.m. nightingale info: [audio] uploaded session_1792465334__1792466419447.wav (464 KB) in 0.3s, asset 0fa33063-4a7a-4943-99e5-b70baa0d7d3b
+2:40:15 p.m. nightingale info: [audio] uploaded session_1792465334__1792466434529.wav (464 KB) in 0.3s, asset ac4319ff-fabd-4347-b6ae-3225bbecf49a
+2:40:15 p.m. nightingale info: [audio] uploaded session_1792465334__1792466449605.wav (464 KB) in 0.3s, asset e0cae9bd-beae-4bfa-b902-954857f6f003
+2:40:15 p.m. nightingale info: [audio] uploaded session_1792465334__1792466464679.wav (464 KB) in 0.3s, asset ed9cc4d2-957c-420e-8bc1-acb806e1e7bd
+2:40:16 p.m. nightingale info: [audio] uploaded session_1792465334__1792466479755.wav (464 KB) in 0.2s, asset ceed927b-9b0d-434a-8727-8c36380e4204
+2:40:16 p.m. nightingale info: [audio] uploaded session_1792465334__1792466494830.wav (464 KB) in 0.2s, asset 95f0c1ad-bf6f-42d6-9e86-d829b1403c5a
+2:40:16 p.m. nightingale info: [audio] uploaded session_1792465334__1792466509905.wav (464 KB) in 0.3s, asset 411dc887-1127-4615-8615-1a4d37c64d5d
+2:40:16 p.m. nightingale info: [audio] uploaded session_1792465334__1792466524981.wav (464 KB) in 0.3s, asset b2d6050d-4efd-44f2-a976-5a3de5751a6e
+2:40:17 p.m. nightingale info: [audio] uploaded session_1792465334__1792466540055.wav (464 KB) in 0.3s, asset 41ca8c4c-b0e6-473a-9321-e6d2e894eed0
+2:40:17 p.m. nightingale info: [audio] uploaded session_1792465334__1792466555128.wav (464 KB) in 0.2s, asset 110d2497-db65-443e-a1fb-bdfe757bec05
+2:40:17 p.m. nightingale info: [audio] uploaded session_1792465334__1792466570202.wav (464 KB) in 0.2s, asset e336196e-c002-443b-86f4-ef737f49481d
+2:40:17 p.m. nightingale info: [audio] uploaded session_1792465334__1792466585278.wav (464 KB) in 0.2s, asset d29ca105-7764-45b9-b753-7692fa278543
+2:40:18 p.m. nightingale info: [audio] uploaded session_1792465334__1792466600355.wav (464 KB) in 0.3s, asset 5f496afb-ca5c-4157-8f56-c0e29064ab8a
+2:40:18 p.m. nightingale info: [audio] uploaded session_1792465334__1792466615428.wav (464 KB) in 0.3s, asset 96416ba4-5e59-4392-b3b9-58731aef8769
+2:40:18 p.m. nightingale info: [audio] uploaded session_1792465334__1792466630506.wav (273 KB) in 0.1s, asset afe6615c-76d3-4772-a5a0-5529215db825
+2:40:18 p.m. nightingale info: [audio] uploaded session_1792467124__1792467125000.wav (464 KB) in 0.2s, asset 1313b342-9356-49da-80b5-a64cd35080b9
+10:44:37 a.m. nightingale info: [audio] uploaded session_1792467124__1792467140107.wav (468 KB) in 0.3s, asset 4748be8a-9e89-430d-8adb-75e2a9d92ee4
+10:44:37 a.m. nightingale info: [audio] uploaded session_1792467124__1792634169700.wav (468 KB) in 0.3s, asset 774a237a-010c-4254-a69b-b17e9fb89b30
+10:44:37 a.m. nightingale info: [audio] uploaded session_1792467124__1792634184774.wav (50 KB) in 0.1s, asset a13513d1-dddc-4d4e-ad3d-007f7ebf044c
+10:44:37 a.m. nightingale info: [audio] uploaded session_1792634270__1792634270791.wav (140 KB) in 0.1s, asset faf2f5c4-ce59-4bec-b9d0-ad46a4d71f84
+10:44:38 a.m. nightingale info: [audio] uploaded session_1792634290__1792634291076.wav (464 KB) in 0.2s, asset 36927ded-8d0d-4feb-8982-47980634f383
+10:44:38 a.m. nightingale info: [audio] uploaded session_1792634290__1792634306193.wav (468 KB) in 0.3s, asset 99001e03-4266-4234-8fa3-0e0549698a03
+10:44:38 a.m. nightingale info: [audio] uploaded session_1792634290__1792694096464.wav (468 KB) in 0.2s, asset d4a563f7-91a2-4e4b-8f7e-5f227eeb6f58
+10:44:38 a.m. nightingale info: [audio] uploaded session_1792634290__1792694111536.wav (210 KB) in 0.1s, asset 734f1e53-9689-4729-a083-cc1cb930a1ab
+10:44:38 a.m. nightingale info: [audio] uploaded session_1792694133__1792694134056.wav (464 KB) in 0.2s, asset 7074ec8f-52b0-4c3a-8ede-c5f41d1e69ec
+10:44:39 a.m. nightingale info: [audio] uploaded session_1792694133__1792694149165.wav (468 KB) in 0.2s, asset b1c38cbc-fb75-4e56-bf6b-3d4961a6e4be
+10:44:39 a.m. nightingale info: [audio] uploaded session_1792694133__1792694200522.wav (468 KB) in 0.2s, asset 7b66a212-0116-4c77-bc05-b0435e93172d
+10:44:39 a.m. nightingale info: [audio] uploaded session_1792694133__1792694215592.wav (464 KB) in 0.3s, asset 341d6f16-e1e0-4c00-83af-ac42ab57c162
+10:44:39 a.m. nightingale info: [audio] uploaded session_1792694133__1792694230669.wav (464 KB) in 0.3s, asset 3268221a-d621-432b-baf2-df9a16dd8284
+10:44:40 a.m. nightingale info: [audio] uploaded session_1792694133__1792694245749.wav (464 KB) in 0.2s, asset 8c8c443d-bd2a-40cf-a7e0-43eca462c643
+10:44:40 a.m. nightingale info: [audio] uploaded session_1792694133__1792694260872.wav (468 KB) in 0.3s, asset 912dfacf-c599-47be-89f8-79808d6c7c1a
+10:44:40 a.m. nightingale info: [audio] uploaded session_1792694133__1792694275941.wav (464 KB) in 0.2s, asset 7d5dac4f-2c3a-4df1-8a43-d0cda0f42857
+10:44:40 a.m. nightingale info: [audio] uploaded session_1792694133__1792694291016.wav (464 KB) in 0.2s, asset 0cc3b6ff-66a5-4faf-aa06-eda8112c3adc
+10:44:41 a.m. nightingale info: [audio] uploaded session_1792694133__1792694306089.wav (468 KB) in 0.2s, asset b90f2ade-e7e3-4169-a59e-badf50686967
+10:44:41 a.m. nightingale info: [audio] uploaded session_1792694133__1792694321158.wav (464 KB) in 0.2s, asset 5242b8a9-a479-4b71-b94e-ded9103605ad
+10:44:41 a.m. nightingale info: [heartbeat] up 0m, queue 4 file(s) / 1746 KB, 36 uploaded, 2 failed attempts, cpu 33.2C, wifi -41 dBm
+10:44:41 a.m. nightingale info: [audio] uploaded session_1792694133__1792694336231.wav (464 KB) in 0.3s, asset 4c47c4e2-9291-44f4-b3ec-483fdecf6e69
+10:44:41 a.m. nightingale info: [audio] chunk #2 saved (15s), queued
+10:44:41 a.m. nightingale info: [audio] uploaded session_1792694133__1792694351303.wav (464 KB) in 0.2s, asset ed4f0e11-6bb7-432f-99b9-fa4f556de81f
+10:44:41 a.m. nightingale info: [audio] uploaded session_1792694133__1792694366378.wav (351 KB) in 0.2s, asset 494bae09-21cc-4309-a346-780346d4a41a
+10:44:42 a.m. server info: got audio chunk c76efcd6-699c-4a84-94bf-02a6fec0ab23 (465 KB, loudest -23 dBFS), labelling speakers...
+10:44:42 a.m. nightingale info: [audio] uploaded session_1792694393__1792694393210.wav (464 KB) in 0.2s, asset c76efcd6-699c-4a84-94bf-02a6fec0ab23
+10:44:42 a.m. server info: got audio chunk c6541b11-752f-4b3e-96cc-5c96973ae09d (469 KB, loudest -28 dBFS), labelling speakers...
+10:44:42 a.m. nightingale info: [audio] uploaded session_1792694393__1792694408336.wav (468 KB) in 0.2s, asset c6541b11-752f-4b3e-96cc-5c96973ae09d
+10:44:44 a.m. server info: speakers labelled for c76efcd6-699c-4a84-94bf-02a6fec0ab23 in 2.7s (nobody), updating the ePCR...
+10:44:45 a.m. server info: speakers labelled for c6541b11-752f-4b3e-96cc-5c96973ae09d in 3.0s (nobody), updating the ePCR...
+10:44:56 a.m. nightingale info: [audio] chunk #3 saved (15s), queued
+10:44:57 a.m. server info: got audio chunk a9bbaf79-edc8-4ceb-86a5-ebd2f8b8e93f (469 KB, loudest -29 dBFS), labelling speakers...
+10:44:57 a.m. nightingale info: [audio] uploaded session_1792694393__1793112281729.wav (468 KB) in 0.3s, asset a9bbaf79-edc8-4ceb-86a5-ebd2f8b8e93f
+10:44:59 a.m. server info: speakers labelled for a9bbaf79-edc8-4ceb-86a5-ebd2f8b8e93f in 2.1s (nobody), updating the ePCR...
+10:45:03 a.m. server info: live audio connected, transcribing as you speak
+10:45:11 a.m. nightingale info: [heartbeat] up 1m, queue 0 file(s) / 0 KB, 42 uploaded, 2 failed attempts, cpu 33.2C, wifi -41 dBm
+10:45:11 a.m. nightingale info: [audio] chunk #4 saved (15s), queued
+10:45:12 a.m. server info: got audio chunk b9897d69-c21c-42cc-ad17-5bdc9320f934 (465 KB, loudest -29 dBFS), labelling speakers...
+10:45:12 a.m. nightingale info: [audio] uploaded session_1792694393__1793112296809.wav (464 KB) in 0.3s, asset b9897d69-c21c-42cc-ad17-5bdc9320f934
+10:45:14 a.m. server info: speakers labelled for b9897d69-c21c-42cc-ad17-5bdc9320f934 in 2.1s (nobody), updating the ePCR...
+10:45:26 a.m. nightingale info: [audio] chunk #5 saved (15s), queued
+10:45:27 a.m. server info: got audio chunk 7f25d64c-3904-43a6-9d84-33357cbd4a3d (469 KB, loudest -29 dBFS), labelling speakers...
+10:45:27 a.m. nightingale info: [audio] uploaded session_1792694393__1793112311884.wav (468 KB) in 0.3s, asset 7f25d64c-3904-43a6-9d84-33357cbd4a3d
+10:45:29 a.m. server info: speakers labelled for 7f25d64c-3904-43a6-9d84-33357cbd4a3d in 2.2s (nobody), updating the ePCR...
+10:45:41 a.m. nightingale info: [heartbeat] up 1m, queue 0 file(s) / 0 KB, 44 uploaded, 2 failed attempts, cpu 33.2C, wifi -41 dBm
+10:45:42 a.m. nightingale info: [audio] chunk #6 saved (15s), queued
+10:45:42 a.m. server info: got audio chunk 4a4baa08-c0fe-4093-8577-832eec75d834 (469 KB, loudest -29 dBFS), labelling speakers...
+10:45:42 a.m. nightingale info: [audio] uploaded session_1792694393__1793112326955.wav (468 KB) in 0.3s, asset 4a4baa08-c0fe-4093-8577-832eec75d834
+10:45:44 a.m. server info: speakers labelled for 4a4baa08-c0fe-4093-8577-832eec75d834 in 2.1s (nobody), updating the ePCR...
+10:45:57 a.m. nightingale info: [audio] chunk #7 saved (15s), queued
+10:45:57 a.m. server info: got audio chunk 01689702-6a94-4a1a-a0cd-93449dfefebd (465 KB, loudest -29 dBFS), labelling speakers...
+10:45:57 a.m. nightingale info: [audio] uploaded session_1792694393__1793112342028.wav (464 KB) in 0.3s, asset 01689702-6a94-4a1a-a0cd-93449dfefebd
+10:45:59 a.m. server info: speakers labelled for 01689702-6a94-4a1a-a0cd-93449dfefebd in 2.2s (nobody), updating the ePCR...
+10:46:11 a.m. nightingale info: [heartbeat] up 2m, queue 0 file(s) / 0 KB, 46 uploaded, 2 failed attempts, cpu 34.3C, wifi -54 dBm
+10:46:12 a.m. nightingale info: [audio] chunk #8 saved (15s), queued
+10:46:12 a.m. server info: got audio chunk 49f0bc9e-93f2-4392-9e4c-e66d3f36551d (465 KB, loudest -28 dBFS), labelling speakers...
+10:46:12 a.m. nightingale info: [audio] uploaded session_1792694393__1793112357110.wav (464 KB) in 0.3s, asset 49f0bc9e-93f2-4392-9e4c-e66d3f36551d
+10:46:14 a.m. server info: speakers labelled for 49f0bc9e-93f2-4392-9e4c-e66d3f36551d in 2.1s (nobody), updating the ePCR...
+10:46:27 a.m. server info: got audio chunk f96946c1-6457-4d1c-ae5b-005b150fa420 (465 KB, loudest -28 dBFS), labelling speakers...
+10:46:30 a.m. server info: new voice heard, calling it Person 1
+10:46:30 a.m. server info: speakers labelled for f96946c1-6457-4d1c-ae5b-005b150fa420 in 2.2s (Person 1), updating the ePCR...
+10:46:30 a.m. server info: ePCR updated from 1 transcript line(s) in 0.6s (1 sections filled)

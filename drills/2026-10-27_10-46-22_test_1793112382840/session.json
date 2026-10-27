@@ -1,0 +1,149 @@
+{
+  "captureId": "test_1793112382840",
+  "dir": "2026-10-27_10-46-22_test_1793112382840",
+  "startedAt": 1793112382840,
+  "assets": [
+    {
+      "assetId": "245cc752-6178-47fa-a419-99b0a9ec8cd6",
+      "captureId": "test_1793112382840",
+      "kind": "audio",
+      "completedAt": 1793112402768,
+      "capturedAt": 1793112387258,
+      "status": "ready",
+      "file": "audio/104642_245cc752.wav",
+      "durationMs": 14875,
+      "levelDbfs": -29.053180039706735,
+      "transcript": [],
+      "note": {
+        "id": "05baf01e-5078-4204-8928-974ceeb883ab",
+        "captureId": "test_1793112382840",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "6830d9ac-3585-4a1b-8845-f71089d510b2",
+      "captureId": "test_1793112382840",
+      "kind": "audio",
+      "completedAt": 1793112418074,
+      "capturedAt": 1793112402323,
+      "status": "ready",
+      "file": "audio/104658_6830d9ac.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.68447913833976,
+      "transcript": [],
+      "note": {
+        "id": "b438b4d6-9392-4107-9f29-973479f7c70c",
+        "captureId": "test_1793112382840",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "ade95932-1aec-4c4e-a64a-ce1788ec2a5b",
+      "captureId": "test_1793112382840",
+      "kind": "audio",
+      "completedAt": 1793112432870,
+      "capturedAt": 1793112417408,
+      "status": "ready",
+      "file": "audio/104712_ade95932.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.8148658943869,
+      "transcript": [],
+      "note": {
+        "id": "6b58e448-3bcb-42e5-b590-d372d48db670",
+        "captureId": "test_1793112382840",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "dcdf96de-8a46-490a-8c38-3d86a73163b1",
+      "captureId": "test_1793112382840",
+      "kind": "audio",
+      "completedAt": 1793112448193,
+      "capturedAt": 1793112432463,
+      "status": "ready",
+      "file": "audio/104728_dcdf96de.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.651291181653864,
+      "transcript": [],
+      "note": {
+        "id": "2130c48f-f824-4a4c-a93b-877f0aeda1cb",
+        "captureId": "test_1793112382840",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "a244afcf-b4e4-43ee-b271-6a76a2d09dee",
+      "captureId": "test_1793112382840",
+      "kind": "audio",
+      "completedAt": 1793112464510,
+      "capturedAt": 1793112447546,
+      "status": "ready",
+      "file": "audio/104744_a244afcf.wav",
+      "durationMs": 7250,
+      "levelDbfs": -28.886150113388158,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "B",
+          "at": 1793112450346
+        }
+      ],
+      "note": {
+        "id": "bb594716-7345-49e5-8e07-0eecdac385d7",
+        "captureId": "test_1793112382840",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    }
+  ],
+  "deviceSessionId": "session_1792694393",
+  "deviceId": "nightingale",
+  "speakers": [
+    "Person 1"
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "7c88059f-a2f9-4546-b33a-354ade39ceef",
+    "captureId": "test_1793112382840",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v9",
+    "sections": {
+      "narrative": "The provided transcript is too short to generate a narrative.",
+      "incident": {
+        "times": {
+          "departScene": "10:47:30 (end of recording)"
+        }
+      }
+    },
+    "spans": [
+      {
+        "field": "sections.narrative",
+        "transcriptSegmentIds": [
+          "segment[0]"
+        ]
+      }
+    ],
+    "flags": []
+  },
+  "epcrUpdatedAt": 1793112467184,
+  "epcrChunks": 1
+}
