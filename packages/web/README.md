@@ -5,7 +5,7 @@ the dashboard ui (ARCHITECTURE.md section 9), built from alita's figma mvp flow
 vite + react 19 + react router 7, typescript strict, css modules on top of the figma
 "clear blue" tokens in `src/styles/tokens.css`. no tailwind. the react compiler is on.
 
-prototype only: one fictional call, one fictional patient, every number is sample data.
+prototype only: fictional drills and one sample call, no real patient ever.
 
 ## run it
 
@@ -27,7 +27,10 @@ server-sent event stream refreshes whenever the api says something changed.
 
 the records list is the named cases from `drills/` plus the sample call (the original figma
 story with its made-up patient). the current call card follows the newest call, so a fresh one
-from the pi shows up there. each call keeps its own story (shared, accepted, verified…) in the
+from the pi shows up there. **new call** on the home page starts one on purpose (same as the
+dev dashboard's "new session"), and the home page shows whether the live feed is up and when
+the pi was last heard from. words being said right now show up greyed out at the bottom of
+the transcript until the saved line lands. each call keeps its own story (shared, accepted, verified…) in the
 browser until milestones 4 and 5 add those routes; see `docs/integration-plan.md`.
 
 `src/api/`: `client.ts` (fetch + zod parse against `@nightingale/schema`), `mapNote.ts`
@@ -55,7 +58,7 @@ triage's receipt lights the last step on both dashboards. `/reset` starts over.
 - `src/session/`: who is signed in (sessionStorage)
 - `src/incident/`: the shared record. `types.ts` has the stage path, `reducer.ts` only
   ever moves forward, `selectors.ts` resolves ePCR fields through the responders' reviews.
-  persisted to localStorage so it survives reloads and sign-ins.
+  persisted to sessionStorage so it survives reloads and sign-ins, but not closing the tab.
 - `src/data/`: the fictional call, patient record, ePCR fields, transcript, handoff summary
 - `src/components/`: ui primitives (button, chip, card, alert, dialog, tabs, field) and the
   app shell. the dialog is a native `<dialog>`.
