@@ -8,6 +8,8 @@ export type LogLevel = "info" | "warn" | "error";
 export interface LiveLogLine {
   id: number;
   ts: number; // unix millis
+  /** when the server got it. the pi's own ts can be off (no clock battery) */
+  receivedAt: number;
   source: string; // "server" or a device id
   level: LogLevel;
   msg: string;
@@ -50,7 +52,7 @@ export function createLiveHub({ maxLines = 2000, echo = false } = {}): LiveHub {
 
   return {
     log(source, level, msg, { ts = Date.now(), sessionId }: { ts?: number; sessionId?: string } = {}) {
-      const line: LiveLogLine = { id: nextId++, ts, source, level, msg, sessionId };
+      const line: LiveLogLine = { id: nextId++, ts, receivedAt: Date.now(), source, level, msg, sessionId };
       lines.push(line);
       if (lines.length > maxLines) lines.shift();
       if (echo) {
