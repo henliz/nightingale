@@ -32,11 +32,10 @@ export interface PartialLine {
   startedAt: number;
 }
 
-/** a line from the dev feed, only source + when the server heard it matter here */
-export interface FeedLine {
-  source: string;
-  receivedAt?: number;
-  msg: string;
+/** the pi was just heard from (a log line, an upload or its live audio), by the server's clock */
+export interface DeviceHeard {
+  id: string;
+  heardAt: number;
 }
 
 interface StreamHandlers {
@@ -45,12 +44,12 @@ interface StreamHandlers {
   onStatus?: (open: boolean) => void;
   /** every new word while someone's talking, and once more when the line is final */
   onPartial?: (line: PartialLine) => void;
-  /** pi + server log lines. the last 300 get replayed on connect */
-  onLog?: (line: FeedLine) => void;
+  /** the pi showed a sign of life. the last one gets replayed on connect */
+  onDevice?: (device: DeviceHeard) => void;
 }
 
 /** listens to the api's live feed, returns an unsubscribe */
-export function subscribeToChanges({ onChange, onStatus, onPartial, onLog }: StreamHandlers): () => void {
+export function subscribeToChanges({ onChange, onStatus, onPartial, onDevice }: StreamHandlers): () => void {
   const source = new EventSource(`${API_BASE}/dev/stream`);
   source.onopen = () => onStatus?.(true);
   source.onerror = () => onStatus?.(false);
@@ -61,7 +60,7 @@ export function subscribeToChanges({ onChange, onStatus, onPartial, onLog }: Str
     onPartial?.(line);
     if (line.final) onChange();
   });
-  source.addEventListener("log", (e) => onLog?.(JSON.parse((e as MessageEvent<string>).data) as FeedLine));
+  source.addEventListener("device", (e) => onDevice?.(JSON.parse((e as MessageEvent<string>).data) as DeviceHeard));
   return () => source.close();
 }
 

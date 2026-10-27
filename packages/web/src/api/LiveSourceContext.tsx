@@ -103,11 +103,7 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
           else next[line.id] = line;
           return next;
         }),
-      onLog: (line) => {
-        if (line.source === "server") return;
-        const heard = line.receivedAt ?? Date.now();
-        setDevice((prev) => (prev && prev.lastHeard >= heard ? prev : { id: line.source, lastHeard: heard }));
-      },
+      onDevice: ({ id, heardAt }) => setDevice((prev) => (prev && prev.lastHeard >= heardAt ? prev : { id, lastHeard: heardAt })),
     });
     return () => {
       cancelled = true;

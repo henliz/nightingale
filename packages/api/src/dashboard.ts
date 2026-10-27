@@ -545,6 +545,12 @@ es.onopen = () => { setConn(true, "api connected, live"); logEl.innerHTML = ""; 
 es.onerror = () => setConn(false, "api unreachable, retrying...");
 es.addEventListener("log", (e) => appendLog(JSON.parse(e.data)));
 es.addEventListener("update", scheduleRefresh);
+// uploads + the live audio stream count as hearing from the pi too, not just its log lines
+es.addEventListener("device", (e) => {
+  const d = JSON.parse(e.data);
+  lastDevice = { id: d.id, ts: Date.now() };
+  updateDeviceStatus();
+});
 // words as they're spoken: patch the transcript box straight away, no refetch
 es.addEventListener("transcript", (e) => {
   const t = JSON.parse(e.data);

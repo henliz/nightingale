@@ -164,6 +164,14 @@ export function createApp(
   // heartbeat is every 30s, so a pi quiet for longer than this is off (or off the wifi)
   let lastDeviceHeardAt = 0;
   const deviceOn = () => lastDeviceSessionId !== undefined && Date.now() - lastDeviceHeardAt < 45_000;
+  let lastDeviceId = "nightingale";
+  // any sign of life counts, not just log lines (those only ship with NIGHTINGALE_DEV=1 and can
+  // be stuck while uploads still work), so the dashboard's "pi is on" matches what's landing
+  const heardFromDevice = (deviceId?: string) => {
+    if (deviceId) lastDeviceId = deviceId;
+    lastDeviceHeardAt = Date.now();
+    live.device(lastDeviceId);
+  };
   // "new call" pressed before any pi was on: the next pi that boots records into this one
   // instead of starting its own
   let waitingCallId: string | undefined;
@@ -433,7 +441,7 @@ export function createApp(
     // the device's current session comes from its logs / live stream. an upload alone
     // doesn't count, it can be an old chunk from an earlier boot sitting in the queue
     lastDeviceSessionId ??= result.captureId;
-    if (result.captureId === lastDeviceSessionId) lastDeviceHeardAt = Date.now();
+    if (result.captureId === lastDeviceSessionId) heardFromDevice();
     const completedAt = Date.now();
     const sessionId = resolveSession(result.captureId, capturedAtById.get(assetId) ?? completedAt);
     const session = sessionFor(sessionId, undefined, result.captureId !== lastDeviceSessionId);
@@ -626,7 +634,7 @@ export function createApp(
     // own folder, that's what makes every new connection a new test
     if (batch.sessionId) {
       adoptWaitingCall(batch.sessionId);
-      lastDeviceHeardAt = Date.now();
+      heardFromDevice(batch.deviceId);
     }
     const target = batch.sessionId ? resolveSession(batch.sessionId) : undefined;
     if (batch.sessionId) lastDeviceSessionId = batch.sessionId;
@@ -645,7 +653,7 @@ export function createApp(
     const deviceSessionId = c.req.param("sessionId");
     adoptWaitingCall(deviceSessionId);
     lastDeviceSessionId = deviceSessionId;
-    lastDeviceHeardAt = Date.now();
+    heardFromDevice();
     // resolved per utterance, so pressing "new session" mid-stream switches over cleanly
     const sessionNow = () => resolveSession(deviceSessionId);
     const sessionId = sessionNow();
@@ -719,6 +727,9 @@ export function createApp(
       currentSessionId = waiting.captureId;
       return c.json(waiting, 201);
     }
+    // same with the pi on: the call it's recording into is still a fresh, empty new call
+    const current = currentSessionId ? sessions.get(currentSessionId) : undefined;
+    if (current?.fromNewCall && current.assets.length === 0) return c.json(current, 201);
     const piOn = deviceOn();
     const startedAt = Date.now();
     const captureId = `test_${startedAt}`;
@@ -765,9 +776,17 @@ export function createApp(
       for (const line of live.recentLogs().slice(-300)) {
         await stream.writeSSE({ event: "log", data: JSON.stringify(line) });
       }
+      const device = live.lastDevice();
+      if (device) await stream.writeSSE({ event: "device", data: JSON.stringify(device) });
       const unsubscribe = live.subscribe((event) => {
         const data = JSON.stringify(
-          event.type === "log" ? event.line : event.type === "transcript" ? event.transcript : { assetId: event.assetId },
+          event.type === "log"
+            ? event.line
+            : event.type === "transcript"
+              ? event.transcript
+              : event.type === "device"
+                ? event.device
+                : { assetId: event.assetId },
         );
         stream.writeSSE({ event: event.type, data }).catch(() => {});
       });

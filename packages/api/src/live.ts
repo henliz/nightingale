@@ -26,8 +26,15 @@ export interface LiveTranscriptEvent {
   startedAt: number;
 }
 
+/** the pi was just heard from: a log line, an upload, or its live audio stream */
+export interface LiveDeviceEvent {
+  id: string;
+  heardAt: number;
+}
+
 export type LiveEvent =
   | { type: "log"; line: LiveLogLine }
+  | { type: "device"; device: LiveDeviceEvent }
   | { type: "update"; assetId: string }
   | { type: "transcript"; transcript: LiveTranscriptEvent };
 
@@ -37,6 +44,9 @@ export interface LiveHub {
   log(source: string, level: LogLevel, msg: string, opts?: { ts?: number; sessionId?: string }): void;
   update(assetId: string): void;
   transcript(event: LiveTranscriptEvent): void;
+  device(id: string): void;
+  /** last time the pi was heard from, replayed to a dashboard that just opened */
+  lastDevice(): LiveDeviceEvent | undefined;
   recentLogs(): LiveLogLine[];
   subscribe(listener: Listener): () => void;
 }
@@ -45,6 +55,7 @@ export function createLiveHub({ maxLines = 2000, echo = false } = {}): LiveHub {
   const lines: LiveLogLine[] = [];
   const listeners = new Set<Listener>();
   let nextId = 1;
+  let lastDevice: LiveDeviceEvent | undefined;
 
   const broadcast = (event: LiveEvent) => {
     for (const listener of listeners) listener(event);
@@ -67,6 +78,13 @@ export function createLiveHub({ maxLines = 2000, echo = false } = {}): LiveHub {
     },
     transcript(event) {
       broadcast({ type: "transcript", transcript: event });
+    },
+    device(id) {
+      lastDevice = { id, heardAt: Date.now() };
+      broadcast({ type: "device", device: lastDevice });
+    },
+    lastDevice() {
+      return lastDevice;
     },
     recentLogs() {
       return [...lines];
