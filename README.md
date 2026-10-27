@@ -4,102 +4,191 @@ a shared record that crosses custody, so what a firefighter captures on scene do
 lost by the time a patient reaches the hospital. fire, then paramedics, then hospital ed,
 each one handed a clean note instead of whatever used to get lost in the shuffle.
 
-capstone prototype only right now. scripted drills, fictional patients, no real patient
-info goes through this thing. full design doc, the why behind every rule, is in
-[ARCHITECTURE.md](./ARCHITECTURE.md), this file is just the quickstart.
+capstone prototype (GBDA 402, "lost in handoff"). scripted drills, fictional patients, no
+real patient info goes through this thing, ever. there's no access control yet, so that's
+not a nice-to-have, it's the rule.
 
-## how it works, start here
+- the why behind every design rule: [ARCHITECTURE.md](./ARCHITECTURE.md)
+- the whole thing in plain english, for non-coders: [HOW-NIGHTINGALE-WORKS.txt](./HOW-NIGHTINGALE-WORKS.txt)
 
-three things happen, in order, and each one lives in a different part of this repo.
+## the 30 second version
 
-**1. capture, the device.** a responder presses a button. maybe it's the raspberry pi
-wearable (`device/`), maybe it's a phone/tablet app, maybe it's a paper form with photos,
-whichever's on hand in the moment. none of these are smart, they just record a short clip
-and send the raw bytes off in chunks, so a bad wifi connection on scene doesn't lose the
-whole clip. see [`device/README.md`](./device/README.md).
-
-**2. transcribing + writing the note, the pipeline.** the raw audio lands in a sealed
-vault nobody can casually browse, then runs through three steps: transcribe it (speech to
-text), diarize it (flag any voice that isn't the responder or the patient, like a
-bystander, so it gets reviewed before anything is shared), then condense it into a short
-structured note. nothing gets shared yet at this point, a human reviews and approves it
-first. see [`packages/pipeline/README.md`](./packages/pipeline/README.md).
-
-**3. the final destination, access + dashboard.** once a responder approves the note, it
-(never the raw audio) goes out to whoever's actually cleared to see it: fire sees its own
-captures, paramedics see the approved note, the hospital ed only sees it once the patient
-is confirmed as arriving there, nowhere else. every view, edit, and approval gets logged
-in a tamper evident audit trail. the api is `packages/api`, the dashboard is `packages/web`
-(fire + paramedic views, the ePCR split by role, the er handoff page). access control isn't
-built yet, so the dashboard only ever shows the fictional drills. see
-[`packages/api/README.md`](./packages/api/README.md),
-[`packages/web/README.md`](./packages/web/README.md) and
-[`packages/audit/README.md`](./packages/audit/README.md).
-
-there's also a plain english version of all this for non-coders in
-[HOW-NIGHTINGALE-WORKS.txt](./HOW-NIGHTINGALE-WORKS.txt).
-
-## quickstart
+a responder wears a little raspberry pi ("nightingale") with a mic, a camera and two
+buttons. it records the call and sends the audio + photos to a laptop. the laptop turns
+that into a transcript (who said what) and a draft ePCR (the patient care report medics
+fill in), live, as the call happens. then the dashboard lets fire review it, share it
+with the paramedics, and hand it off to the er.
 
 ```
+ pi on the responder  ──wifi──▶  api on hen's laptop  ──▶  dashboard in the browser
+ (records, 2 buttons)            (transcribes, writes         (the nice one, :5173)
+                                  the ePCR, saves drills/)    (the ugly dev one, :8787)
+```
+
+## there are two dashboards
+
+**the real one** (`packages/web`, http://localhost:5173). light mode, built from the
+group's figma. sign in as **alvin** (fire captain) or **rick** (paramedic), any 4 digit
+pin. the records list is every real call we've recorded plus one sample call (made-up
+patient, from the figma story). open a call to see the ePCR split by role, the
+transcript, photos, flags, the share + handoff flow. **new call** on the home page starts
+a fresh call the pi records into, and the transcript fills in word by word while you talk.
+
+**the ugly one** (`packages/api`, http://localhost:8787). dark mode, one page, no login.
+it's the dev feed: the raw ePCR, the transcript, and a console with every log line from
+the server and the pi (heartbeats, uploads, errors). use it when something's broken and
+you want to see why.
+
+both read the same data from the same api, so they always agree.
+
+## just want to look? (groupmates start here)
+
+you can see every recorded call on your own laptop, no pi, no docker, no api keys.
+
+what you're installing and why:
+
+| thing | why | how |
+| --- | --- | --- |
+| node 22+ | runs the api and the dashboard | [nodejs.org](https://nodejs.org) or `brew install node` |
+| pnpm | installs the monorepo's packages (like npm, but for a repo with lots of packages) | `corepack enable` (comes with node) |
+
+```
+git clone https://github.com/henliz/nightingale.git
+cd nightingale
 pnpm install
-pnpm run dev:services   # postgres + the s3-compatible vault (seaweedfs) via docker compose
-pnpm run typecheck
-pnpm run test
+
+# terminal 1: the api, with the saved calls from drills/
+pnpm --filter @nightingale/api dev:memory
+
+# terminal 2: the real dashboard
+pnpm --filter @nightingale/web dev
 ```
 
-## running the demo
+then open http://localhost:5173 (real one) or http://localhost:8787 (ugly one).
+
+good to know:
+- you'll see the transcripts and ePCRs, but **not the photos or audio**. those stay on
+  hen's laptop (gitignored), so photo thumbnails show up empty
+- without api keys nothing new gets transcribed, you're just reading what's saved. that's
+  the point, you can't break anything
+- anything you click through (reviewing, sharing, accepting) lives in that browser tab
+  only. close the tab and it's back to clean
+
+### watching a call live from your own laptop
+
+if you're on the **same wifi** as hen's laptop while she's running a drill, skip the api
+and point your dashboard at hers:
+
+```
+NIGHTINGALE_API_URL=http://Henriettas-MacBook-Air.local:8787 pnpm --filter @nightingale/web dev
+```
+
+open http://localhost:5173 and you'll see the call come in as it happens, same as on her
+screen. or just open http://Henriettas-MacBook-Air.local:8787 for the ugly one, no
+install needed. (uni / venue wifi sometimes blocks laptops from seeing each other, a phone
+hotspot fixes that.)
+
+## who receives the pi?
+
+**only hen's laptop.** when the pi gets set up (`./device/deploy.sh`), the address of the
+laptop running the script gets written onto the pi, and that's the only place it ever
+sends to. your laptop running the api doesn't change that, the pi doesn't know it exists.
+setting it up from another laptop would need ssh access to the pi (hen's login), so don't.
+
+so: one receiver, everyone else can watch (see above). a proper "everyone gets the call"
+setup (a hosted api, logins, who's allowed to see what) is the access control work in
+ARCHITECTURE.md section 7, not built yet. until then, anyone on the same wifi can open
+hen's ugly dashboard, which is fine because it's only ever fictional drills.
+
+## running the whole thing (hen's laptop, with the pi)
+
+on top of node + pnpm:
+
+| thing | why |
+| --- | --- |
+| docker, via [colima](https://github.com/abiosoft/colima) on a mac | runs postgres + the "sealed vault" (where raw audio and photos go, an s3 style store) |
+| `.env` at the repo root with `GEMINI_API_KEY` (or `OPENAI_API_KEY`) | real transcription, speaker labels, the ePCR, photo captions. not committed, ask hen |
+| rust + [cross](https://github.com/cross-rs/cross) | only to rebuild the pi's code, see [`device/README.md`](./device/README.md) |
 
 ```
 colima start                              # docker on the mac
-pnpm run dev:services                     # postgres + vault, give the vault ~30s
-pnpm --filter @nightingale/api dev        # http://localhost:8787, the old dark dev dashboard
-pnpm --filter @nightingale/web dev        # http://localhost:5173, the real dashboard
+pnpm run dev:services                     # postgres + vault. give the vault ~30s or the api crashes on start
+pnpm --filter @nightingale/api dev        # :8787, the api + the ugly dashboard
+pnpm --filter @nightingale/web dev        # :5173, the real dashboard
 ```
 
-the api needs `OPENAI_API_KEY` (or `GEMINI_API_KEY`) in `.env` at the repo root for
-transcribing + writing the ePCR. no docker? `pnpm --filter @nightingale/api dev:memory`
-runs it all in memory instead.
+then:
+1. turn the pi on (power/record button). recording starts on boot
+2. the real dashboard's home page should say **nightingale is on, last heard Xs ago**. if
+   it says "no device heard from yet", the pi can't reach the laptop (same wifi?)
+3. **new call**, then talk. words show up greyed out right away, speaker labels and the
+   ePCR land ~15-30s later as each 15s chunk saves
+4. power/record again to stop. the pi saves, uploads and powers off. photo button takes a
+   photo, only while recording
 
-- the records list is the 3 maryhill drills in `drills/` (cardiac arrest, shellfish
-  allergy, dirt bike femur) plus the sample call. they're committed, so
-  `git checkout drills/` puts them back if anything ever touches them
-- anything you click through or edit in the dashboard lives in that browser tab only,
-  close it and you're back to clean (`/reset` only clears the call on screen)
-- **new call** on the home page starts a fresh call: whatever the pi records from then on
-  lands there, live words show up in the transcript as they're said, the ePCR fills in
-  every chunk. the saved cases aren't touched
-- the home page also says if the live feed is up and when the pi was last heard from
-  (it sends a heartbeat every 30s)
-- pi side: `ssh henliz@nightingale.local`, deploy with `./device/deploy.sh`. the pi
-  finds the laptop at `Henriettas-MacBook-Air.local:8787`, so both have to be on the
-  same wifi
+pushing new pi code: `./device/deploy.sh` (needs colima running, first build ~5 min). only
+needed when something in `device/` changes, the api and dashboard reload on their own.
 
-device stuff lives in `device/`, separate cargo toolchain:
+## the saved calls (`drills/`)
+
+every call the api hears gets its own folder: `transcript.md`, `epcr.md` (both readable
+on github), `session.json`, plus audio + photos that stay local. what's committed:
+
+- **case 1 · cardiac arrest (bbq)**, **case 2 · shellfish allergy**, **case 3 · dirt bike
+  femur**: the oct 19 field tests at maryhill
+- the oct 27 read-along (low blood sugar at a community centre gym), shows up as
+  "confusion, headache"
+
+only commit real test calls. the pi left on in silence, old queued uploads from an earlier
+boot, empty new-call clicks: the dashboard hides those, but they still get a folder, so
+check before `git add drills`. if a case ever gets messed up, `git checkout drills/` puts
+it back.
+
+## checks
 
 ```
-cd device
-cargo build
-cargo test
+pnpm run typecheck
+pnpm --filter @nightingale/web lint
+pnpm run test
+node packages/api/scripts/grade-cases.mjs gemini-2.5-flash:none   # re-grades the ePCR on the saved calls, needs a gemini key
 ```
+
+ci runs the first three plus the device's `cargo fmt / clippy / test` on every push.
+
+## how it works, a bit deeper
+
+**1. capture, the device** (`device/`). the pi records 15s audio chunks and button photos
+into an on-disk queue, and uploads them in parts so bad wifi on scene never loses a
+clip. nothing gets deleted off the pi until the laptop confirms it has it. it also
+streams the mic live so the transcript can show words as they're said.
+
+**2. transcribing + writing the note** (`packages/pipeline`). the raw audio lands in the
+vault, gets transcribed with speaker labels (Person 1, 2, ...), then condensed into a
+structured draft ePCR. the instructions for that live in `real-adapters.ts`
+(`CONDENSE_PROMPT_VERSION`, epcr-v10 right now): never invent a side, a time, a name or a
+number, flag anything uncertain so it's outlined red for the responder to check.
+
+**3. review, share, hand off** (`packages/web` + `packages/api`). fire reviews and
+confirms the flagged fields, shares the record with the paramedics, paramedics accept and
+verify, the er gets a one-time handoff link. every view and edit goes through a tamper
+evident audit log (`packages/audit`).
 
 ## status
 
-done: scaffold, chunked/resumable ingest api + rust upload client, hash chained audit log
-on every api route, the pipeline with real providers (openai or gemini transcribe, speaker
-labels, condense into an ePCR, photo captions), the pi's two button capture daemon, the dev
-dashboard and the web dashboard. not done: access control (so no real patient data, ever),
-retention, a watchdog on the pi. see ARCHITECTURE.md section 12 for the full build order.
+done: chunked/resumable ingest + the rust upload client, the hash chained audit log, the
+real pipeline (gemini or openai), the pi's two button capture daemon, both dashboards,
+live transcription. not done: access control (so no real patient data, ever), retention,
+a watchdog on the pi. ARCHITECTURE.md section 12 has the full build order.
 
 ## layout
 
-- `packages/schema`: zod schemas + json schema export, single source of truth for the data model
-- `packages/fixtures`: two fictional drill scenarios, everything else tests against these
-- `packages/api`: the ingest api (device/app -> vault), live transcription, the dev
-  dashboard at `/`, and the `/dev/*` routes the web dashboard reads
-- `packages/pipeline`: transcribe -> diarize -> condense, real (openai/gemini) + fake adapters
-- `packages/audit`: the hash chained log, wired into every api route
-- `packages/web`: the dashboard (vite + react), fire, paramedic and er handoff views
+- `device/`: rust capture daemon for the pi (buttons, queue, uploads, live mic stream)
+- `packages/api`: the ingest api, live transcription, the ugly dashboard at `/`, the
+  `/dev/*` routes the real dashboard reads
+- `packages/web`: the real dashboard (vite + react), fire, paramedic and er handoff views
+- `packages/pipeline`: transcribe -> speaker labels -> condense into the ePCR, real + fake adapters
+- `packages/schema`: zod schemas, single source of truth for the data model
+- `packages/audit`: the hash chained log
+- `packages/fixtures`: two fictional scenarios the tests run against
 - `packages/retention`: placeholder, its README says which milestone builds it
-- `device/`: rust capture daemon for the pi, two button state machine, on-disk queue, uploads
-- `drills/`: the saved cases, one folder each (audio, photos, transcript, ePCR)
+- `drills/`: the saved calls
