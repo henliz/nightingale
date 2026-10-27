@@ -1,5 +1,5 @@
 import { useLiveSource } from "../../api/LiveSourceContext";
-import { sortedSessions } from "../../api/mapNote";
+import { sessionLines, sortedSessions } from "../../api/mapNote";
 import type { DrillSession } from "../../api/types";
 import type { RecordRow } from "../../data/incident";
 
@@ -21,13 +21,23 @@ function untitledName(s: DrillSession, at: Date): string {
   return what ? `${what.charAt(0).toUpperCase()}${what.slice(1)} · ${time}` : `Call at ${time}`;
 }
 
+// a pi left on in silence (or one stray word) isn't a call. a few words of real speech is,
+// and so is anything started with new call that the pi recorded into, even if it's quiet
+const MIN_WORDS = 5;
+function isCall(s: DrillSession): boolean {
+  if (s.title) return true;
+  if (s.fromNewCall && s.assets.length > 0) return true;
+  const words = sessionLines(s).reduce((n, l) => n + l.text.split(/\s+/).filter(Boolean).length, 0);
+  return words >= MIN_WORDS;
+}
+
 const DEMO_ROW: RecordRow = { callId: "Sample call", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
 
-/** the records list: every real call that has something in it (named cases + whatever got recorded since), plus the sample call */
+/** the records list: the named cases, every real call recorded since, plus the sample call */
 export function useRecordRows() {
   const live = useLiveSource();
   // api down or still booting = just the sample call, never the old made-up figma rows (looked real, weren't)
-  const rows = [...sortedSessions(live.sessions).filter((s) => s.title || s.assets.length > 0).map(sessionRow), DEMO_ROW];
+  const rows = [...sortedSessions(live.sessions).filter(isCall).map(sessionRow), DEMO_ROW];
   return {
     rows,
     total: rows.length,

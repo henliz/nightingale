@@ -38,5 +38,7 @@ export const DrillSession = z.object({
   speakers: z.array(z.string()).optional(),
   /** audio from an earlier boot that only uploaded now, never the current call */
   backlog: z.boolean().optional(),
+  /** started with new call, a call even if nothing was said */
+  fromNewCall: z.boolean().optional(),
 });
 export type DrillSession = z.infer<typeof DrillSession>;

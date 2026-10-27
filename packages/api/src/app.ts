@@ -727,6 +727,7 @@ export function createApp(
       dir: sessionDirName(captureId, startedAt),
       startedAt,
       assets: [],
+      fromNewCall: true,
       deviceSessionId: piOn ? lastDeviceSessionId : undefined,
     };
     sessions.set(captureId, session);
