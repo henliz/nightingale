@@ -1407,17 +1407,16 @@
   ],
   "epcrStatus": "ready",
   "epcr": {
-    "id": "e3492bc0-bf02-413b-a5ba-337fd1a49061",
+    "id": "ea8033dd-92a0-44b4-89aa-8afba8442adf",
     "captureId": "session_1793112464",
     "modelVersion": "demo-1",
-    "promptVersion": "epcr-v9",
+    "promptVersion": "epcr-v10",
     "sections": {
       "incident": {
         "location": "Birchwood Community Center, 41 Birchwood Crescent",
-        "dispatchReason": "58 year old male, confused, possible diabetic",
-        "unitsOnScene": "fire (Alan, firefighter)",
+        "dispatchReason": "confused, possible diabetic",
+        "unitsOnScene": "Engine 12, EMS 17",
         "times": {
-          "callReceived": "10:48:44",
           "onScene": "10:48:44",
           "patientContact": "10:49:15",
           "departScene": "10:53:08 (end of recording)"
@@ -1425,79 +1424,89 @@
       },
       "scene": {
         "numberOfPatients": "1",
-        "environment": "gym floor is wet by the water fountain",
-        "safety": "watch your footing",
+        "environment": "gym floor wet by water fountain",
+        "safety": "safe, watch footing due to wet floor",
         "othersOnScene": "Priya (wife)"
       },
-      "chiefComplaint": "confusion, headache",
-      "mechanismOrComplaint": "diabetic emergency",
-      "timeline": "10:48:44 911 call; 10:48:44 fire arriving; 10:49:15 patient contact; 10:51:31 oral glucose administered; 10:52:31 EMS 17 arriving; 10:52:31 transfer of care to paramedics; 10:53:04 fire clearing scene",
+      "chiefComplaint": "confusion, hypoglycemia",
+      "mechanismOrComplaint": "hypoglycemia secondary to missed meal and morning insulin administration",
+      "timeline": "10:48:44 Engine 12 on scene; 10:49:15 patient contact; 10:50:16 vitals assessed; 10:51:31 oral glucose 1 tube administered; 10:52:01 reassessment vitals; 10:52:31 transfer of care to EMS 17",
       "patient": {
         "name": "Marcus Bell",
         "age": "58",
         "sex": "male",
-        "dob": "March 3rd, 1968",
-        "capacity": "impaired",
-        "capacityNote": "confused, possible diabetic emergency, cannot recall day",
-        "decisionMaker": "implied consent (emergency), Priya (wife) on scene"
+        "dob": "1968-03-03",
+        "capacity": "capable",
+        "capacityNote": "impaired on contact (confused, GCS 14, BGL 2.4); capable after oral glucose, oriented to place and event (GCS 15, BGL 5.8)",
+        "decisionMaker": "self"
       },
       "sample": {
-        "signsSymptoms": "confused, tired, sweaty, headache (dull), GCS 14 then 15",
+        "signsSymptoms": "confusion, diaphoresis, pale and cool skin, dull headache 4/10",
         "medications": [
-          "insulin (pen, 20-30 units in morning)",
-          "medication for high blood pressure"
+          "insulin pen"
         ],
-        "pastHistory": "diabetic type one, high blood pressure",
+        "pastHistory": "Type 1 diabetes, hypertension, no known allergies",
         "lastOralIntake": "skipped lunch",
-        "events": "played pickleball all morning, got really sweaty, stopped making sense"
+        "events": "played pickleball all morning after morning insulin, skipped lunch, became diaphoretic and confused"
       },
       "opqrst": {
-        "onset": "started at the game",
+        "onset": "started during pickleball game",
         "quality": "dull",
-        "severity": "4",
-        "time": "10:51:16"
+        "severity": "4/10"
       },
       "vitals": [
         {
           "time": "10:50:16",
-          "loc": "room air",
+          "loc": "confused",
           "bp": "138/84",
-          "hr": "112 regular",
+          "hr": "112",
           "rr": "20",
-          "spo2": "90%",
+          "spo2": "90% RA",
           "gcs": "14",
           "glucose": "2.4",
+          "pain": "4/10",
           "skin": "pale, cool, sweaty"
         },
         {
           "time": "10:52:01",
+          "loc": "alert",
           "bp": "132/80",
           "hr": "96",
           "rr": "16",
           "gcs": "15",
           "glucose": "5.8",
-          "skin": "warmer, still a bit damp"
+          "skin": "warmer, damp"
         }
       ],
+      "physicalExam": "swallowing intact, commands followed, dull headache reported",
       "interventions": [
         {
           "time": "10:51:31",
-          "intervention": "oral glucose (one tube)",
-          "response": "glucose improved from 2.4 to 5.8, GCS improved from 14 to 15, patient became alert"
+          "intervention": "oral glucose 1 tube administered",
+          "response": "patient swallowed successfully, mentation improved to GCS 15, BGL increased to 5.8"
         },
         {
           "time": "10:52:31",
-          "intervention": "transfer of care to EMS 17 paramedics",
-          "response": "patient transferred to paramedics for transport"
+          "intervention": "transfer of care to EMS 17",
+          "response": "verbal handoff given, care transferred"
         }
       ],
-      "narrative": "Fire arrived on scene at 10:48:44 for a 58-year-old male, Marcus Bell, found confused, possible diabetic emergency. Patient contact was made at 10:49:15. Patient was confused, GCS 14, with a blood glucose of 2.4. One tube of oral glucose was administered at 10:51:31, after which the patient's glucose improved to 5.8 and GCS to 15. Patient was handed off to EMS 17 paramedics at 10:52:31 for transport to Grand River Hospital.",
-      "conditionObserved": "confused, then alert",
-      "interventionsPerformed": "oral glucose",
+      "transport": {
+        "destination": "Grand River",
+        "priority": "non-urgent",
+        "position": "sitting up",
+        "handoffTo": "EMS 17"
+      },
+      "narrative": "Engine 12 responded to Birchwood Community Center for a 58-year-old male with acute confusion and suspected hypoglycemia. On arrival, patient was found seated on a gym bench, pale, diaphoretic, and confused with a BGL of 2.4 mmol/L after playing pickleball and missing lunch. One tube of oral glucose was administered, resulting in resolution of confusion and improvement of BGL to 5.8 mmol/L and GCS to 15. Care was transferred to EMS 17 for non-urgent transport to Grand River.",
+      "conditionObserved": "sitting by bench in gym, pale, cool, diaphoretic, initially confused but able to swallow and follow commands",
+      "interventionsPerformed": "oral glucose 1 tube PO; transfer of care to EMS 17",
       "medsAndAllergiesMentioned": [
-        "insulin (pen, 20-30 units in morning)",
-        "medication for high blood pressure"
-      ]
+        "insulin pen"
+      ],
+      "hazards": "wet floor near water fountain",
+      "bystanderStatements": "\"He's a diabetic type one. He played pickleball all morning I don't think he ate lunch. He got really sweaty and then just stopped making sense.\" — Priya (wife)",
+      "belongings": "insulin pen in wallet",
+      "familyContact": "Priya (wife, on scene); family member texted and en route"
     },
     "spans": [
       {
@@ -1789,7 +1798,71 @@
         ]
       },
       {
+        "field": "sections.physicalExam",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
         "field": "sections.interventions",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.transport",
         "transcriptSegmentIds": [
           "segment[0]",
           "segment[1]",
@@ -1947,17 +2020,127 @@
           "segment[25]",
           "segment[26]"
         ]
+      },
+      {
+        "field": "sections.hazards",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.bystanderStatements",
+        "transcriptSegmentIds": []
+      },
+      {
+        "field": "sections.belongings",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.familyContact",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
       }
     ],
     "flags": [
       {
         "type": "unsupported_claim",
         "ref": "sections.sample",
-        "note": "insulin dose unclear (20 or 30 units)"
+        "note": "Wife noted patient takes medication for high blood pressure, but specific medication name was not stated"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.sample",
+        "note": "Morning insulin dose uncertain: wife estimated 20 or 30 units"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.familyContact",
+        "note": "Transcript states 'Duloxetine is on his way. I texted her', which appears to be a transcription error for a family member's name"
       }
     ]
   },
-  "epcrUpdatedAt": 1793112801680,
+  "epcrUpdatedAt": 1793113675386,
   "epcrChunks": 27,
   "liveTurns": [
     {

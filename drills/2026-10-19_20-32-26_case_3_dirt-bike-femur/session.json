@@ -432,14 +432,14 @@
   ],
   "epcrStatus": "ready",
   "epcr": {
-    "id": "24bf39e7-b0cf-4116-b70a-e7dfcaa8befe",
+    "id": "d35e5326-3d0a-42df-8cbc-37ba3bf74dcc",
     "captureId": "case_3_dirt-bike-femur",
     "modelVersion": "demo-1",
-    "promptVersion": "epcr-v9",
+    "promptVersion": "epcr-v10",
     "sections": {
       "incident": {
         "location": "19 Fake Street",
-        "dispatchReason": "motorcycle crash",
+        "dispatchReason": "dirt bike crash",
         "unitsOnScene": "fire",
         "times": {
           "callReceived": "20:32:42",
@@ -451,27 +451,27 @@
       "scene": {
         "numberOfPatients": "1",
         "environment": "dark",
-        "othersOnScene": "bystanders"
+        "safety": "limited visibility due to darkness",
+        "othersOnScene": "bystanders/friends"
       },
-      "chiefComplaint": "femur deformity and leg pain",
-      "mechanismOrComplaint": "dirt bike jump crash ~10-11 minutes prior with awkward landing",
-      "timeline": "20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:51 pedal pulse assessed; 20:33:57 pain assessed",
+      "chiefComplaint": "leg deformity and pain",
+      "mechanismOrComplaint": "dirt bike jump wipeout, landed awkwardly and leg twisted",
+      "timeline": "20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:51 pedal pulse and motor function assessed; 20:33:57 pain assessed",
       "patient": {
         "name": "Dave",
         "sex": "male",
         "capacity": "impaired",
-        "capacityNote": "intoxicated per bystanders, dizzy and lightheaded, ?head strike, unable to recall event timeline",
-        "decisionMaker": "implied consent (emergency)"
+        "capacityNote": "intoxicated per bystanders, possible head strike, unable to recall event, dizzy/lightheaded",
+        "decisionMaker": "implied consent (emergency), friend on scene"
       },
       "sample": {
-        "signsSymptoms": "leg pain, nausea, dizziness, lightheadedness, inability to wiggle toes, no neck pain, no back pain",
-        "events": "bailing off dirt bike during a jump ~10-11 minutes prior, leg rotated/snapped on landing"
+        "signsSymptoms": "leg pain, obvious femur deformity with lump, leg twisted, inability to wiggle toes, nausea, dizziness and lightheadedness; no neck pain, no back pain",
+        "events": "operating dirt bike, jumped and bailed, landing awkwardly approximately 10 to 11 minutes prior"
       },
       "opqrst": {
-        "onset": "sudden upon landing dirt bike jump",
-        "quality": "feels like bones snapped in half",
-        "severity": "6/10",
-        "time": "~10-11 minutes prior"
+        "onset": "sudden following dirt bike crash",
+        "quality": "feels like bone snapped in half",
+        "severity": "6/10"
       },
       "vitals": [
         {
@@ -479,19 +479,18 @@
           "pain": "6/10"
         }
       ],
-      "physicalExam": "femur: obvious deformity, palpable lump, abnormal rotation; pedal pulse present; inability to wiggle toes; possible head strike with amnesia; no other obvious injuries or external hemorrhage noted",
+      "physicalExam": "obvious deformity and lump to femur, leg twisted/abnormal rotation, unable to wiggle toes, pedal pulse present; no other deformities, injuries, or pooling blood observed",
       "interventions": [
         {
           "time": "20:33:51",
-          "intervention": "pedal pulse assessment",
-          "response": "pedal pulse present"
+          "intervention": "distal neurovascular assessment (pedal pulse check, toe motor function)",
+          "response": "pedal pulse present, unable to wiggle toes"
         }
       ],
-      "narrative": "Fire arrived on scene for a male patient who crashed a dirt bike off a jump approximately 10-11 minutes prior. Patient was found conscious with an obvious femur deformity, reporting 6/10 pain, dizziness, nausea, and possible head strike with retrograde amnesia, alongside reported alcohol intoxication. Physical assessment revealed an intact pedal pulse but inability to wiggle toes, with no reported neck or back pain.",
-      "conditionObserved": "conscious, alert, reports nausea and dizziness",
-      "interventionsPerformed": "pedal pulse assessment",
-      "hazards": "poor lighting / dark",
-      "bystanderStatements": "\"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted\", \"he's drunk\", \"He's always drunk\", \"There's a lump there\", \"Not about 10 minutes ago. Oh, 11 minutes ago.\""
+      "narrative": "Responders arrived on scene at 19 Fake Street for a reported dirt bike crash. Patient Dave was assessed presenting with an obvious femur deformity, nausea, dizziness, inability to move his toes, and an intact pedal pulse. Patient reported 6/10 pain with no neck or back pain, was unable to recall the event, and noted a possible head strike while bystanders reported alcohol intoxication.",
+      "interventionsPerformed": "distal neurovascular assessment",
+      "hazards": "darkness",
+      "bystanderStatements": "\"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted.\"; \"he's drunk. He's always drunk.\"; \"Not about 10 minutes ago. Oh, 11 minutes ago.\""
     },
     "spans": [
       {
@@ -1107,57 +1106,6 @@
         ]
       },
       {
-        "field": "sections.conditionObserved",
-        "transcriptSegmentIds": [
-          "segment[0]",
-          "segment[1]",
-          "segment[2]",
-          "segment[3]",
-          "segment[4]",
-          "segment[5]",
-          "segment[6]",
-          "segment[7]",
-          "segment[8]",
-          "segment[9]",
-          "segment[10]",
-          "segment[11]",
-          "segment[12]",
-          "segment[13]",
-          "segment[14]",
-          "segment[15]",
-          "segment[16]",
-          "segment[17]",
-          "segment[18]",
-          "segment[19]",
-          "segment[20]",
-          "segment[21]",
-          "segment[22]",
-          "segment[23]",
-          "segment[24]",
-          "segment[25]",
-          "segment[26]",
-          "segment[27]",
-          "segment[28]",
-          "segment[29]",
-          "segment[30]",
-          "segment[31]",
-          "segment[32]",
-          "segment[33]",
-          "segment[34]",
-          "segment[35]",
-          "segment[36]",
-          "segment[37]",
-          "segment[38]",
-          "segment[39]",
-          "segment[40]",
-          "segment[41]",
-          "segment[42]",
-          "segment[43]",
-          "segment[44]",
-          "segment[45]"
-        ]
-      },
-      {
         "field": "sections.interventionsPerformed",
         "transcriptSegmentIds": [
           "segment[0]",
@@ -1268,10 +1216,25 @@
       {
         "type": "unsupported_claim",
         "ref": "sections.chiefComplaint",
-        "note": "affected leg/femur side (left vs right) was not specified"
+        "note": "affected leg side (left vs right) was not specified"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.physicalExam",
+        "note": "laterality of femur deformity was not stated"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.sample",
+        "note": "head strike uncertain ('I think so' per patient)"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.sample",
+        "note": "time since incident conflicted between 10 and 11 minutes per bystander"
       }
     ]
   },
-  "epcrUpdatedAt": 1792804457166,
+  "epcrUpdatedAt": 1793113657218,
   "epcrChunks": 46
 }

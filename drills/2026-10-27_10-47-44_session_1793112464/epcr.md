@@ -2,15 +2,14 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 10:53:21 a.m. from 27 chunk(s), model demo-1, prompt epcr-v9
+updated 11:07:55 a.m. from 27 chunk(s), model demo-1, prompt epcr-v10
 
 ## Incident
 
 - **Location:** Birchwood Community Center, 41 Birchwood Crescent
-- **Dispatch reason:** 58 year old male, confused, possible diabetic
-- **Units on scene:** fire (Alan, firefighter)
+- **Dispatch reason:** confused, possible diabetic
+- **Units on scene:** Engine 12, EMS 17
 - **Times:**
-  - **Call received:** 10:48:44
   - **On scene:** 10:48:44
   - **Patient contact:** 10:49:15
   - **Depart scene:** 10:53:08 (end of recording)
@@ -18,83 +17,109 @@ updated 10:53:21 a.m. from 27 chunk(s), model demo-1, prompt epcr-v9
 ## Scene
 
 - **Number of patients:** 1
-- **Environment:** gym floor is wet by the water fountain
-- **Safety:** watch your footing
+- **Environment:** gym floor wet by water fountain
+- **Safety:** safe, watch footing due to wet floor
 - **Others on scene:** Priya (wife)
 
 ## Chief complaint
 
-confusion, headache
+confusion, hypoglycemia
 
 ## Mechanism / what happened
 
-diabetic emergency
+hypoglycemia secondary to missed meal and morning insulin administration
 
 ## Timeline
 
-10:48:44 911 call; 10:48:44 fire arriving; 10:49:15 patient contact; 10:51:31 oral glucose administered; 10:52:31 EMS 17 arriving; 10:52:31 transfer of care to paramedics; 10:53:04 fire clearing scene
+10:48:44 Engine 12 on scene; 10:49:15 patient contact; 10:50:16 vitals assessed; 10:51:31 oral glucose 1 tube administered; 10:52:01 reassessment vitals; 10:52:31 transfer of care to EMS 17
 
 ## Patient
 
 - **name:** Marcus Bell
 - **age:** 58
 - **sex:** male
-- **dob:** March 3rd, 1968
-- **capacity:** impaired
-- **Capacity reason:** confused, possible diabetic emergency, cannot recall day
-- **Decision maker:** implied consent (emergency), Priya (wife) on scene
+- **dob:** 1968-03-03
+- **capacity:** capable
+- **Capacity reason:** impaired on contact (confused, GCS 14, BGL 2.4); capable after oral glucose, oriented to place and event (GCS 15, BGL 5.8)
+- **Decision maker:** self
 
 ## SAMPLE history
 
-- **Signs / symptoms:** confused, tired, sweaty, headache (dull), GCS 14 then 15
+- **Signs / symptoms:** confusion, diaphoresis, pale and cool skin, dull headache 4/10
 - **Medications:**
-  - insulin (pen, 20-30 units in morning)
-  - medication for high blood pressure
-- **Past history:** diabetic type one, high blood pressure
+  - insulin pen
+- **Past history:** Type 1 diabetes, hypertension, no known allergies
 - **Last oral intake:** skipped lunch
-- **Events leading up:** played pickleball all morning, got really sweaty, stopped making sense
+- **Events leading up:** played pickleball all morning after morning insulin, skipped lunch, became diaphoretic and confused
 
 ## OPQRST
 
-- **onset:** started at the game
+- **onset:** started during pickleball game
 - **quality:** dull
-- **severity:** 4
-- **time:** 10:51:16
+- **severity:** 4/10
 
 ## Vitals
 
 | time | LOC | BP | HR | RR | SpO2 | GCS | temp | glucose | pain | skin |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 10:50:16 | room air | 138/84 | 112 regular | 20 | 90% | 14 |  | 2.4 |  | pale, cool, sweaty |
-| 10:52:01 |  | 132/80 | 96 | 16 |  | 15 |  | 5.8 |  | warmer, still a bit damp |
+| 10:50:16 | confused | 138/84 | 112 | 20 | 90% RA | 14 |  | 2.4 | 4/10 | pale, cool, sweaty |
+| 10:52:01 | alert | 132/80 | 96 | 16 |  | 15 |  | 5.8 |  | warmer, damp |
+
+## Physical exam
+
+swallowing intact, commands followed, dull headache reported
 
 ## Interventions
 
 | time | intervention | response |
 |---|---|---|
-| 10:51:31 | oral glucose (one tube) | glucose improved from 2.4 to 5.8, GCS improved from 14 to 15, patient became alert |
-| 10:52:31 | transfer of care to EMS 17 paramedics | patient transferred to paramedics for transport |
+| 10:51:31 | oral glucose 1 tube administered | patient swallowed successfully, mentation improved to GCS 15, BGL increased to 5.8 |
+| 10:52:31 | transfer of care to EMS 17 | verbal handoff given, care transferred |
+
+## Transport
+
+- **destination:** Grand River
+- **priority:** non-urgent
+- **position:** sitting up
+- **handoffTo:** EMS 17
 
 ## Narrative
 
-Fire arrived on scene at 10:48:44 for a 58-year-old male, Marcus Bell, found confused, possible diabetic emergency. Patient contact was made at 10:49:15. Patient was confused, GCS 14, with a blood glucose of 2.4. One tube of oral glucose was administered at 10:51:31, after which the patient's glucose improved to 5.8 and GCS to 15. Patient was handed off to EMS 17 paramedics at 10:52:31 for transport to Grand River Hospital.
+Engine 12 responded to Birchwood Community Center for a 58-year-old male with acute confusion and suspected hypoglycemia. On arrival, patient was found seated on a gym bench, pale, diaphoretic, and confused with a BGL of 2.4 mmol/L after playing pickleball and missing lunch. One tube of oral glucose was administered, resulting in resolution of confusion and improvement of BGL to 5.8 mmol/L and GCS to 15. Care was transferred to EMS 17 for non-urgent transport to Grand River.
 
 ## Condition observed
 
-confused, then alert
+sitting by bench in gym, pale, cool, diaphoretic, initially confused but able to swallow and follow commands
 
 ## Interventions (summary)
 
-oral glucose
+oral glucose 1 tube PO; transfer of care to EMS 17
 
 ## Meds / allergies mentioned
 
-- insulin (pen, 20-30 units in morning)
-- medication for high blood pressure
+- insulin pen
+
+## Hazards
+
+wet floor near water fountain
+
+## Bystander statements
+
+"He's a diabetic type one. He played pickleball all morning I don't think he ate lunch. He got really sweaty and then just stopped making sense." — Priya (wife)
+
+## Belongings
+
+insulin pen in wallet
+
+## Family contact
+
+Priya (wife, on scene); family member texted and en route
 
 ## Needs review
 
-- unsupported claim: insulin dose unclear (20 or 30 units)
+- unsupported claim: Wife noted patient takes medication for high blood pressure, but specific medication name was not stated
+- unsupported claim: Morning insulin dose uncertain: wife estimated 20 or 30 units
+- unsupported claim: Transcript states 'Duloxetine is on his way. I texted her', which appears to be a transcription error for a family member's name
 
 ## Scene photos
 
