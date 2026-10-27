@@ -368,7 +368,13 @@ type ExtractedSections = Record<string, unknown> & { uncertain?: (string | { fie
 // v9 (oct 23 2026): the shellfish case charted "denies EpiPen" under medications and put
 // EpiPen in the meds-mentioned list when he just doesn't carry one. things the patient
 // doesn't have/take go in plain words in the history, never "denies", never as a med
-export const CONDENSE_PROMPT_VERSION = "epcr-v9";
+//
+// v10 (oct 27 2026, the low blood sugar read-along): dropped "no allergies" though it was
+// said twice, kept capacity "impaired" after he came round from the glucose, put "room air"
+// in the LOC column, and only put the hospital / non-urgent / sitting up in the narrative.
+// capacity is charted as it stands at the end, pertinent negatives are a must, and
+// transport + belongings get filled from a handoff report too
+export const CONDENSE_PROMPT_VERSION = "epcr-v10";
 
 const CONDENSE_SYSTEM_PROMPT = `you fill in a draft ePCR (electronic patient care report) from a transcript of an emergency-response drill. a responder will review every field before anything is shared.
 
@@ -387,20 +393,25 @@ rules:
 - write every field the way a paramedic charts it: short clinical phrases with the body part, not fragments ("chest tightness" not "tightening", "pain 6/10" not "six")
 - bystanders count for scene facts: a name they use for the patient ("my friend <name>") is the patient's name, and what they say about the patient or scene (e.g. intoxication, what happened, who else is around) goes in the matching field (sample.events, hazards, scene) as well as bystanderStatements
 - bystanderStatements and any quotes must use the words actually said. never add a name, age or detail into a quote
+- a handoff report repeating a vital with a different number than was measured ("140 over 80" measured, "140 over 90" at handoff) is a disagreement: that vitals row holds both ("140/80; 140/90 per handoff") and it goes in "uncertain". it's not a new vitals set and never silently dropped
 - when people disagree (two different ages, two different times), the field holds each value with who said it ("32 per cousin; 57 per responder at handoff") and the conflict goes in "uncertain". never pick one
 - fill every field the transcript supports, including the obvious one-word summaries a paramedic would write: dispatchReason is the call type that was described (what dispatch said if that's quoted, otherwise e.g. "fall", "MVC", "chest pain"), chiefComplaint is the patient's main problem with the body part and side ("R wrist pain"), hazards / environment / safety come from what's described about the scene
 - other responders count: who's on scene and what they said or did goes in unitsOnScene / othersOnScene (e.g. "fire (Sam, firefighter), police"), a responder giving a report to another (a handoff) goes in the narrative, a radio report to command is an intervention/communication worth noting
 - anything a responder reports about the patient (age, meds, time trapped, injuries) counts the same as the patient saying it
 - lines are tagged with who spoke: [Person 1], [Person 2], ... are different voices, numbered in the order they were first heard (not by role). [unlabelled] means the speaker isn't known yet. work out who is the patient only from what they say (e.g. describing their own pain or history), and never put a "Person N" label in the form
 - lines marked [bystander] are not the responder or patient, that content only goes in bystanderStatements
+- vitals.loc is level of consciousness only (alert, confused, responds to voice / pain, unresponsive). "on room air" / "on 4 litres" belongs with the sats: spo2 "97% RA", "94% on 4 L O2"
 - vitals: only record a number if someone actually said it out loud (e.g. "bp 140 over 90", "sats 96"). never estimate one, and "no pulse" is hr "absent", not 0. qualitative findings (alert, pale, breathing fast) go in conditionObserved / physicalExam / vitals.loc / vitals.skin
 - "(hh:mm:ss)" at the start of a line is the clock time that part was recorded. you may use it for a vitals/intervention/incident time when the speech is about that moment ("giving aspirin now"), otherwise leave times out
+- transport: fill it whenever it's said, a handoff report counts ("they're taking him to <hospital>, non-urgent, sitting up" -> destination, priority, position), not just in the narrative
+- belongings: the patient's things that were mentioned (bag, wallet, phone, their own meds like an insulin pen) and who has them. familyContact: family who were called / are on the way, as said
 - interventions are things the responder actually did, each as its own entry, with the patient's response if it was said
-- medications and allergies: only ones the patient actually takes or has, as said. also list them in medsAndAllergiesMentioned for the short handoff view
-- something the patient doesn't have or take (no EpiPen, no blood thinners, no allergies) is a pertinent negative: write it in plain words ("doesn't carry an EpiPen", "no known allergies") in sample.pastHistory or sample.signsSymptoms where it fits. never write "denies", it reads like they refused something. never put it in medications or medsAndAllergiesMentioned
+- medications and allergies: only ones the patient actually takes or has, as said. also list them in medsAndAllergiesMentioned for the short handoff view. when the answer to "any allergies?" is no, sample.allergies stays out and sample.pastHistory must say "no known allergies"
+- something the patient doesn't have or take (no EpiPen, no blood thinners, no allergies) is a pertinent negative and must be charted every time it's said, by anyone, including in a handoff report: write it in plain words ("doesn't carry an EpiPen", "no known allergies") in sample.pastHistory or sample.signsSymptoms where it fits. never write "denies", it reads like they refused something. never put it in medications or medsAndAllergiesMentioned
 - a responder asking a yes/no question and moving on ("you don't carry an EpiPen? no? okay") is the responder's understanding, not the patient's answer. chart it the same way but don't quote the patient as saying it
 - the transcript is speech-to-text and has errors. if a word or phrase is clearly a mis-hearing (an ems term, or an everyday phrase where one word is obviously misheard), use the obvious intended words, but if you're not sure, keep it out and add a short note to "uncertain"
 - scene.numberOfPatients: the number of patients described. one person hurt or sick and nobody mentions another -> "1"
+- patient.capacity is charted as it stands at the END of the transcript. if it changes during the call (confused on contact, then oriented and answering normally after treatment), capacity is the latest state and capacityNote says how it changed and why ("impaired on contact (confused, GCS 14); capable after oral glucose, oriented to place"). only a reason that was actually fixed during the call drops out (low sugar treated): intoxication, a possible head strike or not remembering the event still count at the end. decisionMaker follows the latest state
 - patient.capacity is charted from what was said, the way a medic would, with the reasons in patient.capacityNote:
   - "incapable": unresponsive, pulseless, not answering, or clearly confused / disoriented
   - "impaired": answering but with something said that undermines it, e.g. intoxicated (even per bystanders), possible head strike, can't remember the event, dizzy / near syncope. list each reason said ("intoxicated per bystanders, ?head strike, can't recall event")
