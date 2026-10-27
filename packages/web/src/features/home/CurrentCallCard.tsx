@@ -4,6 +4,7 @@ import { Card } from "../../components/ui/Card/Card";
 import { Chip } from "../../components/ui/Chip/Chip";
 import { Icon } from "../../components/ui/Icon/Icon";
 import { useLiveSource } from "../../api/LiveSourceContext";
+import { sortedSessions } from "../../api/mapNote";
 import { PARAMEDIC_UNIT, type Role } from "../../data/users";
 import { hasReached, type IncidentState } from "../../incident/types";
 import { elapsed } from "../../lib/time";
@@ -24,8 +25,15 @@ interface CurrentCallCardProps {
 }
 
 function FireDeviceChip({ incident }: { incident: IncidentState }) {
+  const live = useLiveSource();
+  // the newest real call is the one the pi is saving into, so its chip shows the actual device
+  const isLiveCall = live.source === "api" && live.session !== null && sortedSessions(live.sessions)[0]?.captureId === live.session.captureId;
   const recording = incident.recordingStartedAt !== null;
-  const now = useNow(recording);
+  const now = useNow(isLiveCall || recording);
+  if (isLiveCall) {
+    const on = live.device !== null && now - live.device.lastHeard < 45_000;
+    return on ? <Chip tone="active">Nightingale on</Chip> : <Chip>Nightingale off</Chip>;
+  }
   if (incident.stage === "dispatched") return <Chip>NEW</Chip>;
   if (recording && incident.recordingStartedAt !== null) {
     return <Chip tone="active">Nightingale active {elapsed(incident.recordingStartedAt, now)}</Chip>;
