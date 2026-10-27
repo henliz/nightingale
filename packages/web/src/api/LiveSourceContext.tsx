@@ -90,7 +90,11 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     void load();
     const unsubscribe = subscribeToChanges({
       onChange: () => void load(),
-      onStatus: setFeedOpen,
+      onStatus: (open) => {
+        setFeedOpen(open);
+        // the feed reconnects on its own, so an api that was down (or still booting) shows its calls the moment it's back
+        if (open) void load();
+      },
       onPartial: (line) =>
         setPartials((prev) => {
           const next = { ...prev };

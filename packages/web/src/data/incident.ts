@@ -25,28 +25,6 @@ export interface RecordRow {
   demo?: boolean;
 }
 
-const RECORD_ROWS = [
-  { callId: "1020381", callNumber: "1043", sharedAt: "14:35" },
-  { callId: "1020380", callNumber: "1042", sharedAt: "14:35" },
-  { callId: "1020379", callNumber: "1041", sharedAt: "11:48" },
-  { callId: "1020378", callNumber: "1040", sharedAt: "10:04" },
-] as const;
-
-const UNITS_BY_ROLE: Record<Role, readonly string[]> = {
-  firefighter: ["FF-12", "FF-02", "FF-06", "FF-07"],
-  paramedic: ["EMS-12", "EMS-17", "EMS-21", "EMS-05"],
-};
-
-/** each service sees its own recent calls */
-export function recentRecordsFor(role: Role): RecordRow[] {
-  return RECORD_ROWS.map((row, i) => ({ ...row, unit: UNITS_BY_ROLE[role][i] ?? "" }));
-}
-
-/** @deprecated use recentRecordsFor */
-export const RECENT_RECORDS: readonly RecordRow[] = recentRecordsFor("firefighter");
-
-export const TOTAL_RECORDS = 6;
-
 export interface Observation {
   receivedAt: string;
   text: string;

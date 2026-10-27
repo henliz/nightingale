@@ -26,7 +26,7 @@ export function HomeLayout({ user, currentCall, review, records, children }: Hom
     live.source === "demo"
       ? " · Showing the sample call"
       : live.status === "error"
-        ? ` · api unreachable (${live.error})`
+        ? " · Can't reach the api, real calls show up here as soon as it's running"
         : live.status === "loading"
           ? " · connecting to the api…"
           : "";

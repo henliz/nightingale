@@ -22,7 +22,7 @@ export function FireHomePage() {
   const [recordTab, setRecordTab] = useState<RecordTab>("overview");
   const [shareOpen, setShareOpen] = useState(false);
   const [printOpen, setPrintOpen] = useState(false);
-  const records = useRecordRows("firefighter");
+  const records = useRecordRows();
   if (!user) return null;
 
   const openRecord = () => {

@@ -1,8 +1,7 @@
 import { useLiveSource } from "../../api/LiveSourceContext";
 import { sortedSessions } from "../../api/mapNote";
 import type { DrillSession } from "../../api/types";
-import { recentRecordsFor, TOTAL_RECORDS, type RecordRow } from "../../data/incident";
-import type { Role } from "../../data/users";
+import type { RecordRow } from "../../data/incident";
 
 function sessionRow(s: DrillSession): RecordRow {
   const at = new Date(s.startedAt);
@@ -18,13 +17,13 @@ function sessionRow(s: DrillSession): RecordRow {
 const DEMO_ROW: RecordRow = { callId: "Sample call", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
 
 /** the records list: the named cases from the api plus the sample call. a fresh untitled call from the pi shows as the current call instead */
-export function useRecordRows(role: Role) {
+export function useRecordRows() {
   const live = useLiveSource();
-  const ready = live.status === "ready";
-  const rows = ready ? [...sortedSessions(live.sessions).filter((s) => s.title).map(sessionRow), DEMO_ROW] : recentRecordsFor(role);
+  // api down or still booting = just the sample call, never the old made-up figma rows (looked real, weren't)
+  const rows = [...sortedSessions(live.sessions).filter((s) => s.title).map(sessionRow), DEMO_ROW];
   return {
     rows,
-    total: ready ? rows.length : TOTAL_RECORDS,
+    total: rows.length,
     /** points the record modal + review pages at this row's call */
     select: (row: RecordRow) => {
       if (row.demo) live.setSource("demo");

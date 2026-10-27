@@ -24,7 +24,7 @@ export function ParamedicHomePage() {
   const [recordOpen, setRecordOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [printOpen, setPrintOpen] = useState(false);
-  const records = useRecordRows("paramedic");
+  const records = useRecordRows();
   const form = useEpcrForm("paramedic");
   if (!user) return null;
 
