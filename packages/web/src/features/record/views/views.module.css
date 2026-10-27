@@ -1,0 +1,345 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: var(--space-24);
+  background: var(--color-white);
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 44px;
+}
+
+.heading {
+  font: var(--text-heading);
+  white-space: nowrap;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.lede {
+  font: var(--text-body);
+  color: var(--color-muted);
+}
+
+.hint {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 503fr 465fr;
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.columnTight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  min-width: 0;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  background: var(--color-canvas);
+  border-radius: var(--radius-8);
+}
+
+.noteSource {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.noteText {
+  font: var(--text-body);
+}
+
+.readings {
+  display: flex;
+  flex-direction: column;
+}
+
+.reading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  height: 36px;
+}
+
+.readingLabel {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.readingValue {
+  font: var(--text-label);
+  text-align: right;
+}
+
+.divider {
+  height: 1px;
+  background: var(--color-line);
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+}
+
+.event {
+  display: flex;
+  gap: var(--space-16);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.eventTime {
+  width: 48px;
+  flex-shrink: 0;
+  font: var(--text-label);
+  color: var(--color-blue);
+}
+
+.eventBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.eventTitle {
+  font: var(--text-label);
+}
+
+.eventDetail {
+  font: var(--text-body);
+  color: var(--color-muted);
+}
+
+.eventSource {
+  font: var(--text-small);
+  color: #8490a1;
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.file {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding: var(--space-16);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-8);
+  text-align: left;
+  width: 100%;
+}
+
+.file {
+  align-items: center;
+}
+
+.fileInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.fileName {
+  font: var(--text-label);
+}
+
+.fileMeta {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.accordion {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-8);
+  overflow: hidden;
+}
+
+.accordionHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  width: 100%;
+  height: 56px;
+  padding: var(--space-16);
+  background: var(--color-white);
+  font: var(--text-label);
+  text-align: left;
+}
+
+.accordionHead:hover {
+  background: var(--color-canvas);
+}
+
+.accordionHeadLabel {
+  flex: 1;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.accordionBody {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16);
+  padding: var(--space-16);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.formRow {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputLabel {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.inputSurface {
+  height: 48px;
+  padding: var(--space-12);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-6);
+  background: var(--color-white);
+  font: 400 16px/24px var(--font-sans);
+}
+
+.inputSurface:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.textarea {
+  height: 112px;
+  resize: vertical;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding: 20px;
+  background: var(--color-canvas);
+}
+
+.recordNumber {
+  font: var(--text-label);
+  color: var(--color-blue);
+}
+
+.transcriptTurn {
+  display: flex;
+  gap: var(--space-16);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* not saved yet, speaker labels land ~15-30s later */
+.transcriptLive {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.speaker {
+  width: 96px;
+  flex-shrink: 0;
+  font: var(--text-label);
+}
+
+.speakerOther {
+  color: #a0640a;
+}
+
+.noteRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: 0 var(--space-16) var(--space-16);
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  background: var(--color-blue-soft);
+  border-radius: var(--radius-8);
+}
+
+.summaryLabel {
+  font: var(--text-label);
+  color: var(--color-blue);
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-6);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.thumbButton {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  flex-shrink: 0;
+}
+
+.fileLink {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-blue);
+  text-align: left;
+  cursor: pointer;
+}
+
+.photoStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}

@@ -1,0 +1,111 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: var(--space-24);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.identity {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.title {
+  font: var(--text-heading);
+}
+
+.fieldName {
+  font: var(--text-body);
+  color: var(--color-muted);
+}
+
+.speech {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  background: var(--color-blue-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-8);
+}
+
+.speechTitle {
+  font: var(--text-label);
+  color: var(--color-blue);
+}
+
+.speechLine {
+  font: var(--text-body);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputLabel {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.textarea {
+  height: 112px;
+  padding: var(--space-12);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-6);
+  background: var(--color-white);
+  font: var(--text-reading);
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.status {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.footerButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-12);
+}
+
+.flagBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  background: var(--color-flag-soft);
+  border: 1px solid var(--color-flag);
+  border-radius: var(--radius-6);
+}
+
+.flagTitle {
+  font: var(--text-label);
+  color: var(--color-flag);
+}

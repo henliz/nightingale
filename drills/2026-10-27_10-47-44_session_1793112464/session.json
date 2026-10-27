@@ -1,0 +1,2283 @@
+{
+  "captureId": "session_1793112464",
+  "dir": "2026-10-27_10-47-44_session_1793112464",
+  "deviceId": "nightingale",
+  "startedAt": 1793112464359,
+  "assets": [
+    {
+      "assetId": "5d3d75ef-38a5-463d-8a46-677f8cfd35bb",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112479798,
+      "capturedAt": 1793112464365,
+      "status": "ready",
+      "file": "audio/104759_5d3d75ef.wav",
+      "durationMs": 15000,
+      "levelDbfs": -25.216815331032194,
+      "transcript": [
+        {
+          "speaker": "Person 1",
+          "text": "Hm.",
+          "at": 1793112478865
+        }
+      ],
+      "note": {
+        "id": "ba4af51a-6a5e-4b30-8181-a3f6f17c9a69",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "8bb836d8-ed37-4070-a443-f7b2a59f296f",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112495089,
+      "capturedAt": 1793112479437,
+      "status": "ready",
+      "file": "audio/104815_8bb836d8.wav",
+      "durationMs": 14875,
+      "levelDbfs": -26.696319858765914,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Okay. I've just updated the code on the device. I have our dashboard with a call waiting for first details. And I'm going to be",
+          "at": 1793112481537
+        }
+      ],
+      "note": {
+        "id": "91f09e67-c328-4fa9-af53-68e37cf499da",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "The drill begins with a responder updating a device and preparing for a call. No patient or incident details are available yet."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "1577eb5d-a6b6-44a8-bf2a-c7b5fcf9b1c4",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112509891,
+      "capturedAt": 1793112494509,
+      "status": "ready",
+      "file": "audio/104829_1577eb5d.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.7556246668769,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "in the script in different voices. Hopefully in different voices means it will pick everything up. I don't know if it will do that or if it is too um smart for me. So",
+          "at": 1793112494609
+        }
+      ],
+      "note": {
+        "id": "be4015aa-e47b-43a9-a220-5ef5c191faa0",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "6b7fcf16-36fb-40f0-a660-1204a7f739fe",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112525342,
+      "capturedAt": 1793112509578,
+      "status": "ready",
+      "file": "audio/104845_6b7fcf16.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.417857631149296,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "You can see it's already talking and updating as I go. So let us begin and I will read this script and check back periodically here. Uh and",
+          "at": 1793112509578
+        }
+      ],
+      "note": {
+        "id": "9451a9b9-c3da-429d-bf26-58dff8dcdba6",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "narrative": "The drill has begun. The responder will read a script and check back periodically."
+        },
+        "spans": [
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "e874bf31-9067-44ca-ae78-4256a70864c9",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112540188,
+      "capturedAt": 1793112524662,
+      "status": "ready",
+      "file": "audio/104900_e874bf31.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.42958997590742,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "12 on scene at the Birchwood Community Center, 41 Birchwood Crescent. Uh dispatch had a 58 year old male, confused, possible diabetic. Call came in at 2:10. One patient sitting by bench found at the gym",
+          "at": 1793112524762
+        }
+      ],
+      "note": {
+        "id": "2802edc6-6c58-4e62-9254-5ffb3a14d74b",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "incident": {
+            "location": "41 Birchwood Crescent, Birchwood Community Center",
+            "dispatchReason": "confused, possible diabetic",
+            "times": {
+              "callReceived": "02:10:00",
+              "onScene": "00:12:00"
+            }
+          },
+          "scene": {
+            "numberOfPatients": "1"
+          },
+          "chiefComplaint": "confusion",
+          "mechanismOrComplaint": "confused, possible diabetic",
+          "timeline": "02:10:00 911 call; 00:12:00 on scene",
+          "patient": {
+            "age": "58",
+            "sex": "male",
+            "capacity": "impaired",
+            "capacityNote": "confused"
+          },
+          "narrative": "Dispatch reported a 58 year old male, confused, possible diabetic. Crew arrived on scene at the Birchwood Community Center. Patient was found sitting by a bench in the gym."
+        },
+        "spans": [
+          {
+            "field": "sections.incident",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.scene",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.mechanismOrComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.timeline",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "56489a17-8e15-41ec-8b5f-7ea67f2ff965",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112556027,
+      "capturedAt": 1793112539738,
+      "status": "ready",
+      "file": "audio/104916_56489a17.wav",
+      "durationMs": 15875,
+      "levelDbfs": -28.21759155425502,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "floor is wet by the water fountain. Watch your footing. Scene is safe. And then I'm going to try and take a picture hopefully",
+          "at": 1793112540638
+        }
+      ],
+      "note": {
+        "id": "3b9acfe0-d934-466d-a5ca-7b4d6783eee1",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "scene": {
+            "environment": "floor wet by water fountain",
+            "safety": "scene is safe"
+          }
+        },
+        "spans": [
+          {
+            "field": "sections.scene",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "f505f570-f3ef-42a5-9fc2-f238ff8e309b",
+      "captureId": "session_1793112464",
+      "kind": "photo",
+      "completedAt": 1793112556147,
+      "capturedAt": 1793112551254,
+      "status": "ready",
+      "file": "photos/104916_f505f570.jpg",
+      "caption": "A young woman is visible lying on a light-colored surface, holding a phone, and looking directly at the camera."
+    },
+    {
+      "assetId": "dc1f7a12-4bc0-4ad6-b251-19f6ee39736d",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112571329,
+      "capturedAt": 1793112555753,
+      "status": "ready",
+      "file": "audio/104931_dc1f7a12.wav",
+      "durationMs": 15000,
+      "levelDbfs": -28.22749974719021,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Okay, that may be a picture of my neck, but that's fine. We can see so far everything is coming in. Hi sir. I'm Alan with the fire department. Can you tell me your name?",
+          "at": 1793112555953
+        }
+      ],
+      "note": {
+        "id": "996d994a-7d31-4e18-8a87-d525074d287a",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "incident": {
+            "times": {
+              "patientContact": "00:00:06"
+            }
+          },
+          "chiefComplaint": "neck pain",
+          "timeline": "00:00:06 patient contact",
+          "patient": {
+            "capacity": "unknown"
+          },
+          "narrative": "Fire department personnel made contact with the patient. The patient was asked for their name."
+        },
+        "spans": [
+          {
+            "field": "sections.incident",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.timeline",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "a6c80944-fc31-40f7-92db-5a4743af88a6",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112586686,
+      "capturedAt": 1793112570829,
+      "status": "ready",
+      "file": "audio/104946_a6c80944.wav",
+      "durationMs": 14875,
+      "levelDbfs": -27.167886589646407,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "uh Marcus. I'm I'm fine. Just tired. Marcus, do you know where you are right now? What day it is? The gym?",
+          "at": 1793112571529
+        }
+      ],
+      "note": {
+        "id": "48bc142a-aa96-45ee-a97e-95e8e5abc210",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "chiefComplaint": "tired",
+          "patient": {
+            "name": "Marcus",
+            "capacity": "impaired",
+            "capacityNote": "disoriented to place (gym)",
+            "decisionMaker": "implied consent (emergency)"
+          },
+          "sample": {
+            "signsSymptoms": "tired"
+          },
+          "narrative": "Patient Marcus is tired and disoriented to place, stating he is at 'the gym'."
+        },
+        "spans": [
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "826a753a-68f2-4214-84bc-ca5966309c53",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112601469,
+      "capturedAt": 1793112585897,
+      "status": "ready",
+      "file": "audio/105001_826a753a.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.791461140713523,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "I don't know. Tuesday? I'm his wife, Priya. He's a diabetic type one. He played pickleball all morning",
+          "at": 1793112586897
+        }
+      ],
+      "note": {
+        "id": "fcbd3b23-5a48-46f4-89d3-803adacecb73",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "patient": {
+            "name": "Priya's husband",
+            "sex": "male",
+            "capacity": "unknown"
+          },
+          "sample": {
+            "pastHistory": "diabetic type one",
+            "events": "played pickleball all morning"
+          },
+          "bystanderStatements": "wife Priya states patient is a diabetic type one and played pickleball all morning"
+        },
+        "spans": [
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.bystanderStatements",
+            "transcriptSegmentIds": []
+          }
+        ],
+        "flags": [
+          {
+            "type": "unsupported_claim",
+            "ref": "sections.patient",
+            "note": "patient's name not stated, only wife's name Priya"
+          }
+        ]
+      }
+    },
+    {
+      "assetId": "d444ae27-4d7b-4230-9651-5853e183cb56",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112616789,
+      "capturedAt": 1793112600993,
+      "status": "ready",
+      "file": "audio/105016_d444ae27.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.59195555704579,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "I don't think he ate lunch. He got really sweaty and then just stopped making sense.",
+          "at": 1793112601093
+        },
+        {
+          "speaker": "Person 2",
+          "text": "Okay. How old is he, Priya?",
+          "at": 1793112607093
+        },
+        {
+          "speaker": "Person 3",
+          "text": "He's 58. Birthday's March 3rd, 1968.",
+          "at": 1793112610093
+        }
+      ],
+      "note": {
+        "id": "02388f0f-3fd5-4a3c-97d9-0db392b1afe5",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "patient": {
+            "age": "58",
+            "dob": "March 3rd, 1968"
+          },
+          "sample": {
+            "events": "got really sweaty and then just stopped making sense; didn't eat lunch"
+          },
+          "bystanderStatements": "He's 58. Birthday's March 3rd, 1968.; I don't think he ate lunch. He got really sweaty and then just stopped making sense."
+        },
+        "spans": [
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          },
+          {
+            "field": "sections.bystanderStatements",
+            "transcriptSegmentIds": []
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "e7173543-5c71-4b62-8fb4-0200ff458b25",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112631577,
+      "capturedAt": 1793112616051,
+      "status": "ready",
+      "file": "audio/105031_e7173543.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.668327203894805,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Okay, vitals first set at 216, heart rate 112 regular. Resps 20, BP 138 over 84. Sats 90% on room air, skin's pale, cool",
+          "at": 1793112616551
+        }
+      ],
+      "note": {
+        "id": "bed6bbbe-1fc0-43c9-be16-d5feb0ff4784",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "timeline": "00:02:16 vitals taken",
+          "vitals": [
+            {
+              "time": "00:02:16",
+              "bp": "138/84",
+              "hr": "112 regular",
+              "rr": "20",
+              "spo2": "90% on room air",
+              "skin": "pale, cool"
+            }
+          ],
+          "narrative": "At 00:02:16, the first set of vitals were taken: HR 112 regular, RR 20, BP 138/84, SpO2 90% on room air, skin pale and cool."
+        },
+        "spans": [
+          {
+            "field": "sections.timeline",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.vitals",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "3888ae08-40fd-44e9-ac88-948beab585f6",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112646897,
+      "capturedAt": 1793112631133,
+      "status": "ready",
+      "file": "audio/105046_3888ae08.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.331436153018302,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "And sweaty. GCS 14. He's confused. Let's get a shimmer on him. Uh blood glucose is 2.4. Priya, does he take insulin? When was his last dose?",
+          "at": 1793112631233
+        }
+      ],
+      "note": {
+        "id": "2863c6b8-6028-4ace-b809-d1af54b52dfb",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "chiefComplaint": "confused, sweaty",
+          "patient": {
+            "capacity": "impaired",
+            "capacityNote": "confused"
+          },
+          "sample": {
+            "medications": [
+              "insulin"
+            ]
+          },
+          "vitals": [
+            {
+              "gcs": "14",
+              "glucose": "2.4",
+              "skin": "sweaty"
+            }
+          ],
+          "narrative": "Patient found confused and sweaty with a GCS of 14. Blood glucose was 2.4. Responder asked about insulin use and last dose.",
+          "conditionObserved": "confused, sweaty",
+          "medsAndAllergiesMentioned": [
+            "insulin"
+          ]
+        },
+        "spans": [
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.vitals",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "b326f8e8-68f6-4653-8f68-4a6fb4c1b12d",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112661701,
+      "capturedAt": 1793112646198,
+      "status": "ready",
+      "file": "audio/105101_b326f8e8.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.59959343035444,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "Uh the the pen. He does it in the morning. I think he took 20 units, maybe 30. I'm honestly not quite sure.",
+          "at": 1793112646198
+        },
+        {
+          "speaker": "Person 4",
+          "text": "Any allergies, other medical problems?",
+          "at": 1793112655898
+        },
+        {
+          "speaker": "Person 3",
+          "text": "Uh no, no allergies.",
+          "at": 1793112659398
+        }
+      ],
+      "note": {
+        "id": "34e661bd-827f-4bab-bd15-5f7c91e51db1",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "patient": {
+            "capacity": "capable",
+            "decisionMaker": "self"
+          },
+          "sample": {
+            "allergies": [
+              "no known allergies"
+            ],
+            "medications": [
+              "insulin pen 20-30 units in morning"
+            ]
+          },
+          "medsAndAllergiesMentioned": [
+            "insulin pen 20-30 units in morning",
+            "no known allergies"
+          ]
+        },
+        "spans": [
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          },
+          {
+            "field": "sections.medsAndAllergiesMentioned",
+            "transcriptSegmentIds": [
+              "segment[0]",
+              "segment[1]",
+              "segment[2]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "86e95bee-d04d-4381-9269-2dd187baa06c",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112677002,
+      "capturedAt": 1793112661282,
+      "status": "ready",
+      "file": "audio/105117_86e95bee.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.728739038770733,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "He's got high blood pressure, uh takes for it. That's it. Marcus, are you having any pain anywhere? Had chest uh headache kind of dull?",
+          "at": 1793112661782
+        }
+      ],
+      "note": {
+        "id": "a8ff6032-1f1e-46e0-8d9c-e85760d4539e",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "chiefComplaint": "headache, dull",
+          "patient": {
+            "capacity": "capable",
+            "decisionMaker": "self"
+          },
+          "sample": {
+            "medications": [
+              "medication for high blood pressure"
+            ],
+            "pastHistory": "high blood pressure"
+          },
+          "opqrst": {
+            "quality": "dull",
+            "time": "now"
+          },
+          "medsAndAllergiesMentioned": [
+            "medication for high blood pressure"
+          ]
+        },
+        "spans": [
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.opqrst",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.medsAndAllergiesMentioned",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "d6fadcee-ec9c-4d22-a91d-c1790d3ced93",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112691829,
+      "capturedAt": 1793112676351,
+      "status": "ready",
+      "file": "audio/105131_d6fadcee.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.437787412431923,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Started at the game. Like Well, I lost his accent, whatever. Uh out of 10, how bad? Like a full. He's swallowing okay and following commands, so we're giving oral glucose. When tube",
+          "at": 1793112676451
+        }
+      ],
+      "note": {
+        "id": "7f13a95d-c86c-4a37-9e60-b130fe3f36e3",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "chiefComplaint": "altered mental status",
+          "patient": {
+            "capacity": "impaired",
+            "capacityNote": "altered mental status, able to swallow and follow commands",
+            "decisionMaker": "implied consent (emergency)"
+          },
+          "sample": {
+            "events": "started at the game"
+          },
+          "interventions": [
+            {
+              "intervention": "oral glucose"
+            }
+          ],
+          "narrative": "Patient presented with altered mental status, which started at a game. Patient was able to swallow and follow commands. Oral glucose was administered.",
+          "conditionObserved": "swallowing okay and following commands",
+          "interventionsPerformed": "oral glucose"
+        },
+        "spans": [
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.interventions",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.interventionsPerformed",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "c4703e01-198f-43d7-b525-9f3c070e5e9a",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112707170,
+      "capturedAt": 1793112691430,
+      "status": "ready",
+      "file": "audio/105147_c4703e01.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.314416119722587,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "Marcus Gelat 219. Marcus, I need you to swallow this for me. Ugh. Okay. Now I'll take a selfie with this thing.",
+          "at": 1793112691530
+        }
+      ],
+      "note": {
+        "id": "1549c264-d533-476c-ad3f-59bfc2d66dff",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "patient": {
+            "name": "Marcus Gelat"
+          }
+        },
+        "spans": [
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "a2013baa-cbe6-4855-95bb-c8e50c06e6e5",
+      "captureId": "session_1793112464",
+      "kind": "photo",
+      "completedAt": 1793112716514,
+      "capturedAt": 1793112712358,
+      "status": "ready",
+      "file": "photos/105156_a2013baa.jpg",
+      "caption": "A young woman is pictured smiling and holding a phone in an indoor setting, with no visible signs of injury or distress."
+    },
+    {
+      "assetId": "f3d84820-c9e9-487e-807f-44fc2512c145",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112721962,
+      "capturedAt": 1793112706496,
+      "status": "ready",
+      "file": "audio/105201_f3d84820.wav",
+      "durationMs": 15000,
+      "levelDbfs": -28.856128298728034,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "And Okay, that should hopefully be long enough. If not, we will",
+          "at": 1793112709496
+        }
+      ],
+      "note": {
+        "id": "e02a1d26-b90a-4f4c-af11-aa14f60ab30e",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {},
+        "spans": [],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "7ff005ae-71d4-45d6-ae3e-171d905a8d97",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112737266,
+      "capturedAt": 1793112721582,
+      "status": "ready",
+      "file": "audio/105217_7ff005ae.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.336054702047946,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "Tweak that. Uh second set at 2:27, heart rate 96, resps 16, BP 132 over 80. Skin's warmer, still a bit damp. Glucose",
+          "at": 1793112721982
+        }
+      ],
+      "note": {
+        "id": "f34d6589-3cf8-4e51-aa58-2cd5efe616fa",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "vitals": [
+            {
+              "time": "02:27:00",
+              "bp": "132/80",
+              "hr": "96",
+              "rr": "16",
+              "skin": "warm, damp"
+            }
+          ]
+        },
+        "spans": [
+          {
+            "field": "sections.vitals",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "5c513d69-ca1e-478c-b72d-e566b029c073",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112752048,
+      "capturedAt": 1793112736665,
+      "status": "ready",
+      "file": "audio/105232_5c513d69.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.38909000286581,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "95.8 GCS 15. Marcus, where are you right now? At Birchwood, the community center. Oh, man, I skipped lunch, didn't I? Sorry, Priya. His",
+          "at": 1793112736765
+        }
+      ],
+      "note": {
+        "id": "760181ed-01cd-45b4-83d9-61f705143b25",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "chiefComplaint": "disoriented",
+          "patient": {
+            "name": "Marcus",
+            "capacity": "impaired",
+            "capacityNote": "disoriented, skipped lunch",
+            "decisionMaker": "implied consent (emergency)"
+          },
+          "vitals": [
+            {
+              "time": "00:00:00",
+              "gcs": "15"
+            }
+          ],
+          "narrative": "Patient Marcus found disoriented, stating he skipped lunch. GCS 15 was noted.",
+          "conditionObserved": "disoriented"
+        },
+        "spans": [
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.vitals",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "e740a9b1-5dcb-4264-b74f-b543fbe21ea3",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112767320,
+      "capturedAt": 1793112751738,
+      "status": "ready",
+      "file": "audio/105247_e740a9b1.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.496845587211098,
+      "transcript": [
+        {
+          "speaker": "Person 2",
+          "text": "He's got his insulin pen in his wallet. I'll bring it. Uh on Duloxetine is on his way. I texted her. EMS 17 is here. Paramedics, this is Marcus Bell, 58 type 1 diabetic found confused.",
+          "at": 1793112751838
+        }
+      ],
+      "note": {
+        "id": "c64d72ba-5677-4bf0-a9b2-6d5c95058402",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "incident": {
+            "unitsOnScene": "EMS 17",
+            "times": {
+              "onScene": "00:00:00"
+            }
+          },
+          "chiefComplaint": "confused",
+          "mechanismOrComplaint": "confused",
+          "timeline": "00:00:00 EMS 17 on scene; 00:00:00 handoff to paramedics",
+          "patient": {
+            "name": "Marcus Bell",
+            "age": "58",
+            "capacity": "impaired",
+            "capacityNote": "found confused",
+            "decisionMaker": "implied consent (emergency)"
+          },
+          "sample": {
+            "medications": [
+              "insulin",
+              "Duloxetine"
+            ],
+            "pastHistory": "type 1 diabetic"
+          },
+          "interventions": [
+            {
+              "time": "00:00:00",
+              "intervention": "transfer of care to paramedics",
+              "response": "patient found confused"
+            }
+          ],
+          "transport": {
+            "handoffTo": "paramedics"
+          },
+          "narrative": "EMS 17 arrived on scene and reported a 58-year-old male, Marcus Bell, a type 1 diabetic, found confused. The patient takes insulin and Duloxetine. Care was transferred to paramedics.",
+          "conditionObserved": "confused",
+          "interventionsPerformed": "transfer of care to paramedics",
+          "medsAndAllergiesMentioned": [
+            "insulin",
+            "Duloxetine"
+          ]
+        },
+        "spans": [
+          {
+            "field": "sections.incident",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.mechanismOrComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.timeline",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.interventions",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.transport",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.interventionsPerformed",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.medsAndAllergiesMentioned",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "assetId": "05c25113-f232-4b3a-8756-f4a70e11d46d",
+      "captureId": "session_1793112464",
+      "kind": "audio",
+      "completedAt": 1793112782134,
+      "capturedAt": 1793112766819,
+      "status": "ready",
+      "file": "audio/105302_05c25113.wav",
+      "durationMs": 14875,
+      "levelDbfs": -28.65999968954677,
+      "transcript": [
+        {
+          "speaker": "Person 3",
+          "text": "was 2.4, one tube of oral glucose at 219, now 5.8 and alert. Insulin dose this morning is unclear, 20 or 30 minutes, no allergies. They're taking him up to Grand River. Non-urgent, sitting up and",
+          "at": 1793112766919
+        }
+      ],
+      "note": {
+        "id": "726ebbca-38e6-473e-bccf-b965dac0b5c1",
+        "captureId": "session_1793112464",
+        "modelVersion": "demo-1",
+        "promptVersion": "v1",
+        "sections": {
+          "chiefComplaint": "hypoglycemia",
+          "mechanismOrComplaint": "hypoglycemia",
+          "timeline": "219 oral glucose given",
+          "patient": {
+            "capacity": "capable",
+            "decisionMaker": "self"
+          },
+          "sample": {
+            "allergies": [
+              "no known allergies"
+            ],
+            "pastHistory": "insulin dependent diabetic"
+          },
+          "vitals": [
+            {
+              "time": "02:19:00",
+              "glucose": "2.4"
+            },
+            {
+              "glucose": "5.8"
+            }
+          ],
+          "interventions": [
+            {
+              "time": "02:19:00",
+              "intervention": "oral glucose, 1 tube",
+              "response": "glucose increased to 5.8, patient alert"
+            }
+          ],
+          "transport": {
+            "destination": "Grand River",
+            "priority": "non-urgent",
+            "position": "sitting up"
+          },
+          "narrative": "Patient presented with hypoglycemia, blood glucose 2.4. One tube of oral glucose was administered at 02:19. Patient's glucose increased to 5.8 and they are now alert. Patient is an insulin dependent diabetic, unclear on insulin dose this morning. No known allergies. Transport to Grand River non-urgent, patient sitting up.",
+          "conditionObserved": "alert",
+          "interventionsPerformed": "oral glucose",
+          "medsAndAllergiesMentioned": [
+            "no known allergies"
+          ]
+        },
+        "spans": [
+          {
+            "field": "sections.chiefComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.mechanismOrComplaint",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.timeline",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.patient",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.sample",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.vitals",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.interventions",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.transport",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.narrative",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.conditionObserved",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.interventionsPerformed",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          },
+          {
+            "field": "sections.medsAndAllergiesMentioned",
+            "transcriptSegmentIds": [
+              "segment[0]"
+            ]
+          }
+        ],
+        "flags": []
+      }
+    }
+  ],
+  "speakers": [
+    "Person 1",
+    "Person 2",
+    "Person 3",
+    "Person 4"
+  ],
+  "epcrStatus": "ready",
+  "epcr": {
+    "id": "ea8033dd-92a0-44b4-89aa-8afba8442adf",
+    "captureId": "session_1793112464",
+    "modelVersion": "demo-1",
+    "promptVersion": "epcr-v10",
+    "sections": {
+      "incident": {
+        "location": "Birchwood Community Center, 41 Birchwood Crescent",
+        "dispatchReason": "confused, possible diabetic",
+        "unitsOnScene": "Engine 12, EMS 17",
+        "times": {
+          "onScene": "10:48:44",
+          "patientContact": "10:49:15",
+          "departScene": "10:53:08 (end of recording)"
+        }
+      },
+      "scene": {
+        "numberOfPatients": "1",
+        "environment": "gym floor wet by water fountain",
+        "safety": "safe, watch footing due to wet floor",
+        "othersOnScene": "Priya (wife)"
+      },
+      "chiefComplaint": "confusion, hypoglycemia",
+      "mechanismOrComplaint": "hypoglycemia secondary to missed meal and morning insulin administration",
+      "timeline": "10:48:44 Engine 12 on scene; 10:49:15 patient contact; 10:50:16 vitals assessed; 10:51:31 oral glucose 1 tube administered; 10:52:01 reassessment vitals; 10:52:31 transfer of care to EMS 17",
+      "patient": {
+        "name": "Marcus Bell",
+        "age": "58",
+        "sex": "male",
+        "dob": "1968-03-03",
+        "capacity": "capable",
+        "capacityNote": "impaired on contact (confused, GCS 14, BGL 2.4); capable after oral glucose, oriented to place and event (GCS 15, BGL 5.8)",
+        "decisionMaker": "self"
+      },
+      "sample": {
+        "signsSymptoms": "confusion, diaphoresis, pale and cool skin, dull headache 4/10",
+        "medications": [
+          "insulin pen"
+        ],
+        "pastHistory": "Type 1 diabetes, hypertension, no known allergies",
+        "lastOralIntake": "skipped lunch",
+        "events": "played pickleball all morning after morning insulin, skipped lunch, became diaphoretic and confused"
+      },
+      "opqrst": {
+        "onset": "started during pickleball game",
+        "quality": "dull",
+        "severity": "4/10"
+      },
+      "vitals": [
+        {
+          "time": "10:50:16",
+          "loc": "confused",
+          "bp": "138/84",
+          "hr": "112",
+          "rr": "20",
+          "spo2": "90% RA",
+          "gcs": "14",
+          "glucose": "2.4",
+          "pain": "4/10",
+          "skin": "pale, cool, sweaty"
+        },
+        {
+          "time": "10:52:01",
+          "loc": "alert",
+          "bp": "132/80",
+          "hr": "96",
+          "rr": "16",
+          "gcs": "15",
+          "glucose": "5.8",
+          "skin": "warmer, damp"
+        }
+      ],
+      "physicalExam": "swallowing intact, commands followed, dull headache reported",
+      "interventions": [
+        {
+          "time": "10:51:31",
+          "intervention": "oral glucose 1 tube administered",
+          "response": "patient swallowed successfully, mentation improved to GCS 15, BGL increased to 5.8"
+        },
+        {
+          "time": "10:52:31",
+          "intervention": "transfer of care to EMS 17",
+          "response": "verbal handoff given, care transferred"
+        }
+      ],
+      "transport": {
+        "destination": "Grand River",
+        "priority": "non-urgent",
+        "position": "sitting up",
+        "handoffTo": "EMS 17"
+      },
+      "narrative": "Engine 12 responded to Birchwood Community Center for a 58-year-old male with acute confusion and suspected hypoglycemia. On arrival, patient was found seated on a gym bench, pale, diaphoretic, and confused with a BGL of 2.4 mmol/L after playing pickleball and missing lunch. One tube of oral glucose was administered, resulting in resolution of confusion and improvement of BGL to 5.8 mmol/L and GCS to 15. Care was transferred to EMS 17 for non-urgent transport to Grand River.",
+      "conditionObserved": "sitting by bench in gym, pale, cool, diaphoretic, initially confused but able to swallow and follow commands",
+      "interventionsPerformed": "oral glucose 1 tube PO; transfer of care to EMS 17",
+      "medsAndAllergiesMentioned": [
+        "insulin pen"
+      ],
+      "hazards": "wet floor near water fountain",
+      "bystanderStatements": "\"He's a diabetic type one. He played pickleball all morning I don't think he ate lunch. He got really sweaty and then just stopped making sense.\" — Priya (wife)",
+      "belongings": "insulin pen in wallet",
+      "familyContact": "Priya (wife, on scene); family member texted and en route"
+    },
+    "spans": [
+      {
+        "field": "sections.incident",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.scene",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.chiefComplaint",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.mechanismOrComplaint",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.timeline",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.patient",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.sample",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.opqrst",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.vitals",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.physicalExam",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.interventions",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.transport",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.narrative",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.conditionObserved",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.interventionsPerformed",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.medsAndAllergiesMentioned",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.hazards",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.bystanderStatements",
+        "transcriptSegmentIds": []
+      },
+      {
+        "field": "sections.belongings",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      },
+      {
+        "field": "sections.familyContact",
+        "transcriptSegmentIds": [
+          "segment[0]",
+          "segment[1]",
+          "segment[2]",
+          "segment[3]",
+          "segment[4]",
+          "segment[5]",
+          "segment[6]",
+          "segment[7]",
+          "segment[8]",
+          "segment[9]",
+          "segment[10]",
+          "segment[11]",
+          "segment[12]",
+          "segment[13]",
+          "segment[14]",
+          "segment[15]",
+          "segment[16]",
+          "segment[17]",
+          "segment[18]",
+          "segment[19]",
+          "segment[20]",
+          "segment[21]",
+          "segment[22]",
+          "segment[23]",
+          "segment[24]",
+          "segment[25]",
+          "segment[26]"
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.sample",
+        "note": "Wife noted patient takes medication for high blood pressure, but specific medication name was not stated"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.sample",
+        "note": "Morning insulin dose uncertain: wife estimated 20 or 30 units"
+      },
+      {
+        "type": "unsupported_claim",
+        "ref": "sections.familyContact",
+        "note": "Transcript states 'Duloxetine is on his way. I texted her', which appears to be a transcription error for a family member's name"
+      }
+    ]
+  },
+  "epcrUpdatedAt": 1793113675386,
+  "epcrChunks": 27,
+  "liveTurns": [
+    {
+      "id": "gemini_18",
+      "startedAt": 1793112482592,
+      "endedAt": 1793112484807,
+      "text": "Okay, I've just updated the code."
+    },
+    {
+      "id": "gemini_19",
+      "startedAt": 1793112485765,
+      "endedAt": 1793112505133,
+      "text": "on the device. I have a dashboard with a call waiting for first details and I'm going to be script in different voices. Hopefully in different voices means it will pick everything up. I don't know if it will do that or"
+    },
+    {
+      "id": "gemini_20",
+      "startedAt": 1793112505525,
+      "endedAt": 1793112524306,
+      "text": "if it is too um smart for me. So, you can see it's already being talking and updating as I go. So, let us begin and I will read the script and check back periodically here."
+    },
+    {
+      "id": "gemini_21",
+      "startedAt": 1793112526021,
+      "endedAt": 1793112544489,
+      "text": "Uh, involved on scene at the Birchwood Community Center, 41 Birchwood Crescent. Uh, dispatch had a 58-year-old male, confused, possible diabetic. Call came in at 2:10. One patient sitting by bench found at the gym. Floor's wet by the water fountain. Watch your footing. Scene is safe."
+    },
+    {
+      "id": "gemini_22",
+      "startedAt": 1793112546204,
+      "endedAt": 1793112565024,
+      "text": "And now I'm going to try and take a picture, hopefully. Okay, that may have taken a picture of my neck, but that's fine. As we can see so far, everything is coming in."
+    },
+    {
+      "id": "gemini_23",
+      "startedAt": 1793112566960,
+      "endedAt": 1793112578784,
+      "text": "Hi sir, I'm Alan with the fire department. Can you tell me your name? Marcus. I'm I'm fine, just tired."
+    },
+    {
+      "id": "gemini_24",
+      "startedAt": 1793112578767,
+      "endedAt": 1793112598266,
+      "text": "Marcus, do you know where you are right now? What day it is? The gym? I don't know. Tuesday? I'm his wife, Priya. He's a diabetic."
+    },
+    {
+      "id": "gemini_25",
+      "startedAt": 1793112598972,
+      "endedAt": 1793112616299,
+      "text": "Type one. He played pickleball all morning. I don't think he ate lunch. He got really sweaty and then just stopped making sense. Okay. How old is he, Priya? He's 58. Birthday is March 3rd, 1968."
+    },
+    {
+      "id": "gemini_26",
+      "startedAt": 1793112618001,
+      "endedAt": 1793112636948,
+      "text": "Okay, vitals. First set is 216, heart rate 112, regular. Resps 20, BP 138 over 84. Sats 90% on room air, skin's pale, cool, and sweaty. GCS 14, he's confused. Let's get"
+    },
+    {
+      "id": "gemini_27",
+      "startedAt": 1793112637988,
+      "endedAt": 1793112641169,
+      "text": "shiver on him blood glucose is 2.4"
+    },
+    {
+      "id": "gemini_28",
+      "startedAt": 1793112642760,
+      "endedAt": 1793112662280,
+      "text": "Priya, does he take insulin? When was his last dose? The pen. He does it in the morning. I think he took 20 units, maybe 30. I'm honestly not quite sure. Any allergies, other medical problems? Uh, no, no allergies."
+    },
+    {
+      "id": "gemini_29",
+      "startedAt": 1793112662430,
+      "endedAt": 1793112682731,
+      "text": "He's got high blood pressure. Takes ramipril for it. That's it. Marcus, are you having any pain anywhere? Head, chest? Headache, kind of dull. Started at the game. Well, I lost his accent, whatever. Out of 10."
+    },
+    {
+      "id": "gemini_30",
+      "startedAt": 1793112682684,
+      "endedAt": 1793112696326,
+      "text": "How bad? Like uh full. He's swallowing okay and following commands so we're giving oral glucose. Marcus, I need you to swallow this for me."
+    },
+    {
+      "id": "gemini_31",
+      "startedAt": 1793112698556,
+      "endedAt": 1793112716593,
+      "text": "Oh. Okay. And then, oh, let's all take a selfie with this thing."
+    },
+    {
+      "id": "gemini_32",
+      "startedAt": 1793112719152,
+      "endedAt": 1793112736700,
+      "text": "Okay, that should hopefully be long enough. If not, we will tweak that. Uh, second set at 227, heart rate 96, resps 16, BP 132 over 80. Skin's warmer, still a bit damp."
+    },
+    {
+      "id": "gemini_33",
+      "startedAt": 1793112737622,
+      "endedAt": 1793112757111,
+      "text": "glucose 5.8 and GCS 15. Marcus, where are you right now? Uh, Birchwood, the community center. Oh, man, I skipped lunch, didn't I? Sorry, Priya. He's got his insulin pen and his wallet. I'll bring it. Aunt Dalton Lena's on her"
+    },
+    {
+      "id": "gemini_34",
+      "startedAt": 1793112757785,
+      "endedAt": 1793112759300,
+      "text": "I texted her."
+    },
+    {
+      "id": "gemini_35",
+      "startedAt": 1793112761009,
+      "endedAt": 1793112780004,
+      "text": "EMS 17 is here. Paramedics, this is Marcus Bell, 58, type 1 diabetic, found confused. Glucose was 2.4, one tube of oral glucose at 2:19, now 5.8 and alert. Insulin dose this morning is unclear, 20 or 30 minutes, no allergies. We're taking him up to Grand River."
+    },
+    {
+      "id": "gemini_36",
+      "startedAt": 1793112780703,
+      "endedAt": 1793112780704,
+      "text": "non-urgent"
+    },
+    {
+      "id": "gemini_38",
+      "startedAt": 1793112784384,
+      "endedAt": 1793112785730,
+      "text": "Engine of clearing scene at 2:33."
+    },
+    {
+      "id": "gemini_39",
+      "startedAt": 1793112788213,
+      "endedAt": 1793112794464,
+      "text": "And then we press the button here."
+    }
+  ],
+  "liveCoverage": [
+    [
+      1793112464362,
+      1793112780150
+    ],
+    [
+      1793112783209,
+      1793112793837
+    ]
+  ]
+}

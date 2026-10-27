@@ -4,14 +4,35 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc -b",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "typecheck": "tsc -b",
-    "test": "echo \"no tests yet (milestone 5)\" && exit 0"
+    "lint": "eslint .",
+    "test": "echo \"no tests yet\" && exit 0"
   },
   "dependencies": {
-    "@nightingale/schema": "workspace:*"
+    "@nightingale/schema": "workspace:*",
+    "qrcode": "^1.5",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-router": "^7",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
-    "typescript": "^5.7.3"
+    "@eslint/js": "^9",
+    "@types/node": "^22",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5",
+    "babel-plugin-react-compiler": "^1",
+    "eslint": "^9",
+    "eslint-plugin-react-hooks": "^7",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.13.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8",
+    "vite": "^7"
   }
 }

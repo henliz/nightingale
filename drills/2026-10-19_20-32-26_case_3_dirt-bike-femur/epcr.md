@@ -2,12 +2,12 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 2:41:19 p.m. from 46 chunk(s), model demo-1, prompt epcr-v7
+updated 11:07:37 a.m. from 46 chunk(s), model demo-1, prompt epcr-v10
 
 ## Incident
 
 - **Location:** 19 Fake Street
-- **Dispatch reason:** motorcycle crash
+- **Dispatch reason:** dirt bike crash
 - **Units on scene:** fire
 - **Times:**
   - **Call received:** 20:32:42
@@ -19,7 +19,8 @@ updated 2:41:19 p.m. from 46 chunk(s), model demo-1, prompt epcr-v7
 
 - **Number of patients:** 1
 - **Environment:** dark
-- **Others on scene:** fire
+- **Safety:** limited visibility due to darkness
+- **Others on scene:** bystanders/friends
 
 ## Chief complaint
 
@@ -27,31 +28,30 @@ leg deformity and pain
 
 ## Mechanism / what happened
 
-dirt bike jump crash, landed awkwardly
+dirt bike jump wipeout, landed awkwardly and leg twisted
 
 ## Timeline
 
-20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact
+20:32:42 911 call; 20:33:10 fire on scene; 20:33:24 patient contact; 20:33:51 pedal pulse and motor function assessed; 20:33:57 pain assessed
 
 ## Patient
 
 - **name:** Dave
 - **sex:** male
 - **capacity:** impaired
-- **Capacity reason:** intoxicated per bystanders, ?head strike, memory loss regarding incident timing, dizziness/lightheadedness
-- **Decision maker:** implied consent (emergency)
+- **Capacity reason:** intoxicated per bystanders, possible head strike, unable to recall event, dizzy/lightheaded
+- **Decision maker:** implied consent (emergency), friend on scene
 
 ## SAMPLE history
 
-- **Signs / symptoms:** leg deformity and pain, nausea, dizziness, lightheadedness, inability to wiggle toes; denies neck or back pain
-- **Events leading up:** jumped dirt bike, crashed, landed awkwardly causing leg to snap back ~10-11 minutes prior
+- **Signs / symptoms:** leg pain, obvious femur deformity with lump, leg twisted, inability to wiggle toes, nausea, dizziness and lightheadedness; no neck pain, no back pain
+- **Events leading up:** operating dirt bike, jumped and bailed, landing awkwardly approximately 10 to 11 minutes prior
 
 ## OPQRST
 
-- **onset:** sudden post-crash
-- **quality:** like bones have snapped in half
+- **onset:** sudden following dirt bike crash
+- **quality:** feels like bone snapped in half
 - **severity:** 6/10
-- **time:** ~10-11 minutes ago per bystander; patient unable to recall
 
 ## Vitals
 
@@ -61,23 +61,36 @@ dirt bike jump crash, landed awkwardly
 
 ## Physical exam
 
-Obvious femur deformity with localized lump. No blood pooling noted. Pedal pulse present. Unable to wiggle toes. No neck or back tenderness reported; no other deformities or bleeding noted.
+obvious deformity and lump to femur, leg twisted/abnormal rotation, unable to wiggle toes, pedal pulse present; no other deformities, injuries, or pooling blood observed
+
+## Interventions
+
+| time | intervention | response |
+|---|---|---|
+| 20:33:51 | distal neurovascular assessment (pedal pulse check, toe motor function) | pedal pulse present, unable to wiggle toes |
 
 ## Narrative
 
-Responders were dispatched to a reported dirt bike crash. Patient was found conscious complaining of nausea, dizziness, and severe leg pain following an awkward landing off a jump, with possible head strike and intoxication noted by bystanders. Assessment revealed an obvious femur deformity with a lump, an intact pedal pulse, and inability to wiggle toes, with no blood pooling or spinal pain identified.
+Responders arrived on scene at 19 Fake Street for a reported dirt bike crash. Patient Dave was assessed presenting with an obvious femur deformity, nausea, dizziness, inability to move his toes, and an intact pedal pulse. Patient reported 6/10 pain with no neck or back pain, was unable to recall the event, and noted a possible head strike while bystanders reported alcohol intoxication.
 
-## Condition observed
+## Interventions (summary)
 
-Conscious, nauseous, dizzy, lightheaded
+distal neurovascular assessment
+
+## Hazards
+
+darkness
 
 ## Bystander statements
 
-"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted."; "he's drunk. Yeah."; "He's always drunk."
+"my buddy Dave, he uh he wiped out on his motorcycle and his leg is messed up. It's twisted."; "he's drunk. He's always drunk."; "Not about 10 minutes ago. Oh, 11 minutes ago."
 
 ## Needs review
 
-- unsupported claim: body side (left vs right) of injured femur/leg
+- unsupported claim: affected leg side (left vs right) was not specified
+- unsupported claim: laterality of femur deformity was not stated
+- unsupported claim: head strike uncertain ('I think so' per patient)
+- unsupported claim: time since incident conflicted between 10 and 11 minutes per bystander
 
 ## Scene photos
 

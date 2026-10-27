@@ -174,7 +174,11 @@ fn rejected(step: &str, res: reqwest::blocking::Response) -> Box<dyn std::error:
         .ok()
         .and_then(|v| v.get("error").and_then(|e| e.as_str()).map(str::to_string))
         .unwrap_or(body);
-    format!("{step} rejected: {status} ({})", detail.chars().take(200).collect::<String>()).into()
+    format!(
+        "{step} rejected: {status} ({})",
+        detail.chars().take(200).collect::<String>()
+    )
+    .into()
 }
 
 #[cfg(test)]

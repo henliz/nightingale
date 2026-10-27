@@ -1,0 +1,42 @@
+.list {
+  display: flex;
+  padding: 0 var(--space-24);
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-white);
+}
+
+.tab {
+  position: relative;
+  width: 130px;
+  height: 56px;
+  font: var(--text-label);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: transparent;
+}
+
+.tab:hover {
+  color: var(--color-ink);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: -2px;
+}
+
+.active {
+  color: var(--color-blue);
+}
+
+.active::after {
+  background: var(--color-blue);
+}

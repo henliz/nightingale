@@ -53,6 +53,8 @@ export interface DrillSession {
   assets: LiveAsset[];
   /** audio from an earlier boot that was still queued on the pi, uploaded late */
   backlog?: boolean;
+  /** started with the dashboard's new call button, so it's a call even if nobody talks */
+  fromNewCall?: boolean;
   /** a name for the dropdown, e.g. "Case 2 · Shellfish allergy" (scripts/split-cases.mjs) */
   title?: string;
   /** the recording a case was split out of */

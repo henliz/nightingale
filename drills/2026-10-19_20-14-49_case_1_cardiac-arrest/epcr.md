@@ -2,12 +2,13 @@
 
 _draft, pending responder review. ai-generated from the transcript, nothing here is approved._
 
-updated 2:40:33 p.m. from 87 chunk(s), model demo-1, prompt epcr-v7
+updated 11:06:45 a.m. from 87 chunk(s), model demo-1, prompt epcr-v10
 
 ## Incident
 
-- **Dispatch reason:** cardiac arrest
-- **Units on scene:** Fire, Paramedics (arriving)
+- **Location:** backyard
+- **Dispatch reason:** chest pain
+- **Units on scene:** fire
 - **Times:**
   - **Call received:** 20:15:53
   - **On scene:** 20:16:25
@@ -17,42 +18,40 @@ updated 2:40:33 p.m. from 87 chunk(s), model demo-1, prompt epcr-v7
 ## Scene
 
 - **Number of patients:** 1
-- **Environment:** Backyard barbecue
-- **Safety:** Scene secure
-- **Others on scene:** Cousin
+- **Environment:** backyard barbecue
+- **Others on scene:** patient's cousin
 
 ## Chief complaint
 
-Cardiac arrest / unresponsive
+cardiac arrest
 
 ## Mechanism / what happened
 
-Witnessed sudden collapse following chest tightness and diaphoresis
+sudden collapse following acute chest tightness and diaphoresis
 
 ## Timeline
 
-20:15:53 911 call; 20:16:25 fire on scene and patient contact; 20:16:39 no pulse detected; 20:16:43 CPR initiated; 20:16:59 AED pads applied; 20:17:26 O2 15 L/min started; 20:18:32 AED analyzes, no shock advised, CPR resumed; 20:19:48 AED shock advised, 1 shock delivered; 20:20:18 transfer of care to paramedics
+20:15:53 911 call; 20:16:25 fire on scene, patient contact; 20:16:39 pulselessness confirmed; 20:16:43 CPR initiated; 20:16:59 AED pads applied; 20:17:26 oxygen initiated at 15 L/min; 20:18:32 AED rhythm analysis, no shock advised; 20:19:48 AED rhythm analysis, shock advised; 20:20:00 AED shock delivered; 20:20:15 paramedics on scene; 20:20:18 transfer of care to paramedics
 
 ## Patient
 
 - **age:** 32 per cousin; 57 per responder at handoff
 - **sex:** male
 - **capacity:** incapable
-- **Capacity reason:** Unresponsive, pulseless
+- **Capacity reason:** unresponsive and pulseless in cardiac arrest
 - **Decision maker:** implied consent (emergency), cousin on scene
 
 ## SAMPLE history
 
-- **Signs / symptoms:** Pale, diaphoretic, clammy, chest tightness/chest pain prior to collapse; unresponsive, pulseless
-- **Past history:** Hypertension; no prior myocardial infarction
-- **Last oral intake:** Barbecue, a couple beers
-- **Events leading up:** Attending backyard barbecue, developed diaphoresis and chest tightness/pain, then collapsed suddenly
+- **Signs / symptoms:** chest tightness, pale, sweaty, clammy, sudden collapse, unresponsive, pulseless
+- **Past history:** high blood pressure; no prior myocardial infarction
+- **Events leading up:** attending backyard barbecue, consumed a couple beers, developed diaphoresis and chest tightness, then collapsed
 
 ## OPQRST
 
-- **onset:** Sudden onset ~20 minutes prior to handoff
-- **quality:** Tightness
-- **time:** ~20 minutes prior to handoff
+- **onset:** sudden, ~20 minutes prior to handoff
+- **quality:** tightening
+- **time:** ~20 minutes ago
 
 ## Vitals
 
@@ -60,45 +59,37 @@ Witnessed sudden collapse following chest tightness and diaphoresis
 |---|---|---|---|---|---|---|---|---|---|---|
 | 20:16:39 | unresponsive |  | absent |  |  |  |  |  |  | pale, sweaty, clammy |
 
-## Physical exam
-
-Head-to-toe: unresponsive, pulseless. Chest: good chest rise and compliance with positive-pressure ventilations
-
 ## Interventions
 
 | time | intervention | response |
 |---|---|---|
-| 20:16:43 | CPR initiated | CPR in progress |
-| 20:16:59 | AED pads applied | Pads attached |
-| 20:17:26 | Supplemental oxygen initiated at 15 L/min via BVM ventilations | Good chest rise and compliance noted |
-| 20:18:32 | AED rhythm analysis, no shock advised; CPR immediately resumed | CPR continued |
-| 20:19:48 | AED rhythm analysis, shock advised; 1 shock delivered, CPR immediately resumed | CPR continued |
-| 20:20:18 | Transfer of care to paramedics | Verbal report provided to incoming ambulance crew |
+| 20:16:43 | CPR compressions initiated | no change |
+| 20:16:59 | AED pads applied | evaluating |
+| 20:17:26 | supplemental oxygen applied at 15 L/min with assisted ventilations | good chest rise and compliance observed |
+| 20:18:32 | AED rhythm analysis, no shock indicated; CPR resumed | ongoing CPR |
+| 20:20:00 | AED shock delivered (1 shock); CPR resumed | ongoing CPR |
+| 20:20:18 | transfer of care to paramedics | care assumed by arriving ambulance crew |
 
 ## Transport
 
-- **handoffTo:** Paramedics / incoming ambulance crew
+- **handoffTo:** paramedics
 
 ## Narrative
 
-Fire arrived on scene to find a male patient unresponsive and pulseless in a backyard following a reported collapse preceded by chest pain, diaphoresis, and clamminess. CPR was initiated immediately, AED pads were placed, and ventilations were provided via high-flow oxygen at 15 L/min with good chest rise. Initial AED analysis indicated no shock; subsequent analysis advised shock, and one shock was administered before CPR was resumed. Paramedic crew arrived on scene, and care was transferred with CPR ongoing.
+Fire responded to a reported collapse at a backyard barbecue following acute chest tightness. On arrival, patient was found unresponsive, apneic, and pulseless. High-quality CPR was initiated, AED pads were placed, and ventilations were provided with supplemental oxygen at 15 L/min. Following two rhythm analysis cycles and one delivered defibrillation shock, care was transferred to arriving paramedics.
 
 ## Condition observed
 
-Unresponsive, apneic, pulseless, pale, and clammy on the ground
-
-## Interventions (summary)
-
-CPR, AED application, BVM ventilations with O2 at 15 L/min, defibrillation (1 shock), handoff to paramedics
+Unresponsive, pulseless, pale, and clammy male lying supine on ground.
 
 ## Bystander statements
 
-Cousin: "this is my cousin. He's uh he's 32 years old. We're having a barbecue in our backyard. He started getting a little bit pale and sweaty and he said he was his chest was starting to tighten up and then he just fell right over and that's where he's been since. So I don't have any medical training, but yeah, that's all I know for now." / "we were having a barbecue. Cousin came over. We had a couple beers and uh started getting all sweaty and clammy and then he just fell over. He was complaining of chest pain as well and he just fell over and he's unresponsive now."
+"this is my cousin. He's uh he's 32 years old. We're having a barbecue in our backyard. He started getting a little bit pale and sweaty and he said he was his chest was starting to tighten up and then he just fell right over and that's where he's been since. So I don't have any medical training, but yeah, that's all I know for now."; "we were having a barbecue. Cousin came over. We had a couple beers and uh started getting all sweaty and clammy and then he just fell over. He was complaining of chest pain as well and he just fell over and he's unresponsive now."
 
 ## Needs review
 
-- unsupported claim: Patient age discrepancy: 32 per cousin, 19 or 50-some mentioned by dispatch, 57 per responder at handoff
-- unsupported claim: Patient name not explicitly confirmed (Luke mentioned during drill planning, unclear if Luke refers to cousin or patient)
+- unsupported claim: Age conflict: reported as 32 by cousin, 19/50-some by dispatch, and 57 by responder at handoff.
+- unsupported claim: Handoff reported one shock delivered approximately 5 minutes ago, but drill timing shows shock administered immediately prior to handoff.
 
 ## Scene photos
 

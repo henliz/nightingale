@@ -1,0 +1,63 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 71px;
+  padding: 8px 32px 8px 32px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 56px;
+}
+
+.brandName {
+  font: 600 21.867px/31.586px var(--font-sans);
+  white-space: nowrap;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 509px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  flex: 1;
+  min-width: 120px;
+  height: 44px;
+  padding: var(--space-12);
+  background: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-8);
+}
+
+.search:focus-within {
+  border-color: var(--color-blue);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: var(--text-body);
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--color-muted);
+}
+

@@ -1,0 +1,47 @@
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  background: rgb(0 0 0 / 0.72);
+}
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  max-width: min(1100px, 100%);
+  max-height: 100%;
+  padding: var(--space-16);
+  background: var(--color-white);
+  border-radius: var(--radius-8);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.count {
+  flex: 1;
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 220px);
+  object-fit: contain;
+  border-radius: var(--radius-6);
+  background: var(--color-ink);
+}
+
+.caption {
+  font: var(--text-body);
+  color: var(--color-ink);
+}

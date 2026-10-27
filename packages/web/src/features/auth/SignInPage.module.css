@@ -1,0 +1,90 @@
+.page {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 162px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 440px;
+  padding: 40px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-12);
+}
+
+.brand {
+  font: 600 18px/25px var(--font-sans);
+}
+
+.heading {
+  font: 600 22px/31px var(--font-sans);
+}
+
+.lede {
+  font: 400 13px/18px var(--font-sans);
+  color: var(--color-muted);
+}
+
+.sectionLabel {
+  font: 500 11px/13px var(--font-sans);
+  color: var(--color-muted);
+}
+
+.pin {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.pinField {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-6);
+}
+
+.pinField:focus-within {
+  border-color: var(--color-blue);
+}
+
+.pinInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: 400 14px/17px var(--font-sans);
+  letter-spacing: 0.2em;
+}
+
+.pinInput:focus {
+  outline: none;
+}
+
+.pinInput::placeholder {
+  color: var(--color-ink);
+  letter-spacing: 0;
+}
+
+.footnote {
+  font: 400 11px/15px var(--font-sans);
+  color: var(--color-muted);
+}
+
+.error {
+  font: 400 12px/16px var(--font-sans);
+  color: var(--color-red);
+}
+
+.hint {
+  font: 400 11px/15px var(--font-sans);
+  color: var(--color-muted);
+}

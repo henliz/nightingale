@@ -1,0 +1,44 @@
+/* design tokens, mirrored from the Figma "Clear blue" variables */
+:root {
+  --color-canvas: #f6f8fb;
+  --color-white: #ffffff;
+  --color-ink: #202b3d;
+  --color-muted: #657185;
+  --color-line: #e5eaf1;
+  --color-line-strong: #dee3eb;
+  --color-chip: #f1f4f8;
+  --color-blue: #3448b5;
+  --color-red: #d64040;
+  --color-green: #2f9e5b;
+  --color-amber: #d9a21b;
+  --color-blue-soft: #eef1fd;
+  --color-flag: #ff2929;
+  --color-flag-soft: #fff9f9;
+  --color-neutral-accent: #343a40;
+  --print-line: #b8bcc2;
+  --print-section: #eff0f2;
+
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-pill: 14px;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* type scale: size / line-height / weight */
+  --text-title: 600 28px/36px var(--font-sans);
+  --text-heading: 600 18px/26px var(--font-sans);
+  --text-body: 400 14px/22px var(--font-sans);
+  --text-label: 500 14px/20px var(--font-sans);
+  --text-small: 400 12px/18px var(--font-sans);
+  --text-caption: 500 11px/16px var(--font-sans);
+  --text-reading: 400 16px/24px var(--font-sans);
+}

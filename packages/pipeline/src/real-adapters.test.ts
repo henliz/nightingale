@@ -167,9 +167,41 @@ describe("OpenAICondenser", () => {
     expect(note.sections.vitals).toEqual([{ time: "18:40", bp: "140/90" }]);
     expect(note.sections.interventions).toEqual([{ intervention: "gave ASA 162 mg" }]);
     expect(note.sections.sample).toEqual({ allergies: ["penicillin"] });
+    // built from the patient's own meds + allergies, never the model's list
+    expect(note.sections.medsAndAllergiesMentioned).toEqual(["penicillin"]);
     expect(note.sections.hazards).toBeUndefined();
     expect(note.sections.transport).toBeUndefined();
     expect(note.flags.some((f) => f.ref === "sections.transport")).toBe(true);
+  });
+
+  it("points uncertain items at their field, and still takes v7 style plain strings", async () => {
+    mockFetchOnce({
+      choices: [
+        {
+          message: {
+            content: JSON.stringify({
+              patient: { age: "32 per cousin; 57 per responder" },
+              uncertain: [
+                { field: "patient", note: "age conflict, 32 vs 57" },
+                { field: "notARealField", note: "goes to the whole note" },
+                { field: "vitals", note: "" },
+                "plain string from an older prompt",
+              ],
+            }),
+          },
+        },
+      ],
+    });
+    const note = await new OpenAICondenser({ apiKey: "k" }).condense(
+      { id: "t1", captureId: "c1", provider: "test", modelVersion: "test", segments: [] },
+      { captureId: "c1", modelVersion: "m", promptVersion: "p" },
+    );
+
+    expect(note.flags.filter((f) => f.type === "unsupported_claim")).toEqual([
+      { type: "unsupported_claim", ref: "sections.patient", note: "age conflict, 32 vs 57" },
+      { type: "unsupported_claim", ref: "condenser", note: "goes to the whole note" },
+      { type: "unsupported_claim", ref: "condenser", note: "plain string from an older prompt" },
+    ]);
   });
 });
 
