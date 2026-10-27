@@ -548,7 +548,8 @@ es.addEventListener("update", scheduleRefresh);
 // uploads + the live audio stream count as hearing from the pi too, not just its log lines
 es.addEventListener("device", (e) => {
   const d = JSON.parse(e.data);
-  lastDevice = { id: d.id, ts: Date.now() };
+  // heardAt, not now: on connect the server replays the last one, which can be minutes old
+  lastDevice = { id: d.id, ts: d.heardAt };
   updateDeviceStatus();
 });
 // words as they're spoken: patch the transcript box straight away, no refetch
