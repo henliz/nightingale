@@ -6,14 +6,14 @@ import type { IncidentAction, IncidentState } from "./types";
 const StateContext = createContext<IncidentState | null>(null);
 const DispatchContext = createContext<Dispatch<IncidentAction> | null>(null);
 
-const STORAGE_PREFIX = "medfi.incident.v3.";
+const STORAGE_PREFIX = "nightingale.incident.v3.";
 
 // story lives in sessionStorage: survives a reload + sign-out/sign-in in the same tab,
 // but nothing typed during a demo outlives the tab
 function loadState(storageKey: string): IncidentState {
   try {
-    localStorage.removeItem("medfi.incident.v1");
-    sessionStorage.removeItem("medfi.incident.v2");
+    localStorage.removeItem("nightingale.incident.v1");
+    sessionStorage.removeItem("nightingale.incident.v2");
     const raw = sessionStorage.getItem(storageKey);
     if (!raw) return initialIncidentState;
     const parsed = JSON.parse(raw) as Partial<IncidentState>;

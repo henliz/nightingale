@@ -60,7 +60,7 @@ export function SignInPage() {
   return (
     <main className={styles.page}>
       <form className={styles.card} onSubmit={handleSubmit} noValidate>
-        <p className={styles.brand}>Medfi</p>
+        <p className={styles.brand}>Nightingale</p>
         <h1 className={styles.heading}>Sign in on the department device</h1>
         <p className={styles.lede}>Choose your account for this shift. Everyone has a personal account under their service.</p>
 

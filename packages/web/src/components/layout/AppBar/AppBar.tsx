@@ -21,7 +21,7 @@ export function AppBar({ user, alerts, unseenCount, search, onAlertsOpened, onDi
     <header className={styles.bar}>
       <div className={styles.brand}>
         <Icon name="logo" size={29} />
-        <span className={styles.brandName}>Medfi</span>
+        <span className={styles.brandName}>Nightingale</span>
       </div>
 
       <div className={styles.right}>

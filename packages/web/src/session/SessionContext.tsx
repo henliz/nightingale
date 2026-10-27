@@ -9,7 +9,7 @@ interface SessionValue {
 
 const SessionContext = createContext<SessionValue | null>(null);
 
-const STORAGE_KEY = "medfi.session.userId";
+const STORAGE_KEY = "nightingale.session.userId";
 
 function readStoredUser(): User | null {
   try {

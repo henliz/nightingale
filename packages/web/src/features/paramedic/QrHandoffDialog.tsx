@@ -48,7 +48,7 @@ export function QrHandoffDialog({ open, version, onPrint, onClose }: QrHandoffDi
         </button>
         <p className={styles.caption}>Scan to open a secure, read-only handoff page</p>
         <p className={styles.lede}>
-          Opens in any browser, no hospital account or Medfi access needed. One-time link, expires in 4 hours, every open is logged. Summary
+          Opens in any browser, no hospital account or Nightingale access needed. One-time link, expires in 4 hours, every open is logged. Summary
           reads in IMIST-AMBO order; identity unlocks when the nurse confirms receipt.
         </p>
         <span className={styles.pill}>{`Secure link · Version ${version} · ${openedLabel}`}</span>

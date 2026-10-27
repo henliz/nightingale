@@ -6,7 +6,7 @@ import { useLiveSource } from "../../api/LiveSourceContext";
 import { UNNAMED } from "../../api/call";
 import styles from "./ShareRecordDialog.module.css";
 
-export const HANDOFF_LINK = "handoff.medfi.ca/h/7Q4K-29XZ";
+export const HANDOFF_LINK = "handoff.nightingale.ca/h/7Q4K-29XZ";
 
 interface ShareRecordDialogProps {
   open: boolean;

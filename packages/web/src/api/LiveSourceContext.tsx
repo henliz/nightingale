@@ -28,8 +28,8 @@ interface LiveSourceValue {
 
 const LiveSourceContext = createContext<LiveSourceValue | null>(null);
 
-const SOURCE_KEY = "medfi.source";
-const SESSION_KEY = "medfi.source.session";
+const SOURCE_KEY = "nightingale.source";
+const SESSION_KEY = "nightingale.source.session";
 
 /** real calls by default. the sample call is one of the records, picking it flips to "demo" for the tab */
 function readSource(): DataSource {
