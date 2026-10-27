@@ -87,6 +87,12 @@
   background: var(--color-canvas);
 }
 
+/* not saved yet, speaker labels land ~15-30s later */
+.turnLive {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
 .turnSelected,
 .turnSelected:hover {
   background: var(--color-blue-soft);

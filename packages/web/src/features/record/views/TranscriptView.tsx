@@ -1,4 +1,5 @@
 import type { ResponderNote, TranscriptTurn } from "../../../data/record";
+import { useLiveSource } from "../../../api/LiveSourceContext";
 import styles from "./views.module.css";
 
 interface TranscriptViewProps {
@@ -9,6 +10,7 @@ interface TranscriptViewProps {
 
 /** summary first, then who said what + when, as the device heard it */
 export function TranscriptView({ turns, latest }: TranscriptViewProps) {
+  const { partials } = useLiveSource();
   return (
     <div className={styles.view}>
       <h3 className={styles.heading}>Transcript</h3>
@@ -18,7 +20,7 @@ export function TranscriptView({ turns, latest }: TranscriptViewProps) {
         <p className={styles.noteText}>{latest.text}</p>
         <p className={styles.noteSource}>{latest.source} · review before adding to the record</p>
       </div>
-      {turns.length === 0 ? (
+      {turns.length === 0 && partials.length === 0 ? (
         <p className={styles.lede}>No recording yet. The transcript fills in once the device starts capturing on scene.</p>
       ) : (
         <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
@@ -32,6 +34,13 @@ export function TranscriptView({ turns, latest }: TranscriptViewProps) {
               </li>
             );
           })}
+          {partials.map((p) => (
+            <li key={p.id} className={[styles.transcriptTurn, styles.transcriptLive].join(" ")} aria-live="polite">
+              <span className={styles.eventTime} />
+              <span className={styles.speaker}>Hearing…</span>
+              <span className={styles.noteText}>{p.text}</span>
+            </li>
+          ))}
         </ol>
       )}
     </div>

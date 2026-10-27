@@ -74,7 +74,8 @@ function Transcript({
   highlighted: ReadonlySet<string>;
   onSelect: (id: string) => void;
 }) {
-  if (excerpts.length === 0) return <p className={styles.overviewValue}>No transcript yet. Lines appear as the device uploads chunks.</p>;
+  const { partials } = useLiveSource();
+  if (excerpts.length === 0 && partials.length === 0) return <p className={styles.overviewValue}>No transcript yet. Lines appear as the device uploads chunks.</p>;
   return (
     <>
       {excerpts.map((excerpt) => (
@@ -98,6 +99,14 @@ function Transcript({
               </button>
             );
           })}
+        </div>
+      ))}
+      {partials.map((p) => (
+        <div key={p.id} className={[styles.turn, styles.turnLive].join(" ")} aria-live="polite">
+          <span className={styles.turnHead}>
+            <span className={styles.speaker}>Hearing…</span>
+          </span>
+          <span className={styles.text}>{p.text}</span>
         </div>
       ))}
     </>

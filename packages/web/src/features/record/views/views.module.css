@@ -276,6 +276,12 @@
   border-bottom: 1px solid var(--color-line);
 }
 
+/* not saved yet, speaker labels land ~15-30s later */
+.transcriptLive {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
 .speaker {
   width: 96px;
   flex-shrink: 0;
