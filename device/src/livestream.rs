@@ -16,7 +16,7 @@ use std::time::{Duration, Instant};
 // ~10 s of 100 ms frames, beyond that we're not "live" anymore anyway
 const BACKLOG_FRAMES: usize = 100;
 
-pub fn start(base_url: String, session_id: String) -> SyncSender<Vec<u8>> {
+pub fn start(base_url: String, session_id: String, auth_token: Option<String>) -> SyncSender<Vec<u8>> {
     let (tx, rx) = sync_channel::<Vec<u8>>(BACKLOG_FRAMES);
     let rx = Arc::new(Mutex::new(rx));
     thread::spawn(move || {
@@ -50,11 +50,14 @@ pub fn start(base_url: String, session_id: String) -> SyncSender<Vec<u8>> {
                 ended: Arc::new(Mutex::new(false)),
             };
             let ended = reader.ended.clone();
-            let result = client
+            let mut request = client
                 .post(&url)
                 .header("content-type", "audio/L16; rate=16000; channels=1")
-                .body(reqwest::blocking::Body::new(reader))
-                .send();
+                .body(reqwest::blocking::Body::new(reader));
+            if let Some(token) = &auth_token {
+                request = request.bearer_auth(token);
+            }
+            let result = request.send();
             if *ended.lock().unwrap() {
                 return; // recording's over, the daemon is shutting down
             }
@@ -159,7 +162,7 @@ mod tests {
             (path, body)
         });
 
-        let tx = start(format!("http://{addr}"), "session_1".into());
+        let tx = start(format!("http://{addr}"), "session_1".into(), None);
         thread::sleep(Duration::from_millis(200));
         tx.send(vec![1, 2, 3]).unwrap();
         tx.send(vec![4, 5]).unwrap();

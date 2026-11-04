@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "pnpm --filter @nightingale/schema build",
     "dev": "vite",
+    "prebuild": "pnpm --filter @nightingale/schema build",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b",

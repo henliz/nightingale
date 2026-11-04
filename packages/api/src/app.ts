@@ -36,6 +36,7 @@ import {
 import { LiveStream, type LiveAsrFactory } from "./live-transcribe.js";
 import { HttpError } from "./http-error.js";
 import { createLiveHub, type LiveHub } from "./live.js";
+import { authMiddleware, principalFromRequest, requirePermission, securityHeaders, type ApiPermission, type ApiSecurityConfig } from "./security.js";
 import { createUploadTracker } from "./uploads.js";
 import type { VaultStore } from "./vault.js";
 
@@ -78,10 +79,46 @@ const defaultPipelineDeps: PipelineDeps = {
 // real identity/auth is milestone 4 (access control), these headers are just a
 // stand-in so audit events have someone to point at in the meantime
 function actorFrom(c: Context) {
+  const principal = c.get("principal") as { actorId: string; actorRole: string } | undefined;
+  if (principal) return principal;
   return {
     actorId: c.req.header("x-actor-id") ?? "unknown",
     actorRole: c.req.header("x-actor-role") ?? "unknown",
   };
+}
+
+function requiredParam(c: Context, name: string): string {
+  const value = c.req.param(name);
+  if (!value) throw new HttpError(400, `missing route parameter ${name}`);
+  return value;
+}
+
+async function readBodyLimited(c: Context, maxBytes: number): Promise<Uint8Array> {
+  const declared = Number(c.req.header("content-length"));
+  if (Number.isFinite(declared) && declared > maxBytes) throw new HttpError(413, "upload part is too large");
+  const body = c.req.raw.body;
+  if (!body) return new Uint8Array();
+  const reader = body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > maxBytes) throw new HttpError(413, "upload part is too large");
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const result = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    result.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return result;
 }
 
 export function createApp(
@@ -107,6 +144,8 @@ export function createApp(
     // a slower, stronger model for rebuilding a finished session's epcr (after a drill,
     // speed doesn't matter, getting who's who right does). falls back to the live one
     reviewCondenser,
+    security = { requireAuth: false, allowLegacyHeaders: true } as ApiSecurityConfig,
+    maxUploadBytes = 16 * 1024 * 1024,
   }: {
     silenceDbfs?: number;
     drills?: DrillStore;
@@ -114,6 +153,8 @@ export function createApp(
     crashpad?: Crashpad;
     processInBackground?: boolean;
     reviewCondenser?: Condenser;
+    security?: ApiSecurityConfig;
+    maxUploadBytes?: number;
   } = {},
 ) {
   const tracker = createUploadTracker(vault);
@@ -123,6 +164,16 @@ export function createApp(
   const piStampById = new Map<string, number>();
   const draftNotes = new Map<string, DraftNote>();
   const captions = new Map<string, string>();
+  const assetOwner = new Map<string, string>();
+  const principalFor = (c: Context) =>
+    (c.get("principal") as { actorId: string; actorRole: string; permissions: readonly ApiPermission[] } | undefined) ?? principalFromRequest(c, security);
+  const canAccessAsset = (c: Context, assetId: string, permission: "read" | "ingest" = "read") => {
+    const principal = principalFor(c);
+    requirePermission(principal, permission);
+    if (!security.requireAuth) return;
+    const owner = assetOwner.get(assetId);
+    if (owner && owner !== principal.actorId && !principal.permissions.includes("admin")) throw new HttpError(403, "asset access denied");
+  };
 
   // drill sessions (one per device connection), restored from disk so a restart
   // doesn't wipe anything. anything that was mid-processing when the api died is
@@ -133,6 +184,7 @@ export function createApp(
     if (session.epcrStatus === "updating") session.epcrStatus = session.epcr ? "ready" : "failed";
     for (const asset of session.assets) {
       if (asset.status === "processing") asset.status = "failed";
+      if (asset.ownerActorId) assetOwner.set(asset.assetId, asset.ownerActorId);
       assetsById.set(asset.assetId, asset);
     }
     sessions.set(session.captureId, session);
@@ -339,14 +391,19 @@ export function createApp(
     live.update(`epcr:${captureId}`);
   };
   const app = new Hono();
+  app.use("*", async (c, next) => {
+    securityHeaders(c);
+    await next();
+  });
 
   // ugly demo dashboard, not the real tiered-access one from ARCHITECTURE.md
   // section 9, see dashboard.ts for the caveat
   app.get("/", (c) => c.html(dashboardHtml));
 
-  app.post("/captures/:captureId/assets", async (c) => {
+  app.post("/captures/:captureId/assets", authMiddleware(security, "ingest"), async (c) => {
     const body = InitAssetRequest.parse(await c.req.json());
-    const result = await tracker.initAsset(c.req.param("captureId"), body);
+    const result = await tracker.initAsset(requiredParam(c, "captureId"), body);
+    assetOwner.set(result.assetId, actorFrom(c).actorId);
     if (body.capturedAt) {
       piStampById.set(result.assetId, body.capturedAt);
       const offset = body.deviceNow ? Date.now() - body.deviceNow : 0;
@@ -362,13 +419,14 @@ export function createApp(
     return c.json(result, 201);
   });
 
-  app.put("/assets/:assetId/parts/:partNumber", async (c) => {
-    const assetId = c.req.param("assetId");
-    const partNumber = Number(c.req.param("partNumber"));
+  app.put("/assets/:assetId/parts/:partNumber", authMiddleware(security, "ingest"), async (c) => {
+    const assetId = requiredParam(c, "assetId");
+    canAccessAsset(c, assetId, "ingest");
+    const partNumber = Number(requiredParam(c, "partNumber"));
     if (!Number.isInteger(partNumber) || partNumber < 1) {
       throw new HttpError(400, "partNumber must be a positive integer");
     }
-    const body = new Uint8Array(await c.req.arrayBuffer());
+    const body = await readBodyLimited(c, maxUploadBytes);
     const result = await tracker.uploadPart(assetId, partNumber, body);
     await auditLog.record({
       ...actorFrom(c),
@@ -380,15 +438,17 @@ export function createApp(
     return c.json(result);
   });
 
-  app.get("/assets/:assetId", async (c) => {
-    const assetId = c.req.param("assetId");
+  app.get("/assets/:assetId", authMiddleware(security, "read"), async (c) => {
+    const assetId = requiredParam(c, "assetId");
+    canAccessAsset(c, assetId);
     const result = tracker.getStatus(assetId);
     await auditLog.record({ ...actorFrom(c), action: "view", recordType: "Asset", recordId: assetId });
     return c.json(result);
   });
 
-  app.post("/assets/:assetId/complete", async (c) => {
-    const assetId = c.req.param("assetId");
+  app.post("/assets/:assetId/complete", authMiddleware(security, "ingest"), async (c) => {
+    const assetId = requiredParam(c, "assetId");
+    canAccessAsset(c, assetId, "ingest");
     const result = await tracker.complete(assetId);
     await auditLog.record({
       ...actorFrom(c),
@@ -447,6 +507,7 @@ export function createApp(
     capturedAtById.delete(assetId);
     const asset: LiveAsset = {
       assetId,
+      ownerActorId: actor.actorId,
       captureId: sessionId,
       kind: result.kind,
       completedAt,
@@ -570,16 +631,18 @@ export function createApp(
   };
 
   // the whole point of this one: see the note the pipeline produced, as plain json
-  app.get("/assets/:assetId/note", (c) => {
-    const assetId = c.req.param("assetId");
+  app.get("/assets/:assetId/note", authMiddleware(security, "read"), (c) => {
+    const assetId = requiredParam(c, "assetId");
+    canAccessAsset(c, assetId);
     const note = draftNotes.get(assetId);
     if (!note) throw new HttpError(404, `no draft note for asset ${assetId} (not audio, or still processing)`);
     return c.json(note);
   });
 
   // one short caption for a photo, same "not ready yet" semantics as /note
-  app.get("/assets/:assetId/caption", (c) => {
-    const assetId = c.req.param("assetId");
+  app.get("/assets/:assetId/caption", authMiddleware(security, "read"), (c) => {
+    const assetId = requiredParam(c, "assetId");
+    canAccessAsset(c, assetId);
     const caption = captions.get(assetId);
     if (caption === undefined) {
       throw new HttpError(404, `no caption for asset ${assetId} (not a photo, or still processing)`);
@@ -589,8 +652,9 @@ export function createApp(
 
   // see the photo. no viewer/ui yet, this just streams the bytes back so a
   // browser can render them directly
-  app.get("/assets/:assetId/download", async (c) => {
-    const assetId = c.req.param("assetId");
+  app.get("/assets/:assetId/download", authMiddleware(security, "read"), async (c) => {
+    const assetId = requiredParam(c, "assetId");
+    canAccessAsset(c, assetId);
     const status = tracker.getStatus(assetId);
     if (status.status !== "complete") {
       throw new HttpError(409, `asset ${assetId} isn't complete yet (${status.status})`);
@@ -611,7 +675,7 @@ export function createApp(
 
   // no access control on this yet either, same milestone 4 caveat as above.
   // mostly here so the audit trail is actually inspectable/demoable right now
-  app.get("/_audit", async (c) => {
+  app.get("/_audit", authMiddleware(security, "audit"), async (c) => {
     const events = await auditLog.list();
     const verified = await auditLog.verify();
     await auditLog.record({ ...actorFrom(c), action: "view", recordType: "AuditLog", recordId: "all" });
@@ -620,7 +684,7 @@ export function createApp(
 
   // dev feed (ARCHITECTURE.md section 9, item 5). the pi posts its log lines here,
   // the dashboard listens on /dev/stream and re-reads /dev/sessions when something lands
-  app.post("/dev/logs", async (c) => {
+  app.post("/dev/logs", authMiddleware(security, "ingest"), async (c) => {
     const batch = DevLogBatch.parse(await c.req.json());
     // a device announcing a session it hasn't uploaded anything for yet still gets its
     // own folder, that's what makes every new connection a new test
@@ -641,8 +705,8 @@ export function createApp(
   // chunked request, reconnects if it drops). transcribed word by word, see
   // live-transcribe.ts. partial text goes out as "transcript" events, final utterances
   // get saved to the session
-  app.post("/live/:sessionId/audio", async (c) => {
-    const deviceSessionId = c.req.param("sessionId");
+  app.post("/live/:sessionId/audio", authMiddleware(security, "ingest"), async (c) => {
+    const deviceSessionId = requiredParam(c, "sessionId");
     adoptWaitingCall(deviceSessionId);
     lastDeviceSessionId = deviceSessionId;
     lastDeviceHeardAt = Date.now();
@@ -697,12 +761,12 @@ export function createApp(
     return c.json({ ok: true });
   });
 
-  app.get("/dev/sessions", (c) => c.json([...sessions.values()]));
+  app.get("/dev/sessions", authMiddleware(security, "read"), (c) => c.json([...sessions.values()]));
 
   // rebuilds a session's whole-session epcr from its transcript, e.g. after a case was
   // split out of a longer recording (scripts/split-cases.mjs)
-  app.post("/dev/sessions/:captureId/epcr", async (c) => {
-    const captureId = c.req.param("captureId");
+  app.post("/dev/sessions/:captureId/epcr", authMiddleware(security, "admin"), async (c) => {
+    const captureId = requiredParam(c, "captureId");
     if (!sessions.has(captureId)) throw new HttpError(404, `no session ${captureId}`);
     await refreshEpcr(captureId, reviewCondenser);
     const session = sessions.get(captureId)!;
@@ -712,7 +776,7 @@ export function createApp(
   // the dashboard's "new session" button. starts a fresh session (own drills/ folder,
   // empty epcr, speakers from Person 1) for everything the device sends from now on,
   // without touching the pi. the previous session is kept as it is
-  app.post("/dev/sessions/new", (c) => {
+  app.post("/dev/sessions/new", authMiddleware(security, "admin"), (c) => {
     // already waiting on the pi with an empty call, clicking again just keeps that one
     const waiting = waitingCallId ? sessions.get(waitingCallId) : undefined;
     if (waiting && waiting.assets.length === 0) {
@@ -752,15 +816,17 @@ export function createApp(
   });
 
   // raw captures saved in a drill folder (photos, audio), see drills.ts
-  app.get("/dev/files/:dir/:sub/:name", (c) => {
-    const { dir, sub, name } = c.req.param();
+  app.get("/dev/files/:dir/:sub/:name", authMiddleware(security, "read"), (c) => {
+    const dir = requiredParam(c, "dir");
+    const sub = requiredParam(c, "sub");
+    const name = requiredParam(c, "name");
     const path = drills.resolveFile(dir, `${sub}/${name}`);
     if (!path || !existsSync(path)) throw new HttpError(404, "no such drill file");
     const type = name.endsWith(".wav") ? "audio/wav" : name.endsWith(".jpg") ? "image/jpeg" : "application/octet-stream";
     return c.body(new Blob([readFileSync(path)]), 200, { "Content-Type": type });
   });
 
-  app.get("/dev/stream", (c) =>
+  app.get("/dev/stream", authMiddleware(security, "read"), (c) =>
     streamSSE(c, async (stream) => {
       for (const line of live.recentLogs().slice(-300)) {
         await stream.writeSSE({ event: "log", data: JSON.stringify(line) });
@@ -782,7 +848,7 @@ export function createApp(
   );
 
   app.onError((err, c) => {
-    if (err instanceof HttpError) return c.json({ error: err.message }, err.status as 400 | 404 | 409 | 500);
+    if (err instanceof HttpError) return c.json({ error: err.message }, err.status as 400 | 401 | 403 | 404 | 409 | 413 | 500);
     if (err instanceof z.ZodError) return c.json({ error: "bad request", issues: err.issues }, 400);
     console.error(err);
     return c.json({ error: "something broke on our end" }, 500);

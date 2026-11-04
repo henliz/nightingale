@@ -45,17 +45,23 @@ fn now_millis() -> u64 {
 
 // call once at startup. without this (or with shipping off) the log functions
 // still print, they just don't leave the pi
-pub fn init(base_url: String, device_id: String, session_id: String, ship: bool) {
+pub fn init(base_url: String, device_id: String, session_id: String, auth_token: Option<String>, ship: bool) {
     if !ship {
         return;
     }
     let (tx, rx) = channel();
     if SHIPPER.set(tx).is_ok() {
-        thread::spawn(move || ship_loop(rx, base_url, device_id, session_id));
+        thread::spawn(move || ship_loop(rx, base_url, device_id, session_id, auth_token));
     }
 }
 
-fn ship_loop(rx: Receiver<Line>, base_url: String, device_id: String, session_id: String) {
+fn ship_loop(
+    rx: Receiver<Line>,
+    base_url: String,
+    device_id: String,
+    session_id: String,
+    auth_token: Option<String>,
+) {
     let http = reqwest::blocking::Client::builder()
         .timeout(Duration::from_secs(5))
         .build()
@@ -81,9 +87,11 @@ fn ship_loop(rx: Receiver<Line>, base_url: String, device_id: String, session_id
             lines: buffer.iter().take(200).cloned().collect(),
         };
         let sent = batch.lines.len();
-        let ok = http
-            .post(&url)
-            .json(&batch)
+        let mut request = http.post(&url).json(&batch);
+        if let Some(token) = &auth_token {
+            request = request.bearer_auth(token);
+        }
+        let ok = request
             .send()
             .map(|r| r.status().is_success())
             .unwrap_or(false);

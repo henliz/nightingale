@@ -4,14 +4,15 @@
 #
 # env overrides:
 #   PI=henliz@nightingale.local        ssh target
-#   API_URL=http://<host>.local:8787    where the pi sends uploads + logs
-#                                       (default: this mac's own .local name)
+#   API_URL=https://<host>:8787         where the pi sends uploads + logs
+#   DEVICE_TOKEN=<32+ chars>            per-device ingest token; never commit it
 #   PROFILE=release|debug               default release (smaller, faster)
 #   MAX_CLIP_SECONDS=1800               safety net: recording auto-stops (save, queue, power off) after this
 #   LED_PIN= BUZZER_PIN=                optional bcm pins, nothing wired yet
 #   NOTICE_WAV=/home/henliz/notice.wav  optional, played after the ready tone (aplay)
 # the buttons are fixed: POWER/RECORD gpio 3 (pin 5), PHOTO gpio 17 (pin 11)
 set -euo pipefail
+umask 077
 
 cd "$(dirname "$0")"
 
@@ -19,12 +20,13 @@ PI="${PI:-henliz@nightingale.local}"
 PROFILE="${PROFILE:-release}"
 TARGET=aarch64-unknown-linux-gnu
 
-if [[ -z "${API_URL:-}" ]]; then
-  if command -v scutil >/dev/null; then
-    API_URL="http://$(scutil --get LocalHostName).local:8787"
-  else
-    API_URL="http://$(hostname).local:8787"
-  fi
+if [[ -z "${API_URL:-}" || "$API_URL" != https://* ]]; then
+  echo "API_URL must be an https:// endpoint" >&2
+  exit 1
+fi
+if [[ -z "${DEVICE_TOKEN:-}" || ${#DEVICE_TOKEN} -lt 32 ]]; then
+  echo "DEVICE_TOKEN must be at least 32 characters" >&2
+  exit 1
 fi
 
 if ! docker info >/dev/null 2>&1; then
@@ -52,6 +54,7 @@ echo "==> writing env file (api at $API_URL)"
 ENV_FILE="$(mktemp)"
 cat > "$ENV_FILE" <<ENV
 NIGHTINGALE_API_URL=$API_URL
+NIGHTINGALE_DEVICE_TOKEN=$DEVICE_TOKEN
 NIGHTINGALE_DEV=1
 NIGHTINGALE_AUDIO_CHUNK_SECONDS=${AUDIO_CHUNK_SECONDS:-15}
 NIGHTINGALE_MAX_CLIP_SECONDS=${MAX_CLIP_SECONDS:-1800}
