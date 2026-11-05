@@ -5,8 +5,9 @@ lost by the time a patient reaches the hospital. fire, then paramedics, then hos
 each one handed a clean note instead of whatever used to get lost in the shuffle.
 
 capstone prototype (GBDA 402, "lost in handoff"). scripted drills, fictional patients, no
-real patient info goes through this thing, ever. there's no access control yet, so that's
-not a nice-to-have, it's the rule.
+real patient info goes through this thing, ever. This branch includes MVP authentication,
+authorization, audit logging, upload limits, and device transport protections, but it is
+still not approved for real patient data or a claim of PHIPA/MFIPPA compliance.
 
 - the why behind every design rule: [ARCHITECTURE.md](./ARCHITECTURE.md)
 - the whole thing in plain english, for non-coders: [HOW-NIGHTINGALE-WORKS.txt](./HOW-NIGHTINGALE-WORKS.txt)
@@ -34,10 +35,9 @@ patient, from the figma story). open a call to see the ePCR split by role, the
 transcript, photos, flags, the share + handoff flow. **new call** on the home page starts
 a fresh call the pi records into, and the transcript fills in word by word while you talk.
 
-**the ugly one** (`packages/api`, http://localhost:8787). dark mode, one page, no login.
-it's the dev feed: the raw ePCR, the transcript, and a console with every log line from
-the server and the pi (heartbeats, uploads, errors). use it when something's broken and
-you want to see why.
+**the ugly one** (`packages/api`, http://localhost:8787). dark mode, one page, intended
+for local fictional drills. In secured server mode its data routes require scoped API
+credentials; use it when something's broken and you want to see why.
 
 both read the same data from the same api, so they always agree.
 
@@ -95,10 +95,10 @@ laptop running the script gets written onto the pi, and that's the only place it
 sends to. your laptop running the api doesn't change that, the pi doesn't know it exists.
 setting it up from another laptop would need ssh access to the pi (hen's login), so don't.
 
-so: one receiver, everyone else can watch (see above). a proper "everyone gets the call"
-setup (a hosted api, logins, who's allowed to see what) is the access control work in
-ARCHITECTURE.md section 7, not built yet. until then, anyone on the same wifi can open
-hen's ugly dashboard, which is fine because it's only ever fictional drills.
+so: one receiver, everyone else can watch (see above). The local memory demo retains
+fictional-drill compatibility; the production-style server requires API keys and the
+device requires HTTPS plus a per-device bearer token. The browser demo still needs a
+real login/token exchange before it could be used outside this school prototype.
 
 ## running the whole thing (hen's laptop, with the pi)
 
@@ -175,10 +175,12 @@ evident audit log (`packages/audit`).
 
 ## status
 
-done: chunked/resumable ingest + the rust upload client, the hash chained audit log, the
-real pipeline (gemini or openai), the pi's two button capture daemon, both dashboards,
-live transcription. not done: access control (so no real patient data, ever), retention,
-a watchdog on the pi. ARCHITECTURE.md section 12 has the full build order.
+done: chunked/resumable ingest + the rust upload client, scoped MVP API access control,
+hash-chained audit logging, the real pipeline (gemini or openai), the pi's two button
+capture daemon, both dashboards, live transcription, upload limits, and device bearer
+authentication/HTTPS checks. not done: production identity, retention, breach response,
+and a watchdog on the pi. See [SECURITY-DEMO.md](./SECURITY-DEMO.md),
+[THREAT-MODEL.md](./THREAT-MODEL.md), and [PRIVACY-SECURITY-READINESS.md](./PRIVACY-SECURITY-READINESS.md).
 
 ## layout
 

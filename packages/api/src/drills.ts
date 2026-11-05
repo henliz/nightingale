@@ -12,13 +12,15 @@
 // fictional drill data only (ARCHITECTURE.md scope note). this is a dev convenience,
 // not the sealed vault, no retention rules, no access control
 
-import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, chmodSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve, sep } from "node:path";
 import type { DraftNote } from "@nightingale/schema";
 import type { LiveLogLine } from "./live.js";
 
 export interface LiveAsset {
   assetId: string;
+  /** authenticated actor that uploaded this asset; used for post-restart access checks */
+  ownerActorId?: string;
   captureId: string;
   kind: "audio" | "photo";
   completedAt: number;
@@ -107,14 +109,17 @@ export function clockStamp(ms: number) {
 
 export function createFsDrillStore(root: string): DrillStore {
   const rootAbs = resolve(root);
+  mkdirSync(rootAbs, { recursive: true, mode: 0o700 });
+  chmodSync(rootAbs, 0o700);
   const pending = new Map<string, NodeJS.Timeout>();
 
   const writeNow = (session: DrillSession) => {
     const dir = join(rootAbs, session.dir);
-    mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, "session.json"), JSON.stringify(session, null, 2));
-    writeFileSync(join(dir, "transcript.md"), transcriptMarkdown(session));
-    writeFileSync(join(dir, "epcr.md"), epcrMarkdown(session));
+    mkdirSync(dir, { recursive: true, mode: 0o700 });
+    chmodSync(dir, 0o700);
+    writeFileSync(join(dir, "session.json"), JSON.stringify(session, null, 2), { mode: 0o600 });
+    writeFileSync(join(dir, "transcript.md"), transcriptMarkdown(session), { mode: 0o600 });
+    writeFileSync(join(dir, "epcr.md"), epcrMarkdown(session), { mode: 0o600 });
   };
 
   return {
@@ -153,13 +158,15 @@ export function createFsDrillStore(root: string): DrillStore {
       const target = this.resolveFile(session.dir, relPath);
       if (!target) return;
       mkdirSync(dirname(target), { recursive: true });
-      writeFileSync(target, bytes);
+      writeFileSync(target, bytes, { mode: 0o600 });
+      chmodSync(target, 0o600);
     },
     appendLog(session, line) {
       const dir = join(rootAbs, session.dir);
       mkdirSync(dir, { recursive: true });
       const ts = new Date(line.ts).toLocaleTimeString();
-      appendFileSync(join(dir, "console.log"), `${ts} ${line.source} ${line.level}: ${line.msg}\n`);
+      appendFileSync(join(dir, "console.log"), `${ts} ${line.source} ${line.level}: ${line.msg}\n`, { mode: 0o600 });
+      chmodSync(join(dir, "console.log"), 0o600);
     },
     resolveFile(dir, relPath) {
       const sessionDir = resolve(rootAbs, dir);
