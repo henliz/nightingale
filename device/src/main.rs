@@ -133,8 +133,22 @@ fn main() {
     }
 
     let counters = Arc::new(Counters::default());
-    spawn_uploader(&queue, &base_url, &counters, "wav", "audio");
-    spawn_uploader(&queue, &base_url, &counters, "jpg", "photo");
+    spawn_uploader(
+        &queue,
+        &base_url,
+        &counters,
+        device_token.clone(),
+        "wav",
+        "audio",
+    );
+    spawn_uploader(
+        &queue,
+        &base_url,
+        &counters,
+        device_token.clone(),
+        "jpg",
+        "photo",
+    );
     spawn_heartbeat(&queue, &counters);
 
     // live word-by-word transcription on the laptop, NIGHTINGALE_LIVE=0 to turn it off
@@ -213,6 +227,7 @@ fn spawn_uploader(
     queue: &Arc<Queue>,
     base_url: &str,
     counters: &Arc<Counters>,
+    device_token: Option<String>,
     ext: &'static str,
     kind: &'static str,
 ) {
