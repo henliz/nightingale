@@ -45,7 +45,13 @@ fn now_millis() -> u64 {
 
 // call once at startup. without this (or with shipping off) the log functions
 // still print, they just don't leave the pi
-pub fn init(base_url: String, device_id: String, session_id: String, auth_token: Option<String>, ship: bool) {
+pub fn init(
+    base_url: String,
+    device_id: String,
+    session_id: String,
+    auth_token: Option<String>,
+    ship: bool,
+) {
     if !ship {
         return;
     }

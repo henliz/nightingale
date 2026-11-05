@@ -72,7 +72,9 @@ fn main() {
         return;
     }
     if !mock && device_token.as_deref().is_none_or(|token| token.len() < 32) {
-        eprintln!("NIGHTINGALE_DEVICE_TOKEN of at least 32 characters is required outside mock mode");
+        eprintln!(
+            "NIGHTINGALE_DEVICE_TOKEN of at least 32 characters is required outside mock mode"
+        );
         return;
     }
     // a safety net for a forgotten device, not the normal way to stop: the POWER/RECORD
@@ -94,7 +96,13 @@ fn main() {
     });
 
     let capture_id = format!("session_{}", now_secs());
-    devlog::init(base_url.clone(), device_id.clone(), capture_id.clone(), device_token.clone(), dev);
+    devlog::init(
+        base_url.clone(),
+        device_id.clone(),
+        capture_id.clone(),
+        device_token.clone(),
+        dev,
+    );
 
     let queue = match Queue::open(&queue_dir) {
         Ok(q) => Arc::new(q),

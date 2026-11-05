@@ -16,7 +16,11 @@ use std::time::{Duration, Instant};
 // ~10 s of 100 ms frames, beyond that we're not "live" anymore anyway
 const BACKLOG_FRAMES: usize = 100;
 
-pub fn start(base_url: String, session_id: String, auth_token: Option<String>) -> SyncSender<Vec<u8>> {
+pub fn start(
+    base_url: String,
+    session_id: String,
+    auth_token: Option<String>,
+) -> SyncSender<Vec<u8>> {
     let (tx, rx) = sync_channel::<Vec<u8>>(BACKLOG_FRAMES);
     let rx = Arc::new(Mutex::new(rx));
     thread::spawn(move || {

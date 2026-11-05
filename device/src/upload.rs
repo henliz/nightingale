@@ -92,14 +92,14 @@ impl UploadClient {
     ) -> Result<InitAssetResponse> {
         let url = format!("{}/captures/{}/assets", self.base_url, capture_id);
         let mut request = self.http.post(url).json(&InitAssetRequest {
-                kind,
-                sha256,
-                captured_at,
-                device_now: std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .map(|d| d.as_millis() as u64)
-                    .unwrap_or(0),
-            });
+            kind,
+            sha256,
+            captured_at,
+            device_now: std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map(|d| d.as_millis() as u64)
+                .unwrap_or(0),
+        });
         if let Some(token) = &self.auth_token {
             request = request.bearer_auth(token);
         }
@@ -269,9 +269,10 @@ mod tests {
     fn sends_bearer_token_when_configured() {
         let server = MockServer::start();
         let mock = server.mock(|when, then| {
-            when.method(POST)
-                .path("/captures/cap_1/assets")
-                .header("authorization", "Bearer device-secret-xxxxxxxxxxxxxxxxxxxxxxxx");
+            when.method(POST).path("/captures/cap_1/assets").header(
+                "authorization",
+                "Bearer device-secret-xxxxxxxxxxxxxxxxxxxxxxxx",
+            );
             then.status(201).json_body(json!({
                 "assetId": "asset_1",
                 "vaultKey": "cap_1/asset_1",
@@ -283,7 +284,9 @@ mod tests {
             server.base_url(),
             Some("device-secret-xxxxxxxxxxxxxxxxxxxxxxxx".into()),
         );
-        client.init_asset("cap_1", "audio", &"a".repeat(64)).unwrap();
+        client
+            .init_asset("cap_1", "audio", &"a".repeat(64))
+            .unwrap();
         mock.assert();
     }
 }
