@@ -15,7 +15,7 @@ interface EpcrDraftPanelProps {
   onSelectField: (key: string) => void;
   onOpenField: (key: string) => void;
   onToggleCheckbox: (key: string, checked: boolean) => void;
-  /** field keys that still need attention, their tabs get a red dot */
+  /** field keys that still need attention, their tabs show a count */
   attentionKeys?: ReadonlySet<string>;
   draftStatus: string;
   saveLabel: string;
@@ -27,9 +27,15 @@ export function EpcrDraftPanel(props: EpcrDraftPanelProps) {
   const { tabs, sections, tab, onTabChange, incident, selectedKey, onSelectField, onOpenField, onToggleCheckbox, draftStatus, saveLabel, onSave } = props;
   const attentionKeys = props.attentionKeys ?? new Set<string>();
   const visible = sections.filter((s) => s.tab === tab);
-  const tabsNeedingAttention = new Set(
-    sections.filter((s) => s.fields.some((f) => attentionKeys.has(f.key))).map((s) => s.tab),
-  );
+  // how many things on each tab still need a look (flagged or needed for handoff, not yet reviewed)
+  const todoByTab = new Map<string, number>();
+  for (const sec of sections) {
+    for (const f of sec.fields) {
+      const r = resolveField(f, incident);
+      if (r.review) continue;
+      if (r.flagged || attentionKeys.has(f.key)) todoByTab.set(sec.tab, (todoByTab.get(sec.tab) ?? 0) + 1);
+    }
+  }
 
   return (
     <section className={styles.panel} aria-label="ePCR draft">
@@ -48,8 +54,8 @@ export function EpcrDraftPanel(props: EpcrDraftPanelProps) {
             className={[styles.tab, tab === t.id ? styles.tabActive : ""].join(" ")}
             onClick={() => onTabChange(t.id)}
           >
-            {tabsNeedingAttention.has(t.id) && <span className={styles.tabDot} aria-label="Needs attention" />}
             {t.label}
+            {(todoByTab.get(t.id) ?? 0) > 0 && <span className={styles.tabCount} aria-label={`${todoByTab.get(t.id)} to check`}>{todoByTab.get(t.id)}</span>}
           </button>
         ))}
       </div>

@@ -15,6 +15,7 @@
 
 .title {
   font: var(--text-heading);
+  letter-spacing: -0.015em;
 }
 
 .chips {
@@ -67,8 +68,8 @@
 .pill {
   padding: 6px 12px;
   border-radius: var(--radius-6);
-  background: #e6f7ea;
-  color: #1f7a3a;
+  background: var(--color-success-soft);
+  color: var(--color-success);
   font: var(--text-label);
 }
 

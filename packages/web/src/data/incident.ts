@@ -23,6 +23,11 @@ export interface RecordRow {
   captureId?: string;
   /** the sample-data story, picking it flips the dashboard to demo mode */
   demo?: boolean;
+  /** "Unnamed patient · 57 · male" */
+  patient?: string;
+  conflicts?: number;
+  /** draft / no epcr / updating */
+  status?: string;
 }
 
 export interface Observation {

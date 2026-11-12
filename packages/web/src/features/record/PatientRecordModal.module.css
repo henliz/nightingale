@@ -16,11 +16,12 @@
 
 .name {
   font: var(--text-title);
+  letter-spacing: -0.015em;
 }
 
 .recordNumber {
   font: var(--text-small);
-  color: var(--color-blue);
+  color: var(--color-accent);
 }
 
 .search {

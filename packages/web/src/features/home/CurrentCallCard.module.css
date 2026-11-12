@@ -7,7 +7,7 @@
 
 .callId {
   font: var(--text-caption);
-  color: var(--color-blue);
+  color: var(--color-accent);
   white-space: nowrap;
 }
 
@@ -33,13 +33,14 @@
 }
 
 .title {
-  font: var(--text-heading);
+  font: 600 24px/30px var(--font-heading);
+  letter-spacing: -0.02em;
   max-width: 648px;
 }
 
 .patient {
-  font: var(--text-body);
-  color: var(--color-muted);
+  font: var(--text-label);
+  color: var(--color-ink);
   white-space: pre-wrap;
   max-width: 648px;
 }
@@ -57,4 +58,24 @@
   align-items: center;
   gap: var(--space-12);
   height: 44px;
+}
+
+.conflicts {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--space-8);
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-flag-soft);
+  color: var(--color-flag);
+  font: 600 11px/18px var(--font-sans);
+  vertical-align: 1px;
+}
+
+/* lock svg is navy, flip it white on the solid button */
+.lockIcon {
+  filter: brightness(0) invert(1);
+}
+:root[data-theme="night"] .lockIcon {
+  filter: brightness(0);
 }

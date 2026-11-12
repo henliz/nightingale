@@ -15,11 +15,11 @@
 }
 
 .active {
-  background: #d1f9cc;
-  color: #537360;
+  background: var(--color-success-soft);
+  color: var(--color-success);
 }
 
 .warning {
-  background: #fff3db;
-  color: #a0640a;
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
 }

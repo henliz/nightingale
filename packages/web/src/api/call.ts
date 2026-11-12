@@ -21,6 +21,8 @@ export interface CallInfo {
   dispatchAt: string;
   dispatchText: string;
   hazards: string;
+  /** how many things the pipeline flagged as conflicting or unsupported */
+  conflicts: number;
   /** newest thing heard on scene */
   latest: { at: string; text: string } | null;
   sections: NoteSections;
@@ -31,6 +33,14 @@ export const UNNAMED = "Unnamed patient";
 function clock(ms: number | undefined): string {
   if (!ms) return "";
   return new Date(ms).toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
+}
+
+// "32 per cousin; 57 per responder at handoff" doesn't fit a card line, the conflict list has the detail
+export function shortAge(age: string | undefined): string | undefined {
+  if (!age) return undefined;
+  const nums = [...new Set(age.match(/\d+/g) ?? [])];
+  if (nums.length > 1) return `age unclear (${nums.join(" or ")})`;
+  return nums.length === 1 && age.length > 12 ? nums[0] : age;
 }
 
 const hhmm = (t: string | undefined) => (t ? t.slice(0, 5) : undefined);
@@ -46,6 +56,7 @@ export function callInfo(session: DrillSession | null): CallInfo {
       dispatchAt: "",
       dispatchText: "",
       hazards: "",
+      conflicts: 0,
       latest: null,
       sections: {},
     };
@@ -60,11 +71,12 @@ export function callInfo(session: DrillSession | null): CallInfo {
     callId: session.title ?? `Call ${when}`,
     headline: s.chiefComplaint ?? s.incident?.dispatchReason ?? "Waiting for the first details",
     patientName: s.patient?.name ?? null,
-    patientLine: [s.patient?.name ?? UNNAMED, s.patient?.age, s.patient?.sex].filter(Boolean).join(" · "),
+    patientLine: [s.patient?.name ?? UNNAMED, shortAge(s.patient?.age), s.patient?.sex].filter(Boolean).join(" · "),
     firstContact: hhmm(t.patientContact) ?? hhmm(t.onScene) ?? clock(session.startedAt),
     dispatchAt: hhmm(t.callReceived) ?? clock(session.startedAt),
     dispatchText: [s.incident?.dispatchReason, s.incident?.location].filter(Boolean).join(", ") || "No dispatch details captured.",
     hazards: hazards ? `Scene safety and hazards: ${hazards}` : "Scene safety and hazards: none mentioned on scene.",
+    conflicts: session.epcr?.flags.length ?? 0,
     latest: last ? { at: clock(last.at), text: last.text } : null,
     sections: s,
   };
@@ -80,6 +92,7 @@ export const SAMPLE_CALL: CallInfo = {
   dispatchAt: CURRENT_CALL.dispatch.createdAt,
   dispatchText: CURRENT_CALL.dispatch.text,
   hazards: HANDOFF_HAZARDS,
+  conflicts: 0,
   latest: { at: LATEST_OBSERVATION.needs_review.receivedAt, text: LATEST_OBSERVATION.needs_review.text },
   sections: {},
 };

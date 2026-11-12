@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../../../components/ui/Button/Button";
 import { Field } from "../../../components/ui/Field/Field";
-import { Icon } from "../../../components/ui/Icon/Icon";
 import { INCIDENT_SECTIONS } from "../../../data/record";
 import type { IncidentState } from "../../../incident/types";
 import styles from "./views.module.css";
@@ -14,44 +13,69 @@ interface IncidentViewProps {
 }
 
 export function IncidentView({ sections = INCIDENT_SECTIONS, notes, onSaveNote }: IncidentViewProps) {
-  const [openTitle, setOpenTitle] = useState<string | null>(sections[0]?.title ?? null);
+  // every section stays open (no hunting through an accordion), a side index jumps between them
+  const idFor = (title: string) => `incident-${title.replace(/\W+/g, "-").toLowerCase()}`;
+  const [active, setActive] = useState<string>(sections[0]?.title ?? "");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // highlight whichever section is at the top of the scroll area
+  useEffect(() => {
+    const root = scrollRef.current?.closest("[data-scroll-root]") ?? null;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const top = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (top) setActive(top.target.getAttribute("data-title") ?? "");
+      },
+      { root, rootMargin: "0px 0px -70% 0px" },
+    );
+    scrollRef.current?.querySelectorAll("[data-title]").forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [sections]);
+
+  const jump = (title: string) => {
+    setActive(title);
+    document.getElementById(idFor(title))?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  };
 
   return (
-    <div className={styles.view}>
-      <h3 className={styles.heading}>Patient and incident details</h3>
-      <p className={styles.lede}>Keep call reporting alongside the patient record. Open only the sections needed for this incident.</p>
-      {sections.map((section) => {
-        const open = openTitle === section.title;
-        const panelId = `incident-${section.title.replace(/\W+/g, "-").toLowerCase()}`;
-        const note = notes[section.title];
-        return (
-          <div key={section.title} className={styles.accordion}>
+    <div className={styles.segmented}>
+      <nav className={styles.segNav} aria-label="ePCR sections">
+        {sections.map((section) => {
+          const flags = section.fields.filter((f) => f.flag).length;
+          const filled = section.fields.filter((f) => f.value).length;
+          return (
             <button
+              key={section.title}
               type="button"
-              className={styles.accordionHead}
-              aria-expanded={open}
-              aria-controls={panelId}
-              onClick={() => setOpenTitle(open ? null : section.title)}
+              className={styles.segLink}
+              aria-current={active === section.title ? "true" : undefined}
+              onClick={() => jump(section.title)}
             >
-              <span className={styles.accordionHeadLabel}>{section.title}</span>
-              {note && <span className={styles.hint}>Note added</span>}
-              <Icon name="chevron" size={18} className={open ? styles.chevronOpen : undefined} />
+              <span className={styles.segLabel}>{section.title}</span>
+              {flags > 0 ? <span className={styles.segFlag}>{flags}</span> : <span className={styles.segCount}>{filled}/{section.fields.length}</span>}
             </button>
-            {open && (
-              <div id={panelId}>
-                <div className={styles.accordionBody}>
-                  {section.fields.length === 0 ? (
-                    <p className={styles.hint}>Nothing recorded for this section.</p>
-                  ) : (
-                    section.fields.map((f) => <Field key={f.label} label={f.label} value={f.value} flag={f.flag} note={f.note} />)
-                  )}
-                </div>
-                <SectionNote section={section.title} note={note} onSave={onSaveNote} />
+          );
+        })}
+      </nav>
+
+      <div className={styles.segBody} ref={scrollRef}>
+        {sections.map((section) => {
+          const note = notes[section.title];
+          return (
+            <section key={section.title} id={idFor(section.title)} data-title={section.title} className={styles.segment} aria-label={section.title}>
+              <h3 className={styles.segTitle}>{section.title}</h3>
+              <div className={styles.segFields}>
+                {section.fields.length === 0 ? (
+                  <p className={styles.hint}>Nothing recorded for this section.</p>
+                ) : (
+                  section.fields.map((f) => <Field key={f.label} label={f.label} value={f.value} flag={f.flag} note={f.note} />)
+                )}
               </div>
-            )}
-          </div>
-        );
-      })}
+              <SectionNote section={section.title} note={note} onSave={onSaveNote} />
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@
 
 .title {
   font: var(--text-title);
+  letter-spacing: -0.015em;
 }
 
 .meta {
@@ -21,8 +22,3 @@
   min-height: 520px;
 }
 
-.workspaceSingle {
-  height: calc(100vh - 71px - 97px - 16px);
-  min-height: 520px;
-  display: flex;
-}

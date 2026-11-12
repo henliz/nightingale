@@ -29,11 +29,8 @@ export function FireHomePage() {
     setRecordTab("overview");
     setRecordOpen(true);
   };
-  /** "Review note": transcript with the latest observation summarised on top */
-  const reviewNote = () => {
-    setRecordTab("transcript");
-    setRecordOpen(true);
-  };
+  /** "Review note": the overview, latest observation on top (no transcript, that's a privacy no) */
+  const reviewNote = openRecord;
 
   return (
     <HomeLayout

@@ -4,6 +4,7 @@ import { USERS, type User } from "../../data/users";
 import { useSession } from "../../session/SessionContext";
 import { Icon } from "../../components/ui/Icon/Icon";
 import { AccountPicker } from "./AccountPicker";
+import logo from "../../assets/figma/icon-logo.svg";
 import styles from "./SignInPage.module.css";
 
 const HOME_BY_ROLE: Record<User["role"], string> = {
@@ -59,6 +60,13 @@ export function SignInPage() {
 
   return (
     <main className={styles.page}>
+      {/* the one place the textured gradient gets to be loud, nothing clinical lives here */}
+      <aside className={styles.brandPanel} aria-hidden="true">
+        <img className={styles.brandMark} src={logo} alt="" width={64} height={64} />
+        <p className={styles.brandWord}>Nightingale</p>
+        <p className={styles.brandLine}>Say it once. It reaches the hospital.</p>
+        <span className={styles.brandHalftone} />
+      </aside>
       <form className={styles.card} onSubmit={handleSubmit} noValidate>
         <p className={styles.brand}>Nightingale</p>
         <h1 className={styles.heading}>Sign in on the department device</h1>

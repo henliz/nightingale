@@ -19,12 +19,11 @@ import { IncidentView } from "./views/IncidentView";
 import { NoteFormView } from "./views/NoteFormView";
 import { OverviewView } from "./views/OverviewView";
 import { TimelineView } from "./views/TimelineView";
-import { TranscriptView } from "./views/TranscriptView";
 import { UploadView } from "./views/UploadView";
 import { LockedSummaryView } from "./views/LockedSummaryView";
 import styles from "./PatientRecordModal.module.css";
 
-type Tab = "overview" | "transcript" | "timeline" | "files" | "incident";
+type Tab = "overview" | "timeline" | "files" | "incident";
 
 function LockedSummary({ tab }: { tab: Tab }) {
   return <LockedSummaryView showSummary={tab === "overview"} />;
@@ -33,7 +32,6 @@ type SubView = "noteform" | "upload" | null;
 
 const TABS = [
   { id: "overview", label: "Overview" },
-  { id: "transcript", label: "Transcript" },
   { id: "timeline", label: "Care timeline" },
   { id: "files", label: "Files" },
   { id: "incident", label: "Incident" },
@@ -41,7 +39,7 @@ const TABS = [
 
 interface PatientRecordModalProps {
   open: boolean;
-  /** tab to open on, "Review note" opens the transcript */
+  /** tab to open on */
   initialTab?: Tab;
   /** paramedic step 2: shared, not accepted yet. hazards show, identity stays locked */
   locked?: boolean;
@@ -135,7 +133,8 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
         return (
           <OverviewView
             record={record}
-            flags={live.source === "demo" ? [] : flags.map((f) => `${f.label}: ${f.flagNote}`)}
+            flags={live.source === "demo" ? [] : flags.map((f) => ({ key: f.key, field: f.label, note: f.flagNote! }))}
+            onOpenFlag={(key) => navigate(`${user?.role === "paramedic" ? "/paramedic/record" : "/fire/record"}?field=${encodeURIComponent(key)}`)}
             deviceActive={recording}
             deviceElapsed={incident.recordingStartedAt !== null ? elapsed(incident.recordingStartedAt, now) : null}
             onAddObservation={() => setSubView("noteform")}
@@ -143,8 +142,6 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
             onViewFiles={() => setTab("files")}
           />
         );
-      case "transcript":
-        return <TranscriptView turns={record.transcript} latest={record.latestNote} />;
       case "timeline":
         return <TimelineView events={record.timeline} onAddObservation={() => setSubView("noteform")} onViewFiles={() => setTab("files")} />;
       case "files":
@@ -184,7 +181,7 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
 
       <Tabs tabs={live.source === "demo" ? TABS : TABS.map((t) => (t.id === "incident" ? { ...t, label: "ePCR" } : t))} value={tab} onChange={(next) => { setSubView(null); setTab(next); }} label="Record sections" />
 
-      <div className={styles.body} role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
+      <div className={styles.body} data-scroll-root role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
         {renderBody()}
       </div>
 

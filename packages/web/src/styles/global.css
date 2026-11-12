@@ -18,6 +18,8 @@ body {
   color: var(--color-ink);
   font: var(--text-body);
   -webkit-font-smoothing: antialiased;
+  /* times + vitals line up in columns */
+  font-variant-numeric: tabular-nums;
 }
 
 h1,
@@ -43,4 +45,15 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* visible to screen readers only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

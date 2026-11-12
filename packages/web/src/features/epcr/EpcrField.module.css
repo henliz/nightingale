@@ -43,23 +43,47 @@
   align-items: flex-start;
 }
 
+
+
+/* not captured: dashed, quiet, clearly not a value */
+.empty {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--color-line-strong);
+}
+
+
+
+.suggested {
+  border-color: var(--color-line-strong);
+}
+
 .flagged {
   background: var(--color-flag-soft);
   border-color: var(--color-flag);
 }
 
+
+.confirmed {
+  border-color: var(--color-line);
+}
+
 .selected {
   border-color: var(--color-blue);
-  box-shadow: 0 0 0 2px var(--color-blue-soft);
+  border-style: solid;
+  box-shadow: 0 0 0 3px var(--color-blue-soft);
 }
 
 .placeholder {
   color: var(--color-muted);
+  font-size: 14px;
 }
 
 .reviewed {
   margin-left: auto;
-  padding-left: var(--space-8);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-blue-soft);
   font: var(--text-caption);
   color: var(--color-blue);
   white-space: nowrap;
@@ -92,4 +116,33 @@
 .flagNote {
   font: var(--text-small);
   color: var(--color-flag);
+}
+
+/* vitals set: monitor tiles inside the field */
+.vitals {
+  align-items: flex-start;
+  padding: var(--space-12);
+}
+
+.vitalsBody {
+  flex: 1;
+  min-width: 0;
+}
+
+/* intervention rows: time column + value, reads like a log */
+.timed {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  column-gap: var(--space-12);
+  align-items: start;
+}
+
+.timed .flagNote {
+  grid-column: 2;
+}
+
+.timeLabel {
+  padding-top: 14px;
+  font: 600 13px/18px var(--font-heading);
+  color: var(--color-ink);
 }

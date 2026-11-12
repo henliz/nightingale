@@ -36,6 +36,7 @@
 
 .title {
   font: var(--text-title);
+  letter-spacing: -0.02em;
 }
 
 .chips {
@@ -57,13 +58,13 @@
 }
 
 .chipRed {
-  background: #ffecec;
-  color: #c62828;
+  background: var(--color-danger-soft);
+  color: var(--color-flag);
 }
 
 .chipGreen {
-  background: #e6f7ea;
-  color: #1f7a3a;
+  background: var(--color-success-soft);
+  color: var(--color-success);
 }
 
 .headActions {
@@ -73,50 +74,141 @@
 }
 
 .hazards {
-  display: inline-block;
   margin-top: var(--space-16);
-  padding: 8px 16px;
-  border-radius: var(--radius-6);
-  background: #e6f7ea;
-  color: #1f7a3a;
-  font: var(--text-label);
+  max-width: 1120px;
 }
 
 .rows {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-  margin-top: var(--space-24);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: var(--space-16);
+  max-width: 1120px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-12);
+  overflow: hidden;
 }
 
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr);
   gap: var(--space-16);
-  width: fit-content;
-  max-width: 100%;
   padding: 12px 16px;
-  background: var(--color-white);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-8);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+/* allergies / meds that actually say something */
+.rowLoud {
+  background: var(--color-warning-soft);
 }
 
 .rowLabel {
-  width: 144px;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  align-self: start;
+  padding-top: 3px;
   font: var(--text-label);
   color: var(--color-muted);
 }
 
-.rowText {
-  font: var(--text-reading);
+/* the imist-ambo letter, so a nurse can find "M for meds" without reading */
+.letter {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: var(--radius-6);
+  background: var(--color-neutral-accent);
+  color: var(--color-on-primary);
+  font: 700 13px/1 var(--font-heading);
 }
 
-.rowLocked {
+.rowLoud .letter {
+  background: var(--color-warning);
+}
+
+.rowText {
+  min-width: 0;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fact {
+  padding: 4px 10px;
+  border-radius: var(--radius-6);
+  background: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  font: var(--text-label);
+  color: var(--color-ink);
+}
+
+.rowLocked .fact {
   color: var(--color-muted);
+  border-style: dashed;
 }
 
 .footnote {
   margin-top: var(--space-16);
   font: var(--text-small);
   color: var(--color-muted);
+}
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.photo {
+  width: 88px;
+  height: 66px;
+  padding: 0;
+  border-radius: var(--radius-6);
+  overflow: hidden;
+  border: 1px solid var(--color-line-strong);
+  cursor: zoom-in;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+/* a face can identify the patient, so photos stay blurred with the name */
+.photoLocked {
+  cursor: not-allowed;
+}
+
+.photoLocked img {
+  filter: blur(8px) saturate(0.6);
+  transform: scale(1.15);
+}
+
+.signs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
 }

@@ -28,7 +28,7 @@
 }
 
 .dotReached {
-  background: var(--color-blue);
+  background: var(--color-accent);
 }
 
 .connector {
@@ -39,7 +39,7 @@
 }
 
 .connectorReached {
-  background: var(--color-blue);
+  background: var(--color-accent);
 }
 
 .label {

@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { AppShell } from "../../components/layout/AppShell/AppShell";
-import { fieldForTurn, turnsById, type CaptureExcerpt, type EpcrSection, type EpcrTab } from "../../data/epcr";
+import { CAPTURE_META, CAPTURE_TURN_BY_ID, turnsById, type CaptureExcerpt, type EpcrSection, type EpcrTab } from "../../data/epcr";
 import type { User } from "../../data/users";
 import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext";
 import { resolveField } from "../../incident/selectors";
 import type { FieldReview } from "../../incident/types";
 import { clockTime } from "../../lib/time";
-import { CallCapturePanel } from "./CallCapturePanel";
+import { ReviewQueuePanel } from "./ReviewQueuePanel";
 import { EpcrDraftPanel } from "./EpcrDraftPanel";
 import { FieldReviewDialog } from "./FieldReviewDialog";
 import styles from "./EpcrReviewPage.module.css";
@@ -25,7 +26,7 @@ interface EpcrReviewPageProps {
   initialTab: EpcrTab;
   saveLabel: string;
   savePrimary?: boolean;
-  /** fire sees the transcript beside the draft, paramedic verifies without it */
+  /** fire works through every drafted line, paramedic only gets conflicts + what handoff needs */
   showCapture?: boolean;
   /** fields that still need attention (red outline, dot on their tab) */
   attentionKeys?: ReadonlySet<string>;
@@ -34,38 +35,35 @@ interface EpcrReviewPageProps {
   onSave: () => void;
 }
 
-/** transcript beside the structured draft, every field gets checked against what was said */
+/** review queue beside the structured draft, one field at a time, never the whole transcript */
 export function EpcrReviewPage(props: EpcrReviewPageProps) {
   const { user, responder, title, meta, tabs, sections, excerpts, captureSummary, initialTab, saveLabel, savePrimary, showCapture = true, attentionKeys, onFieldChanged, onSave } = props;
   const fieldByKey = new Map(sections.flatMap((s) => s.fields.map((f) => [f.key, f] as const)));
-  const turns = excerpts ? turnsById(excerpts) : undefined;
+  const turns = excerpts ? turnsById(excerpts) : CAPTURE_TURN_BY_ID;
   const incident = useIncident();
   const dispatch = useIncidentDispatch();
-  const [tab, setTab] = useState<EpcrTab>(initialTab);
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [selectedTurnId, setSelectedTurnId] = useState<string | null>(null);
+  // ?field=patient.age arrives from a conflict in the record overview
+  const [params] = useSearchParams();
+  const linked = params.get("field");
+  const linkedField = linked ? fieldByKey.get(linked) : undefined;
+  const [tab, setTab] = useState<EpcrTab>(() => (linkedField ? (sections.find((s) => s.fields.some((f) => f.key === linked))?.tab ?? initialTab) : initialTab));
+  const [selectedKey, setSelectedKey] = useState<string | null>(linkedField ? linked : null);
+
+  // bring the selected field into view in the form
+  useEffect(() => {
+    if (!selectedKey) return;
+    const el = document.getElementById(`label-${selectedKey}`);
+    el?.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }, [selectedKey, tab]);
   const [reviewingKey, setReviewingKey] = useState<string | null>(null);
 
-  const selectedField = selectedKey ? fieldByKey.get(selectedKey) : undefined;
-  const highlighted = new Set(selectedField?.evidence ?? []);
-  if (selectedTurnId) highlighted.add(selectedTurnId);
-  const captureHint = selectedKey
-    ? "Check the selected field"
-    : selectedTurnId
-      ? "This line does not fill a field"
-      : "Select a field to review it";
   const reviewing = reviewingKey ? fieldByKey.get(reviewingKey) : undefined;
   const reviewedCount = Object.keys(incident.fieldReviews).length;
 
-  function selectTurn(turnId: string) {
-    setSelectedTurnId(turnId);
-    const field = fieldForTurn(turnId, sections);
-    if (!field) {
-      setSelectedKey(null);
-      return;
-    }
-    setSelectedKey(field.key);
-    const section = sections.find((s) => s.fields.some((f) => f.key === field.key));
+  // picking from the queue jumps the form to that field's tab
+  function selectFromQueue(key: string) {
+    setSelectedKey(key);
+    const section = sections.find((s) => s.fields.some((f) => f.key === key));
     if (section) setTab(section.tab);
   }
 
@@ -89,18 +87,19 @@ export function EpcrReviewPage(props: EpcrReviewPageProps) {
         <p className={styles.meta}>{meta}</p>
       </header>
 
-      <div className={showCapture ? styles.workspace : styles.workspaceSingle}>
-        {showCapture && (
-          <CallCapturePanel
-            excerpts={excerpts}
-            summary={captureSummary}
-            highlightedTurnIds={highlighted}
-            onSelectTurn={selectTurn}
-            hint={captureHint}
-            canReview={selectedKey !== null}
-            onReviewField={() => setReviewingKey(selectedKey)}
-          />
-        )}
+      <div className={styles.workspace}>
+        <ReviewQueuePanel
+          mode={showCapture ? "fire" : "handoff"}
+          sections={sections}
+          incident={incident}
+          turns={turns}
+          summary={showCapture ? (captureSummary ?? CAPTURE_META.summary) : "Fire's record. Fix what's flagged, fill what the ER needs."}
+          attentionKeys={attentionKeys ?? new Set()}
+          selectedKey={selectedKey}
+          onSelect={selectFromQueue}
+          onConfirm={confirmField}
+          onEdit={setReviewingKey}
+        />
         <EpcrDraftPanel
           tabs={tabs}
           sections={sections}
@@ -108,10 +107,7 @@ export function EpcrReviewPage(props: EpcrReviewPageProps) {
           onTabChange={setTab}
           incident={incident}
           selectedKey={selectedKey}
-          onSelectField={(key) => {
-            setSelectedKey(key);
-            setSelectedTurnId(null);
-          }}
+          onSelectField={setSelectedKey}
           onOpenField={(key) => {
             setSelectedKey(key);
             setReviewingKey(key);

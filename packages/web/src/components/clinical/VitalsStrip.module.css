@@ -1,0 +1,140 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.title {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.at {
+  font: var(--text-caption);
+  color: var(--color-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: var(--space-8);
+  margin: 0;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--radius-8);
+  background: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  min-width: 0;
+}
+
+.short {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  font: 600 11px/14px var(--font-sans);
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.flag {
+  font: 700 10px/14px var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.value {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+  min-width: 0;
+}
+
+.num {
+  font: 600 26px/30px var(--font-heading);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+/* "absent", "unresponsive": words, not numbers, so a size down */
+.numWord {
+  font: 600 16px/30px var(--font-heading);
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unit {
+  font: var(--text-caption);
+  color: var(--color-muted);
+}
+
+.unknown .num {
+  color: var(--color-line-strong);
+}
+
+.low,
+.high {
+  background: var(--color-warning-soft);
+  border-color: var(--color-warning);
+}
+.low .flag,
+.high .flag {
+  color: var(--color-warning);
+}
+
+.critical {
+  background: var(--color-flag-soft);
+  border-color: var(--color-flag);
+}
+.critical .flag,
+.critical .num,
+.critical .numWord {
+  color: var(--color-flag);
+}
+
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-16);
+  margin: 0;
+  font: var(--text-small);
+}
+
+.wordRow {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.wordRow dt {
+  color: var(--color-muted);
+}
+
+.wordRow dd {
+  margin: 0;
+}
+
+.none {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.wordCritical dd {
+  color: var(--color-flag);
+  font-weight: 600;
+}

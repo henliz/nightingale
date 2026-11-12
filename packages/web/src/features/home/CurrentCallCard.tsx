@@ -1,3 +1,4 @@
+import { HazardStrip } from "../../components/clinical/HazardStrip";
 import { Alert } from "../../components/ui/Alert/Alert";
 import { Button } from "../../components/ui/Button/Button";
 import { Card } from "../../components/ui/Card/Card";
@@ -41,6 +42,14 @@ function FireDeviceChip({ incident }: { incident: IncidentState }) {
   return <Chip>Nightingale inactive</Chip>;
 }
 
+// closing the loop: crews want proof it arrived (p81), so the furthest receipt sits on the card
+function ReceiptChip({ incident }: { incident: IncidentState }) {
+  if (hasReached(incident.stage, "received")) return <Chip tone="active">✓ Received by triage {incident.times.received ?? ""}</Chip>;
+  if (hasReached(incident.stage, "accepted")) return <Chip tone="active">✓ Accepted by {PARAMEDIC_UNIT}</Chip>;
+  if (hasReached(incident.stage, "shared")) return <Chip tone="warning">Shared · not opened yet</Chip>;
+  return null;
+}
+
 export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, onShare, onPrint, onSeeChanges }: CurrentCallCardProps) {
   const isFire = role === "firefighter";
   const reviewed = hasReached(incident.stage, "reviewed");
@@ -60,6 +69,7 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
             Share link
           </Button>
         )}
+        <ReceiptChip incident={incident} />
         <span className={styles.spacer} />
         <span className={styles.firstContact}>First contact {call.firstContact}</span>
         {showExpand && (
@@ -72,7 +82,15 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
       <h2 id="current-call-title" className={styles.title}>
         {call.headline}
       </h2>
-      <p className={styles.patient}>{call.patientLine}</p>
+      <p className={styles.patient}>
+        {call.patientLine}
+        {call.conflicts > 0 && (
+          <span className={styles.conflicts}>
+            {call.conflicts} conflict{call.conflicts === 1 ? "" : "s"} to check
+          </span>
+        )}
+      </p>
+      <HazardStrip hazards={call.hazards} />
 
       {isFire && shared && (
         <div className={styles.banners}>
@@ -104,7 +122,8 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
 
       <div className={styles.actions}>
         <Button variant={locked ? "primarySoft" : "primary"} onClick={onOpenRecord}>
-          Open record
+          {locked && <Icon name="lock" size={14} className={styles.lockIcon} />}
+          {locked ? "Open summary" : "Open record"}
         </Button>
         {isFire && reviewed && onPrint && (
           <Button variant="outline" onClick={onPrint}>

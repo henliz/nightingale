@@ -1,16 +1,21 @@
 import { useState } from "react";
-import { Alert } from "../../../components/ui/Alert/Alert";
 import { Button } from "../../../components/ui/Button/Button";
 import { Chip } from "../../../components/ui/Chip/Chip";
+import { HazardStrip } from "../../../components/clinical/HazardStrip";
+import { TreatmentTable } from "../../../components/clinical/TreatmentTable";
+import { VitalsStrip } from "../../../components/clinical/VitalsStrip";
 import { Field } from "../../../components/ui/Field/Field";
 import type { PatientRecord } from "../../../data/record";
+import { ConflictList, type RecordFlag } from "./ConflictList";
 import { PhotoViewer } from "./PhotoViewer";
 import styles from "./views.module.css";
 
 interface OverviewViewProps {
   record: PatientRecord;
-  /** flagged fields + why, "Age: 32 per cousin vs 57 per responder" */
-  flags?: readonly string[];
+  /** flagged fields + why, e.g. age 32 per cousin vs 57 per responder */
+  flags?: readonly RecordFlag[];
+  /** jump to that field on the review page */
+  onOpenFlag?: (key: string) => void;
   deviceActive: boolean;
   deviceElapsed: string | null;
   onAddObservation: () => void;
@@ -18,12 +23,13 @@ interface OverviewViewProps {
   onViewFiles: () => void;
 }
 
-export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, onAddObservation, onViewTimeline, onViewFiles }: OverviewViewProps) {
+export function OverviewView({ record, flags = [], onOpenFlag, deviceActive, deviceElapsed, onAddObservation, onViewTimeline, onViewFiles }: OverviewViewProps) {
   const hasFiles = record.files.length > 0;
   const photos = record.files.filter((f) => f.url);
   const [viewing, setViewing] = useState<number | null>(null);
   return (
     <div className={styles.view}>
+      <HazardStrip hazards={record.hazards ?? ""} />
       <div className={styles.headingRow}>
         <h3 className={styles.heading}>Latest observations</h3>
         {deviceActive ? (
@@ -38,7 +44,7 @@ export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, 
         <Button onClick={onAddObservation}>Add observation</Button>
       </div>
 
-      {flags.length > 0 && <Alert tone="warning" title={`${flags.length} field${flags.length === 1 ? "" : "s"} need a look before sharing`} body={flags.join(" · ")} />}
+      {flags.length > 0 && <ConflictList flags={flags} onOpen={onOpenFlag} />}
 
       <div className={styles.columns}>
         <div className={styles.column}>
@@ -46,16 +52,8 @@ export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, 
             <p className={styles.noteSource}>{record.latestNote.source}</p>
             <p className={styles.noteText}>{record.latestNote.text}</p>
           </div>
-          <dl className={styles.readings} style={{ margin: 0 }}>
-            {record.readings.map((r) => (
-              <div key={r.label} className={styles.reading}>
-                <dt className={styles.readingLabel}>{r.label}</dt>
-                <dd className={styles.readingValue} style={{ margin: 0 }}>
-                  {r.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <VitalsStrip readings={record.readings} at={record.vitalsAt} />
+          <TreatmentTable rows={record.treatments ?? []} />
           <div>
             <Button variant="ghostInk" onClick={onViewTimeline}>
               View care timeline
@@ -70,7 +68,7 @@ export function OverviewView({ record, flags = [], deviceActive, deviceElapsed, 
 
         <div className={styles.columnTight}>
           <h3 className={styles.heading}>Scene account</h3>
-          {record.sceneAccount.map((f) => (
+          {record.sceneAccount.filter((f) => f.label !== "Hazards").map((f) => (
             <Field key={f.label} label={f.label} value={f.value} />
           ))}
           {photos.length > 0 && (

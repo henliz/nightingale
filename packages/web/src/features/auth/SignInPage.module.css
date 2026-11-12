@@ -1,9 +1,78 @@
 .page {
   min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(360px, 1fr) minmax(0, 1.1fr);
+}
+
+.page > .card {
+  align-self: center;
+  justify-self: center;
+  margin: 48px 24px;
+}
+
+/* textured gradient: brand colours + svg grain, same recipe as the logo */
+.brandPanel {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 162px;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-8);
+  padding: 56px;
+  overflow: hidden;
+  color: #fdf6ec;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 0% 0%, var(--brand-tangerine) 0%, transparent 55%),
+    radial-gradient(90% 80% at 100% 100%, var(--brand-navy) 10%, transparent 70%),
+    linear-gradient(160deg, var(--brand-sunset) 0%, var(--brand-viridian) 70%, var(--brand-navy) 100%);
+  background-blend-mode: soft-light, normal, normal, normal;
+}
+
+.brandMark {
+  width: 64px;
+  height: 64px;
+  margin-bottom: auto;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgb(253 246 236 / 0.92);
+}
+
+.brandWord {
+  font: 700 56px/1 var(--font-heading);
+  letter-spacing: -0.035em;
+}
+
+.brandLine {
+  font: 500 18px/26px var(--font-heading);
+  opacity: 0.85;
+  max-width: 340px;
+}
+
+.brandHalftone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background: #fdf6ec;
+  -webkit-mask: radial-gradient(circle, #000 1.6px, transparent 2px) 0 0 / 6px 6px, linear-gradient(90deg, transparent 0%, #000 60%);
+  mask: radial-gradient(circle, #000 1.6px, transparent 2px) 0 0 / 6px 6px, linear-gradient(90deg, transparent 0%, #000 60%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  opacity: 0.6;
+}
+
+@media (max-width: 860px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+  .brandPanel {
+    min-height: 220px;
+    padding: 32px;
+  }
+  .brandWord {
+    font-size: 40px;
+  }
 }
 
 .card {
@@ -18,11 +87,14 @@
 }
 
 .brand {
-  font: 600 18px/25px var(--font-sans);
+  font: 700 20px/28px var(--font-heading);
+  letter-spacing: -0.02em;
+  color: var(--brand-sunset);
 }
 
 .heading {
-  font: 600 22px/31px var(--font-sans);
+  font: 600 26px/32px var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 .lede {

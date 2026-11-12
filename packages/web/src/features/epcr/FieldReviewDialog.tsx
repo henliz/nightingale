@@ -4,6 +4,7 @@ import { Dialog } from "../../components/ui/Dialog/Dialog";
 import { CAPTURE_TURN_BY_ID, type CaptureTurn } from "../../data/epcr";
 import type { ResolvedField } from "../../incident/selectors";
 import type { FieldReview } from "../../incident/types";
+import { bestEvidence } from "../../lib/evidence";
 import styles from "./FieldReviewDialog.module.css";
 
 interface FieldReviewDialogProps {
@@ -32,11 +33,12 @@ function ReviewForm({
   const suggestion = field.suggested ?? "";
   const [value, setValue] = useState(review ? review.value : suggestion);
 
-  // a real note's spans can point at dozens of lines; show the first few
-  const speech = (field.evidence ?? [])
-    .map((id) => turns.get(id))
-    .filter((t) => t !== undefined)
-    .slice(0, 6);
+  // a real note's spans can point at dozens of lines, show the few that match
+  const speech = bestEvidence(
+    (field.evidence ?? []).map((id) => turns.get(id)).filter((t) => t !== undefined),
+    suggestion,
+    field.flagNote ?? "",
+  );
 
   const status = review
     ? `${review.status === "cleared" ? "Cleared" : "Confirmed"} by ${review.by} at ${review.at}`

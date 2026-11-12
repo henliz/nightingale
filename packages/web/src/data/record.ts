@@ -34,9 +34,21 @@ export interface TranscriptTurn {
   text: string;
 }
 
+/** one row of the treatment table: what was done, when, how they responded */
+export interface Treatment {
+  time: string;
+  what: string;
+  response: string;
+}
+
 export interface PatientRecord {
   latestNote: ResponderNote;
   readings: readonly LabelledValue[];
+  /** when the readings above were taken */
+  vitalsAt?: string;
+  treatments?: readonly Treatment[];
+  /** scene safety line, empty = nothing mentioned */
+  hazards?: string;
   medicalBackground: readonly LabelledValue[];
   sceneAccount: readonly LabelledValue[];
   timeline: readonly TimelineEvent[];
@@ -89,6 +101,13 @@ const AFTER_SCENE: PatientRecord = {
     { label: "SpO2", value: "95%" },
     { label: "GCS", value: "14/15" },
   ],
+  vitalsAt: "14:28",
+  treatments: [
+    { time: "14:06", what: "Spinal precautions", response: "" },
+    { time: "14:08", what: "Oxygen, nasal cannula", response: "Flow not recorded" },
+    { time: "14:15", what: "Left leg splinted", response: "" },
+  ],
+  hazards: "",
   medicalBackground: [
     { label: "Medication list", value: "Warfarin appears on a medication list. Current use is unconfirmed." },
     { label: "Allergies", value: NOT_RECORDED },

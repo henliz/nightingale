@@ -1,4 +1,15 @@
 .page {
+  /* paper is always paper, even in night mode */
+  --color-white: #ffffff;
+  --color-ink: #16110b;
+  --color-muted: #6f6460;
+  --color-line: #e5e1dc;
+  --color-line-strong: #d6d0c8;
+  --color-chip: #f3efea;
+  --color-flag: #c4321a;
+  --color-flag-soft: #fdf1ec;
+  --color-blue: #3d5889;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -8,7 +19,24 @@
   background: var(--color-white);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  box-shadow: 0 1px 4px rgba(32, 43, 61, 0.12);
+  box-shadow: 0 1px 4px rgba(var(--shadow-rgb), 0.12);
+}
+
+/* brand halftone across the top of the sheet */
+.page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  background: var(--brand-halftone);
+  -webkit-mask: var(--brand-halftone-mask);
+  mask: var(--brand-halftone-mask);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 .identity {

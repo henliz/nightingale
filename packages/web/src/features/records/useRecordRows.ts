@@ -1,3 +1,4 @@
+import { callInfo } from "../../api/call";
 import { useLiveSource } from "../../api/LiveSourceContext";
 import { sessionLines, sortedSessions } from "../../api/mapNote";
 import type { DrillSession } from "../../api/types";
@@ -7,10 +8,13 @@ function sessionRow(s: DrillSession): RecordRow {
   const at = new Date(s.startedAt);
   return {
     callId: s.title ?? untitledName(s, at),
-    unit: s.epcr?.sections.chiefComplaint ?? "No ePCR yet",
+    unit: s.epcr?.sections.chiefComplaint ?? s.epcr?.sections.incident?.dispatchReason ?? (s.epcr ? "Nothing clinical captured yet" : "No ePCR yet"),
     callNumber: at.toLocaleDateString("en-CA", { month: "short", day: "numeric" }),
     sharedAt: at.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false }),
     captureId: s.captureId,
+    patient: s.epcr ? callInfo(s).patientLine : undefined,
+    conflicts: s.epcr?.flags.length ?? 0,
+    status: !s.epcr ? "No ePCR yet" : s.epcrStatus === "updating" ? "Updating" : "Draft ePCR",
   };
 }
 
@@ -18,7 +22,8 @@ function sessionRow(s: DrillSession): RecordRow {
 function untitledName(s: DrillSession, at: Date): string {
   const what = s.epcr?.sections.chiefComplaint ?? s.epcr?.sections.incident?.dispatchReason;
   const time = at.toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit", hour12: false });
-  return what ? `${what.charAt(0).toUpperCase()}${what.slice(1)} · ${time}` : `Call at ${time}`;
+  // the time has its own column now, so only fall back to it when there's nothing else
+  return what ? `${what.charAt(0).toUpperCase()}${what.slice(1)}` : `Call at ${time}`;
 }
 
 // a pi left on in silence (or one stray word) isn't a call. a few words of real speech is,
@@ -31,7 +36,7 @@ function isCall(s: DrillSession): boolean {
   return words >= MIN_WORDS;
 }
 
-const DEMO_ROW: RecordRow = { callId: "Sample call", unit: "Sample data, fell down stairs", callNumber: "1020382", sharedAt: "13:22", demo: true };
+const DEMO_ROW: RecordRow = { callId: "Sample call", unit: "Fell down stairs, left hip pain", callNumber: "Sample", sharedAt: "13:22", demo: true, patient: "Patient 007", status: "Sample data" };
 
 /** the records list: the named cases, every real call recorded since, plus the sample call */
 export function useRecordRows() {

@@ -1,4 +1,3 @@
-import { Button } from "../../components/ui/Button/Button";
 import type { RecordRow } from "../../data/incident";
 import styles from "./RecordsList.module.css";
 
@@ -25,24 +24,25 @@ export function RecordsList({ records, totalCount, query = "", onView }: Records
       <ul className={styles.list} style={{ listStyle: "none", margin: 0, padding: 0 }}>
         {shown.length === 0 && <li className={styles.row}><span className={styles.unit}>No records match “{query.trim()}”.</span></li>}
         {shown.map((record) => (
-          <li key={record.captureId ?? record.callId} className={styles.row}>
-            <div className={styles.callColumn}>
-              <span className={styles.callId}>{record.captureId || record.demo ? record.callId : `Call ID: ${record.callId}`}</span>
-              <span className={styles.unit}>{record.unit}</span>
-            </div>
-            <Button variant="ghost" onClick={() => onView(record)}>
-              View record
-            </Button>
-            <div className={styles.meta}>
-              <span className={styles.metaRow}>
-                <span>{record.captureId ? "Date" : "Call"}</span>
-                <span>{record.callNumber}</span>
+          <li key={record.captureId ?? record.callId}>
+            <button type="button" className={styles.rowButton} onClick={() => onView(record)} aria-label={`View record: ${record.callId}`}>
+              <span className={styles.when}>
+                <span className={styles.time}>{record.sharedAt}</span>
+                <span className={styles.date}>{record.callNumber}</span>
               </span>
-              <span className={styles.metaRow}>
-                <span>{record.captureId ? "Recorded" : "Shared"}</span>
-                <span>{record.sharedAt}</span>
+              <span className={styles.callColumn}>
+                <span className={styles.callId}>{record.captureId || record.demo ? record.callId : `Call ID: ${record.callId}`}</span>
+                {/* "truck crash" under "Truck crash" was just noise */}
+                {record.unit.toLowerCase() !== record.callId.toLowerCase() && <span className={styles.unit}>{record.unit}</span>}
               </span>
-            </div>
+              <span className={styles.patient}>{record.patient ?? ""}</span>
+              {/* only what's unusual gets a chip, "draft epcr" on every row was the default */}
+              <span className={styles.chips}>
+                {record.conflicts ? <span className={styles.conflictChip}>{record.conflicts} to check</span> : null}
+                {record.status && record.status !== "Draft ePCR" && <span className={[styles.statusChip, styles.statusQuiet].join(" ")}>{record.status}</span>}
+              </span>
+              <span className={styles.chevron} aria-hidden="true" />
+            </button>
           </li>
         ))}
       </ul>

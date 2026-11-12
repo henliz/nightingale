@@ -111,6 +111,9 @@ export function mapSessionToRecord(session: DrillSession): PatientRecord {
   return {
     latestNote,
     readings,
+    vitalsAt: v?.time,
+    treatments: (s.interventions ?? []).map((i) => ({ time: i.time ?? "", what: i.intervention, response: i.response ?? "" })),
+    hazards: [s.scene?.safety, s.hazards].filter(Boolean).join(". "),
     medicalBackground: [
       { label: "Medication list", value: joinList(s.sample?.medications) || NOT_RECORDED },
       { label: "Allergies", value: joinList(s.sample?.allergies) || NOT_RECORDED },

@@ -20,6 +20,7 @@
 
 .title {
   font: var(--text-heading);
+  letter-spacing: -0.015em;
 }
 
 .fieldName {
@@ -39,7 +40,7 @@
 
 .speechTitle {
   font: var(--text-label);
-  color: var(--color-blue);
+  color: var(--color-accent);
 }
 
 .speechLine {

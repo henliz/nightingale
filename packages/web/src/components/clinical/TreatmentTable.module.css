@@ -1,0 +1,50 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.title {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--text-small);
+}
+
+.table th {
+  text-align: left;
+  font: 600 11px/16px var(--font-sans);
+  color: var(--color-muted);
+  padding: 0 8px 6px 0;
+  border-bottom: 1px solid var(--color-line-strong);
+}
+
+.table td {
+  padding: 7px 8px 7px 0;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+
+.time {
+  white-space: nowrap;
+  color: var(--color-muted);
+  width: 72px;
+}
+
+.response {
+  color: var(--color-muted);
+}
+
+.dose {
+  background: var(--color-blue-soft);
+  color: var(--color-ink);
+  font-weight: 600;
+  padding: 0 3px;
+  border-radius: 3px;
+}

@@ -52,7 +52,20 @@ const ALIASES: Record<string, string[]> = {
   chiefComplaint: ["laterality", "side", "left", "right", "complaint"],
 };
 
-/** red outline + reason on the field a flag is about. a flag that names no field outlines its whole section */
+// no field named, so pick the row whose value shares the most words with the flag
+// (case 1's shock flag was landing on all 6 interventions). nothing shared = first row
+function bestByValue(inSection: EpcrField[], text: string): EpcrField[] {
+  const noteWords = new Set(text.split(/[^a-z0-9]+/).filter((w) => w.length > 3));
+  let best: EpcrField | undefined;
+  let bestScore = 0;
+  for (const f of inSection) {
+    const score = new Set((f.suggested ?? "").toLowerCase().split(/[^a-z0-9]+/).filter((w) => noteWords.has(w))).size;
+    if (score > bestScore) [best, bestScore] = [f, score];
+  }
+  return best ? [best] : inSection.slice(0, 1);
+}
+
+/** red outline + reason on the field a flag is about. a flag that names no field goes on its closest row */
 function applyFlags(sections: EpcrSection[], note: DraftNote | undefined): EpcrSection[] {
   const fields = sections.flatMap((s) => s.fields);
   const hits = new Map<string, string[]>();
@@ -62,7 +75,7 @@ function applyFlags(sections: EpcrSection[], note: DraftNote | undefined): EpcrS
     const inSection = fields.filter((f) => f.flagPath === flag.ref);
     const words = (f: EpcrField) => [f.key.split(".").at(-1)!.toLowerCase(), f.label.split(/[ /(]/)[0]!.toLowerCase(), ...(ALIASES[f.key] ?? [])];
     const named = inSection.filter((f) => words(f).some((w) => w.length > 2 && text.includes(w)));
-    for (const f of named.length ? named : inSection) hits.set(f.key, [...(hits.get(f.key) ?? []), flag.note ?? flag.type.replace(/_/g, " ")]);
+    for (const f of named.length ? named : bestByValue(inSection, text)) hits.set(f.key, [...(hits.get(f.key) ?? []), flag.note ?? flag.type.replace(/_/g, " ")]);
   }
   return sections.map((s) => ({
     ...s,

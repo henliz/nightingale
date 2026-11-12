@@ -1,0 +1,101 @@
+.box {
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-8);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 10px 12px 10px 14px;
+  background: var(--color-flag-soft);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--color-flag);
+  color: #fff;
+  font: 700 11px/1 var(--font-heading);
+}
+
+.title {
+  flex: 1;
+  font: 600 14px/20px var(--font-heading);
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item + .item {
+  border-top: 1px solid var(--color-line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.row:hover:not(:disabled) {
+  background: var(--color-canvas);
+}
+
+.row:hover:not(:disabled) .fix {
+  background: var(--color-flag);
+  color: var(--color-on-primary);
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--color-flag);
+  outline-offset: -2px;
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.headline {
+  font: 600 14px/20px var(--font-sans);
+  color: var(--color-ink);
+}
+
+/* two lines max, the review page has the rest */
+.detail {
+  font: var(--text-small);
+  color: var(--color-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fix {
+  flex-shrink: 0;
+  padding: 5px 12px;
+  border-radius: var(--radius-6);
+  border: 1px solid var(--color-flag);
+  color: var(--color-flag);
+  font: 600 12px/16px var(--font-sans);
+  transition: background-color 120ms ease, color 120ms ease;
+}

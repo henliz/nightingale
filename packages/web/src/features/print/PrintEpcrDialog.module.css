@@ -16,6 +16,7 @@
 .title {
   flex: 1;
   font: var(--text-heading);
+  letter-spacing: -0.015em;
 }
 
 .toolbar {

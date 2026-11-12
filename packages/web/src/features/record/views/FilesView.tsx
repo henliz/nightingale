@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/Button/Button";
 import { Icon } from "../../../components/ui/Icon/Icon";
 import type { RecordFile } from "../../../data/record";
+import { PHOTO_TAGS, photoTag, setPhotoTag, type PhotoTag } from "../../../lib/photoRows";
 import { PhotoViewer } from "./PhotoViewer";
-import styles from "./views.module.css";
+import styles from "./FilesView.module.css";
 
 interface FilesViewProps {
   files: readonly RecordFile[];
@@ -11,49 +12,81 @@ interface FilesViewProps {
   onRemove: (file: RecordFile) => void;
 }
 
+/** thumbnails in a grid, each tagged (scene, mechanism, injury, treatment, meds, document) so the right one is easy to find */
 export function FilesView({ files, onAddFile, onRemove }: FilesViewProps) {
-  const photos = files.filter((f) => f.url);
+  const [filter, setFilter] = useState<PhotoTag | "All">("All");
+  const [, bump] = useState(0);
+  const tagged = files.map((f) => ({ f, tag: photoTag(f) }));
+  const counts = new Map<PhotoTag, number>();
+  for (const { tag } of tagged) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  const shown = filter === "All" ? tagged : tagged.filter((t) => t.tag === filter);
+  const photos = shown.filter((t) => t.f.url).map((t) => t.f);
   const [viewing, setViewing] = useState<number | null>(null);
-  const open = (f: RecordFile) => setViewing(photos.indexOf(f));
+
   return (
     <div className={styles.view}>
-      <div className={styles.headingRow}>
+      <div className={styles.head}>
         <h3 className={styles.heading}>Documents and images</h3>
-        <span className={styles.spacer} />
         <Button onClick={onAddFile}>Add file</Button>
       </div>
-      <p className={styles.lede}>Forms, scene photos, medication lists and medical screenshots for this record.</p>
+
       {files.length === 0 ? (
-        <p className={styles.hint}>No files attached yet.</p>
+        <p className={styles.empty}>No files attached yet. Photos from the device land here on their own.</p>
       ) : (
-        <div className={styles.fileList}>
-          {files.map((f) => (
-            <div key={f.name + f.stamp} className={styles.file}>
-              {f.url ? (
-                // raw photos stay on the laptop that ran the drill; when the bytes are not here, fall back to the icon
-                <button type="button" className={styles.thumbButton} onClick={() => open(f)} aria-label={`Open ${f.name}`}>
-                  <img className={styles.thumb} src={f.url} alt="" onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("span"), { textContent: "" }))} />
-                </button>
-              ) : (
-                <Icon name="file" size={24} />
-              )}
-              <span className={styles.fileInfo}>
+        <>
+          <div className={styles.filters} role="group" aria-label="Filter by tag">
+            {(["All", ...PHOTO_TAGS.filter((t) => counts.has(t))] as const).map((t) => (
+              <button key={t} type="button" className={styles.filter} aria-pressed={filter === t} onClick={() => setFilter(t)}>
+                {t}
+                <span className={styles.count}>{t === "All" ? files.length : counts.get(t)}</span>
+              </button>
+            ))}
+          </div>
+
+          <ul className={styles.grid}>
+            {shown.map(({ f, tag }) => (
+              <li key={f.name + f.stamp} className={styles.tile}>
                 {f.url ? (
-                  <button type="button" className={[styles.fileName, styles.fileLink].join(" ")} onClick={() => open(f)}>
-                    {f.name}
+                  <button type="button" className={styles.thumb} onClick={() => setViewing(photos.indexOf(f))} aria-label={`Open ${f.kind}`}>
+                    <img src={f.url} alt="" loading="lazy" />
                   </button>
                 ) : (
-                  <span className={styles.fileName}>{f.name}</span>
+                  <div className={[styles.thumb, styles.doc].join(" ")}>
+                    <Icon name="file" size={28} />
+                  </div>
                 )}
-                <span className={styles.fileMeta}>{f.kind}</span>
-                <span className={styles.fileMeta}>{f.stamp}</span>
-              </span>
-              <Button variant="ghost" onClick={() => onRemove(f)} style={{ height: 36 }} aria-label={`Remove ${f.name}`}>
-                Remove
-              </Button>
-            </div>
-          ))}
-        </div>
+                <div className={styles.meta}>
+                  <label className={styles.tagPick}>
+                    <span className="sr-only">Tag for {f.name}</span>
+                    <select
+                      value={tag}
+                      onChange={(e) => {
+                        setPhotoTag(f, e.target.value as PhotoTag);
+                        bump((n) => n + 1);
+                      }}
+                      className={[styles.tag, styles[`tag${tag}`]].join(" ")}
+                    >
+                      {PHOTO_TAGS.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <p className={styles.caption} title={f.kind}>
+                    {f.kind}
+                  </p>
+                  <div className={styles.foot}>
+                    <span className={styles.stamp}>{f.stamp}</span>
+                    <button type="button" className={styles.remove} onClick={() => onRemove(f)} aria-label={`Remove ${f.name}`}>
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
       {viewing !== null && <PhotoViewer photos={photos} index={viewing} onIndex={setViewing} onClose={() => setViewing(null)} />}
     </div>

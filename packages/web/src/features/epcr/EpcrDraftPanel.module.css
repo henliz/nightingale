@@ -19,6 +19,7 @@
 
 .title {
   font: var(--text-heading);
+  letter-spacing: -0.015em;
 }
 
 .confidential {
@@ -56,11 +57,11 @@
 }
 
 .tabActive {
-  color: var(--color-blue);
+  color: var(--color-tab);
 }
 
 .tabActive::after {
-  background: var(--color-blue);
+  background: var(--color-tab);
 }
 
 .scroll {
@@ -82,7 +83,8 @@
 
 .sectionTitle {
   font: var(--text-heading);
-  color: var(--color-blue);
+  letter-spacing: -0.015em;
+  color: var(--color-accent);
 }
 
 .sectionTitleNeutral {
@@ -90,7 +92,7 @@
 }
 
 .sectionTitleNote {
-  color: #d1d1d1;
+  color: var(--color-disabled-text);
 }
 
 .grid {
@@ -123,12 +125,16 @@
   flex: 1;
 }
 
-.tabDot {
+.tabCount {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 6px;
-  border-radius: 4px;
+  min-width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 9px;
   background: var(--color-flag);
-  vertical-align: middle;
+  color: var(--color-on-primary);
+  font: 700 11px/18px var(--font-sans);
+  text-align: center;
+  vertical-align: 1px;
 }

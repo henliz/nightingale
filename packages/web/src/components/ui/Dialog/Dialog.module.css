@@ -7,12 +7,12 @@
   max-width: calc(100vw - 32px);
   max-height: calc(100vh - 32px);
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(32, 43, 61, 0.35);
+  box-shadow: 0 24px 64px rgba(var(--shadow-rgb), 0.35);
 }
 
 .dialog::backdrop {
   /* light see-through grey so the queue stays visible behind the record */
-  background: rgba(32, 43, 61, 0.28);
+  background: rgba(var(--shadow-rgb), 0.28);
 }
 
 .dialog[open] {

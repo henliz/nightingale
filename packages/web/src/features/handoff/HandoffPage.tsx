@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import { HazardStrip } from "../../components/clinical/HazardStrip";
+import { TreatmentTable } from "../../components/clinical/TreatmentTable";
+import { VitalsStrip } from "../../components/clinical/VitalsStrip";
+import { readingsFromLine } from "../../lib/vitals";
 import { Button } from "../../components/ui/Button/Button";
 import { Icon } from "../../components/ui/Icon/Icon";
 import { useLiveSource } from "../../api/LiveSourceContext";
@@ -10,7 +14,20 @@ import { useIncident, useIncidentDispatch } from "../../incident/IncidentContext
 import { hasReached } from "../../incident/types";
 import { clockTime } from "../../lib/time";
 import { PrintEpcrDialog } from "../print/PrintEpcrDialog";
+import { PhotoViewer } from "../record/views/PhotoViewer";
+import { photosByRow } from "../../lib/photoRows";
 import styles from "./HandoffPage.module.css";
+
+// one sentence per row was a wall (report p80). split into the separate facts it already is
+function facts(text: string): string[] {
+  return text
+    .split(/;\s+|\.\s+(?=[A-Z0-9])/)
+    .map((f) => f.replace(/\.$/, "").trim())
+    .filter(Boolean);
+}
+
+// allergies or meds that say something real get the attention colour, "none known" stays quiet
+const QUIET = /^(none|nkda|no known|not captured|not recorded)/i;
 
 /** paramedic steps 7 + 8: what the ER triage nurse sees after scanning the QR. no account, read-only */
 export function HandoffPage() {
@@ -18,11 +35,15 @@ export function HandoffPage() {
   const dispatch = useIncidentDispatch();
   const [printOpen, setPrintOpen] = useState(false);
   const live = useLiveSource();
+  // scene photos sit next to the row they show (oxygen mask by treatment etc), blurred until receipt
+  const photos = (live.record?.files ?? []).filter((f) => f.url);
+  const byRow = photosByRow(photos);
+  const [viewing, setViewing] = useState<number | null>(null);
   const form = useEpcrForm("paramedic");
   // sample call keeps its written-out summary, a real one reads the paramedic's verified form
   const summary =
     live.source === "demo"
-      ? { rows: HANDOFF_ROWS, lockedIdentity: HANDOFF_LOCKED_IDENTITY, unlockedIdentity: HANDOFF_IDENTITY_UNLOCKED }
+      ? { rows: HANDOFF_ROWS, lockedIdentity: HANDOFF_LOCKED_IDENTITY, unlockedIdentity: HANDOFF_IDENTITY_UNLOCKED, treatments: undefined }
       : handoffSummary(form.sections, incident);
 
   useEffect(() => {
@@ -71,16 +92,63 @@ export function HandoffPage() {
         </div>
       </header>
 
-      <p className={styles.hazards}>{live.call.hazards}</p>
+      <div className={styles.hazards}>
+        <HazardStrip hazards={live.call.hazards} />
+      </div>
 
       <dl className={styles.rows} style={{ margin: 0 }}>
         {summary.rows.map((row) => {
           const locked = row.identity && !received;
+          const items = locked ? [summary.lockedIdentity] : facts(row.text);
+          const loud = (row.label === "Allergies" || row.label === "Medications") && !QUIET.test(row.text);
           return (
-            <div key={row.label} className={styles.row}>
-              <dt className={styles.rowLabel}>{row.label}</dt>
+            <div key={row.label} className={[styles.row, loud ? styles.rowLoud : ""].join(" ")}>
+              <dt className={styles.rowLabel}>
+                <span className={styles.letter} aria-hidden="true">{row.label[0]}</span>
+                {row.label}
+              </dt>
               <dd className={[styles.rowText, locked ? styles.rowLocked : ""].join(" ")} style={{ margin: 0 }}>
-                {locked ? summary.lockedIdentity : row.text}
+                {row.label === "Signs" && !locked && readingsFromLine(items[0] ?? "") ? (
+                  <div className={styles.signs}>
+                    <VitalsStrip readings={readingsFromLine(items[0]!)!} bare />
+                    {items.length > 1 && (
+                      <ul className={styles.facts}>
+                        {items.slice(1).map((f, i) => (
+                          <li key={i} className={styles.fact}>
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : row.label === "Treatment" && summary.treatments?.length ? (
+                  <TreatmentTable rows={summary.treatments} title={null} />
+                ) : (
+                  <ul className={styles.facts}>
+                    {items.map((f, i) => (
+                      <li key={i} className={styles.fact}>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {(byRow.get(row.label) ?? []).length > 0 && (
+                  <div className={styles.photos}>
+                    {(byRow.get(row.label) ?? []).map((p) => (
+                      <button
+                        key={p.name}
+                        type="button"
+                        className={[styles.photo, received ? "" : styles.photoLocked].join(" ")}
+                        onClick={() => received && setViewing(photos.indexOf(p))}
+                        disabled={!received}
+                        aria-label={received ? `Open photo: ${p.kind}` : "Photo locked until receipt is confirmed"}
+                        title={received ? p.kind : "Unlocks with identity"}
+                      >
+                        <img src={p.url} alt="" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </dd>
             </div>
           );
@@ -90,6 +158,7 @@ export function HandoffPage() {
       <p className={styles.footnote}>{HANDOFF_FOOTNOTE}</p>
 
       <PrintEpcrDialog role="paramedic" open={printOpen} onClose={() => setPrintOpen(false)} />
+      {viewing !== null && <PhotoViewer photos={photos} index={viewing} onIndex={setViewing} onClose={() => setViewing(null)} />}
     </main>
   );
 }

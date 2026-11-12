@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import avatar from "../../../assets/figma/avatar-alvin.png";
+import avatarAlvin from "../../../assets/figma/avatar-alvin.png";
+import avatarRick from "../../../assets/figma/avatar-rick.png";
 import type { User } from "../../../data/users";
+import { useTheme } from "../../../lib/theme";
 import styles from "./ProfileMenu.module.css";
 
 const ROLE_LABEL: Record<User["role"], string> = { firefighter: "Firefighter", paramedic: "Paramedic" };
@@ -11,10 +13,11 @@ interface ProfileMenuProps {
   onRestartDemo: () => void;
 }
 
-/** the app bar name opens a little menu: who's signed in, restart demo, sign out */
+/** the app bar name opens a little menu: who's signed in, night mode, restart demo, sign out */
 export function ProfileMenu({ user, onSignOut, onRestartDemo }: ProfileMenuProps) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const [theme, setTheme] = useTheme();
 
   useEffect(() => {
     if (!open) return;
@@ -42,7 +45,7 @@ export function ProfileMenu({ user, onSignOut, onRestartDemo }: ProfileMenuProps
         aria-label={`${user.fullName}, ${ROLE_LABEL[user.role]}. Open account menu`}
         onClick={() => setOpen((o) => !o)}
       >
-        <img className={styles.avatar} src={avatar} alt="" width={38} height={38} />
+        <img className={styles.avatar} src={user.role === "paramedic" ? avatarRick : avatarAlvin} alt="" width={38} height={38} />
         <span>
           <span className={styles.name}>{user.fullName}</span>
           <br />
@@ -55,6 +58,11 @@ export function ProfileMenu({ user, onSignOut, onRestartDemo }: ProfileMenuProps
           <li className={styles.who} role="presentation">
             <div className={styles.whoName}>{user.fullName}</div>
             <div className={styles.whoOrg}>{user.org}</div>
+          </li>
+          <li role="none">
+            <button type="button" role="menuitemcheckbox" aria-checked={theme === "night"} className={styles.item} onClick={() => setTheme(theme === "night" ? "day" : "night")}>
+              {theme === "night" ? "Day mode" : "Night mode"}
+            </button>
           </li>
           <li role="none">
             <button type="button" role="menuitem" className={[styles.item, styles.itemMuted].join(" ")} onClick={onRestartDemo}>

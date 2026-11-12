@@ -1,0 +1,224 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  flex-shrink: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-12);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.headRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.title {
+  font: var(--text-heading);
+  letter-spacing: -0.015em;
+}
+
+.count {
+  font: 600 13px/18px var(--font-heading);
+  color: var(--color-accent);
+}
+
+.subtitle {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-accent-soft);
+  overflow: hidden;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-tangerine), var(--brand-sunset));
+  border-radius: inherit;
+  transition: width 240ms ease-out;
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.empty {
+  font: var(--text-body);
+  color: var(--color-muted);
+}
+
+/* the field being checked right now */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-8);
+  background: var(--color-canvas);
+}
+
+.cardUrgent {
+  border-color: var(--color-flag);
+  background: var(--color-flag-soft);
+}
+
+.cardSection {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+}
+
+.cardLabel {
+  font: 600 16px/22px var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+.cardValue {
+  font: var(--text-reading);
+  padding: var(--space-8) var(--space-12);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-6);
+}
+
+.cardValueEmpty {
+  color: var(--color-muted);
+}
+
+.flagNote {
+  font: var(--text-small);
+  color: var(--color-flag);
+}
+
+.heard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.heardTitle {
+  font: var(--text-caption);
+  color: var(--color-muted);
+}
+
+.heardLine {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font: var(--text-body);
+}
+
+.heardMeta {
+  font: var(--text-caption);
+  color: var(--color-muted);
+}
+
+.reviewedNote {
+  font: var(--text-small);
+  color: var(--color-blue);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-4);
+}
+
+.actions > :first-child {
+  flex: 1;
+}
+
+/* the rest of the queue */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.listLabel {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-6);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-8) var(--space-8);
+  border-radius: var(--radius-6);
+  text-align: left;
+}
+
+.row:hover {
+  background: var(--color-canvas);
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+.rowActive {
+  background: var(--color-accent-soft);
+}
+
+.rowLabel {
+  font: var(--text-label);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowValue {
+  font: var(--text-small);
+  color: var(--color-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.todo {
+  border: 1.5px solid var(--color-line-strong);
+}
+
+.urgent {
+  background: var(--color-flag);
+}
+
+.done {
+  background: var(--color-blue);
+}

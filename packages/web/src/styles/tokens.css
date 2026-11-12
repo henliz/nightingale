@@ -1,20 +1,48 @@
-/* design tokens, mirrored from the Figma "Clear blue" variables */
+/* design tokens, nightingale brand (sunset / viridian / tangerine / navy / cream) */
 :root {
-  --color-canvas: #f6f8fb;
-  --color-white: #ffffff;
-  --color-ink: #202b3d;
-  --color-muted: #657185;
-  --color-line: #e5eaf1;
-  --color-line-strong: #dee3eb;
-  --color-chip: #f1f4f8;
-  --color-blue: #3448b5;
-  --color-red: #d64040;
+  /* brand palette, straight off the brand guidelines */
+  --brand-sunset: #bd4b2b;
+  --brand-viridian: #3d5889;
+  --brand-tangerine: #f06a45;
+  --brand-navy: #192b52;
+  --brand-cream: #f2e7d2;
+  --brand-black: #16110b;
+
+  /* the textured gradient: cream into tangerine, sunset, viridian, navy */
+  --brand-gradient: linear-gradient(90deg, var(--brand-cream) 0%, var(--brand-tangerine) 30%, var(--brand-sunset) 50%, var(--brand-viridian) 75%, var(--brand-navy) 100%);
+  /* halftone: the gradient seen through a dot screen that thins out to the left */
+  --brand-halftone: linear-gradient(90deg, var(--brand-tangerine) 0%, var(--brand-sunset) 40%, var(--brand-viridian) 70%, var(--brand-navy) 100%);
+  --brand-halftone-mask: radial-gradient(circle, #000 1.3px, transparent 1.6px) 0 0 / 4px 4px, linear-gradient(90deg, transparent 0%, #000 35%);
+
+  --color-canvas: #f8f3f0;
+  --color-white: #fffcfa;
+  --color-ink: #16110b;
+  --color-muted: #6f6460;
+  --color-line: #eee3dd;
+  --color-line-strong: #e5d6ce;
+  --color-chip: #f5ece7;
+  --color-blue: #3d5889;
+  --color-red: #bd4b2b;
+  /* sunset does the accent work (tabs, section titles, progress), viridian stays on buttons */
+  --color-accent: #bd4b2b;
+  --color-accent-soft: #fbefe9;
   --color-green: #2f9e5b;
   --color-amber: #d9a21b;
-  --color-blue-soft: #eef1fd;
-  --color-flag: #ff2929;
-  --color-flag-soft: #fff9f9;
-  --color-neutral-accent: #343a40;
+  --color-blue-soft: #e8ebf2;
+  --color-flag: #e03a1e;
+  --color-flag-soft: #fff8f5;
+  --color-neutral-accent: #192b52;
+  /* status tints, one place so night mode can flip them */
+  --color-warning: #a0640a;
+  --color-warning-soft: #fff3db;
+  --color-success: #2f7a4a;
+  --color-success-soft: #e3f4e7;
+  --color-danger-soft: #fdecea;
+  --color-tab: #192b52;
+  --color-on-primary: #ffffff;
+  --color-hover: #2f4670;
+  --color-disabled-text: #c9c3bd;
+  --shadow-rgb: 22, 17, 11;
   --print-line: #b8bcc2;
   --print-section: #eff0f2;
 
@@ -32,13 +60,44 @@
   --radius-pill: 14px;
 
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Hanken Grotesk", "Inter", system-ui, sans-serif;
 
   /* type scale: size / line-height / weight */
-  --text-title: 600 28px/36px var(--font-sans);
-  --text-heading: 600 18px/26px var(--font-sans);
+  --text-title: 600 30px/36px var(--font-heading);
+  --text-heading: 600 19px/26px var(--font-heading);
   --text-body: 400 14px/22px var(--font-sans);
   --text-label: 500 14px/20px var(--font-sans);
   --text-small: 400 12px/18px var(--font-sans);
   --text-caption: 500 11px/16px var(--font-sans);
   --text-reading: 400 16px/24px var(--font-sans);
+}
+
+/* night mode for the truck: navy, not black, so it still feels like the brand */
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --color-canvas: #0f1628;
+  --color-white: #172138;
+  --color-ink: #f2ebe2;
+  --color-muted: #a3a9b8;
+  --color-line: #26324d;
+  --color-line-strong: #33415f;
+  --color-chip: #212c46;
+  --color-blue: #7f9bd1;
+  --color-blue-soft: #1e2b49;
+  --color-red: #f07a57;
+  --color-accent: #f07a57;
+  --color-accent-soft: #2e2230;
+  --color-flag: #ff6a4d;
+  --color-flag-soft: #33202a;
+  --color-neutral-accent: #c9d3e6;
+  --color-warning: #f0b860;
+  --color-warning-soft: #33291a;
+  --color-success: #6fcf93;
+  --color-success-soft: #173326;
+  --color-danger-soft: #3a1f24;
+  --color-tab: #f2ebe2;
+  --color-on-primary: #0f1628;
+  --color-hover: #9bb3e0;
+  --color-disabled-text: #4b5672;
+  --shadow-rgb: 0, 0, 0;
 }

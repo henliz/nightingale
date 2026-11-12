@@ -6,7 +6,7 @@ export function useQrSvg(text: string): string | null {
   const [svg, setSvg] = useState<string | null>(null);
   useEffect(() => {
     let cancelled = false;
-    QRCode.toString(text, { type: "svg", margin: 0, color: { dark: "#202b3d", light: "#ffffff" } })
+    QRCode.toString(text, { type: "svg", margin: 0, color: { dark: "#16110b", light: "#ffffff" } })
       .then((out) => {
         if (!cancelled) setSvg(out);
       })
