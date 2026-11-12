@@ -22,22 +22,25 @@
   --color-line-strong: #e5d6ce;
   --color-chip: #f5ece7;
   --color-blue: #3d5889;
-  --color-red: #bd4b2b;
-  /* sunset does the accent work (tabs, section titles, progress), viridian stays on buttons */
+  --color-red: #c41e3a;
+  /* colour rules: sunset/tangerine = brand + identity only (wordmark, logo, halftone, progress, call ids).
+     alerts = crimson, always with a badge, a warning sign or a count. structure = viridian + navy */
   --color-accent: #bd4b2b;
   --color-accent-soft: #fbefe9;
+  --color-label: #3d5889;
+  --color-label-soft: #e8edf6;
   --color-green: #2f9e5b;
   --color-amber: #d9a21b;
   --color-blue-soft: #e8ebf2;
-  --color-flag: #e03a1e;
-  --color-flag-soft: #fff8f5;
+  --color-flag: #c41e3a;
+  --color-flag-soft: #fdf1f3;
   --color-neutral-accent: #192b52;
   /* status tints, one place so night mode can flip them */
   --color-warning: #a0640a;
   --color-warning-soft: #fff3db;
   --color-success: #2f7a4a;
   --color-success-soft: #e3f4e7;
-  --color-danger-soft: #fdecea;
+  --color-danger-soft: #fbe7ea;
   --color-tab: #192b52;
   --color-on-primary: #ffffff;
   --color-hover: #2f4670;
@@ -86,6 +89,8 @@
   --color-blue-soft: #1e2b49;
   --color-red: #f07a57;
   --color-accent: #f07a57;
+  --color-label: #9bb3e0;
+  --color-label-soft: #1e2b49;
   --color-accent-soft: #2e2230;
   --color-flag: #ff6a4d;
   --color-flag-soft: #33202a;

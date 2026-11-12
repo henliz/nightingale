@@ -17,7 +17,9 @@ export function bestEvidence(lines: readonly CaptureTurn[], value: string, note 
   });
   const top = Math.max(0, ...scored.map((s) => s.score));
   // weak one-word overlaps ("dispatch") ride along with a real match, so keep only the strong ones
-  const floor = Math.max(1, Math.ceil(top / 2));
+  // one shared ordinary word isn't evidence. a two digit number, or two real words, is
+  if (top < 2) return [];
+  const floor = Math.max(2, Math.ceil(top / 2));
   return scored
     .filter((s) => s.score >= floor)
     .sort((a, b) => b.score - a.score)

@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Button } from "../../components/ui/Button/Button";
 import { NOT_CAPTURED, type CaptureTurn, type EpcrSection } from "../../data/epcr";
 import { resolveField, type ResolvedField } from "../../incident/selectors";
@@ -50,13 +51,27 @@ export function ReviewQueuePanel({ sections, incident, turns, summary, attention
   const current = queue.find((q) => q.resolved.field.key === selectedKey) ?? pending[0];
   const pct = queue.length ? Math.round((done.length / queue.length) * 100) : 0;
 
+  // confirming plays a short beat: the card stamps itself, then the next one slides in
+  // and the row drops into "checked". under 0.4s, and skipped for reduced motion
+  const [settling, setSettling] = useState<{ key: string; cleared: boolean } | null>(null);
+  const [justDone, setJustDone] = useState<string | null>(null);
+  const timer = useRef<number | undefined>(undefined);
+
   function confirmCurrent(value: string) {
-    if (!current) return;
+    if (!current || settling) return;
     const key = current.resolved.field.key;
-    onConfirm(key, { value, status: value ? "confirmed" : "cleared" });
-    // hop to the next one still waiting
-    const next = pending.find((q) => q.resolved.field.key !== key);
-    if (next) onSelect(next.resolved.field.key);
+    const finish = () => {
+      onConfirm(key, { value, status: value ? "confirmed" : "cleared" });
+      setSettling(null);
+      setJustDone(key);
+      // hop to the next one still waiting
+      const next = pending.find((q) => q.resolved.field.key !== key);
+      if (next) onSelect(next.resolved.field.key);
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return finish();
+    setSettling({ key, cleared: !value });
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(finish, 380);
   }
 
   return (
@@ -75,16 +90,39 @@ export function ReviewQueuePanel({ sections, incident, turns, summary, attention
       </div>
 
       <div className={styles.scroll}>
-        {current ? <CurrentCard item={current} turns={turns} onConfirm={confirmCurrent} onEdit={() => onEdit(current.resolved.field.key)} /> : <p className={styles.empty}>Nothing to check on this call yet.</p>}
+        {current ? (
+          <CurrentCard
+            key={current.resolved.field.key}
+            item={current}
+            turns={turns}
+            settling={settling?.key === current.resolved.field.key ? settling : null}
+            onConfirm={confirmCurrent}
+            onEdit={() => onEdit(current.resolved.field.key)}
+          />
+        ) : (
+          <p className={styles.empty}>Nothing to check on this call yet.</p>
+        )}
 
         {pending.length > 0 && <QueueList label={`To check · ${pending.length}`} items={pending} currentKey={current?.resolved.field.key} onSelect={onSelect} />}
-        {done.length > 0 && <QueueList label={`Checked · ${done.length}`} items={done} currentKey={current?.resolved.field.key} onSelect={onSelect} />}
+        {done.length > 0 && <QueueList label={`Checked · ${done.length}`} items={done} currentKey={current?.resolved.field.key} justDone={justDone} onSelect={onSelect} />}
       </div>
     </aside>
   );
 }
 
-function CurrentCard({ item, turns, onConfirm, onEdit }: { item: QueueItem; turns: ReadonlyMap<string, CaptureTurn>; onConfirm: (value: string) => void; onEdit: () => void }) {
+function CurrentCard({
+  item,
+  turns,
+  settling,
+  onConfirm,
+  onEdit,
+}: {
+  item: QueueItem;
+  turns: ReadonlyMap<string, CaptureTurn>;
+  settling: { cleared: boolean } | null;
+  onConfirm: (value: string) => void;
+  onEdit: () => void;
+}) {
   const { field, value, review } = item.resolved;
   const empty = value === NOT_CAPTURED;
   // just the few lines this field leans on, best match first
@@ -92,7 +130,12 @@ function CurrentCard({ item, turns, onConfirm, onEdit }: { item: QueueItem; turn
   const lines = bestEvidence(all, empty ? "" : value, field.flagNote ?? "");
 
   return (
-    <div className={[styles.card, item.urgent && !review ? styles.cardUrgent : ""].join(" ")}>
+    <div className={[styles.card, item.urgent && !review ? styles.cardUrgent : "", settling ? styles.cardSettling : ""].join(" ")} aria-busy={settling ? true : undefined}>
+      {settling && (
+        <span className={styles.stamp} role="status">
+          <span aria-hidden="true">✓</span> {settling.cleared ? "Cleared" : "Confirmed"}
+        </span>
+      )}
       <p className={styles.cardSection}>{item.section}</p>
       <p className={styles.cardLabel}>{field.label}</p>
       <p className={[styles.cardValue, empty ? styles.cardValueEmpty : ""].join(" ")}>{value}</p>
@@ -136,7 +179,7 @@ function CurrentCard({ item, turns, onConfirm, onEdit }: { item: QueueItem; turn
   );
 }
 
-function QueueList({ label, items, currentKey, onSelect }: { label: string; items: QueueItem[]; currentKey?: string; onSelect: (key: string) => void }) {
+function QueueList({ label, items, currentKey, justDone, onSelect }: { label: string; items: QueueItem[]; currentKey?: string; justDone?: string | null; onSelect: (key: string) => void }) {
   return (
     <div className={styles.list}>
       <p className={styles.listLabel}>{label}</p>
@@ -144,7 +187,7 @@ function QueueList({ label, items, currentKey, onSelect }: { label: string; item
         const key = resolved.field.key;
         const state = resolved.review ? "done" : urgent ? "urgent" : "todo";
         return (
-          <button key={key} type="button" className={[styles.row, key === currentKey ? styles.rowActive : ""].join(" ")} aria-current={key === currentKey} onClick={() => onSelect(key)}>
+          <button key={key} type="button" className={[styles.row, key === currentKey ? styles.rowActive : "", key === justDone ? styles.rowJust : ""].join(" ")} aria-current={key === currentKey} onClick={() => onSelect(key)}>
             <span className={[styles.dot, styles[state]].join(" ")} aria-hidden="true" />
             <span className={styles.rowLabel}>{resolved.field.label}</span>
             <span className={styles.rowValue}>{resolved.value === NOT_CAPTURED ? "empty" : resolved.value}</span>

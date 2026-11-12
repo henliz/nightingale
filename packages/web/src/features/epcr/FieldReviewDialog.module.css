@@ -40,7 +40,7 @@
 
 .speechTitle {
   font: var(--text-label);
-  color: var(--color-accent);
+  color: var(--color-label);
 }
 
 .speechLine {

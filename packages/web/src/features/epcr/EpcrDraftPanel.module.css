@@ -84,7 +84,7 @@
 .sectionTitle {
   font: var(--text-heading);
   letter-spacing: -0.015em;
-  color: var(--color-accent);
+  color: var(--color-label);
 }
 
 .sectionTitleNeutral {

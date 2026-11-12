@@ -96,7 +96,7 @@
 }
 
 .filterActive {
-  background: var(--color-accent);
+  background: var(--color-tab);
   color: var(--color-on-primary);
 }
 
@@ -134,7 +134,7 @@
 }
 
 .dotFire {
-  background: var(--color-red);
+  background: var(--brand-tangerine);
 }
 
 .dotParamedic {

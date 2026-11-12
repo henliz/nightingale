@@ -24,6 +24,15 @@ export function setPhotoTag(f: RecordFile, tag: PhotoTag) {
   }
 }
 
+/** true until a person picks the tag, so the ui can say it's a suggestion */
+export function isGuessedTag(f: RecordFile): boolean {
+  try {
+    return !sessionStorage.getItem(KEY(f));
+  } catch {
+    return true;
+  }
+}
+
 export function photoTag(f: RecordFile): PhotoTag {
   try {
     const saved = sessionStorage.getItem(KEY(f)) as PhotoTag | null;

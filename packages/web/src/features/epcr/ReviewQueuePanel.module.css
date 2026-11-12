@@ -30,7 +30,7 @@
 
 .count {
   font: 600 13px/18px var(--font-heading);
-  color: var(--color-accent);
+  color: var(--color-label);
 }
 
 .subtitle {
@@ -41,7 +41,7 @@
 .progress {
   height: 6px;
   border-radius: 3px;
-  background: var(--color-accent-soft);
+  background: var(--color-chip);
   overflow: hidden;
 }
 
@@ -68,8 +68,10 @@
   color: var(--color-muted);
 }
 
-/* the field being checked right now */
+/* the field being checked right now. a new card eases in from the right */
 .card {
+  position: relative;
+  animation: cardIn 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -88,7 +90,7 @@
   font: var(--text-caption);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-accent);
+  color: var(--color-label);
 }
 
 .cardLabel {
@@ -190,12 +192,12 @@
 }
 
 .row:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-blue);
   outline-offset: -2px;
 }
 
 .rowActive {
-  background: var(--color-accent-soft);
+  background: var(--color-label-soft);
 }
 
 .rowLabel {
@@ -229,4 +231,58 @@
 
 .done {
   background: var(--color-blue);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* the beat after "looks right": card settles to confirmed, a stamp lands, buttons go quiet */
+.cardSettling {
+  border-color: var(--color-blue);
+  background: var(--color-blue-soft);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.cardSettling .actions {
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.stamp {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-blue);
+  color: var(--color-on-primary);
+  font: 600 12px/18px var(--font-sans);
+  animation: stampIn 220ms cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+@keyframes stampIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: none; }
+}
+
+/* the row that just moved into checked flashes once so the eye can follow it */
+.rowJust {
+  animation: rowFlash 900ms ease-out;
+}
+
+@keyframes rowFlash {
+  0% { background: var(--color-blue-soft); }
+  100% { background: transparent; }
+}
+
+.progressFill {
+  transition: width 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .stamp, .rowJust { animation: none; }
+  .progressFill { transition: none; }
 }

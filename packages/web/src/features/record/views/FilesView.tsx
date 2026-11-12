@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/Button/Button";
 import { Icon } from "../../../components/ui/Icon/Icon";
 import type { RecordFile } from "../../../data/record";
-import { PHOTO_TAGS, photoTag, setPhotoTag, type PhotoTag } from "../../../lib/photoRows";
+import { isGuessedTag, PHOTO_TAGS, photoTag, setPhotoTag, type PhotoTag } from "../../../lib/photoRows";
 import { PhotoViewer } from "./PhotoViewer";
 import styles from "./FilesView.module.css";
 
@@ -64,7 +64,7 @@ export function FilesView({ files, onAddFile, onRemove }: FilesViewProps) {
                         setPhotoTag(f, e.target.value as PhotoTag);
                         bump((n) => n + 1);
                       }}
-                      className={[styles.tag, styles[`tag${tag}`]].join(" ")}
+                      className={[styles.tag, styles[`tag${tag}`], f.url && isGuessedTag(f) ? styles.tagGuess : ""].join(" ")}
                     >
                       {PHOTO_TAGS.map((t) => (
                         <option key={t} value={t}>
@@ -73,6 +73,7 @@ export function FilesView({ files, onAddFile, onRemove }: FilesViewProps) {
                       ))}
                     </select>
                   </label>
+                  {f.url && isGuessedTag(f) && <span className={styles.suggested}>Suggested from the photo description</span>}
                   <p className={styles.caption} title={f.kind}>
                     {f.kind}
                   </p>

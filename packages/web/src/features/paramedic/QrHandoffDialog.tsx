@@ -47,10 +47,11 @@ export function QrHandoffDialog({ open, version, onPrint, onClose }: QrHandoffDi
           {svg ? <span dangerouslySetInnerHTML={{ __html: svg }} /> : null}
         </button>
         <p className={styles.caption}>Scan to open a secure, read-only handoff page</p>
-        <p className={styles.lede}>
-          Opens in any browser, no hospital account or Nightingale access needed. One-time link, expires in 4 hours, every open is logged. Summary
-          reads in IMIST-AMBO order; identity unlocks when the nurse confirms receipt.
-        </p>
+        <ul className={styles.facts}>
+          <li><b>Any browser.</b> No hospital account or Nightingale login.</li>
+          <li><b>One-time link,</b> gone in 4 hours. Every open is logged.</li>
+          <li><b>IMIST-AMBO order.</b> Identity unlocks when the nurse confirms receipt.</li>
+        </ul>
         <span className={styles.pill}>{`Secure link · Version ${version} · ${openedLabel}`}</span>
         <button type="button" className={styles.link} onClick={openHandoff}>
           Prototype: click the QR code to see what the nurse opens

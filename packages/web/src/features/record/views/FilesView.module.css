@@ -174,3 +174,15 @@
 .remove:hover {
   color: var(--color-flag);
 }
+
+/* a tag nobody has confirmed yet: dashed, with a line saying where it came from */
+.tagGuess {
+  border: 1px dashed currentColor;
+  background-color: transparent !important;
+}
+
+.suggested {
+  font: var(--text-caption);
+  color: var(--color-muted);
+  font-style: italic;
+}

@@ -13,14 +13,109 @@
 }
 
 .title {
-  flex: 1;
-  font: var(--text-heading);
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
   letter-spacing: -0.015em;
 }
 
 .patient {
-  font: var(--text-heading);
-  letter-spacing: -0.015em;
+  margin-top: -12px;
+  font: 600 22px/28px var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.callId {
+  margin-left: 6px;
+  font: var(--text-small);
+  color: var(--color-accent);
+  letter-spacing: 0;
+}
+
+.to {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-16);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-8);
+}
+
+.toMark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-label-soft);
+  color: var(--color-label);
+  font: 700 14px/1 var(--font-heading);
+}
+
+.toText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toName {
+  font: var(--text-label);
+}
+
+.toNote {
+  font: var(--text-small);
+  color: var(--color-muted);
+}
+
+.stages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-8);
+  background: var(--color-canvas);
+}
+
+.stage + .stage {
+  background: var(--color-label-soft);
+}
+
+.stageTitle {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-label);
+}
+
+.stageBody {
+  font: var(--text-small);
+  color: var(--color-ink);
+}
+
+.linkRow {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.linkRow .inputSurface {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  font: var(--text-body);
+  color: var(--color-muted);
+}
+
+.inputHint {
+  font: var(--text-caption);
+  color: var(--color-muted);
 }
 
 .lede {
