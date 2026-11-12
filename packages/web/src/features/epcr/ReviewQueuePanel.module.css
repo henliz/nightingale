@@ -104,6 +104,14 @@
   border-radius: var(--radius-6);
 }
 
+/* long free text (a bystander's whole account) stays a short preview, edit shows the rest */
+.cardValue {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .cardValueEmpty {
   color: var(--color-muted);
 }
