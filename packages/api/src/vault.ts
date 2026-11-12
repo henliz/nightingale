@@ -142,7 +142,14 @@ export class S3VaultStore implements VaultStore {
       body.set(chunk, offset);
       offset += chunk.length;
     }
-    await this.client.send(new PutObjectCommand({ Bucket: this.bucket, Key: vaultKey, Body: body }));
+    await this.client.send(new PutObjectCommand({
+      Bucket: this.bucket,
+      Key: vaultKey,
+      Body: body,
+      // MVP baseline for the local S3-compatible vault. Production should use
+      // KMS-managed keys, key rotation, and a tested restore process.
+      ServerSideEncryption: "AES256",
+    }));
     this.pending.delete(uploadId);
   }
 

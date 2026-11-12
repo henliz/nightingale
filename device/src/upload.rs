@@ -14,6 +14,7 @@ pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 pub struct UploadClient {
     base_url: String,
     http: reqwest::blocking::Client,
+    auth_token: Option<String>,
 }
 
 // the api (packages/api) is a js/ts server, so its json is camelCase, not rust's
@@ -57,8 +58,13 @@ struct InitAssetRequest<'a> {
 
 impl UploadClient {
     pub fn new(base_url: impl Into<String>) -> Self {
+        Self::new_with_token(base_url, None)
+    }
+
+    pub fn new_with_token(base_url: impl Into<String>, auth_token: Option<String>) -> Self {
         Self {
             base_url: base_url.into(),
+            auth_token,
             // the server transcribes + condenses audio before it answers /complete, a 30s
             // chunk can take a while on a slow connection, reqwest's default 30s is too tight
             http: reqwest::blocking::Client::builder()
@@ -85,19 +91,19 @@ impl UploadClient {
         captured_at: Option<u64>,
     ) -> Result<InitAssetResponse> {
         let url = format!("{}/captures/{}/assets", self.base_url, capture_id);
-        let res = self
-            .http
-            .post(url)
-            .json(&InitAssetRequest {
-                kind,
-                sha256,
-                captured_at,
-                device_now: std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .map(|d| d.as_millis() as u64)
-                    .unwrap_or(0),
-            })
-            .send()?;
+        let mut request = self.http.post(url).json(&InitAssetRequest {
+            kind,
+            sha256,
+            captured_at,
+            device_now: std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map(|d| d.as_millis() as u64)
+                .unwrap_or(0),
+        });
+        if let Some(token) = &self.auth_token {
+            request = request.bearer_auth(token);
+        }
+        let res = request.send()?;
         if !res.status().is_success() {
             return Err(rejected("init asset", res));
         }
@@ -114,7 +120,11 @@ impl UploadClient {
             "{}/assets/{}/parts/{}",
             self.base_url, asset_id, part_number
         );
-        let res = self.http.put(url).body(bytes.to_vec()).send()?;
+        let mut request = self.http.put(url).body(bytes.to_vec());
+        if let Some(token) = &self.auth_token {
+            request = request.bearer_auth(token);
+        }
+        let res = request.send()?;
         if !res.status().is_success() {
             return Err(rejected(&format!("part {part_number}"), res));
         }
@@ -123,7 +133,11 @@ impl UploadClient {
 
     pub fn complete(&self, asset_id: &str) -> Result<CompleteResponse> {
         let url = format!("{}/assets/{}/complete", self.base_url, asset_id);
-        let res = self.http.post(url).send()?;
+        let mut request = self.http.post(url);
+        if let Some(token) = &self.auth_token {
+            request = request.bearer_auth(token);
+        }
+        let res = request.send()?;
         if !res.status().is_success() {
             return Err(rejected("complete", res));
         }
@@ -249,5 +263,30 @@ mod tests {
         let result = client.init_asset("cap_1", "audio", &"a".repeat(64));
 
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn sends_bearer_token_when_configured() {
+        let server = MockServer::start();
+        let mock = server.mock(|when, then| {
+            when.method(POST).path("/captures/cap_1/assets").header(
+                "authorization",
+                "Bearer device-secret-xxxxxxxxxxxxxxxxxxxxxxxx",
+            );
+            then.status(201).json_body(json!({
+                "assetId": "asset_1",
+                "vaultKey": "cap_1/asset_1",
+                "nextPartNumber": 1
+            }));
+        });
+
+        let client = UploadClient::new_with_token(
+            server.base_url(),
+            Some("device-secret-xxxxxxxxxxxxxxxxxxxxxxxx".into()),
+        );
+        client
+            .init_asset("cap_1", "audio", &"a".repeat(64))
+            .unwrap();
+        mock.assert();
     }
 }

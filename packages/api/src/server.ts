@@ -12,6 +12,7 @@ import {
   type PhotoCaptioner,
   type PipelineDeps,
 } from "@nightingale/pipeline";
+import { createAuditLog, FileAuditStore } from "@nightingale/audit";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,6 +22,7 @@ import { createFsDrillStore } from "./drills.js";
 import { geminiLiveAsr, openAiLiveAsr } from "./live-transcribe.js";
 import { createLiveHub } from "./live.js";
 import { S3VaultStore } from "./vault.js";
+import type { ApiKey, ApiPermission } from "./security.js";
 
 // epcr + photo captions on gemini: a fast flash model with thinking kept low, same
 // reasoning as luna on openai (speed matters more than depth for a live form)
@@ -105,12 +107,41 @@ const liveAsr = useGemini
 // copy (crashpad.ts). outside the repo so nothing in it ever gets committed
 const crashpadDir = process.env.NIGHTINGALE_CRASHPAD_DIR ?? path.join(os.homedir(), "nightingale-crashpad", "from-pi");
 const crashpad = createFsCrashpad(crashpadDir);
-const app = createApp(vault, undefined, pipelineDeps, captioner, live, {
+const auditFile = process.env.NIGHTINGALE_AUDIT_FILE ?? path.join(os.homedir(), "nightingale-audit", "events.jsonl");
+const configuredKeys = (() => {
+  const raw = process.env.NIGHTINGALE_API_KEYS;
+  if (!raw) return [] as ApiKey[];
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) throw new Error("must be a JSON array");
+    const keys = parsed.map((entry) => {
+      const item = entry as Partial<ApiKey>;
+      if (!item.id || !item.secret || item.secret.length < 32 || !item.actorId || !item.actorRole || !item.permissions?.length) {
+        throw new Error("each API key needs id, actorId, actorRole, permissions and a secret of at least 32 characters");
+      }
+      return { id: item.id, secret: item.secret, actorId: item.actorId, actorRole: item.actorRole, permissions: item.permissions as ApiPermission[] };
+    });
+    if (new Set(keys.map((key) => key.id)).size !== keys.length) throw new Error("API key ids must be unique");
+    if (new Set(keys.map((key) => key.secret)).size !== keys.length) throw new Error("API key secrets must be unique");
+    return keys;
+  } catch (err) {
+    throw new Error(`NIGHTINGALE_API_KEYS is invalid: ${(err as Error).message}`);
+  }
+})();
+const insecureDev = configuredKeys.length === 0 && process.env.NIGHTINGALE_ALLOW_INSECURE_DEV === "1";
+if (configuredKeys.length === 0 && !insecureDev) {
+  throw new Error("NIGHTINGALE_API_KEYS is required; set NIGHTINGALE_ALLOW_INSECURE_DEV=1 only for fictional local drills");
+}
+if (insecureDev) console.warn("INSECURE DEVELOPMENT MODE: protected API routes are unavailable for real patient data");
+const app = createApp(vault, createAuditLog(new FileAuditStore(auditFile)), pipelineDeps, captioner, live, {
   silenceDbfs,
   drills,
   liveAsr,
   crashpad,
   processInBackground: true,
+  security: insecureDev
+    ? { requireAuth: false, allowLegacyHeaders: true }
+    : { requireAuth: true, keys: configuredKeys },
   // rebuilding a finished case's epcr: 3.8-flash got the field test's who's-who right
   // (patient vs bystander names, intoxication, no guessed leg) where 2.5-flash didn't
   reviewCondenser: chat

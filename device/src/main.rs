@@ -65,6 +65,18 @@ fn file_kb(path: &std::path::Path) -> u64 {
 fn main() {
     let base_url = std::env::var("NIGHTINGALE_API_URL")
         .unwrap_or_else(|_| "http://localhost:8787".to_string());
+    let mock = std::env::var("NIGHTINGALE_MOCK").is_ok_and(|v| v == "1");
+    let device_token = std::env::var("NIGHTINGALE_DEVICE_TOKEN").ok();
+    if !mock && !base_url.starts_with("https://") {
+        eprintln!("refusing non-HTTPS API URL outside mock mode");
+        return;
+    }
+    if !mock && device_token.as_deref().is_none_or(|token| token.len() < 32) {
+        eprintln!(
+            "NIGHTINGALE_DEVICE_TOKEN of at least 32 characters is required outside mock mode"
+        );
+        return;
+    }
     // a safety net for a forgotten device, not the normal way to stop: the POWER/RECORD
     // press is. 90 s (the section 2 default) kept cutting drills off mid-scenario
     let max_clip_seconds = env_u32("NIGHTINGALE_MAX_CLIP_SECONDS", 1800);
@@ -72,7 +84,6 @@ fn main() {
     let chunk_seconds = env_u32("NIGHTINGALE_AUDIO_CHUNK_SECONDS", 15);
     let power_pin = env_u32("NIGHTINGALE_POWER_PIN", 3) as u8;
     let photo_pin = env_u32("NIGHTINGALE_PHOTO_PIN", 17) as u8;
-    let mock = std::env::var("NIGHTINGALE_MOCK").is_ok_and(|v| v == "1");
     let dev = std::env::var("NIGHTINGALE_DEV").is_ok_and(|v| v == "1");
     let device_id = std::env::var("NIGHTINGALE_DEVICE_ID").unwrap_or_else(|_| {
         std::fs::read_to_string("/etc/hostname")
@@ -85,7 +96,13 @@ fn main() {
     });
 
     let capture_id = format!("session_{}", now_secs());
-    devlog::init(base_url.clone(), device_id.clone(), capture_id.clone(), dev);
+    devlog::init(
+        base_url.clone(),
+        device_id.clone(),
+        capture_id.clone(),
+        device_token.clone(),
+        dev,
+    );
 
     let queue = match Queue::open(&queue_dir) {
         Ok(q) => Arc::new(q),
@@ -116,13 +133,27 @@ fn main() {
     }
 
     let counters = Arc::new(Counters::default());
-    spawn_uploader(&queue, &base_url, &counters, "wav", "audio");
-    spawn_uploader(&queue, &base_url, &counters, "jpg", "photo");
+    spawn_uploader(
+        &queue,
+        &base_url,
+        &counters,
+        device_token.clone(),
+        "wav",
+        "audio",
+    );
+    spawn_uploader(
+        &queue,
+        &base_url,
+        &counters,
+        device_token.clone(),
+        "jpg",
+        "photo",
+    );
     spawn_heartbeat(&queue, &counters);
 
     // live word-by-word transcription on the laptop, NIGHTINGALE_LIVE=0 to turn it off
     let live = (std::env::var("NIGHTINGALE_LIVE").as_deref() != Ok("0"))
-        .then(|| livestream::start(base_url.clone(), capture_id.clone()));
+        .then(|| livestream::start(base_url.clone(), capture_id.clone(), device_token.clone()));
 
     let cfg = Config {
         max_clip: Duration::from_secs(max_clip_seconds as u64),
@@ -196,12 +227,13 @@ fn spawn_uploader(
     queue: &Arc<Queue>,
     base_url: &str,
     counters: &Arc<Counters>,
+    device_token: Option<String>,
     ext: &'static str,
     kind: &'static str,
 ) {
     let queue = queue.clone();
     let counters = counters.clone();
-    let client = UploadClient::new(base_url.to_string());
+    let client = UploadClient::new_with_token(base_url.to_string(), device_token);
     thread::spawn(move || {
         let mut backoff = 2u64;
         // same file + server said no this many times in a row = it's the file, not the wifi

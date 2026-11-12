@@ -10,7 +10,7 @@
 // a re-upload of the same file (pi retried after a dropped answer) is recognised by its
 // sha256 and not written twice
 
-import { closeSync, existsSync, fsyncSync, mkdirSync, openSync, readFileSync, writeSync, chmodSync } from "node:fs";
+import { chmodSync, closeSync, existsSync, fsyncSync, mkdirSync, openSync, readFileSync, writeFileSync, writeSync } from "node:fs";
 import { createHash } from "node:crypto";
 import path from "node:path";
 
@@ -34,15 +34,19 @@ const fsyncDir = (dir: string) => {
 const safe = (s: string) => s.replace(/[^A-Za-z0-9_.-]/g, "_");
 
 export function createFsCrashpad(dir: string): Crashpad {
-  mkdirSync(dir, { recursive: true });
+  mkdirSync(dir, { recursive: true, mode: 0o700 });
+  chmodSync(dir, 0o700);
   const manifest = path.join(dir, "manifest.sha256");
+  if (!existsSync(manifest)) writeFileSync(manifest, "", { mode: 0o600 });
+  chmodSync(manifest, 0o600);
   const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 
   return {
     save({ captureId, piStamp, kind, bytes }) {
       const ext = kind === "audio" ? "wav" : "jpg";
       const folder = path.join(dir, safe(captureId));
-      mkdirSync(folder, { recursive: true });
+      mkdirSync(folder, { recursive: true, mode: 0o700 });
+      chmodSync(folder, 0o700);
       const hash = sha(bytes);
       const base = `${safe(captureId)}__${piStamp ?? `nostamp-${Date.now()}`}`;
 
@@ -66,7 +70,7 @@ export function createFsCrashpad(dir: string): Crashpad {
       fsyncDir(folder);
 
       const line = `${hash}  ${path.relative(dir, file)}\n`;
-      const mfd = openSync(manifest, "a");
+      const mfd = openSync(manifest, "a", 0o600);
       try {
         writeSync(mfd, line);
         fsyncSync(mfd);

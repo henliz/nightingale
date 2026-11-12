@@ -12,6 +12,17 @@ use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
 
+#[cfg(unix)]
+fn restrict_dir(path: &Path) -> io::Result<()> {
+    use std::os::unix::fs::PermissionsExt;
+    fs::set_permissions(path, fs::Permissions::from_mode(0o700))
+}
+
+#[cfg(not(unix))]
+fn restrict_dir(_path: &Path) -> io::Result<()> {
+    Ok(())
+}
+
 pub struct Queue {
     dir: PathBuf,
 }
@@ -27,6 +38,8 @@ impl Queue {
     pub fn open(dir: impl Into<PathBuf>) -> io::Result<Self> {
         let dir = dir.into();
         fs::create_dir_all(dir.join("incoming"))?;
+        restrict_dir(&dir)?;
+        restrict_dir(&dir.join("incoming"))?;
         Ok(Self { dir })
     }
 
@@ -88,6 +101,7 @@ impl Queue {
     pub fn set_aside(&self, path: &Path) -> io::Result<PathBuf> {
         let stuck = self.dir.join("stuck");
         fs::create_dir_all(&stuck)?;
+        restrict_dir(&stuck)?;
         let to = stuck.join(path.file_name().unwrap_or_default());
         fs::rename(path, &to)?;
         Ok(to)

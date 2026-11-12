@@ -9,7 +9,7 @@ chunked, resumable ingest into the sealed vault, wired to the pipeline on the au
 - `GET /assets/:assetId/note`: the `DraftNote` the pipeline produced, as json. 404 until the audio asset's `/complete` call has finished, or if the asset was a photo (nothing to transcribe)
 - `GET /assets/:assetId/download`: streams the raw bytes back, so a photo can actually be viewed in a browser instead of only living in the vault
 
-dev routes (drills only, no access control, ARCHITECTURE.md section 9 item 5):
+dev routes (drills only; production access is scoped by API key permissions):
 
 - `GET /`: the live dashboard, ePCR box + transcript box + console
 - `POST /live/:sessionId/audio`: the pi streams raw mic audio here while recording, transcribed word by word (`live-transcribe.ts`, `NIGHTINGALE_LIVE_MODEL`, default `gemini-3.5-transcribe-live` with a Gemini key, `gpt-live-transcribe` with an OpenAI one)
@@ -32,4 +32,32 @@ transcription is real if `GEMINI_API_KEY` (preferred, about half the cost) or `O
 
 heads up: s3 multipart requires every part except the last to be at least 5mb, most s3-compatible stores enforce the same rule. the pi sends 8 mb parts so photos and chunks always go up as one part (2 mb parts broke photos, oct 17 2026).
 
-still a placeholder: attribute based access control, that's **milestone 4** (ARCHITECTURE.md section 7). none of these routes check who's asking right now.
+The production server requires an API key on every patient-data, ingest, audit, and
+development route. Configure `NIGHTINGALE_API_KEYS` as a JSON array, for example:
+
+```json
+[{"id":"device-1","secret":"replace-with-a-long-random-secret","actorId":"device-1","actorRole":"device","permissions":["ingest"]},{"id":"reviewer-1","secret":"replace-with-another-long-random-secret","actorId":"reviewer-1","actorRole":"ed","permissions":["read","audit","admin"]}]
+```
+
+Clients send `Authorization: Bearer <secret>` (or `x-api-key`). Asset uploads are
+bound to the authenticated actor; other actors need the `admin` permission. The
+server also requires `NIGHTINGALE_AUDIT_FILE` (defaulting to a private file under
+the operator's home directory) for durable hash-chained JSONL audit events. The
+test factory intentionally retains its legacy headers only for fictional tests.
+API secrets must be at least 32 characters. If no keys are configured, the server
+refuses to start unless `NIGHTINGALE_ALLOW_INSECURE_DEV=1` is explicitly set for
+fictional local drills; that mode enables the legacy demo headers and must never be
+used with patient information.
+
+The current browser demo client does not contain a production login or token
+exchange. Run it only behind a same-origin reverse proxy that authenticates the
+operator and injects the API key server-side, or use the API directly with a
+properly scoped key. Do not put a device or administrator key in a Vite/browser
+bundle, URL, or source-controlled `.env` file.
+
+This is MVP hardening, not a PHIPA/MFIPPA compliance claim. Before real patient
+data, add a real identity provider, organization/role policy, approved sharing and
+break-glass workflows, retention/hold/destruction controls, privacy impact and
+threat assessments, contractual/vendor review, key management, monitoring, backups,
+incident response, and independent security/privacy review. See the detailed
+[privacy and security readiness checklist](../../PRIVACY-SECURITY-READINESS.md).

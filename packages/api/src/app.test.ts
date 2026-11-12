@@ -42,6 +42,31 @@ async function json<T>(res: Response): Promise<T> {
 }
 
 describe("ingest api", () => {
+  it("requires scoped API-key auth and prevents cross-actor asset reads", async () => {
+    const app = createApp(new MemoryVaultStore(), undefined, undefined, undefined, undefined, {
+      security: {
+        requireAuth: true,
+        keys: [
+          { id: "device", secret: "device-secret", actorId: "device-1", actorRole: "device", permissions: ["ingest"] },
+          { id: "reviewer", secret: "reviewer-secret", actorId: "reviewer-1", actorRole: "ed", permissions: ["read", "audit", "admin"] },
+          { id: "other", secret: "other-secret", actorId: "other-1", actorRole: "ed", permissions: ["read"] },
+        ],
+      },
+    });
+    const body = { kind: "photo", sha256: "a".repeat(64) };
+
+    expect((await app.request("/captures/cap_1/assets", { method: "POST", body: JSON.stringify(body) })).status).toBe(401);
+    const init = await app.request("/captures/cap_1/assets", {
+      method: "POST",
+      headers: { authorization: "Bearer device-secret", "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    expect(init.status).toBe(201);
+    const { assetId } = (await init.json()) as { assetId: string };
+    expect((await app.request(`/assets/${assetId}`, { headers: { authorization: "Bearer other-secret" } })).status).toBe(403);
+    expect((await app.request(`/assets/${assetId}`, { headers: { authorization: "Bearer reviewer-secret" } })).status).toBe(200);
+  });
+
   it("uploads a file across two chunks and verifies it on complete", async () => {
     const app = createApp(new MemoryVaultStore());
     // kind "photo" on purpose, this test is about chunked upload mechanics, not the

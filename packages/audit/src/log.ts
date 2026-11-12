@@ -45,25 +45,30 @@ export function verifyChain(events: AuditEvent[]): VerifyResult {
 // see ARCHITECTURE.md section 12 milestone 2 and section 2 "every view, edit, approval,
 // export and deletion is logged"
 export function createAuditLog(store: AuditStore) {
-  async function record(input: RecordInput): Promise<AuditEvent> {
-    const prev = await store.last();
-    const prevHash = prev?.hash ?? GENESIS_HASH;
+  let recordChain: Promise<void> = Promise.resolve();
+  function record(input: RecordInput): Promise<AuditEvent> {
+    const write = recordChain.then(async () => {
+      const prev = await store.last();
+      const prevHash = prev?.hash ?? GENESIS_HASH;
 
-    const base = {
-      id: randomUUID(),
-      ts: new Date().toISOString(),
-      actorId: input.actorId,
-      actorRole: input.actorRole,
-      action: input.action,
-      recordType: input.recordType,
-      recordId: input.recordId,
-      reason: input.reason,
-      prevHash,
-    };
+      const base = {
+        id: randomUUID(),
+        ts: new Date().toISOString(),
+        actorId: input.actorId,
+        actorRole: input.actorRole,
+        action: input.action,
+        recordType: input.recordType,
+        recordId: input.recordId,
+        reason: input.reason,
+        prevHash,
+      };
 
-    const event = AuditEvent.parse({ ...base, hash: computeHash(base) });
-    await store.append(event);
-    return event;
+      const event = AuditEvent.parse({ ...base, hash: computeHash(base) });
+      await store.append(event);
+      return event;
+    });
+    recordChain = write.then(() => undefined, () => undefined);
+    return write;
   }
 
   async function list() {

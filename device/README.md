@@ -6,7 +6,8 @@ of the monorepo on purpose, see ARCHITECTURE.md section 4 and 5.
 - `src/upload.rs`: reads a file, chunks it, pushes it through the ingest api in
   `packages/api` (init -> upload each part -> complete, sha256 checked on both ends).
   tested against a mocked http server, not a live node process, since the only real
-  contract between the two is http (ARCHITECTURE.md section 4).
+  contract between the two is http (ARCHITECTURE.md section 4). Production uploads,
+  logs, and live audio use a per-device bearer token.
 - `src/capture.rs`: shells out to `rpicam-still` (autofocus on capture, `-t 1000` so a
   photo takes ~1.5-2s instead of ~6s) and `arecord`, the same tools already proven from
   the shell on the real pi. not unit tested, no rust-side hardware mock yet (7b).
@@ -31,8 +32,13 @@ of the monorepo on purpose, see ARCHITECTURE.md section 4 and 5.
 mock mode on the laptop, against a running api:
 
 ```
-NIGHTINGALE_MOCK=1 NIGHTINGALE_DEV=1 cargo run
+NIGHTINGALE_MOCK=1 NIGHTINGALE_DEV=1 NIGHTINGALE_ALLOW_INSECURE_DEV=1 cargo run
 ```
+
+For a non-mock device, set `NIGHTINGALE_API_URL` to an `https://` endpoint and
+provide `NIGHTINGALE_DEVICE_TOKEN` with the same 32+ character secret configured in
+the API's `NIGHTINGALE_API_KEYS` as an `ingest` principal. Never commit the token.
+The API and device remain fictional-data-only for this school prototype.
 
 ## the whole loop: pi -> laptop -> dashboard
 
@@ -61,7 +67,7 @@ NIGHTINGALE_MOCK=1 NIGHTINGALE_DEV=1 cargo run
    builds with `cross`, copies the binary + env file + systemd unit over, enables the
    service and restarts it. the pi reaches the laptop by its mdns name
    (`<this mac's LocalHostName>.local:8787`), so no ip editing when the network changes.
-   overrides: `PI=user@host`, `API_URL=http://...:8787`, `AUDIO_DEVICE=plughw:1,0`
+   overrides: `PI=user@host`, `API_URL=https://...`, `AUDIO_DEVICE=plughw:1,0`
    (once the usb sound card's in, find it with `arecord -l`), `MAX_CLIP_SECONDS` (default
    90), `AUDIO_CHUNK_SECONDS`, `LED_PIN`, `BUZZER_PIN`, `NOTICE_WAV`, `PROFILE=debug`.
    the button pins are fixed (3 and 17).
