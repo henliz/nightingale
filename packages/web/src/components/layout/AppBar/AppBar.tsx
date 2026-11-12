@@ -22,6 +22,12 @@ export function AppBar({ user, alerts, unseenCount, search, onAlertsOpened, onDi
       <div className={styles.brand}>
         <Icon name="logo" size={29} />
         <span className={styles.brandName}>Nightingale</span>
+        {/* no api keys = the api's insecure dev mode, fictional drills only (SECURITY-DEMO.md) */}
+        {!__NG_SECURED__ && (
+          <span className={styles.drillBadge} title="The api is running without keys. Fictional drill data only, never real patients.">
+            Fictional drill data
+          </span>
+        )}
       </div>
 
       <div className={styles.right}>

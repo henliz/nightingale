@@ -1,3 +1,4 @@
+import { useLiveSource } from "../../api/LiveSourceContext";
 import { hasReached, type IncidentState } from "../../incident/types";
 import type { ProgressStep } from "./progressSteps";
 import styles from "./StageProgress.module.css";
@@ -8,13 +9,16 @@ interface StageProgressProps {
 }
 
 export function StageProgress({ steps, incident }: StageProgressProps) {
+  // a real call's dispatch time comes from the call itself, the 13:25 is the sample story's
+  const live = useLiveSource();
+  const dispatchedAt = live.source === "api" && live.call.dispatchAt ? live.call.dispatchAt : incident.times.dispatched;
   return (
     <ol className={styles.track} aria-label="Record progress" style={{ listStyle: "none", margin: 0, padding: 0 }}>
       {steps.map((step, i) => {
         const reached = hasReached(incident.stage, step.reachedAt);
         const next = steps[i + 1];
         const nextReached = next ? hasReached(incident.stage, next.reachedAt) : false;
-        const time = incident.times[step.timeFrom];
+        const time = step.timeFrom === "dispatched" ? dispatchedAt : incident.times[step.timeFrom];
         const label = reached && step.labelReached ? step.labelReached : step.label;
         return (
           <li key={step.label} className={styles.stage} aria-current={reached && !nextReached ? "step" : undefined}>

@@ -58,3 +58,18 @@ For the capstone presentation, capture screenshots of:
 3. A successful authorized request.
 4. The audit log with `verified.valid: true`.
 5. The device refusing an insecure URL or missing token.
+
+## 6. The dashboard with keys
+
+The dashboard (`packages/web`) never holds a key. The vite dev proxy adds the signed-in
+person's key to every `/api` request, photos and the live feed included, picked by the
+`ng_user` cookie sign-in sets:
+
+```bash
+NIGHTINGALE_WEB_API_KEYS='{"alvin":"<32+ char secret>","rick":"<32+ char secret>"}' \
+  pnpm --filter @nightingale/web dev
+```
+
+`NIGHTINGALE_WEB_API_KEY=<secret>` uses one key for everyone. With neither set, the app bar
+shows a "Fictional drill data" badge (the api's insecure dev mode). A 401 says this device has
+no key for that person, a 403 says their key can't do that, and "New call" needs `admin`.

@@ -29,15 +29,27 @@ function writeStoredUser(user: User | null) {
   }
 }
 
+// who's signed in, for the dev proxy only: it swaps this for that person's api key server-side,
+// so no key ever lands in the browser (photos + the live feed can't send headers, a cookie rides along)
+function writeUserCookie(user: User | null) {
+  document.cookie = user ? `ng_user=${encodeURIComponent(user.id)}; path=/; SameSite=Strict` : "ng_user=; path=/; max-age=0; SameSite=Strict";
+}
+
 export function SessionProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(readStoredUser);
+  const [user, setUser] = useState<User | null>(() => {
+    const stored = readStoredUser();
+    writeUserCookie(stored);
+    return stored;
+  });
 
   const signIn = (next: User) => {
     writeStoredUser(next);
+    writeUserCookie(next);
     setUser(next);
   };
   const signOut = () => {
     writeStoredUser(null);
+    writeUserCookie(null);
     setUser(null);
   };
 

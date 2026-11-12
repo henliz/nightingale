@@ -49,7 +49,7 @@ export function callInfo(session: DrillSession | null): CallInfo {
   if (!session) {
     return {
       callId: "Loading",
-      headline: "Waiting for the api",
+      headline: "No call open yet",
       patientName: null,
       patientLine: UNNAMED,
       firstContact: "",

@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { AppShell } from "../../components/layout/AppShell/AppShell";
 import { Button } from "../../components/ui/Button/Button";
 import { LabelledSection } from "../../components/ui/Card/Card";
+import { apiProblem } from "../../api/client";
 import { useLiveSource } from "../../api/LiveSourceContext";
 import type { User } from "../../data/users";
 import { greetingFor, longDate } from "../../lib/time";
@@ -26,18 +27,23 @@ export function HomeLayout({ user, currentCall, review, records, children }: Hom
     live.source === "demo"
       ? " · Showing the sample call"
       : live.status === "error"
-        ? " · Can't reach the api, real calls show up here as soon as it's running"
+        ? live.problem === "signed-out"
+          ? " · This device has no api key for you, so real calls are locked. Ask whoever runs the api for one"
+          : live.problem === "forbidden"
+            ? " · Your account can't open real calls"
+            : " · Can't reach the api, real calls show up here as soon as it's running"
         : live.status === "loading"
           ? " · connecting to the api…"
           : "";
-  const [starting, setStarting] = useState<"idle" | "starting" | "failed">("idle");
+  const [starting, setStarting] = useState<"idle" | "starting" | "failed" | "forbidden">("idle");
   const newCall = async () => {
     setStarting("starting");
     try {
       await live.startNewCall();
       setStarting("idle");
-    } catch {
-      setStarting("failed");
+    } catch (e) {
+      // only keys with admin can open a call (security branch), so a 403 means this role can't
+      setStarting(apiProblem(e) === "forbidden" ? "forbidden" : "failed");
     }
   };
   return (
@@ -47,9 +53,13 @@ export function HomeLayout({ user, currentCall, review, records, children }: Hom
           <h1 className={styles.title}>
             {greetingFor()}, {user.firstName}
           </h1>
-          <Button variant="secondary" onClick={() => void newCall()} disabled={starting === "starting" || live.status === "error"} title="Everything the device records from now on goes into a fresh call. The saved cases aren't touched.">
-            {starting === "starting" ? "Starting…" : starting === "failed" ? "Couldn't start, try again" : "New call"}
-          </Button>
+          {starting === "forbidden" ? (
+            <span className={styles.context}>Your account can&rsquo;t start a new call</span>
+          ) : (
+            <Button variant="secondary" onClick={() => void newCall()} disabled={starting === "starting" || live.status === "error"} title="Everything the device records from now on goes into a fresh call. The saved cases aren't touched.">
+              {starting === "starting" ? "Starting…" : starting === "failed" ? "Couldn't start, try again" : "New call"}
+            </Button>
+          )}
         </div>
         <p className={styles.context}>
           {longDate()} | {user.station}

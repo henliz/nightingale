@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { CaptureExcerpt } from "../data/epcr";
 import type { PatientRecord } from "../data/record";
 import { callInfo, SAMPLE_CALL, type CallInfo } from "./call";
-import { fetchSessions, startNewCall, subscribeToChanges, type PartialLine } from "./client";
+import { apiProblem, fetchSessions, startNewCall, subscribeToChanges, type ApiProblem, type PartialLine } from "./client";
 import { mapExcerpts, mapSessionToRecord, sortedSessions } from "./mapNote";
 import type { DrillSession } from "./types";
 
@@ -12,6 +12,8 @@ interface LiveSourceValue {
   source: DataSource;
   status: "loading" | "ready" | "error";
   error: string | null;
+  /** why it failed: no key, key not allowed, or the api isn't there */
+  problem: ApiProblem | null;
   sessions: DrillSession[];
   session: DrillSession | null;
   /** what every card and dialog says about the call on screen, real or the sample */
@@ -59,6 +61,7 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
   const [source, setSourceState] = useState<DataSource>(readSource);
   const [status, setStatus] = useState<LiveSourceValue["status"]>("loading");
   const [error, setError] = useState<string | null>(null);
+  const [problem, setProblem] = useState<ApiProblem | null>(null);
   const [sessions, setSessions] = useState<DrillSession[]>([]);
   const [feedOpen, setFeedOpen] = useState<boolean | null>(null);
   const [device, setDevice] = useState<LiveSourceValue["device"]>(null);
@@ -81,10 +84,12 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
         setSessions(list);
         setStatus("ready");
         setError(null);
+        setProblem(null);
       } catch (e) {
         if (cancelled) return;
         setStatus("error");
         setError(e instanceof Error ? e.message : String(e));
+        setProblem(apiProblem(e));
       }
     }
     void load();
@@ -136,6 +141,7 @@ export function LiveSourceProvider({ children }: { children: ReactNode }) {
     source,
     status,
     error,
+    problem,
     sessions,
     session,
     call: source === "demo" ? SAMPLE_CALL : callInfo(session),

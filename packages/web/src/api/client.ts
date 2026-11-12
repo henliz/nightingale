@@ -1,12 +1,30 @@
 import { z } from "zod";
 import { DrillSession } from "./types";
 
-/** same origin, vite proxies it to packages/api in dev */
+/** same origin, vite proxies it to packages/api in dev (and adds the signed-in person's api key there) */
 export const API_BASE = "/api";
+
+/** the api said no. 401 = this device has no key for that person, 403 = their key can't do that */
+export class ApiError extends Error {
+  constructor(
+    readonly path: string,
+    readonly status: number,
+  ) {
+    super(`${path} → ${status}`);
+  }
+}
+
+export type ApiProblem = "signed-out" | "forbidden" | "down";
+
+export function apiProblem(err: unknown): ApiProblem {
+  if (err instanceof ApiError && err.status === 401) return "signed-out";
+  if (err instanceof ApiError && err.status === 403) return "forbidden";
+  return "down";
+}
 
 async function getJson<T>(path: string, schema: z.ZodType<T>): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, { headers: { accept: "application/json" } });
-  if (!res.ok) throw new Error(`${path} → ${res.status}`);
+  if (!res.ok) throw new ApiError(path, res.status);
   return schema.parse(await res.json());
 }
 
@@ -67,6 +85,6 @@ export function subscribeToChanges({ onChange, onStatus, onPartial, onDevice }: 
 /** same as the dev dashboard's "New session": everything the pi sends from now on goes to a fresh call. the saved cases aren't touched */
 export async function startNewCall(): Promise<DrillSession> {
   const res = await fetch(`${API_BASE}/dev/sessions/new`, { method: "POST", headers: { accept: "application/json" } });
-  if (!res.ok) throw new Error(`/dev/sessions/new → ${res.status}`);
+  if (!res.ok) throw new ApiError("/dev/sessions/new", res.status);
   return DrillSession.parse(await res.json());
 }

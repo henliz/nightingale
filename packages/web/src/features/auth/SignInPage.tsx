@@ -64,7 +64,7 @@ export function SignInPage() {
       <aside className={styles.brandPanel} aria-hidden="true">
         <img className={styles.brandMark} src={logo} alt="" width={64} height={64} />
         <p className={styles.brandWord}>Nightingale</p>
-        <p className={styles.brandLine}>Say it once. It reaches the hospital.</p>
+        <p className={styles.brandLine}>What responders learn at the scene, actually reaching the hospital.</p>
         <span className={styles.brandHalftone} />
       </aside>
       <form className={styles.card} onSubmit={handleSubmit} noValidate>
