@@ -171,12 +171,20 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
           <span className={styles.recordNumber}>{locked ? `${recordLabel} · accept to unlock` : recordLabel}</span>
         </div>
         <label className={styles.search}>
+          <Icon name="search" size={16} className={styles.searchIcon} />
           <input className={styles.searchInput} type="search" placeholder="Search this record" aria-label="Search this record" />
-          <Icon name="search" size={16} />
         </label>
-        <Button variant="ghostInk" onClick={close}>
-          Close
-        </Button>
+        <div className={styles.actions}>
+          {/* notes + observations save as they're added, so the secondary just closes */}
+          <Button variant="secondary" onClick={close}>
+            {locked ? "Close" : "Done"}
+          </Button>
+          {!locked && (
+            <Button variant="primary" onClick={() => navigate(user?.role === "paramedic" ? "/paramedic/record" : "/fire/record")}>
+              Open full ePCR
+            </Button>
+          )}
+        </div>
       </header>
 
       <Tabs tabs={live.source === "demo" ? TABS : TABS.map((t) => (t.id === "incident" ? { ...t, label: "ePCR" } : t))} value={tab} onChange={(next) => { setSubView(null); setTab(next); }} label="Record sections" />
@@ -184,17 +192,6 @@ export function PatientRecordModal({ open, initialTab = "overview", locked = fal
       <div className={styles.body} data-scroll-root role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
         {renderBody()}
       </div>
-
-      <footer className={styles.footer}>
-        {!locked && (
-          <Button variant="ghost" onClick={() => navigate(user?.role === "paramedic" ? "/paramedic/record" : "/fire/record")}>
-            Open full ePCR
-          </Button>
-        )}
-        <Button variant="secondary" onClick={close}>
-          {locked ? "Close" : "Save"}
-        </Button>
-      </footer>
     </Dialog>
   );
 }

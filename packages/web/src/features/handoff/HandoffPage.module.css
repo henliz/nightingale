@@ -212,3 +212,10 @@
   gap: 10px;
   max-width: 640px;
 }
+
+@media (max-width: 760px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}

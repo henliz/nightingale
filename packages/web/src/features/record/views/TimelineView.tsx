@@ -48,7 +48,7 @@ export function TimelineView({ events, onAddObservation, onViewFiles }: Timeline
         </ol>
       )}
       <div className={styles.actions}>
-        <Button onClick={onAddObservation}>Add observation</Button>
+        <Button variant="secondary" onClick={onAddObservation}>Add observation</Button>
         <Button variant="ghostInk" onClick={onViewFiles}>
           View documents and images
         </Button>

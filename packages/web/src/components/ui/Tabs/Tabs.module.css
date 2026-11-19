@@ -1,5 +1,7 @@
 .list {
   display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
   padding: 0 var(--space-24);
   border-bottom: 1px solid var(--color-line);
   background: var(--color-white);
@@ -7,7 +9,9 @@
 
 .tab {
   position: relative;
-  width: 130px;
+  flex: 0 0 auto;
+  min-width: 130px;
+  padding: 0 16px;
   height: 56px;
   font: var(--text-label);
   color: var(--color-muted);
@@ -35,9 +39,19 @@
 }
 
 .active {
-  color: var(--color-tab);
+  color: var(--color-ink);
 }
 
 .active::after {
-  background: var(--color-tab);
+  background: var(--color-ink);
+}
+
+@media (max-width: 760px) {
+  .list {
+    padding: 0 8px;
+  }
+  .tab {
+    min-width: 0;
+    height: 48px;
+  }
 }

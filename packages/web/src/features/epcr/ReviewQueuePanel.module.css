@@ -286,3 +286,10 @@
   .card, .stamp, .rowJust { animation: none; }
   .progressFill { transition: none; }
 }
+
+@media (max-width: 1100px) {
+  .panel {
+    width: 100%;
+    max-height: 420px;
+  }
+}

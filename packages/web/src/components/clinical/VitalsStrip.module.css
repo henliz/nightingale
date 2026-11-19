@@ -24,7 +24,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: var(--space-8);
   margin: 0;
 }
@@ -58,8 +58,9 @@
 
 .value {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 4px;
+  column-gap: 4px;
   margin: 0;
   min-width: 0;
 }
@@ -88,19 +89,19 @@
   color: var(--color-line-strong);
 }
 
+/* one red system: out of range = red edge + red word, critical = red panel too */
 .low,
 .high {
-  background: var(--color-warning-soft);
-  border-color: var(--color-warning);
+  border-color: #efb8b8;
 }
 .low .flag,
 .high .flag {
-  color: var(--color-warning);
+  color: var(--color-flag);
 }
 
 .critical {
-  background: var(--color-flag-soft);
-  border-color: var(--color-flag);
+  background: #fff7f7;
+  border-color: #efb8b8;
 }
 .critical .flag,
 .critical .num,

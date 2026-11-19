@@ -41,7 +41,7 @@ export function OverviewView({ record, flags = [], onOpenFlag, deviceActive, dev
           <Chip>Nightingale inactive</Chip>
         )}
         <span className={styles.spacer} />
-        <Button onClick={onAddObservation}>Add observation</Button>
+        <Button variant="secondary" onClick={onAddObservation}>Add observation</Button>
       </div>
 
       {flags.length > 0 && <ConflictList flags={flags} onOpen={onOpenFlag} />}

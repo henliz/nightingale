@@ -1,28 +1,82 @@
-.greeting {
+.hero {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 16px;
 }
 
-.titleRow {
+.heroTop {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-16);
   flex-wrap: wrap;
 }
 
-/* the greeting stays quiet, the current call is the hero */
-.title {
-  font: 600 20px/28px var(--font-heading);
-  letter-spacing: -0.015em;
-  min-height: 44px;
+.heroText {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
+.title {
+  font: 600 28px/34px var(--font-heading);
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
+
+/* same pattern as the call card's meta line: thin line icon, plain words */
 .context {
-  font: var(--text-small);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  font: 400 14px/20px var(--font-sans);
+  letter-spacing: -0.01em;
+  color: var(--color-muted);
+}
+
+.contextItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* same surface as the buttons and search: white, hairline, faint lift */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 6px 12px 6px 11px;
+  border-radius: var(--radius-6);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 2px rgba(var(--shadow-rgb), 0.05);
+  font: 400 13px/1 var(--font-sans);
+  letter-spacing: -0.01em;
+  color: var(--color-muted);
+  line-height: 18px;
+}
+
+.chip svg {
+  flex-shrink: 0;
+}
+
+.chipLabel {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.heroNote {
+  font: 400 13px/18px var(--font-sans);
   color: var(--color-muted);
 }
 
@@ -33,35 +87,38 @@
   align-items: start;
 }
 
-.status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-16);
-  font: var(--text-small);
-  color: var(--color-muted);
-}
-
-.statusItem {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-8);
-}
-
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--color-line);
+  background: #b5b8bf;
 }
 
 .on {
-  background: var(--color-green);
+  background: #22a35a;
 }
 
 .stale {
-  background: var(--color-amber);
+  background: #e3962b;
 }
 
-.off {
-  background: var(--color-red);
+.idle {
+  background: #b5b8bf;
+}
+
+@media (max-width: 1100px) {
+  .work {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .heroTop {
+    flex-direction: column;
+    gap: 12px;
+  }
 }

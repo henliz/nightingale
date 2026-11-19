@@ -165,3 +165,9 @@
   justify-content: flex-end;
   gap: var(--space-12);
 }
+
+@media (max-width: 760px) {
+  .stages {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

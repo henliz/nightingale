@@ -8,9 +8,10 @@
 
 .headingRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-8);
-  height: 44px;
+  min-height: 44px;
 }
 
 .heading {
@@ -500,5 +501,11 @@
     position: static;
     flex-direction: row;
     overflow-x: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

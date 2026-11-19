@@ -18,7 +18,7 @@ export function RecordsList({ records, totalCount, query = "", onView }: Records
         <h2 id="records-heading" className={styles.title}>
           Records
         </h2>
-        <span className={styles.count}>{needle ? `${shown.length} of ${totalCount} records` : `${totalCount} records`}</span>
+        <span className={styles.count}>{needle ? `${shown.length} of ${totalCount} records` : `${totalCount} ${totalCount === 1 ? "record" : "records"}`}</span>
       </div>
 
       <ul className={styles.list} style={{ listStyle: "none", margin: 0, padding: 0 }}>

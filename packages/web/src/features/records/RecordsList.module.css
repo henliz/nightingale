@@ -12,14 +12,14 @@
 }
 
 .title {
-  font: var(--text-heading);
-  letter-spacing: -0.015em;
+  font: 600 20px/26px var(--font-heading);
+  letter-spacing: -0.03em;
   flex: 1;
 }
 
 .count {
-  font: var(--text-label);
-  padding: 4px 12px;
+  font: 400 13px/18px var(--font-sans);
+  color: var(--color-muted);
 }
 
 .list {
@@ -28,7 +28,8 @@
   background: var(--color-white);
   margin: 0;
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-12);
+  box-shadow: 0 1px 2px rgba(var(--shadow-rgb), 0.04);
   overflow: hidden;
 }
 
@@ -70,11 +71,12 @@ li:last-child .rowButton {
 
 .time {
   font: 600 15px/20px var(--font-heading);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .date {
-  font: var(--text-caption);
+  font: 400 12px/16px var(--font-sans);
   color: var(--color-muted);
 }
 
@@ -86,14 +88,15 @@ li:last-child .rowButton {
 }
 
 .callId {
-  font: var(--text-label);
+  font: 500 14px/20px var(--font-sans);
+  letter-spacing: -0.01em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .unit {
-  font: var(--text-small);
+  font: 400 13px/18px var(--font-sans);
   color: var(--color-muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -101,7 +104,7 @@ li:last-child .rowButton {
 }
 
 .patient {
-  font: var(--text-small);
+  font: 400 13px/18px var(--font-sans);
   color: var(--color-muted);
   text-align: left;
   overflow: hidden;
@@ -117,9 +120,12 @@ li:last-child .rowButton {
 
 .statusChip,
 .conflictChip {
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  font: 600 11px/18px var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-6);
+  font: 500 12px/1 var(--font-sans);
   white-space: nowrap;
 }
 
@@ -130,11 +136,11 @@ li:last-child .rowButton {
 
 .statusQuiet {
   background: var(--color-chip);
-  color: var(--color-muted);
+  color: #4b5059;
 }
 
 .conflictChip {
-  background: var(--color-flag-soft);
+  background: #fdecec;
   color: var(--color-flag);
 }
 
@@ -147,7 +153,7 @@ li:last-child .rowButton {
 }
 
 .hint {
-  font: var(--text-small);
+  font: 400 13px/18px var(--font-sans);
   color: var(--color-muted);
 }
 
@@ -157,5 +163,13 @@ li:last-child .rowButton {
   }
   .patient {
     display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .rowButton {
+    grid-template-columns: 48px minmax(0, 1fr) auto 12px;
+    gap: 12px;
+    padding: 14px 16px;
   }
 }

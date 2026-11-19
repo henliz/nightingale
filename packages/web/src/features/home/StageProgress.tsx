@@ -20,10 +20,17 @@ export function StageProgress({ steps, incident }: StageProgressProps) {
         const nextReached = next ? hasReached(incident.stage, next.reachedAt) : false;
         const time = step.timeFrom === "dispatched" ? dispatchedAt : incident.times[step.timeFrom];
         const label = reached && step.labelReached ? step.labelReached : step.label;
+        const current = reached && !nextReached;
         return (
-          <li key={step.label} className={styles.stage} aria-current={reached && !nextReached ? "step" : undefined}>
+          <li key={step.label} className={styles.stage} aria-current={current ? "step" : undefined}>
             <div className={styles.marker}>
-              <span className={[styles.dot, reached ? styles.dotReached : ""].join(" ")} />
+              <span className={[styles.dot, reached ? styles.dotReached : "", current ? styles.dotCurrent : ""].join(" ")}>
+                {reached && (
+                  <svg width="10" height="10" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7.4l2.6 2.6L11 4.6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </span>
               {next && <span className={[styles.connector, nextReached ? styles.connectorReached : ""].join(" ")} />}
             </div>
             <span className={[styles.label, reached ? styles.labelReached : ""].join(" ")}>{label}</span>

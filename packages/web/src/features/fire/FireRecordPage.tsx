@@ -18,7 +18,7 @@ export function FireRecordPage() {
 
   const meta = live.session
     ? `${live.call.patientLine} · ${live.session.assets.length} chunks · ePCR ${live.session.epcrStatus ?? "pending"}`
-    : `Capture ended ${CAPTURE_META.captureEnded} | Imported ${CAPTURE_META.imported}`;
+    : `Capture ended ${CAPTURE_META.captureEnded} · Imported ${CAPTURE_META.imported}`;
 
   return (
     <EpcrReviewPage

@@ -14,38 +14,38 @@
   --brand-halftone: linear-gradient(90deg, var(--brand-tangerine) 0%, var(--brand-sunset) 40%, var(--brand-viridian) 70%, var(--brand-navy) 100%);
   --brand-halftone-mask: radial-gradient(circle, #000 1.3px, transparent 1.6px) 0 0 / 4px 4px, linear-gradient(90deg, transparent 0%, #000 35%);
 
-  --color-canvas: #f8f3f0;
-  --color-white: #fffcfa;
-  --color-ink: #16110b;
-  --color-muted: #6f6460;
-  --color-line: #eee3dd;
-  --color-line-strong: #e5d6ce;
-  --color-chip: #f5ece7;
-  --color-blue: #3d5889;
+  --color-canvas: #f9f9f9;
+  --color-white: #ffffff;
+  --color-ink: #0d0d0d;
+  --color-muted: #6b6b6b;
+  --color-line: #e5e5e5;
+  --color-line-strong: #d4d4d4;
+  --color-chip: #f3f4f6;
+  --color-blue: #2f4f8c;
   --color-red: #c41e3a;
   /* colour rules: sunset/tangerine = brand + identity only (wordmark, logo, halftone, progress, call ids).
      alerts = crimson, always with a badge, a warning sign or a count. structure = viridian + navy */
   --color-accent: #bd4b2b;
-  --color-accent-soft: #fbefe9;
-  --color-label: #3d5889;
-  --color-label-soft: #e8edf6;
+  --color-accent-soft: #eef2fa;
+  --color-label: #2f4f8c;
+  --color-label-soft: #ebf0f9;
   --color-green: #2f9e5b;
   --color-amber: #d9a21b;
-  --color-blue-soft: #e8ebf2;
-  --color-flag: #c41e3a;
-  --color-flag-soft: #fdf1f3;
+  --color-blue-soft: #ebf0f9;
+  --color-flag: #b91c1c;
+  --color-flag-soft: #fef2f2;
   --color-neutral-accent: #192b52;
-  /* status tints, one place so night mode can flip them */
-  --color-warning: #a0640a;
-  --color-warning-soft: #fff3db;
-  --color-success: #2f7a4a;
-  --color-success-soft: #e3f4e7;
-  --color-danger-soft: #fbe7ea;
+  /* status tints */
+  --color-warning: #92400e;
+  --color-warning-soft: #fffbeb;
+  --color-success: #166534;
+  --color-success-soft: #f0fdf4;
+  --color-danger-soft: #fef2f2;
   --color-tab: #192b52;
   --color-on-primary: #ffffff;
-  --color-hover: #2f4670;
-  --color-disabled-text: #c9c3bd;
-  --shadow-rgb: 22, 17, 11;
+  --color-hover: #263f73;
+  --color-disabled-text: #c0c0c0;
+  --shadow-rgb: 0, 0, 0;
   --print-line: #b8bcc2;
   --print-section: #eff0f2;
 
@@ -57,10 +57,22 @@
   --space-24: 24px;
   --space-32: 32px;
 
-  --radius-6: 6px;
-  --radius-8: 8px;
-  --radius-12: 12px;
-  --radius-pill: 14px;
+  /* flat system: controls + inner panels 12 (rounded rects, never pills), small tags 8-10, cards 20, frames 24 */
+  --radius-control: 12px;
+  --radius-6: 10px;
+  --radius-8: 12px;
+  --radius-12: 20px;
+  --radius-pill: 8px;
+  --radius-frame: 24px;
+  /* the only shadow: floating layers (dialogs, menus, sheets). cards and buttons stay flat */
+  --shadow-float: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 16px 40px -12px rgba(0, 0, 0, 0.14);
+  --color-fill: #f2f2f2;
+  --color-fill-hover: #e9e9e9;
+
+  /* breakpoints (media queries cant read vars, so every file uses these three numbers):
+     1100px half a desktop -> two-column layouts stack
+     760px tablet -> tighter padding, dialogs full screen, form grids one column
+     520px phone -> app bar condenses, stepper goes vertical */
 
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-heading: "Hanken Grotesk", "Inter", system-ui, sans-serif;
@@ -75,34 +87,3 @@
   --text-reading: 400 16px/24px var(--font-sans);
 }
 
-/* night mode for the truck: navy, not black, so it still feels like the brand */
-:root[data-theme="night"] {
-  color-scheme: dark;
-  --color-canvas: #0f1628;
-  --color-white: #172138;
-  --color-ink: #f2ebe2;
-  --color-muted: #a3a9b8;
-  --color-line: #26324d;
-  --color-line-strong: #33415f;
-  --color-chip: #212c46;
-  --color-blue: #7f9bd1;
-  --color-blue-soft: #1e2b49;
-  --color-red: #f07a57;
-  --color-accent: #f07a57;
-  --color-label: #9bb3e0;
-  --color-label-soft: #1e2b49;
-  --color-accent-soft: #2e2230;
-  --color-flag: #ff6a4d;
-  --color-flag-soft: #33202a;
-  --color-neutral-accent: #c9d3e6;
-  --color-warning: #f0b860;
-  --color-warning-soft: #33291a;
-  --color-success: #6fcf93;
-  --color-success-soft: #173326;
-  --color-danger-soft: #3a1f24;
-  --color-tab: #f2ebe2;
-  --color-on-primary: #0f1628;
-  --color-hover: #9bb3e0;
-  --color-disabled-text: #4b5672;
-  --shadow-rgb: 0, 0, 0;
-}
