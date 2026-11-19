@@ -22,3 +22,10 @@
   min-height: 520px;
 }
 
+@media (max-width: 1100px) {
+  .workspace {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+}

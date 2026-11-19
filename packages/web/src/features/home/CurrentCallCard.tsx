@@ -70,11 +70,15 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
           </Button>
         )}
         <ReceiptChip incident={incident} />
+        {call.conflicts > 0 && (
+          <span className={styles.conflicts}>
+            {call.conflicts} conflict{call.conflicts === 1 ? "" : "s"} to check
+          </span>
+        )}
         <span className={styles.spacer} />
-        <span className={styles.firstContact}>First contact {call.firstContact}</span>
         {showExpand && (
           <button type="button" className={styles.iconButton} onClick={onOpenRecord} aria-label="Expand record">
-            <Icon name="arrowsOut" size={22} />
+            <Icon name="arrowsOut" size={18} />
           </button>
         )}
       </div>
@@ -82,15 +86,19 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
       <h2 id="current-call-title" className={styles.title}>
         {call.headline}
       </h2>
-      <p className={styles.patient}>
-        {call.patientLine}
-        {call.conflicts > 0 && (
-          <span className={styles.conflicts}>
-            {call.conflicts} conflict{call.conflicts === 1 ? "" : "s"} to check
-          </span>
-        )}
+      {/* option A: one quiet meta line, line icons, scene safety leads in green */}
+      <p className={styles.meta}>
+        <HazardStrip hazards={call.hazards} inline />
+        <span className={styles.metaItem}>
+          <ClockGlyph />
+          {call.firstContact ? `First contact ${call.firstContact}` : "No first contact yet"}
+        </span>
+        <span className={styles.metaItem}>
+          <PersonGlyph />
+          {/* the call data separates with "|" and double spaces; one separator reads cleaner */}
+          {call.patientLine.split(/\s*\|\s*|\s{2,}/).filter(Boolean).join(" · ")}
+        </span>
       </p>
-      <HazardStrip hazards={call.hazards} />
 
       {isFire && shared && (
         <div className={styles.banners}>
@@ -132,5 +140,23 @@ export function CurrentCallCard({ role, incident, locked = false, onOpenRecord, 
         )}
       </div>
     </Card>
+  );
+}
+
+function ClockGlyph() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.2" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M8 4.8V8l2.2 1.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PersonGlyph() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="5.4" r="2.7" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M2.9 13.6c.6-2.6 2.6-4.1 5.1-4.1s4.5 1.5 5.1 4.1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
   );
 }

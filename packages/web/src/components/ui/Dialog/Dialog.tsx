@@ -1,4 +1,4 @@
-import { useEffect, useRef, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import styles from "./Dialog.module.css";
 
 interface DialogProps {
@@ -19,8 +19,11 @@ export function Dialog({ open, onClose, label, width, height, children }: Dialog
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (open && !el.open) el.showModal();
-    else if (!open && el.open) el.close();
+    if (open && !el.open) {
+      el.showModal();
+      // showModal focuses the first field (the record search); start on the dialog itself instead
+      el.focus();
+    } else if (!open && el.open) el.close();
   }, [open]);
 
   function handleBackdropClick(event: MouseEvent<HTMLDialogElement>) {
@@ -31,7 +34,9 @@ export function Dialog({ open, onClose, label, width, height, children }: Dialog
     <dialog
       ref={ref}
       className={styles.dialog}
-      style={{ width, height }}
+      tabIndex={-1}
+      // size via vars, not inline width/height, so tablets + phones can go full screen
+      style={{ "--dialog-w": `${width}px`, "--dialog-h": height ? `${height}px` : "auto" } as CSSProperties}
       aria-label={label}
       onClose={onClose}
       onCancel={(e) => {

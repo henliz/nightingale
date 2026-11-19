@@ -8,7 +8,7 @@ export function ReviewHead({ title, children, onExpand }: { title: string; child
       <div className={styles.head}>
         <h2 className={styles.title}>{title}</h2>
         <button type="button" className={styles.iconButton} onClick={onExpand} aria-label="Expand">
-          <Icon name="expand" size={15} />
+          <Icon name="expand" size={14} />
         </button>
       </div>
       {children && <p className={styles.meta}>{children}</p>}

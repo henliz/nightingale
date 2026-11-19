@@ -13,12 +13,13 @@
 .title {
   flex: 1;
   min-width: 0;
-  font: var(--text-heading);
-  letter-spacing: -0.015em;
+  font: 600 20px/26px var(--font-heading);
+  letter-spacing: -0.03em;
 }
 
 .meta {
-  font: var(--text-small);
+  margin-top: 4px;
+  font: 400 13px/18px var(--font-sans);
   color: var(--color-muted);
   white-space: pre;
 }
@@ -26,18 +27,21 @@
 .excerpt {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  padding: var(--space-16);
+  gap: 6px;
+  padding: 14px 16px;
   background: var(--color-canvas);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-8);
 }
 
 .excerptText {
-  font: var(--text-body);
+  font: 400 14px/21px var(--font-sans);
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
 }
 
 .excerptHint {
-  font: var(--text-small);
+  font: 400 13px/18px var(--font-sans);
   color: var(--color-muted);
   max-width: 384px;
 }
@@ -45,27 +49,42 @@
 .actions {
   display: flex;
   gap: var(--space-12);
+  margin-top: auto;
 }
 
 .iconButton {
-  display: flex;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -6px -8px 0 0;
+  border-radius: var(--radius-6);
+  color: var(--color-muted);
+}
+.iconButton:hover {
+  background: var(--color-chip);
 }
 .iconButton:focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 2px;
 }
 
+/* same red as a scene hazard: faint red panel, red hairline, red text + line icon */
 .warning {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
-  padding: var(--space-16);
-  background: var(--color-danger-soft);
+  gap: 10px;
+  padding: 14px 16px;
+  background: #fff7f7;
+  border: 1px solid #efb8b8;
   border-radius: var(--radius-8);
-  font: var(--text-body);
+  font: 500 14px/21px var(--font-sans);
+  letter-spacing: -0.005em;
+  color: var(--color-flag);
+}
+
+.warning svg {
+  flex-shrink: 0;
 }
 
 .qrBox {

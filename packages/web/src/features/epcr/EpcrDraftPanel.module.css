@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-12);
-  height: 56px;
+  height: 64px;
   padding: 0 var(--space-24);
 }
 
@@ -23,20 +23,23 @@
 }
 
 .confidential {
-  margin-left: auto;
   font: var(--text-small);
   color: var(--color-muted);
 }
 
 .tabs {
   display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
   padding: 0 var(--space-24);
   border-bottom: 1px solid var(--color-line);
 }
 
 .tab {
   position: relative;
-  width: 156px;
+  flex: 0 0 auto;
+  min-width: 120px;
+  padding: 0 16px;
   height: 48px;
   font: var(--text-label);
   color: var(--color-muted);
@@ -109,13 +112,6 @@
   grid-column: 1 / -1;
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-12);
-  padding: 0 var(--space-24) 8px;
-}
-
 .draftStatus {
   font: var(--text-small);
   color: var(--color-muted);
@@ -137,4 +133,26 @@
   font: 700 11px/18px var(--font-sans);
   text-align: center;
   vertical-align: 1px;
+}
+
+@media (max-width: 760px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 8px;
+    padding: 14px 16px;
+  }
+  .confidential {
+    display: none;
+  }
+  .tabs {
+    padding: 0 8px;
+  }
+  .tab {
+    min-width: 0;
+  }
+  .grid,
+  .grid3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

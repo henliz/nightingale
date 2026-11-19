@@ -115,7 +115,7 @@ export function EpcrReviewPage(props: EpcrReviewPageProps) {
           onToggleCheckbox={toggleCheckbox}
           attentionKeys={attentionKeys}
           savePrimary={savePrimary}
-          draftStatus={reviewedCount === 0 ? "Draft [ Not Saved ]" : `Draft [ Not Saved ]  ·  ${reviewedCount} field${reviewedCount === 1 ? "" : "s"} reviewed`}
+          draftStatus={reviewedCount === 0 ? "Draft, not saved" : `Draft, not saved · ${reviewedCount} field${reviewedCount === 1 ? "" : "s"} reviewed`}
           saveLabel={saveLabel}
           onSave={onSave}
         />

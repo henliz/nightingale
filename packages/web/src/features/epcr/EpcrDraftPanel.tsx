@@ -42,6 +42,11 @@ export function EpcrDraftPanel(props: EpcrDraftPanelProps) {
       <div className={styles.header}>
         <h2 className={styles.title}>ePCR</h2>
         <span className={styles.confidential}>Confidential Electronic Information Record</span>
+        <span className={styles.spacer} />
+        <span className={styles.draftStatus}>{draftStatus}</span>
+        <Button variant={props.savePrimary ? "primary" : "secondary"} onClick={onSave}>
+          {saveLabel}
+        </Button>
       </div>
 
       <div className={styles.tabs} role="tablist" aria-label="Record sections">
@@ -85,13 +90,6 @@ export function EpcrDraftPanel(props: EpcrDraftPanelProps) {
         ))}
       </div>
 
-      <div className={styles.actions}>
-        <span className={styles.draftStatus}>{draftStatus}</span>
-        <span className={styles.spacer} />
-        <Button variant={props.savePrimary ? "primary" : "secondary"} onClick={onSave} style={{ height: 38 }}>
-          {saveLabel}
-        </Button>
-      </div>
     </section>
   );
 }

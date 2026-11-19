@@ -4,18 +4,32 @@
   border-radius: var(--radius-12);
   background: var(--color-white);
   color: var(--color-ink);
+  width: var(--dialog-w);
+  height: var(--dialog-h);
   max-width: calc(100vw - 32px);
   max-height: calc(100vh - 32px);
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(var(--shadow-rgb), 0.35);
+  box-shadow: var(--shadow-float);
+  outline: none;
 }
 
 .dialog::backdrop {
   /* light see-through grey so the queue stays visible behind the record */
-  background: rgba(var(--shadow-rgb), 0.28);
+  background: rgba(var(--shadow-rgb), 0.16);
 }
 
 .dialog[open] {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 760px) {
+  .dialog {
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+  }
 }

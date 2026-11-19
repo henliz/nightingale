@@ -2,12 +2,15 @@
   display: flex;
   align-items: center;
   gap: var(--space-8);
-  height: 24px;
+  height: 32px;
 }
 
+/* monochrome: ink, set like a code */
 .callId {
-  font: var(--text-caption);
-  color: var(--color-accent);
+  font: 500 13px/16px var(--font-sans);
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
@@ -15,17 +18,17 @@
   flex: 1;
 }
 
-.firstContact {
-  font: var(--text-small);
-  color: var(--color-muted);
-  white-space: nowrap;
-}
-
 .iconButton {
-  display: flex;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: -6px;
+  border-radius: var(--radius-6);
+  color: var(--color-muted);
+}
+.iconButton:hover {
+  background: var(--color-chip);
 }
 .iconButton:focus-visible {
   outline: 2px solid var(--color-blue);
@@ -33,16 +36,29 @@
 }
 
 .title {
-  font: 600 24px/30px var(--font-heading);
-  letter-spacing: -0.02em;
+  margin-top: 2px;
+  font: 600 26px/32px var(--font-heading);
+  letter-spacing: -0.035em;
   max-width: 648px;
 }
 
-.patient {
-  font: var(--text-label);
-  color: var(--color-ink);
-  white-space: pre-wrap;
-  max-width: 648px;
+/* facts stacked, icons in one column (the left edge lines up with the title) */
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: -4px 0 6px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 14px/20px var(--font-sans);
+  letter-spacing: -0.01em;
+  color: var(--color-muted);
+  white-space: nowrap;
 }
 
 .banners {
@@ -57,18 +73,19 @@
   display: flex;
   align-items: center;
   gap: var(--space-12);
-  height: 44px;
+  margin-top: 8px;
 }
 
 .conflicts {
   display: inline-flex;
   align-items: center;
   margin-left: var(--space-8);
-  padding: 1px 8px;
-  border-radius: var(--radius-pill);
-  background: var(--color-flag-soft);
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-6);
+  background: #fdecec;
   color: var(--color-flag);
-  font: 600 11px/18px var(--font-sans);
+  font: 500 12px/22px var(--font-sans);
   vertical-align: 1px;
 }
 
@@ -76,6 +93,18 @@
 .lockIcon {
   filter: brightness(0) invert(1);
 }
-:root[data-theme="night"] .lockIcon {
-  filter: brightness(0);
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  .metaItem {
+    white-space: normal;
+  }
+  .identity {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 6px;
+  }
 }

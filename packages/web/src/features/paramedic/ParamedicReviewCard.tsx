@@ -32,7 +32,7 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
     const o = fromCall;
     return (
       <Card className={styles.card}>
-        <ReviewHead title="View the latest observation" onExpand={onExpand}>{`Received ${o.receivedAt} | Not yet reviewed`}</ReviewHead>
+        <ReviewHead title="View the latest observation" onExpand={onExpand}>{`Received ${o.receivedAt} · Not yet reviewed`}</ReviewHead>
         <ReviewExcerpt text={o.text} hint="Review before adding to the record." />
         <div className={styles.actions}>
           <Button variant="secondary" onClick={onReviewNote}>
@@ -46,7 +46,7 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
   if (stage === "shared") {
     return (
       <Card className={styles.card}>
-        <ReviewHead title="Accept record to view" onExpand={onExpand}>{`Shared ${incident.times.shared ?? ""} | Not yet accepted`}</ReviewHead>
+        <ReviewHead title="Accept record to view" onExpand={onExpand}>{`Shared ${incident.times.shared ?? ""} · Not yet accepted`}</ReviewHead>
         <ReviewExcerpt text={`${call.callId} ePCR`} />
         <div className={styles.actions}>
           <Button variant="secondary" onClick={onAccept}>
@@ -61,7 +61,7 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
     const o = fromFire;
     return (
       <Card className={styles.card}>
-        <ReviewHead title="View the latest observation" onExpand={onExpand}>{`Received ${incident.times.accepted ?? o.receivedAt} | Not yet reviewed`}</ReviewHead>
+        <ReviewHead title="View the latest observation" onExpand={onExpand}>{`Received ${incident.times.accepted ?? o.receivedAt} · Not yet reviewed`}</ReviewHead>
         <ReviewExcerpt text={o.text} hint="Review before adding to the care timeline." />
         <div className={styles.actions}>
           <Button variant="secondary" onClick={onViewNote}>
@@ -75,9 +75,12 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
   if (stage === "to_verify") {
     return (
       <Card className={styles.card}>
-        <ReviewHead title="Review and verify the patient’s record" onExpand={onExpand}>{`Shared ${incident.times.shared ?? ""} | Not yet reviewed`}</ReviewHead>
+        <ReviewHead title="Review and verify the patient’s record" onExpand={onExpand}>{`Shared ${incident.times.shared ?? ""} · Not yet reviewed`}</ReviewHead>
         <div className={styles.warning} role="status">
-          <span aria-hidden="true">⚠</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M7.1 2.6a1 1 0 0 1 1.8 0l5.4 9.6a1 1 0 0 1-.9 1.5H2.6a1 1 0 0 1-.9-1.5l5.4-9.6Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+            <path d="M8 6.3v3M8 11.4v.1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
           {unfilledCount} field{unfilledCount === 1 ? " has" : "s have"} not been filled
         </div>
       </Card>
@@ -88,7 +91,7 @@ export function ParamedicReviewCard(props: ParamedicReviewCardProps) {
   return (
     <Card className={styles.card}>
       <ReviewHead title="Patient record QR code" onExpand={onExpand}>
-        {`Generated ${incident.times.verified ?? ""} | ${revealed ? `Revealed ${revealed}` : "Not revealed yet"}`}
+        {`Generated ${incident.times.verified ?? ""} · ${revealed ? `Revealed ${revealed}` : "Not revealed yet"}`}
       </ReviewHead>
       <div className={styles.qrBox}>
         <button type="button" className={styles.qrButton} onClick={onRevealQr}>

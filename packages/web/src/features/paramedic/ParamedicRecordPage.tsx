@@ -24,7 +24,7 @@ export function ParamedicRecordPage() {
       user={user}
       responder={PARAMEDIC_UNIT}
       title={live.source === "demo" ? CAPTURE_META.patientLabel : live.call.callId}
-      meta={live.session ? `${live.call.patientLine} · fire crew's record, verify before handoff` : `Capture ended ${CAPTURE_META.captureEnded} | Imported ${CAPTURE_META.imported}`}
+      meta={live.session ? `${live.call.patientLine} · fire crew's record, verify before handoff` : `Capture ended ${CAPTURE_META.captureEnded} · Imported ${CAPTURE_META.imported}`}
       tabs={form.tabs}
       sections={form.sections}
       initialTab={live.source === "demo" ? "patient" : (form.tabs[0]?.id ?? "summary")}

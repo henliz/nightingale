@@ -26,7 +26,7 @@ export function FireReviewCard({ incident, onCrewEnRoute, onStartReview, onPeekR
     return (
       <Card className={styles.card}>
         <ReviewHead title="Incident created from dispatch" onExpand={onExpand}>
-          {`Created ${call.dispatchAt} by dispatch  |  Nothing captured yet`}
+          {`${call.dispatchAt ? `Created ${call.dispatchAt} by dispatch` : "Created by dispatch"} · Nothing captured yet`}
         </ReviewHead>
         <ReviewExcerpt text={call.dispatchText} hint="Updates on its own as the crew captures information on scene." />
         <div className={styles.actions}>
@@ -44,7 +44,7 @@ export function FireReviewCard({ incident, onCrewEnRoute, onStartReview, onPeekR
     return (
       <Card className={styles.card}>
         <ReviewHead title="Review the latest observation" onExpand={onExpand}>
-          {`Received ${observation.receivedAt} | Not yet reviewed`}
+          {`Received ${observation.receivedAt} · Not yet reviewed`}
         </ReviewHead>
         <ReviewExcerpt text={observation.text} hint="Review before adding to the record." />
         <div className={styles.actions}>

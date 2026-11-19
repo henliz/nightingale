@@ -1,55 +1,36 @@
-.strip {
-  display: flex;
+/* a line icon and plain words; colour carries the meaning, no boxes or tiles */
+.safety {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-12);
-  padding: 8px 14px;
-  border-radius: var(--radius-8);
-  border: 1px solid;
+  gap: 6px;
+  font: 400 14px/20px var(--font-sans);
+  letter-spacing: -0.01em;
   min-width: 0;
 }
 
 .icon {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
   flex-shrink: 0;
-  border-radius: 50%;
-  font: 700 12px/1 var(--font-sans);
-  color: var(--color-on-primary);
 }
 
-.label {
-  font: 600 11px/16px var(--font-sans);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-}
-
-.text {
-  font: var(--text-label);
+/* monochrome when clear; colour is saved for a real hazard */
+.safe {
   color: var(--color-ink);
-  min-width: 0;
-}
-
-.clear {
-  background: var(--color-success-soft);
-  border-color: transparent;
-}
-.clear .icon {
-  background: var(--color-success);
-}
-.clear .label {
-  color: var(--color-success);
 }
 
 .danger {
-  background: var(--color-flag-soft);
-  border-color: var(--color-flag);
-}
-.danger .icon {
-  background: var(--color-flag);
-}
-.danger .label {
   color: var(--color-flag);
+}
+
+/* on its own row a hazard gets a red panel; inline it stays red text */
+.standalone.danger {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border: 1px solid #efb8b8;
+  border-radius: var(--radius-8);
+  background: #fff7f7;
+}
+
+.standalone.danger .icon {
+  margin-top: 2px;
 }

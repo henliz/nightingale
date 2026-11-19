@@ -1,126 +1,85 @@
 .page {
   min-height: 100%;
   display: grid;
-  grid-template-columns: minmax(360px, 1fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(360px, 0.82fr) minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px;
+  background: #ffffff;
 }
 
-.page > .card {
-  align-self: center;
-  justify-self: center;
-  margin: 48px 24px;
-}
-
-/* textured gradient: brand colours + svg grain, same recipe as the logo */
-.brandPanel {
+/* white page is the frame; both halves are rounded panels sitting in it.
+   sized from the panel, not fixed pixels, so the card keeps the same presence at any window size */
+.formPanel {
+  container-type: inline-size;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: var(--space-8);
-  padding: 56px;
-  overflow: hidden;
-  color: #fdf6ec;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    radial-gradient(120% 90% at 0% 0%, var(--brand-tangerine) 0%, transparent 55%),
-    radial-gradient(90% 80% at 100% 100%, var(--brand-navy) 10%, transparent 70%),
-    linear-gradient(160deg, var(--brand-sunset) 0%, var(--brand-viridian) 70%, var(--brand-navy) 100%);
-  background-blend-mode: soft-light, normal, normal, normal;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 20px);
+  padding: 48px 24px;
+  border-radius: 18px;
+  background: #f3f4f6;
 }
 
-.brandMark {
-  width: 64px;
-  height: 64px;
-  margin-bottom: auto;
-  padding: 12px;
-  border-radius: 16px;
-  background: rgb(253 246 236 / 0.92);
-}
-
-.brandWord {
-  font: 700 56px/1 var(--font-heading);
-  letter-spacing: -0.035em;
-}
-
-.brandLine {
-  font: 500 18px/26px var(--font-heading);
-  opacity: 0.85;
-  max-width: 340px;
-}
-
-.brandHalftone {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  background: #fdf6ec;
-  -webkit-mask: radial-gradient(circle, #000 1.6px, transparent 2px) 0 0 / 6px 6px, linear-gradient(90deg, transparent 0%, #000 60%);
-  mask: radial-gradient(circle, #000 1.6px, transparent 2px) 0 0 / 6px 6px, linear-gradient(90deg, transparent 0%, #000 60%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-  opacity: 0.6;
-}
-
-@media (max-width: 860px) {
-  .page {
-    grid-template-columns: 1fr;
-  }
-  .brandPanel {
-    min-height: 220px;
-    padding: 32px;
-  }
-  .brandWord {
-    font-size: 40px;
-  }
-}
-
+/* one type scale: 12 / 13 / 15 / 20 / 32. related things sit tight, groups sit apart */
 .card {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  width: 440px;
-  padding: 40px;
+  width: min(100%, 440px);
+  padding: clamp(28px, 6cqw, 44px);
   background: var(--color-white);
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-12);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(var(--shadow-rgb), 0.04);
 }
 
 .brand {
-  font: 700 20px/28px var(--font-heading);
-  letter-spacing: -0.02em;
-  color: var(--brand-sunset);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 600 20px/1 var(--font-heading);
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
 }
 
 .heading {
-  font: 600 26px/32px var(--font-heading);
-  letter-spacing: -0.02em;
+  max-width: 16ch;
+  margin-top: 28px;
+  font: 500 clamp(28px, 4cqw, 32px)/1.1 var(--font-heading);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 
 .lede {
-  font: 400 13px/18px var(--font-sans);
+  max-width: 42ch;
+  margin: 10px 0 24px;
+  font: 400 15px/1.5 var(--font-sans);
+  letter-spacing: -0.01em;
   color: var(--color-muted);
 }
 
 .sectionLabel {
-  font: 500 11px/13px var(--font-sans);
+  font: 500 13px/1.3 var(--font-sans);
   color: var(--color-muted);
 }
 
 .pin {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: 6px;
+  margin-top: 18px;
 }
 
 .pinField {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  gap: 12px;
+  min-height: 46px;
+  padding: 0 14px;
   background: var(--color-white);
   border: 1px solid var(--color-line-strong);
-  border-radius: var(--radius-6);
+  border-radius: var(--radius-control);
 }
 
 .pinField:focus-within {
@@ -133,7 +92,7 @@
   border: 0;
   padding: 0;
   background: transparent;
-  font: 400 14px/17px var(--font-sans);
+  font: 500 15px/1.2 var(--font-sans);
   letter-spacing: 0.2em;
 }
 
@@ -147,16 +106,32 @@
 }
 
 .footnote {
-  font: 400 11px/15px var(--font-sans);
+  margin-top: 16px;
+  font: 400 12px/1.45 var(--font-sans);
   color: var(--color-muted);
 }
 
 .error {
-  font: 400 12px/16px var(--font-sans);
+  margin-top: 10px;
+  font: 400 12px/1.45 var(--font-sans);
   color: var(--color-red);
 }
 
 .hint {
-  font: 400 11px/15px var(--font-sans);
+  font: 400 12px/1.45 var(--font-sans);
   color: var(--color-muted);
+}
+
+/* phones last, so these win over the base rules above */
+@media (max-width: 860px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .formPanel {
+    min-height: auto;
+    padding: 16px;
+  }
+  .card {
+    padding: 36px 24px;
+  }
 }

@@ -3,12 +3,13 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-8);
-  height: 44px;
-  padding: 4px 12px;
-  border-radius: var(--radius-6);
-  font: var(--text-label);
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--radius-8);
+  font: 500 14px/1 var(--font-sans);
+  letter-spacing: -0.01em;
   white-space: nowrap;
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
 }
 
 .button:focus-visible {
@@ -16,11 +17,16 @@
   outline-offset: 2px;
 }
 
+/* solid grey, not a fade: still readable (4.7:1) so people can see what's paused */
 .button:disabled {
-  opacity: 0.5;
+  background: var(--color-chip);
+  color: #6b7079;
+  border-color: transparent;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
+/* flat: one solid colour, no gradient or highlight */
 .primary {
   background: var(--color-blue);
   color: var(--color-on-primary);
@@ -33,9 +39,11 @@
   background: var(--color-white);
   color: var(--color-ink);
   border: 1px solid var(--color-line);
+  box-shadow: 0 1px 2px rgba(var(--shadow-rgb), 0.05);
 }
 .secondary:hover:not(:disabled) {
   background: var(--color-canvas);
+  border-color: var(--color-line-strong);
 }
 
 .ghost {
@@ -55,30 +63,29 @@
 }
 
 .primarySoft {
-  background: var(--color-neutral-accent);
+  background: var(--color-blue);
   color: var(--color-on-primary);
-  font-weight: 600;
 }
 .primarySoft:hover:not(:disabled) {
   background: var(--color-hover);
 }
 
-.outline {
-  background: transparent;
-  color: var(--color-blue);
-  border: 1px solid var(--color-blue);
+/* outline + small fold into the secondary look: only white-hairline and blue exist */
+.outline,
+.small {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 2px rgba(var(--shadow-rgb), 0.05);
 }
-.outline:hover:not(:disabled) {
-  background: var(--color-blue-soft);
+.outline:hover:not(:disabled),
+.small:hover:not(:disabled) {
+  background: var(--color-canvas);
+  border-color: var(--color-line-strong);
 }
 
 .small {
-  height: 24px;
-  padding: 0 12px;
-  font: 500 11px/20px var(--font-sans);
-  background: var(--color-white);
-  color: var(--color-ink);
-}
-.small:hover:not(:disabled) {
-  background: var(--color-canvas);
+  height: 28px;
+  padding: 0 10px;
+  font: 500 12px/1 var(--font-sans);
 }

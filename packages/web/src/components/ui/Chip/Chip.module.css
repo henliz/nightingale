@@ -1,25 +1,26 @@
+/* monochrome tags: the words carry the state, weight carries emphasis */
 .chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 24px;
+  gap: 5px;
+  height: 22px;
   padding: 0 8px;
-  border-radius: var(--radius-pill);
-  font: 500 11px/1 var(--font-sans);
+  border-radius: var(--radius-6);
+  background: var(--color-fill);
+  font: 500 12px/1 var(--font-sans);
+  letter-spacing: -0.005em;
   white-space: nowrap;
 }
 
 .neutral {
-  background: var(--color-chip);
-  color: var(--color-muted);
+  color: #4b5059;
 }
 
 .active {
-  background: var(--color-success-soft);
-  color: var(--color-success);
+  color: var(--color-ink);
 }
 
 .warning {
-  background: var(--color-warning-soft);
-  color: var(--color-warning);
+  color: var(--color-ink);
 }

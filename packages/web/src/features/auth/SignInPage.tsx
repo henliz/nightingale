@@ -4,7 +4,8 @@ import { USERS, type User } from "../../data/users";
 import { useSession } from "../../session/SessionContext";
 import { Icon } from "../../components/ui/Icon/Icon";
 import { AccountPicker } from "./AccountPicker";
-import logo from "../../assets/figma/icon-logo.svg";
+import { SignInStory } from "./SignInStory";
+import { Logo } from "../../components/ui/Logo/Logo";
 import styles from "./SignInPage.module.css";
 
 const HOME_BY_ROLE: Record<User["role"], string> = {
@@ -60,54 +61,54 @@ export function SignInPage() {
 
   return (
     <main className={styles.page}>
-      {/* the one place the textured gradient gets to be loud, nothing clinical lives here */}
-      <aside className={styles.brandPanel} aria-hidden="true">
-        <img className={styles.brandMark} src={logo} alt="" width={64} height={64} />
-        <p className={styles.brandWord}>Nightingale</p>
-        <p className={styles.brandLine}>What responders learn at the scene, actually reaching the hospital.</p>
-        <span className={styles.brandHalftone} />
-      </aside>
-      <form className={styles.card} onSubmit={handleSubmit} noValidate>
-        <p className={styles.brand}>Nightingale</p>
-        <h1 className={styles.heading}>Sign in on the department device</h1>
-        <p className={styles.lede}>Choose your account for this shift. Everyone has a personal account under their service.</p>
-
-        <AccountPicker users={USERS} value={selected} onChange={handleChoose} />
-
-        {selected && (
-          <div className={styles.pin}>
-            <label className={styles.sectionLabel} htmlFor="device-pin">
-              Device PIN
-            </label>
-            <div className={styles.pinField}>
-              <Icon name="lock" size={16} />
-              <input
-                ref={pinRef}
-                id="device-pin"
-                className={styles.pinInput}
-                type="password"
-                inputMode="numeric"
-                autoComplete="off"
-                maxLength={4}
-                placeholder="••••"
-                value={pin}
-                onChange={(e) => handlePinChange(e.target.value)}
-                aria-invalid={error ? true : undefined}
-                aria-describedby={error ? "pin-error" : undefined}
-              />
-            </div>
-            <p className={styles.hint}>Enter the 4-digit PIN for {selected.firstName}. The demo accepts 1234.</p>
-          </div>
-        )}
-        {error && (
-          <p className={styles.error} id="pin-error" role="alert">
-            {error}
+      {/* the one place the brand gets to be loud: glass, then what nightingale does */}
+      <SignInStory />
+      <section className={styles.formPanel}>
+        <form className={styles.card} onSubmit={handleSubmit} noValidate>
+          <p className={styles.brand}>
+            <Logo width={40} height={25} />
+            Nightingale
           </p>
-        )}
+          <h1 className={styles.heading}>Sign in on the department device</h1>
+          <p className={styles.lede}>Choose your account for this shift. Everyone has a personal account under their service.</p>
 
-        <p className={styles.footnote}>Department device. Personal phones are never used for patient records.</p>
-        <button type="submit" hidden aria-hidden="true" tabIndex={-1} />
-      </form>
+          <AccountPicker users={USERS} value={selected} onChange={handleChoose} />
+
+          {selected && (
+            <div className={styles.pin}>
+              <label className={styles.sectionLabel} htmlFor="device-pin">
+                Device PIN
+              </label>
+              <div className={styles.pinField}>
+                <Icon name="lock" size={16} />
+                <input
+                  ref={pinRef}
+                  id="device-pin"
+                  className={styles.pinInput}
+                  type="password"
+                  inputMode="numeric"
+                  autoComplete="off"
+                  maxLength={4}
+                  placeholder="••••"
+                  value={pin}
+                  onChange={(e) => handlePinChange(e.target.value)}
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? "pin-error" : undefined}
+                />
+              </div>
+              <p className={styles.hint}>Enter the 4-digit PIN for {selected.firstName}. The demo accepts 1234.</p>
+            </div>
+          )}
+          {error && (
+            <p className={styles.error} id="pin-error" role="alert">
+              {error}
+            </p>
+          )}
+
+          <p className={styles.footnote}>Please don't use your personal phone for patient records.</p>
+          <button type="submit" hidden aria-hidden="true" tabIndex={-1} />
+        </form>
+      </section>
     </main>
   );
 }
