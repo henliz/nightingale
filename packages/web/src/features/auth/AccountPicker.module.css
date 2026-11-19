@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .label {
@@ -15,8 +15,8 @@
   align-items: center;
   gap: var(--space-12);
   width: 100%;
-  min-height: 52px;
-  padding: 8px 16px;
+  min-height: 46px;
+  padding: 6px 14px;
   background: var(--color-white);
   border: 1px solid var(--color-line-strong);
   border-radius: var(--radius-control);
@@ -40,7 +40,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  font: 500 16px/1.2 var(--font-sans);
+  font: 500 15px/1.2 var(--font-sans);
   color: var(--color-ink);
   white-space: pre;
 }

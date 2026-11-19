@@ -66,7 +66,7 @@ export function SignInPage() {
       <section className={styles.formPanel}>
         <form className={styles.card} onSubmit={handleSubmit} noValidate>
           <p className={styles.brand}>
-            <Logo width={50} height={31} />
+            <Logo width={40} height={25} />
             Nightingale
           </p>
           <h1 className={styles.heading}>Sign in on the department device</h1>
