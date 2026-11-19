@@ -82,5 +82,5 @@ was 2.4, one tube of oral glucose at 219, now 5.8 and alert. Insulin dose this m
 **10:53:04 a.m.** (live, speaker not labelled yet)  
 Engine of clearing scene at 2:33.
 
-**10:53:08 a.m.** (live, speaker not labelled yet)  
-And then we press the button here.
+**10:53:07 a.m.** Person 5 ([audio](audio/151220_6d082fd0.wav))  
+scene at 2:33. Now we press the button here.

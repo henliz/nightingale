@@ -187,3 +187,7 @@
 10:53:16 a.m. server info: ePCR updated from 26 transcript line(s) in 5.6s (18 sections filled)
 10:53:21 a.m. server info: ePCR updated from 27 transcript line(s) in 5.3s (14 sections filled)
 11:07:55 a.m. server info: ePCR updated from 27 transcript line(s) in 18.1s (20 sections filled)
+3:12:20 p.m. server info: got audio chunk 6d082fd0-35f6-4cd5-809a-becf571d1703 (363 KB, loudest -28 dBFS), labelling speakers...
+3:12:27 p.m. server info: new voice heard, calling it Person 5
+3:12:27 p.m. server info: speakers labelled for 6d082fd0-35f6-4cd5-809a-becf571d1703 in 7.0s (Person 5), updating the ePCR...
+3:12:35 p.m. server info: ePCR updated from 27 transcript line(s) in 7.9s (17 sections filled)
