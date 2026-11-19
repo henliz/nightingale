@@ -4,7 +4,7 @@ import { USERS, type User } from "../../data/users";
 import { useSession } from "../../session/SessionContext";
 import { Icon } from "../../components/ui/Icon/Icon";
 import { AccountPicker } from "./AccountPicker";
-import { FlutedGlass } from "./FlutedGlass";
+import { SignInStory } from "./SignInStory";
 import { Logo } from "../../components/ui/Logo/Logo";
 import styles from "./SignInPage.module.css";
 
@@ -61,14 +61,12 @@ export function SignInPage() {
 
   return (
     <main className={styles.page}>
-      {/* the one place the brand gets to be loud, nothing clinical lives here */}
-      <aside className={styles.brandPanel} aria-hidden="true">
-        <FlutedGlass className={styles.brandCanvas} />
-      </aside>
+      {/* the one place the brand gets to be loud: glass, then what nightingale does */}
+      <SignInStory />
       <section className={styles.formPanel}>
         <form className={styles.card} onSubmit={handleSubmit} noValidate>
           <p className={styles.brand}>
-            <Logo width={40} height={25} />
+            <Logo width={50} height={31} />
             Nightingale
           </p>
           <h1 className={styles.heading}>Sign in on the department device</h1>

@@ -7,8 +7,10 @@
   background: #ffffff;
 }
 
-/* white page is the frame; both halves are rounded panels sitting in it */
+/* white page is the frame; both halves are rounded panels sitting in it.
+   sized from the panel, not fixed pixels, so the card keeps the same presence at any window size */
 .formPanel {
+  container-type: inline-size;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -20,91 +22,64 @@
   background: #f3f4f6;
 }
 
-/* fluted glass, pure image, nothing to read */
-.brandPanel {
-  position: relative;
-  isolation: isolate;
-  min-height: calc(100vh - 20px);
-  overflow: hidden;
-  border-radius: 18px;
-  background: #2a5fbf;
-}
-
-.brandCanvas {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-}
-
-/* film grain over everything, the same tooth as the logo used to have */
-.brandPanel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.22;
-  mix-blend-mode: overlay;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
+/* one type scale (from a 16px body): 13 / 16 / 25 / 42. related things sit tight, groups sit apart */
 .card {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 500px;
-  max-width: 100%;
-  padding: 56px;
+  width: min(100%, 560px);
+  padding: clamp(32px, 7cqw, 64px);
   background: var(--color-white);
   border: 1px solid var(--color-line);
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: 0 1px 2px rgba(var(--shadow-rgb), 0.04);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font: 600 21px/1 var(--font-heading);
+  gap: 12px;
+  font: 600 25px/1 var(--font-heading);
   letter-spacing: -0.035em;
   color: var(--color-ink);
 }
 
 .heading {
-  margin-top: 8px;
-  font: 500 36px/1.12 var(--font-heading);
-  letter-spacing: -0.035em;
+  max-width: 16ch;
+  margin-top: 36px;
+  font: 500 clamp(32px, 5cqw, 42px)/1.1 var(--font-heading);
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .lede {
-  margin-top: -6px;
-  font: 400 15px/20px var(--font-sans);
-  letter-spacing: -0.012em;
+  max-width: 42ch;
+  margin: 14px 0 32px;
+  font: 400 16px/1.5 var(--font-sans);
+  letter-spacing: -0.01em;
   color: var(--color-muted);
 }
 
 .sectionLabel {
-  font: 500 11px/13px var(--font-sans);
+  font: 500 13px/1.3 var(--font-sans);
   color: var(--color-muted);
 }
 
 .pin {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: 8px;
+  margin-top: 24px;
 }
 
 .pinField {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 16px;
   background: var(--color-white);
   border: 1px solid var(--color-line-strong);
-  border-radius: var(--radius-6);
+  border-radius: var(--radius-control);
 }
 
 .pinField:focus-within {
@@ -117,7 +92,7 @@
   border: 0;
   padding: 0;
   background: transparent;
-  font: 400 14px/17px var(--font-sans);
+  font: 500 16px/1.2 var(--font-sans);
   letter-spacing: 0.2em;
 }
 
@@ -131,17 +106,19 @@
 }
 
 .footnote {
-  font: 400 11px/15px var(--font-sans);
+  margin-top: 20px;
+  font: 400 13px/1.45 var(--font-sans);
   color: var(--color-muted);
 }
 
 .error {
-  font: 400 12px/16px var(--font-sans);
+  margin-top: 12px;
+  font: 400 13px/1.45 var(--font-sans);
   color: var(--color-red);
 }
 
 .hint {
-  font: 400 11px/15px var(--font-sans);
+  font: 400 13px/1.45 var(--font-sans);
   color: var(--color-muted);
 }
 
@@ -150,17 +127,11 @@
   .page {
     grid-template-columns: minmax(0, 1fr);
   }
-  .brandPanel {
-    min-height: 160px;
-  }
   .formPanel {
     min-height: auto;
     padding: 16px;
   }
   .card {
-    padding: 32px 24px;
-  }
-  .heading {
-    font-size: 28px;
+    padding: 36px 24px;
   }
 }
