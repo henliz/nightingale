@@ -247,6 +247,7 @@ export function SignInStory() {
   const artRef = useRef<HTMLElement>(null);
   const glassRef = useRef<HTMLCanvasElement>(null);
   const pixelRef = useRef<HTMLCanvasElement>(null);
+  const groupRef = useRef<HTMLDivElement>(null);
   const [story, setStory] = useState(false);
 
   useEffect(() => {
@@ -286,11 +287,29 @@ export function SignInStory() {
       );
     }
 
+    // the clipboard keeps one proportion to the panel on every screen: 58% of its width and,
+    // clip to photo, 90% of its height (measured off the approved mock). phones stack the panels, so there it stays at its natural size
+    const fit = () => {
+      const group = groupRef.current;
+      if (!group) return;
+      if (window.innerWidth <= 860) {
+        group.style.setProperty("--fit", "1");
+        return;
+      }
+      const byHeight = (art.clientHeight * 0.9) / group.offsetHeight;
+      const byWidth = (art.clientWidth * 0.58) / group.offsetWidth;
+      const scale = Math.min(1.6, byHeight, byWidth);
+      group.style.setProperty("--fit", String(Math.max(0.5, scale)));
+    };
+
     const ro = new ResizeObserver(() => {
       drawPixel(pixelCanvas);
       glass = prepareGlass(glassCanvas);
+      fit();
     });
     ro.observe(art);
+    if (groupRef.current) ro.observe(groupRef.current);
+    fit();
     return () => {
       running = false;
       cancelAnimationFrame(raf);
@@ -303,7 +322,7 @@ export function SignInStory() {
     <section ref={artRef} className={[styles.art, story ? styles.story : ""].join(" ")} aria-label="What Nightingale does">
       <canvas ref={glassRef} className={[styles.bg, styles.glass].join(" ")} aria-hidden="true" />
       <canvas ref={pixelRef} className={[styles.bg, styles.pixel].join(" ")} aria-hidden="true" />
-      <div className={styles.group} aria-hidden={!story}>
+      <div ref={groupRef} className={styles.group} aria-hidden={!story}>
         <article className={styles.board}>
           <span className={styles.clip} aria-hidden="true" />
           <div className={styles.card}>
@@ -321,7 +340,7 @@ export function SignInStory() {
             </ol>
           </div>
         </article>
-        <img className={styles.responders} src={responders} alt="A paramedic and a firefighter reviewing a patient record together" />
+        <img className={styles.responders} src={responders} width={760} height={577} alt="A paramedic and a firefighter reviewing a patient record together" />
       </div>
     </section>
   );

@@ -6,8 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 20px);
-  padding: 48px 7%;
+  /* exactly one screen tall on desktop; the clipboard scales to fit inside (see fit() in SignInStory.tsx) */
+  height: calc(100dvh - 20px);
+  min-height: 480px;
+  padding: 40px 7%;
   border-radius: 18px;
   background: #2a5fbf;
 }
@@ -40,17 +42,16 @@
   flex-direction: column;
   width: 100%;
   max-width: 470px;
+  flex-shrink: 0;
+  /* the clipboard only fades in; its size is set once to fit and never animates */
   opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.7s ease 0.5s,
-    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s;
+  transform: scale(var(--fit, 1));
+  transition: opacity 0.7s ease 0.5s;
   pointer-events: none;
 }
 
 .story .group {
   opacity: 1;
-  transform: none;
   pointer-events: auto;
 }
 
@@ -159,27 +160,6 @@
   pointer-events: none;
 }
 
-/* laptop-height windows: same clipboard, a little tighter, so it fits without scrolling */
-@media (max-height: 1000px) {
-  .art {
-    padding-block: 28px;
-  }
-  .card {
-    padding: 48px 40px 160px;
-  }
-  .title {
-    margin-bottom: 24px;
-    font-size: 27px;
-  }
-  .steps {
-    gap: 16px;
-  }
-  .responders {
-    width: min(66%, 300px);
-    margin-top: -150px;
-  }
-}
-
 @media (max-width: 1100px) {
   .responders {
     display: none;
@@ -193,6 +173,7 @@
   /* on phones the sign-in comes first, the story sits under it */
   .art {
     order: 2;
+    height: auto;
     min-height: 520px;
     padding: 40px 16px 24px;
   }
