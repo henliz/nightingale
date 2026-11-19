@@ -235,8 +235,12 @@ ci runs the first three plus the device's `cargo fmt / clippy / test` on every p
 
 done: resumable uploads + the rust upload client, the tamper-evident audit log, the real
 pipeline (gemini or openai), the device's two-button capture, both dashboards, live
-transcription. not done: access control (so no real patient data, ever), retention, a
-watchdog on the device. ARCHITECTURE.md section 12 has the build order.
+transcription. not done: real logins, retention, a watchdog on the device.
+ARCHITECTURE.md section 12 has the build order.
+
+the `branding` branch also has cindy's MVP security work (scoped api keys, upload limits,
+device https + per-device tokens), written up in `SECURITY-DEMO.md`, `THREAT-MODEL.md` and
+`PRIVACY-SECURITY-READINESS.md` on that branch. still not approved for real patient data.
 
 ### layout
 
